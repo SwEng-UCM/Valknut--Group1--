@@ -1,0 +1,30 @@
+package combat;
+
+public class Chaos {
+	private int life;
+	
+	public Chaos() {
+		life = 100;
+	}
+	
+	public boolean receiveAttack(String attack) {
+		
+		if (attack.equals("light")) {
+			life -= 20;
+		}
+		
+		else if (attack.equals("nature")) {
+			life -= 5;
+		}
+		
+		else {
+			life -= 10;
+		}
+		
+		System.out.println("My remaining life is:");
+		System.out.println(life);
+		
+		return (life > 0);
+	}
+
+}

@@ -1,0 +1,18 @@
+import combat.Chaos;
+
+public class Main {
+
+	/**
+	 * Entry point
+	 * 
+	 * @param args Arguments for the game.
+	 */
+	public static void main(String[] args) {
+		Chaos enemy_one = new Chaos();
+		boolean alive = true;
+		
+		while(alive) {
+			
+		}
+	}
+}

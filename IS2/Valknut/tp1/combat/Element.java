@@ -1,0 +1,25 @@
+package combat;
+
+public enum Element {
+	LIGHT, CHAOS, NATURE, BLOOD, FALSEHOOD;
+	
+	public static Element parseCommand(String command) {
+        if (command == null) {
+        	return LIGHT;
+        }
+        switch (command.toLowerCase()) {
+            case "light":
+                return LIGHT;
+            case "chaos":
+                return CHAOS;
+            case "nature":
+                return NATURE;
+            case "blood":
+                return BLOOD;
+            case "falsehood":
+                return FALSEHOOD;
+            default:
+                return LIGHT;
+        }
+    }
+}

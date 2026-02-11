@@ -1,0 +1,22 @@
+package combat;
+
+import java.util.Scanner;
+
+public class Chaos {
+	private int life;
+	private Scanner scanner;
+	
+	public Chaos() {
+		life = 100;
+	}
+	
+	public String[] getPrompt() {
+		System.out.print(Messages.PROMPT);
+		String line = scanner.nextLine();
+		String[] words = line.trim().split("\\s+");
+
+        System.out.println(Messages.DEBUG.formatted(line));		
+
+		return words;
+	}
+}

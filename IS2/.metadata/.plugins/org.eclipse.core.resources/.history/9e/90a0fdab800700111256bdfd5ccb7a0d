@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+import combat.Chaos;
+
+public class Main {
+
+	/**
+	 * Entry point
+	 * 
+	 * @param args Arguments for the game.
+	 */
+	public static void main(String[] args) {
+		Chaos enemy_one = new Chaos();
+		boolean alive = true;
+		
+		while(alive) {
+			String attack = enemy_one.getPrompt();
+			alive = enemy_one.receiveAttack(attack);
+		}
+		
+		System.out.println("Agghhh you got me!");
+	}
+	
+	public String getPrompt() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("What attack would you like to do?: ");
+		String attack = reader.nextLine();
+		
+		return attack;
+	}
+}

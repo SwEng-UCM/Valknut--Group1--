@@ -1,0 +1,39 @@
+package combat;
+
+import java.util.Scanner;
+
+public class Chaos {
+	private int life;
+	
+	public Chaos() {
+		life = 100;
+	}
+	
+	public boolean receiveAttack(String attack) {
+		
+		if (attack.equals("light")) {
+			life -= 20;
+		}
+		
+		else if (attack.equals("nature")) {
+			life -= 5;
+		}
+		
+		else {
+			life -= 10;
+		}
+		
+		System.out.println("My remaining life is:");
+		System.out.println(life);
+		
+		return (life > 0);
+	}
+	
+	public String getPrompt() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("What attack would you like to do?: ");
+		String attack = reader.nextLine();
+		
+		return attack;
+	}
+}
