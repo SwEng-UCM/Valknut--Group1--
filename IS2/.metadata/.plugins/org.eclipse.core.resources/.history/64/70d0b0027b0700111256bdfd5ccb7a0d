@@ -1,0 +1,9 @@
+package combat;
+
+public class Chaos {
+	private int life;
+	
+	public Chaos() {
+		
+	}
+}

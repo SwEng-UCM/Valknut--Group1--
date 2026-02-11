@@ -1,0 +1,11 @@
+public class Main {
+
+	/**
+	 * Entry point
+	 * 
+	 * @param args Arguments for the game.
+	 */
+	public static void main(String[] args) {
+		
+	}
+}

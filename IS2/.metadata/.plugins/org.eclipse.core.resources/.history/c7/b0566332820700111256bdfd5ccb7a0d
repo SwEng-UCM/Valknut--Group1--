@@ -1,0 +1,5 @@
+package combat;
+
+public enum Elements {
+	LIGHT, CHAOS, NATURE, BLOOD, FALSEHOOD;
+}

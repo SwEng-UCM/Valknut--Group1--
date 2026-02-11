@@ -1,0 +1,41 @@
+package combat;
+
+import java.util.Scanner;
+
+public class Chaos {
+	private int life;
+	
+	public Chaos() {
+		life = 100;
+	}
+	
+	public boolean receiveAttack(String attack) {
+		
+		if (attack.equals("light")) {
+			life -= 20;
+		}
+		
+		else if (attack == "nature") {
+			life -= 5;
+		}
+		
+		else {
+			life -= 10;
+		}
+		
+		System.out.println("My remaining life is:");
+		System.out.println(life);
+		
+		return (life > 0);
+	}
+	
+	public String getPrompt() {
+		Scanner reader = new Scanner(System.in); // Reading from System.in
+		System.out.println("Enter a number: ");
+		String attack = reader.nextLine(); // Scans the next token of the input as an int
+		// Once finished
+		reader.close();
+		
+		return attack;
+	}
+}

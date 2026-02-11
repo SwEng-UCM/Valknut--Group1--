@@ -1,0 +1,30 @@
+package combat;
+
+public enum Element {
+	LIGHT, CHAOS, NATURE, BLOOD, FALSEHOOD;
+	
+	public static Element parseCommand(String command) {
+        if (command == null) {
+        	return STOP;
+        }
+        switch (command.toLowerCase()) {
+            case "u":
+            case "up":
+                return UP;
+            case "d":
+            case "down":
+                return DOWN;
+            case "l":
+            case "left":
+                return LEFT;
+            case "r":
+            case "right":
+                return RIGHT;
+            case "s":
+            case "stop":
+                return STOP;
+            default:
+                return STOP;
+        }
+    }
+}
