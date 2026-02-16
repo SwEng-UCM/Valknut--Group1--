@@ -30,7 +30,7 @@ public class Combat {
     public void rmvEnemies(){
         int aux = enemies.size();
         for(int i = 0; i < aux; i++){
-            if(enemies.get(i).getLife() == 0)
+            if(!enemies.get(i).isAlive())
                 enemies.remove(i);
         }
     }
@@ -49,12 +49,16 @@ public class Combat {
     public void playTurn(Scanner sc) {
         if (turn == 1) {
             for(Hero e: heroes){
-                combOpt = selectAction(sc, e);
-                action(combOpt, sc);
+                if(e.isAlive()){
+                    combOpt = selectAction(sc, e);
+                    action(combOpt, sc);
+                }
                 turn++;
                 update();
             }
         } else {
+            System.out.println("ENEMIES's TURN...");
+            System.out.println();
             for(Enemy e: enemies){
                 attack(sc);
                 turn++;
@@ -96,7 +100,7 @@ public class Combat {
             i = sc.nextInt();
             Hero h = heroes.get(turn - 1);
             h.attack(enemies.get(i - 1), h.getMainElement(), null);
-            System.out.println(enemies.get(i - 1).name().toUpperCase() + "'s health points: " + enemies.get(i - 1).getLife());
+            System.out.println();
             System.out.println();
         }
         else{
@@ -104,14 +108,19 @@ public class Combat {
             Hero h = e.selectTarjet(heroes);
             System.out.println(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
             e.attack(h, e.getMainElement(), null);
-            System.out.println(h.name().toUpperCase() + "'s health points: " + h.getLife());
             System.out.println();
         }
     }
 
     public void update() {
         rmvEnemies();
-        if(enemies.isEmpty() || heroes.isEmpty())
+        if(enemies.isEmpty()){
+            System.out.println("YOU WIN. GREAT TEAM.");
             exit = true;
+        }
+        else if(heroes.isEmpty()){
+            System.out.println("YOU LOOSE. KEEP TRYING.");
+            exit = true;
+        }
     }
 }
