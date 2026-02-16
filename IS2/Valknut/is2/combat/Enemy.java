@@ -9,12 +9,13 @@ public class Enemy extends Character {
 
     public Hero selectTarjet(List<Hero> e){
         Hero h;
-        int max = 0, i = 0;
+        int max = 0, i = 0, j = 0;
         for(Hero hero: e){
             if(max < hero.getLife()){
                 max = hero.getLife();
-                i++;
+                i = j;
             }
+            j++;
         }
 
         return e.get(i);

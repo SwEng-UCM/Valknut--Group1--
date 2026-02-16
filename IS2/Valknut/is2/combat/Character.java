@@ -7,14 +7,15 @@ import java.util.Map;
 
 public abstract class Character {
     protected String name;
+    private boolean alive;
     private Map<Element, Integer> elements; // Representing the five elements stats with a Map
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
     private int life;
     private int shield;
-    private boolean alive;
 
     public Character(String name, int life) {
         this.name = name;
+        alive = true;
         this.elements = new EnumMap<>(Element.class) ;
         for(Element e: Element.values())
             elements.put(e,1);
@@ -23,7 +24,6 @@ public abstract class Character {
             attributes.put(a,1);
         this.life = life;
         this.shield = 0;
-        this.alive = true;
     }
 
     public Element getMainElement(){
@@ -50,13 +50,19 @@ public abstract class Character {
         return life;
     }
 
+    public boolean isAlive(){
+        return alive;
+    }
+
     public void receiveDamage(int damage, Element element) {
         int mod = 1;
         life -= damage * mod;
         System.out.println(name.toUpperCase() + " has received " + damage + " point of damage.");
-        if(life < 0){
+        System.out.println(name.toUpperCase() + "'s health points: " + life);
+        if(life <= 0){
             System.out.println(name.toUpperCase() + " DIE.");
             life = 0;
+            alive = false;
         }
     }
 
