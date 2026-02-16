@@ -5,7 +5,9 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Combat cmb = initCmb(sc);
-		cmb.playTurn(sc);
+		while(!cmb.exit()){
+			cmb.playTurn(sc);
+		}
 	}
 
 	static public Hero selectCharacter(Scanner sc){
