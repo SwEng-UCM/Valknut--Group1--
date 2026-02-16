@@ -1,0 +1,74 @@
+package combat;
+
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+
+public abstract class Character {
+    protected String name;
+    private Map<Element, Integer> elements; // Representing the five elements stats with a Map
+	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
+    private int life;
+    private int shield;
+    private boolean alive;
+
+    public Character(String name, int life) {
+        this.name = name;
+        this.elements = new EnumMap<>(Element.class) ;
+        for(Element e: Element.values())
+            elements.put(e,1);
+        this.attributes = new EnumMap<>(Attribute.class);
+        for(Attribute a: Attribute.values())
+            attributes.put(a,1);
+        this.life = life;
+        this.shield = 0;
+        this.alive = true;
+    }
+
+    public Element getMainElement(){
+        return Collections.max(elements.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+
+    public void setElementStats(List <Integer> stats){
+        int i = 0;
+        for(Element e: Element.values())
+            if(stats.get(i) > 0 && stats.get(i) < 11)
+                elements.put(e, stats.get(i++));
+    }
+
+    public void setAttributeStats(){
+
+    }
+
+    public void printElements(){
+        for(Element e: Element.values())
+            System.out.println(e.toString() + ": " + elements.get(e));
+    }
+
+    public int getLife(){
+        return life;
+    }
+
+    public void receiveDamage(int damage, Element element) {
+        int mod = 1;
+        life -= damage * mod;
+        System.out.println(name.toUpperCase() + " has received " + damage + " point of damage.");
+        if(life < 0){
+            System.out.println(name.toUpperCase() + " DIE.");
+            life = 0;
+        }
+    }
+
+    public void attack(Character e, Element element, Object item) {
+        e.receiveDamage(20, element);
+    }
+
+    public String name(){
+        return name;
+    }
+}
+
+
+
+
