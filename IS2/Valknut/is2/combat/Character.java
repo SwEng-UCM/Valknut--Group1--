@@ -13,6 +13,7 @@ public abstract class Character {
     private int life;
     private int shield;
     private boolean escaped;
+    private boolean defend;
 
     public Character(String name, int life) {
         this.name = name;
@@ -26,6 +27,7 @@ public abstract class Character {
         this.life = life;
         this.shield = 0;
         this.escaped = false;
+        this.defend = false;
     }
 
     public Element getMainElement(){
@@ -64,6 +66,17 @@ public abstract class Character {
         return alive;
     }
 
+    public void defend(){
+        defend = true;
+    }
+
+    public boolean isDefending(){
+        boolean yes = defend;
+        if(defend)
+            defend = !defend;
+        return yes;
+    }
+
     public void receiveDamage(int damage, Element element) {
         int mod = 1;
         life -= damage * mod;
@@ -76,8 +89,8 @@ public abstract class Character {
         }
     }
 
-    public void attack(Character e, Element element, Object item) {
-        e.receiveDamage(20, element);
+    public void attack(Character e, Element element, Object item, int damage) {
+        e.receiveDamage(damage, element);
     }
 
     public String name(){
