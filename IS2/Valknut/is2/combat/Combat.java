@@ -27,11 +27,12 @@ public class Combat {
         enemies.add(e);
     }
 
-    public void rmvEnemies(){
-        int aux = enemies.size();
-        for(int i = 0; i < aux; i++){
-            if(!enemies.get(i).isAlive())
+    private void rmvEnemies(){
+        for(int i = 0; i < enemies.size(); i++){
+            if(!enemies.get(i).isAlive()){
                 enemies.remove(i);
+                i--;
+            }
         }
     }
 
