@@ -13,12 +13,12 @@ public class EnemyBuilder {
     static public Enemy buildEnemy(String str){
         List<Integer> element = new ArrayList<>();
         switch (str.toLowerCase()) {
-            case "Ice":
+            case "ice":
                 Enemy iceGiant = new Enemy("Ice Giant", 100);
                 element.add(2); element.add(1); element.add(1); element.add(1); element.add(1);
                 iceGiant.setElementStats(element);
                 return iceGiant;
-            case "Fire":
+            case "fire":
                 Enemy loki = new Enemy("Fire Giant", 100);
                 element.add(1); element.add(1); element.add(1); element.add(1); element.add(2);
                 loki.setElementStats(element);

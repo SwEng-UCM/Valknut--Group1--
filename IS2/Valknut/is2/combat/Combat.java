@@ -9,12 +9,14 @@ public class Combat {
     private List<Enemy> enemies;
     private CombatOption combOpt;
     private int turn;
+    private boolean exit;
 
     public Combat(){
         heroes = new ArrayList<>(4);
         enemies = new ArrayList<>(5);
         combOpt = CombatOption.parseCommand("X"); // Set wait as default 
         turn = 1; 
+        exit = false;
     }
 
     public void addHero(Hero e){
@@ -53,8 +55,10 @@ public class Combat {
                 update();
             }
         } else {
-            for(Enemy e: enemies)
-                e.attack(e.selectTarjet(heroes), e.getMainElement(), null);
+            for(Enemy e: enemies){
+                attack(sc);
+                turn++;
+            }
             turn = 1;
         }
     }
@@ -74,26 +78,40 @@ public class Combat {
         }
     }
 
-    public void exit() {
-        // End combat logic
+    public boolean exit() {
+        return exit;
     }
 
     public void attack(Scanner sc){
-        System.out.print("Tarjets... ");
-        int i = 1;
-        for(Enemy e: enemies){
-            System.out.print(i + ". " + e.name().toUpperCase() + " ");
-            i++;
+        if(turn < 3){
+            System.out.print("Tarjets... ");
+            int i = 1;
+            for(Enemy e: enemies){
+                System.out.print(i + ". " + e.name().toUpperCase() + " ");
+                i++;
+            }
+            System.out.println();
+            System.out.println();
+            System.out.print("Select: ");
+            i = sc.nextInt();
+            Hero h = heroes.get(turn - 1);
+            h.attack(enemies.get(i - 1), h.getMainElement(), null);
+            System.out.println(enemies.get(i - 1).name().toUpperCase() + "'s health points: " + enemies.get(i - 1).getLife());
+            System.out.println();
         }
-        System.out.println();
-        System.out.println();
-        System.out.print("Select: ");
-        i = sc.nextInt();
-        Hero h = heroes.get(turn - 1);
-        h.attack(enemies.get(i - 1), h.getMainElement(), null);
+        else{
+            Enemy e = enemies.get(turn - 3);
+            Hero h = e.selectTarjet(heroes);
+            System.out.println(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
+            e.attack(h, e.getMainElement(), null);
+            System.out.println(h.name().toUpperCase() + "'s health points: " + h.getLife());
+            System.out.println();
+        }
     }
 
     public void update() {
         rmvEnemies();
+        if(enemies.isEmpty() || heroes.isEmpty())
+            exit = true;
     }
 }
