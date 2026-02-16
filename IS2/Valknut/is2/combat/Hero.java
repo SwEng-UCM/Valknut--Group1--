@@ -14,7 +14,6 @@ public class Hero extends Character {
             this.surname = surname;
         else
             this.surname = " ";
-        
     }
 
     public void print(){
