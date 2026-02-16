@@ -8,16 +8,17 @@ public class Enemy extends Character {
     }
 
     public Hero selectTarjet(List<Hero> e){
-        Hero h;
-        int max = 0, i = 0, j = 0;
+        int max = 0, i = -1, j = 0;
         for(Hero hero: e){
-            if(max < hero.getLife()){
+            if(max < hero.getLife() && !hero.escaped()){
                 max = hero.getLife();
                 i = j;
             }
             j++;
         }
-
-        return e.get(i);
+        if(i == -1)
+            return null;
+        else
+            return e.get(i);
     }
 }

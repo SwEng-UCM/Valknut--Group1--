@@ -12,6 +12,7 @@ public abstract class Character {
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
     private int life;
     private int shield;
+    private boolean escaped;
 
     public Character(String name, int life) {
         this.name = name;
@@ -24,10 +25,19 @@ public abstract class Character {
             attributes.put(a,1);
         this.life = life;
         this.shield = 0;
+        this.escaped = false;
     }
 
     public Element getMainElement(){
         return Collections.max(elements.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+
+    public void setEscaped(boolean b){
+        escaped = b;
+    }
+
+    public boolean escaped(){
+        return escaped;
     }
 
     public void setElementStats(List <Integer> stats){

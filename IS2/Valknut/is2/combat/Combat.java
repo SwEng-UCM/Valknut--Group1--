@@ -35,12 +35,21 @@ public class Combat {
         }
     }
 
-    public CombatOption selectAction(Scanner sc, Character c){
+    private void printTurn(Character c){
         System.out.println(c.name().toUpperCase() + "'s TURN...");
         System.out.println();
         combOpt.print();
         System.out.println();
         System.out.print("Option: ");
+    }
+
+    private void printEnemyTurn(){
+        System.out.println("ENEMIES's TURN...");
+            System.out.println();
+    }
+
+    public CombatOption selectAction(Scanner sc, Character c){
+        printTurn(c);
         String aux = sc.next();
         System.out.println();
         return CombatOption.parseCommand(aux);
@@ -49,20 +58,20 @@ public class Combat {
     public void playTurn(Scanner sc) {
         if (turn == 1) {
             for(Hero e: heroes){
-                if(e.isAlive()){
+                if(e.isAlive() && !e.escaped()){
                     combOpt = selectAction(sc, e);
                     action(combOpt, sc);
+                    update();
                 }
                 turn++;
-                update();
             }
         } else {
-            System.out.println("ENEMIES's TURN...");
-            System.out.println();
+            printEnemyTurn();
             for(Enemy e: enemies){
                 attack(sc);
                 turn++;
             }
+            update();
             turn = 1;
         }
     }
@@ -71,14 +80,16 @@ public class Combat {
         switch(co){
             case ATTACK:
                 attack(sc);
+                break;
             case DEFEND:
-                ;
+                break;
             case USE_ITEM:
-                ;
+                break;
             case RUN:
-                exit();
+                run();
+                break;
             default:
-                ;
+                break;
         }
     }
 
@@ -86,9 +97,8 @@ public class Combat {
         return exit;
     }
 
-    public void attack(Scanner sc){
-        if(turn < 3){
-            System.out.print("Tarjets... ");
+    private void printHeroTarjets(){
+        System.out.print("Tarjets... ");
             int i = 1;
             for(Enemy e: enemies){
                 System.out.print(i + ". " + e.name().toUpperCase() + " ");
@@ -97,30 +107,85 @@ public class Combat {
             System.out.println();
             System.out.println();
             System.out.print("Select: ");
-            i = sc.nextInt();
+    }
+
+    public void attack(Scanner sc){
+        if(turn < 3){
+            printHeroTarjets();
+            int i = sc.nextInt();
             Hero h = heroes.get(turn - 1);
             h.attack(enemies.get(i - 1), h.getMainElement(), null);
-            System.out.println();
-            System.out.println();
+            System.out.println(); System.out.println();
         }
         else{
             Enemy e = enemies.get(turn - 3);
             Hero h = e.selectTarjet(heroes);
-            System.out.println(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
-            e.attack(h, e.getMainElement(), null);
-            System.out.println();
+            if(h != null){
+                System.out.println(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
+                e.attack(h, e.getMainElement(), null);
+                System.out.println();
+            }
+            else{
+                System.out.println(e.name().toUpperCase() + " MISS: NO HERO FIGHTING");
+                System.out.println();
+            }
         }
+    }
+
+    private boolean allEscaped(){
+        boolean yes = true;
+
+        for(int i = 0; i < heroes.size() && yes; i++){
+            if(!heroes.get(i).escaped())
+                yes = false;
+        }
+
+        if(yes){
+            for(Hero e: heroes)
+                e.setEscaped(false);
+        }
+
+        return yes;
+    }
+
+    private boolean heroesLoose(){
+        boolean yes = true;
+
+        for(int i = 0; i < heroes.size(); i++){
+            if(!heroes.get(i).escaped() && heroes.get(i).isAlive()){
+                yes = false;
+            }
+        }
+
+        return yes;
     }
 
     public void update() {
         rmvEnemies();
         if(enemies.isEmpty()){
-            System.out.println("YOU WIN. GREAT TEAM.");
+            System.out.println("THE HEROES WIN. GREAT TEAM.");
             exit = true;
         }
-        else if(heroes.isEmpty()){
-            System.out.println("YOU LOOSE. KEEP TRYING.");
+        else if(allEscaped()){
+            System.out.println("THE HEROES ESCAPED THE FIGTH.");
             exit = true;
+        }
+        else if(heroesLoose()){
+            System.out.println("THE HEROES LOOSE. KEEP TRYING.");
+            exit = true;
+        }
+    }
+
+    public void run(){
+        double i = Math.random();
+        if(i > 0.5){
+            System.out.println("YOU ESCAPED LUCKY HERO");
+            System.out.println();
+            heroes.get(turn - 1).setEscaped(true);
+        }
+        else{
+            System.out.println("YOU FAILED IN YOUR ESCAPE");
+            System.out.println();
         }
     }
 }
