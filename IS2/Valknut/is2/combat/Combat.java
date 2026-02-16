@@ -83,6 +83,7 @@ public class Combat {
                 attack(sc);
                 break;
             case DEFEND:
+                defend();
                 break;
             case USE_ITEM:
                 break;
@@ -115,7 +116,7 @@ public class Combat {
             printHeroTarjets();
             int i = sc.nextInt();
             Hero h = heroes.get(turn - 1);
-            h.attack(enemies.get(i - 1), h.getMainElement(), null);
+            h.attack(enemies.get(i - 1), h.getMainElement(), null, 20);
             System.out.println(); System.out.println();
         }
         else{
@@ -123,7 +124,9 @@ public class Combat {
             Hero h = e.selectTarjet(heroes);
             if(h != null){
                 System.out.println(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
-                e.attack(h, e.getMainElement(), null);
+                int damage;
+                if(h.isDefending()){damage = 10;}else{damage = 20;}
+                e.attack(h, e.getMainElement(), null, damage);
                 System.out.println();
             }
             else{
@@ -131,6 +134,10 @@ public class Combat {
                 System.out.println();
             }
         }
+    }
+
+    private void defend(){
+        heroes.get(turn - 1).defend();
     }
 
     private boolean allEscaped(){
