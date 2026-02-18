@@ -1,2 +1,5 @@
-2026/02/11-19:49:05.301 6ebc Creating DB C:\Users\User\Universidad\IS2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Site Characteristics Database since it was missing.
-2026/02/11-19:49:05.307 6ebc Reusing MANIFEST C:\Users\User\Universidad\IS2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Site Characteristics Database/MANIFEST-000001
+2026/02/18-15:00:02.359 43e4 Log #3: 1 ops saved to Table #4 OK
+2026/02/18-15:00:02.365 43e4 Archiving C:\hlocal\Universidad\Segundo\Software Engineering II\Valknut\Valknut--Group1--\IS2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Site Characteristics Database/000003.log: OK
+2026/02/18-15:00:02.366 43e4 Table #4: 1 entries OK
+2026/02/18-15:00:02.370 43e4 Archiving C:\hlocal\Universidad\Segundo\Software Engineering II\Valknut\Valknut--Group1--\IS2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Site Characteristics Database/MANIFEST-000001: OK
+2026/02/18-15:00:02.398 43e4 **** Repaired leveldb C:\hlocal\Universidad\Segundo\Software Engineering II\Valknut\Valknut--Group1--\IS2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Site Characteristics Database; recovered 1 files; 130 bytes. Some data may have been lost. ****
