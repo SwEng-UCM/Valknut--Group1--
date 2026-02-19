@@ -7,8 +7,8 @@ public class Hero extends Character {
     private String surname;
     private List <Item> inventory; // Representing 'item'
 
-    public Hero(String name, int life, String surname) {
-        super(name, life);
+    public Hero(String name, int life, int max_life, String surname) {
+        super(name, life, max_life);
         inventory = new ArrayList<>(10);
         if(surname != null)
             this.surname = surname;

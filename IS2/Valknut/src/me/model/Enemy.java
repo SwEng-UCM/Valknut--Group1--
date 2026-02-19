@@ -3,8 +3,8 @@ package me.model;
 import java.util.List;
 
 public class Enemy extends Character {
-    public Enemy(String name, int life) {
-        super(name, life);
+    public Enemy(String name, int life, int max_life) {
+        super(name, life, max_life);
     }
 
     public Hero selectTarjet(List<Hero> e){
