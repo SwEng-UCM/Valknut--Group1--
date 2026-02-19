@@ -1,4 +1,4 @@
-package combat;
+package me.model;
 
 public enum CombatOption {
     WAIT, ATTACK, DEFEND, USE_ITEM, RUN;

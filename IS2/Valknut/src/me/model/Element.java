@@ -1,4 +1,4 @@
-package combat;
+package me.model;
 
 public enum Element {
 	ICE, CHAOS, NATURE, BLOOD, FIRE;
