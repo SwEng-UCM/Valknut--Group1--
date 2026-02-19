@@ -11,11 +11,12 @@ public abstract class Character {
     private Map<Element, Integer> elements; // Representing the five elements stats with a Map
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
     private int life;
+    private int max_life;
     private int shield;
     private boolean escaped;
     private boolean defend;
 
-    public Character(String name, int life) {
+    public Character(String name, int life, int max_life) {
         this.name = name;
         alive = true;
         this.elements = new EnumMap<>(Element.class) ;
@@ -79,14 +80,9 @@ public abstract class Character {
 
     public void receiveDamage(int damage, Element element) {
         int mod = 1;
-        life -= damage * mod;
+        changeLife(-damage* mod);
         System.out.println(name.toUpperCase() + " has received " + damage + " point of damage.");
         System.out.println(name.toUpperCase() + "'s health points: " + life);
-        if(life <= 0){
-            System.out.println(name.toUpperCase() + " DIES.");
-            life = 0;
-            alive = false;
-        }
     }
 
     public void attack(Character e, Element element, Object item, int damage) {
@@ -95,6 +91,17 @@ public abstract class Character {
 
     public String name(){
         return name;
+    }
+
+    public void changeLife(int value){
+        life += value;
+        if(life > max_life){
+            life = max_life;
+        }
+        else if(life <= 0){
+            life = 0;
+            alive = false;
+        }
     }
 }
 
