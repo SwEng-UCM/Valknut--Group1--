@@ -1,4 +1,4 @@
-package combat;
+package me.model;
 
 public enum Attribute {
     SPEED, STRENGTH, RESISTANCE, CLEVERNESS, AGILITY;
