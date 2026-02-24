@@ -1,0 +1,11 @@
+# Ignorar carpetas
+.metadata/
+
+# Ignorar archivos específicos
+.env
+secret.key
+
+# Ignorar tipos de archivos
+*.log
+*.tmp
+.DS_Store
