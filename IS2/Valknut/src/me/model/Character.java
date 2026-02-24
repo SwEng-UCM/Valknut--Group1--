@@ -12,7 +12,6 @@ public abstract class Character {
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
     private int life;
     private int max_life;
-    private int shield;
     private double mod;
     private boolean escaped;
     private boolean defend;
@@ -27,8 +26,6 @@ public abstract class Character {
         for(Attribute a: Attribute.values())
             attributes.put(a,1);
         this.life = life;
-        this.shield = 0;
-        this.shield = 0;
         this.escaped = false;
         this.defend = false;
     }
@@ -51,13 +48,20 @@ public abstract class Character {
 
     public void setElementStats(List <Integer> stats){
         int i = 0;
-        for(Element e: Element.values())
+        for(Element e: Element.values()){
             if(stats.get(i) > 0 && stats.get(i) < 11)
-                elements.put(e, stats.get(i++));
+                elements.put(e, stats.get(i));
+            i++;
+        }
     }
 
-    public void setAttributeStats(){
-
+    public void setAttributeStats(List <Integer> stats){
+        int i = 0;
+        for(Attribute a: Attribute.values()){
+            if(stats.get(i) > 0 && stats.get(i) < 11)
+                attributes.put(a, stats.get(i));
+            i++;
+        }
     }
 
     public void printElements(){
@@ -107,6 +111,7 @@ public abstract class Character {
     }
 
     public void changeShield(int value){
+        int shield = attributes.get(Attribute.RESISTANCE);
         shield += value;
         if(shield > 9){
             shield = 9;
@@ -114,6 +119,31 @@ public abstract class Character {
         else if(shield < -5){
             shield = -5;
         }
+        attributes.put(Attribute.RESISTANCE, shield);
+    }
+
+    public void changeElement(Element e, int mod){
+        int i = elements.get(e);
+        i += mod;
+        if(i > 10){
+            i = 10;
+        }
+        if(i < 1){
+            i = 1;
+        }
+        elements.put(e, i);
+    }
+
+    public void changeAgility(int mod){
+        int ag = attributes.get(Attribute.AGILITY);
+        ag += mod;
+        if(ag > 10){
+            ag = 10;
+        }
+        if(ag < 0){
+            ag = 0;
+        }
+        attributes.put(Attribute.AGILITY, ag);
     }
 }
 

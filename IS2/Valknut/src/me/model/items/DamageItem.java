@@ -16,4 +16,9 @@ public class DamageItem extends Item{
         
     }
 
+    @Override
+    public void revert(Character c) {
+        
+    }
+
 }
