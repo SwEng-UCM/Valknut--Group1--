@@ -1,18 +1,20 @@
-package me.model;
+package me.model.items;
+
+import me.model.Character;
 
 public abstract class Item {
 
     private String name;
     protected boolean used;
-    private int value;
+    private int cost;
 
-    public Item(String name, int value){
+    public Item(String name, int cost){
         this.name = name;
-        this.value = value;
+        this.cost = cost;
     }
 
     public int getValue(){
-        return value;
+        return cost;
     }
 
     public String getName(){
