@@ -1,0 +1,10 @@
+package view;
+
+public class Messages {
+	
+	// Battle Miscellaneous
+	public static final String BATTLE_START;
+	public static final String BATTLE_WIN;
+	public static final String BATTLE_LOSS;
+	
+}
