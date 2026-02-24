@@ -4,16 +4,21 @@ import me.model.Character;
 
 public class ShieldItem extends Item{
 
-    private int shield;
+    private int mod;
 
     public ShieldItem(String name, int value, int shield){
         super(name, value);
-        this.shield = shield;
+        this.mod = shield;
     }
 
     @Override
     public void use(Character c) {
-       c.changeShield(shield);
+       c.changeShield(mod);
+    }
+
+    @Override
+    public void revert(Character c) {
+        c.changeShield(-mod);
     }
     
 }
