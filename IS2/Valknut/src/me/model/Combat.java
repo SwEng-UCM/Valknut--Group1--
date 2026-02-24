@@ -116,7 +116,7 @@ public class Combat {
             printHeroTarjets();
             int i = sc.nextInt();
             Hero h = heroes.get(turn - 1);
-            h.attack(enemies.get(i - 1), h.getMainElement(), null, 20);
+            h.attack(enemies.get(i - 1), h.getMainElement(), 20);
             System.out.println(); System.out.println();
         }
         else{
@@ -126,7 +126,7 @@ public class Combat {
                 System.out.println(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
                 int damage;
                 if(h.isDefending()){damage = 10;}else{damage = 20;}
-                e.attack(h, e.getMainElement(), null, damage);
+                e.attack(h, e.getMainElement(), damage);
                 System.out.println();
             }
             else{

@@ -2,6 +2,7 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.model.items.Item;
 
 public class Hero extends Character {
     private String surname;

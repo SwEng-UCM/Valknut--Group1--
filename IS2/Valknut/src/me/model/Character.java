@@ -13,6 +13,7 @@ public abstract class Character {
     private int life;
     private int max_life;
     private int shield;
+    private double mod;
     private boolean escaped;
     private boolean defend;
 
@@ -27,12 +28,17 @@ public abstract class Character {
             attributes.put(a,1);
         this.life = life;
         this.shield = 0;
+        this.shield = 0;
         this.escaped = false;
         this.defend = false;
     }
 
     public Element getMainElement(){
         return Collections.max(elements.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+    
+    public String name(){
+        return name;
     }
 
     public void setEscaped(boolean b){
@@ -79,18 +85,14 @@ public abstract class Character {
     }
 
     public void receiveDamage(int damage, Element element) {
-        int mod = 1;
-        changeLife(-damage* mod);
+        changeLife(-damage);
         System.out.println(name.toUpperCase() + " has received " + damage + " point of damage.");
         System.out.println(name.toUpperCase() + "'s health points: " + life);
     }
 
-    public void attack(Character e, Element element, Object item, int damage) {
-        e.receiveDamage(damage, element);
-    }
-
-    public String name(){
-        return name;
+    public void attack(Character e, Element element, int damage) {
+        int var = damage + (int)(damage*mod);
+        e.receiveDamage(var, element);
     }
 
     public void changeLife(int value){
@@ -101,6 +103,16 @@ public abstract class Character {
         else if(life <= 0){
             life = 0;
             alive = false;
+        }
+    }
+
+    public void changeShield(int value){
+        shield += value;
+        if(shield > 9){
+            shield = 9;
+        }
+        else if(shield < -5){
+            shield = -5;
         }
     }
 }
