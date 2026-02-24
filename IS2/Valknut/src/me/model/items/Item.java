@@ -27,4 +27,10 @@ public abstract class Item {
         return used;
     }
 
+    public void delete(Character c){
+        revert(c);
+    }
+
+    public abstract void revert(Character c);
+
 }
