@@ -42,6 +42,11 @@ public abstract class Character {
         escaped = b;
     }
 
+    public void nothing(){
+
+        
+    }
+
     public boolean escaped(){
         return escaped;
     }
