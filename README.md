@@ -1,5 +1,5 @@
 Valknut is a turn-based combat game inspired in Norse mythology. In this game, our heroes are searching for an enemyworthy enough to send them to Valhalla! 
-This is the repository our team is using to develope the game
+This is the repository our team is using to develope the game. Feel free to browse around!
 
 
 
