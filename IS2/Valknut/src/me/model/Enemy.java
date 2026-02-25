@@ -6,7 +6,7 @@ public class Enemy extends Character {
     public Enemy(String name, int life, int max_life) {
         super(name, life, max_life);
     }
-
+//whatever
     public Hero selectTarjet(List<Hero> e){
         int max = 0, i = -1, j = 0;
         for(Hero hero: e){
