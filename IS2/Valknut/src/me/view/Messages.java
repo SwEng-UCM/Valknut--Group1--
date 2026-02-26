@@ -1,4 +1,4 @@
-package view;
+package me.view;
 
 public class Messages {
 	

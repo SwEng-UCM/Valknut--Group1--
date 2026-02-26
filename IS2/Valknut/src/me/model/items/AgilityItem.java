@@ -18,7 +18,7 @@ public class AgilityItem extends Item{
 
     @Override
     public void revert(Character c) {
-        
+        c.changeAgility(-mod);
     }
 
 }
