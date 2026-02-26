@@ -7,3 +7,10 @@
 - Hǫfuð ("man-head",[7] Norwegian hovud, Danish hoved, Swedish huvud and Icelandic höfuð) is the sword of the Æsir Heimdall.
 
 - Mjölnir is Thor's hammer, used both as a weapon and as a spiritual focus with which to perform divine acts. 
+
+
+Each weapon needs to have: 
+
+- Some sort of special mechanique
+- A % or set-number increase for some stats (maybe up to 3?)
+- An element it attacks with / has better affinity with.
