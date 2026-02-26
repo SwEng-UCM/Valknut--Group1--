@@ -145,6 +145,18 @@ public abstract class Character {
         }
         attributes.put(Attribute.AGILITY, ag);
     }
+
+    public void changeStrength(int mod){
+        int damage = attributes.get(Attribute.STRENGTH);
+        damage += mod;
+        if(damage > 10){
+            damage = 10;
+        }
+        else if(damage < 1){
+            damage = 1;
+        }
+        attributes.put(Attribute.RESISTANCE, damage);
+    }
 }
 
 
