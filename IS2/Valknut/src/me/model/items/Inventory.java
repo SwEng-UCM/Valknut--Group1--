@@ -17,9 +17,9 @@ public class Inventory {
        }
 
        public boolean addItem(Item i){
-              if(inventory.size() < inventory_cap){
-              inventory.add(i);
-              return true;
+              if(!isFull()){
+                     inventory.add(i);
+                     return true;
               }
               return false;
        }
@@ -34,7 +34,11 @@ public class Inventory {
               return false;
        }
 
-       public boolean deleteItem(int idx){
+       public boolean isFull(){
+              return inventory.size() == inventory_cap;
+       }
+
+       public boolean dropItem(int idx){
               if(!inventory.isEmpty()){
                      inventory.remove(idx);
                      return true;
@@ -64,4 +68,6 @@ public class Inventory {
        public void increaseCapacity(int mod){
               inventory_cap += mod;
        }
+
+
 }
