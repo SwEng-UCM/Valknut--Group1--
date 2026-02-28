@@ -20,4 +20,7 @@ public class Messages {
 	// Player Actions
 	public static final String PLAYER_RUNS = "YOU ESCAPED TO FIGHT AGAIN HERO";
 	public static final String PLAYER_RUNFAIL = "YOU FAILED IN YOUR ESCAPE";
+	
+	// Enemies Names
+	
 }
