@@ -7,7 +7,8 @@ public class Messages {
 	public static final String BATTLE_WIN = "THE HEROES WIN. ONE STEP CLOSER TO VALHALLA.";
 	public static final String BATTLE_LOSS = "THE HEROES LOSE. YOUR ADVENTURE ENDS HERE.";
 	public static final String BATTLE_ESCAPE = "THE HEROES ESCAPED THE FIGTH.";
-	public static final String ENEMY_TURN = "ENEMIES's TURN...";
+	public static final String ENEMY_TURN = "ENEMIES' TURN...";
+	public static final String HERO_TURN = "HEROES' TURN...";
 	
 	// Enemies attacks
 	public static final String ICEGIANT_ATTACK = "The giant swings his club in your direction";
@@ -22,5 +23,9 @@ public class Messages {
 	public static final String PLAYER_RUNFAIL = "YOU FAILED IN YOUR ESCAPE";
 	
 	// Enemies Names
-	
+	public static final String ICEGIANT = "\u001B[36mIce Giant[0m";
+	public static final String FIREGIANT = "\u001B[38;2;255;128;0mFire Giant[0m";
+	public static final String SHAPESHIFTER = "\u001B[35mShapeshifter[0m";
+	public static final String BERSERKER = "/u001B[31mBerserker[0m";
+	public static final String ELF = "\u001B[32mElf[0m";
 }
