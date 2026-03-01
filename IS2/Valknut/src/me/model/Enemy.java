@@ -3,8 +3,15 @@ package me.model;
 import java.util.List;
 
 public class Enemy extends Character {
-    public Enemy(String name, int life, int max_life) {
+    private final int xpReward;
+
+    public Enemy(String name, int life, int max_life, int xpReward) {
         super(name, life, max_life);
+        this.xpReward = xpReward;
+    }
+
+    public int getXpReward() {
+        return xpReward;
     }
 //whatever
     public Hero selectTarjet(List<Hero> e){

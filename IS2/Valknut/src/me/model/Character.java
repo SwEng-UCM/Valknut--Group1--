@@ -26,8 +26,15 @@ public abstract class Character {
         for(Attribute a: Attribute.values())
             attributes.put(a,1);
         this.life = life;
+        this.max_life = max_life;
         this.escaped = false;
         this.defend = false;
+    }
+
+    public void increaseMaxLife(int amount) {
+        if (amount <= 0) return;
+        max_life += amount;
+        if (life > max_life) life = max_life;
     }
 
     public Element getMainElement(){
@@ -155,10 +162,6 @@ public abstract class Character {
         else if(damage < 1){
             damage = 1;
         }
-        attributes.put(Attribute.RESISTANCE, damage);
+        attributes.put(Attribute.STRENGTH, damage);
     }
 }
-
-
-
-
