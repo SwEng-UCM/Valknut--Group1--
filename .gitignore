@@ -4,3 +4,10 @@ IS2/.project
 IS2/.classpath
 IS2/*.class
 
+
+# macOS / IDE / build
+.DS_Store
+.idea/
+out/
+.Rhistory
+IS2 2/

@@ -28,8 +28,19 @@ public class Combat {
     }
 
     private void rmvEnemies(){
-        for(int i = 0; i < enemies.size(); i++){
-            if(!enemies.get(i).isAlive()){
+        for (int i = 0; i < enemies.size(); i++) {
+            Enemy enemy = enemies.get(i);
+
+            if (!enemy.isAlive()) {
+                System.out.println(enemy.name().toUpperCase() + " was defeated!");
+
+                // Give XP to heroes who participated (alive + not escaped)
+                for (Hero h : heroes) {
+                    if (h.isAlive() && !h.escaped()) {
+                        h.gainXp(enemy.getXpReward());
+                    }
+                }
+
                 enemies.remove(i);
                 i--;
             }
