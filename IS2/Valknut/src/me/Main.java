@@ -2,9 +2,10 @@ package me;
 
 import java.util.Scanner;
 import me.model.*;
-
+import me.view.Story;
 public class Main {
 	public static void main(String[] args) {
+		tellIntro();
 		Scanner sc = new Scanner(System.in);
 		Combat cmb = initCmb(sc);
 		while(!cmb.exit()){
@@ -40,6 +41,12 @@ public class Main {
 			System.out.println();
 		}
 		return cmb;
+	}
+	
+	static public void tellIntro() {
+		System.out.println(Story.IntroLines);
+		System.out.println();
+		System.out.println();
 	}
 	
 }
