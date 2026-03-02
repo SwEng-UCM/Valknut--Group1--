@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Enemy extends Character {
     private final int xpReward;
-    private static String attkDesc;
+    private String attkDesc;
 
     public Enemy(String name, int life, int max_life, int xpReward, String attack) {
         super(name, life, max_life);

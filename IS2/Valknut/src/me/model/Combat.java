@@ -184,6 +184,7 @@ public class Combat {
     public void update() {
         rmvEnemies();
         if(enemies.isEmpty()){
+        	
             System.out.println(Messages.BATTLE_WIN);
             exit = true;
         }
