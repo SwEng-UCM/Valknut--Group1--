@@ -1,0 +1,14 @@
+package ui;
+
+import java.util.Scanner;
+
+public class ConsoleIO {
+
+    private final Scanner scanner;
+
+    public ConsoleIO() {
+        this.scanner = new Scanner(System.in);
+    }
+
+   
+}
