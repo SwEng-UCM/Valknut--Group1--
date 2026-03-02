@@ -23,9 +23,9 @@ public class Messages {
 	public static final String PLAYER_RUNFAIL = "YOU FAILED IN YOUR ESCAPE";
 	
 	// Enemies Names
-	public static final String ICEGIANT = "\u001B[36mIce Giant[0m";
-	public static final String FIREGIANT = "\u001B[38;2;255;128;0mFire Giant[0m";
-	public static final String SHAPESHIFTER = "\u001B[35mShapeshifter[0m";
-	public static final String BERSERKER = "/u001B[31mBerserker[0m";
-	public static final String ELF = "\u001B[32mElf[0m";
+	public static final String ICEGIANT = "Ice Giant";
+	public static final String FIREGIANT = "Fire Giant";
+	public static final String SHAPESHIFTER = "Shapeshifter";
+	public static final String BERSERKER = "Berserker";
+	public static final String ELF = "Elf";
 }

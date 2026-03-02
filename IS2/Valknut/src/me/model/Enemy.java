@@ -4,10 +4,12 @@ import java.util.List;
 
 public class Enemy extends Character {
     private final int xpReward;
+    private static String attkDesc;
 
-    public Enemy(String name, int life, int max_life, int xpReward) {
+    public Enemy(String name, int life, int max_life, int xpReward, String attack) {
         super(name, life, max_life);
         this.xpReward = xpReward;
+        attkDesc = attack;
     }
 
     public int getXpReward() {
@@ -28,4 +30,9 @@ public class Enemy extends Character {
         else
             return e.get(i);
     }
+    
+    public String getAttack() {
+		return attkDesc;
+	}
 }
+
