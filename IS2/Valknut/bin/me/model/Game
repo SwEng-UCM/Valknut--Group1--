@@ -1,0 +1,11 @@
+package me.model
+
+public class Game(){
+
+    public Game(){
+        
+    }
+
+
+
+}
