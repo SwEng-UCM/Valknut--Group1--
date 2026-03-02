@@ -39,4 +39,21 @@ public enum Element {
                 return "ICE";
         }
     }
+    
+    public Element getWeakness() {
+    	switch (this) {
+        case ICE:
+            return FIRE;
+        case CHAOS:
+            return NATURE;
+        case NATURE:
+            return BLOOD;
+        case BLOOD:
+            return ICE;
+        case FIRE:
+            return CHAOS;
+        default:
+            return CHAOS;
+    }
+    }
 }
