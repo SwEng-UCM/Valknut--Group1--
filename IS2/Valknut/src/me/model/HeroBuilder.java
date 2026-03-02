@@ -37,7 +37,7 @@ public class HeroBuilder {
         int i = 1;
         for(Hero e: heroes){
             System.out.print(i++ + " --> ");
-            e.toString();
+            System.out.println(e.toString());
             e.printElements();
             System.out.println();
         }
