@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import me.view.Messages;
 
 public abstract class Character {
     protected String name;
@@ -71,9 +72,13 @@ public abstract class Character {
         }
     }
 
-    public void printElements(){
+    public String getStringElements(){
+        StringBuilder sb = new StringBuilder();
+
         for(Element e: Element.values())
-            System.out.println(e.toString() + ": " + elements.get(e));
+            sb.append(e.toString()).append(": ").append(elements.get(e)).append(Messages.NEW_LINE);
+
+        return sb.toString();
     }
 
     public int getLife(){

@@ -4,56 +4,38 @@ public enum Element {
 	ICE, CHAOS, NATURE, BLOOD, FIRE;
 	
 	public static Element parseElement(String command) {
-        if (command == null) {
+        if (command == null) 
         	return ICE;
-        }
-        switch (command.toLowerCase()) {
-            case "ice":
-                return ICE;
-            case "chaos":
-                return CHAOS;
-            case "nature":
-                return NATURE;
-            case "blood":
-                return BLOOD;
-            case "fire":
-                return FIRE;
-            default:
-                return ICE;
-        }
+        
+        return switch (command.toLowerCase()) {
+            case "ice" -> ICE;
+            case "chaos" -> CHAOS;
+            case "nature" -> NATURE;
+            case "blood" -> BLOOD;
+            case "fire" -> FIRE;
+            default -> ICE;
+        };
     }
 
     public String toString(Element e){
-        switch (e) {
-            case ICE:
-                return "ICE";
-            case CHAOS:
-                return "CHAOS";
-            case NATURE:
-                return "NATURE";
-            case BLOOD:
-                return "BLOOD";
-            case FIRE:
-                return "FIRE";
-            default:
-                return "ICE";
-        }
+            return switch (e) {
+                case ICE -> "ICE";
+                case CHAOS -> "CHAOS";
+                case NATURE -> "NATURE";
+                case BLOOD -> "BLOOD";
+                case FIRE -> "FIRE";
+                default -> "ICE";
+            };
     }
     
     public Element getWeakness() {
-    	switch (this) {
-        case ICE:
-            return FIRE;
-        case CHAOS:
-            return NATURE;
-        case NATURE:
-            return BLOOD;
-        case BLOOD:
-            return ICE;
-        case FIRE:
-            return CHAOS;
-        default:
-            return CHAOS;
-    }
+            return switch (this) {
+                case ICE -> FIRE;
+                case CHAOS -> NATURE;
+                case NATURE -> BLOOD;
+                case BLOOD -> ICE;
+                case FIRE -> CHAOS;
+                default -> CHAOS;
+            };
     }
 }

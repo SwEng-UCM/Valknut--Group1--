@@ -2,13 +2,14 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import me.view.ConsoleIO;
 import me.view.Messages;
+
 
 public class Combat {
     private List<Hero> heroes;
     private List<Enemy> enemies;
-    private CombatOption combOpt;
+    private static CombatOption combOpt;
     private int turn;
     private boolean exit;
 
@@ -48,62 +49,69 @@ public class Combat {
         }
     }
 
-    private void printTurn(Character c){
-        System.out.println(c.name().toUpperCase() + "'s TURN...");
-        System.out.println();
-        combOpt.print();
-        System.out.println();
-        System.out.print("Option: ");
+    private String turnToString(Character c){
+        StringBuilder sb = new StringBuilder();
+        sb.append(c.name().toUpperCase()).append("'s TURN...").append(Messages.NEW_LINE).append(Messages.NEW_LINE);
+        sb.append(CombatOption.display()).append(Messages.NEW_LINE).append("Option: ");
+
+        return sb.toString();
     }
 
-    private void printEnemyTurn(){
-        System.out.println(Messages.ENEMY_TURN);
-            System.out.println();
+    private String enemyTurnToString(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(Messages.ENEMY_TURN).append(Messages.NEW_LINE);
+
+        return sb.toString();
     }
 
-    public CombatOption selectAction(Scanner sc, Character c){
-        printTurn(c);
-        String aux = sc.next();
-        System.out.println();
-        return CombatOption.parseCommand(aux);
+    public CombatOption selectAction(ConsoleIO io, Character c){
+        CombatOption co = null;
+        io.print(turnToString(c));
+        String aux = io.readPrompt();
+        io.printLine("");
+        co = CombatOption.parseCommand(aux);
+        while(co == null || co == CombatOption.WAIT){
+            io.printLine(Messages.ENTER_VV + Messages.NEW_LINE);
+            io.print(turnToString(c));
+            aux = io.readPrompt();
+            io.printLine("");
+            co = CombatOption.parseCommand(aux);
+        }
+
+        return co;
     }
 
-    public void playTurn(Scanner sc) {
+    public void playTurn(ConsoleIO io) {
         if (turn == 1) {
             for(Hero e: heroes){
                 if(e.isAlive() && !e.escaped()){
-                    combOpt = selectAction(sc, e);
-                    action(combOpt, sc);
-                    update();
+                    combOpt = selectAction(io, e);
+                    action(combOpt, io);
+                    update(io);
                 }
                 turn++;
             }
         } else {
-            printEnemyTurn();
+            enemyTurnToString();
             for(Enemy e: enemies){
-                attack(sc);
+                attack(io);
                 turn++;
             }
-            update();
+            update(io);
             turn = 1;
         }
     }
 
-    private void action(CombatOption co, Scanner sc){
+    private void action(CombatOption co, ConsoleIO io){
         switch(co){
-            case ATTACK:
-                attack(sc);
-                break;
-            case DEFEND:
-                defend();
-                break;
-            case USE_ITEM:
-                break;
-            case RUN:
-                run();
-                break;
-            default:
-                break;
+            case ATTACK -> attack(io);
+            case DEFEND -> defend();
+            case USE_ITEM -> {
+            }
+            case RUN -> io.printLine(run());
+            default -> {
+            }
         }
     }
 
@@ -111,39 +119,42 @@ public class Combat {
         return exit;
     }
 
-    private void printHeroTargets(){
-        System.out.print("Targets... ");
+    private String heroTargetsToString(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Targets... ").append(Messages.NEW_LINE);
             int i = 1;
             for(Enemy e: enemies){
-                System.out.print(i + ". " + e.name().toUpperCase() + " ");
+                sb.append(i).append(". ").append(e.name().toUpperCase()).append(" ");
                 i++;
             }
-            System.out.println();
-            System.out.println();
-            System.out.print("Select: ");
+            sb.append(Messages.NEW_LINE).append(Messages.NEW_LINE);
+            sb.append("Select: ");
+
+            return sb.toString();
     }
 
-    public void attack(Scanner sc){
+    public void attack(ConsoleIO io){
         if(turn < 3){
-            printHeroTargets();
-            int i = sc.nextInt();
+            io.print(heroTargetsToString());
+            int i = io.parseIntInRange(1, enemies.size());
             Hero h = heroes.get(turn - 1);
             h.attack(enemies.get(i - 1), h.getMainElement(), 20);
-            System.out.println(); System.out.println();
+            io.printLine(Messages.NEW_LINE); //double '\n'
         }
         else{
             Enemy e = enemies.get(turn - 3);
             Hero h = e.selectTarjet(heroes);
             if(h != null){
-                System.out.println(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
-                System.out.println(e.getAttack());
+                io.printLine(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
+                io.printLine(e.getAttack());
                 int damage;
                 if(h.isDefending()){damage = 10;}else{damage = 20;}
                 e.attack(h, e.getMainElement(), damage);
                 System.out.println();
             }
             else{
-                System.out.println(e.name().toUpperCase() + Messages.ENEMY_MISS);
+                io.printLine(e.name().toUpperCase() + Messages.ENEMY_MISS);
                 System.out.println();
             }
         }
@@ -181,33 +192,31 @@ public class Combat {
         return yes;
     }
 
-    public void update() {
+    public void update(ConsoleIO io) {
         rmvEnemies();
         if(enemies.isEmpty()){
         	
-            System.out.println(Messages.BATTLE_WIN);
+            io.printLine(Messages.BATTLE_WIN);
             exit = true;
         }
         else if(allEscaped()){
-            System.out.println(Messages.BATTLE_ESCAPE);
+            io.printLine(Messages.BATTLE_ESCAPE);
             exit = true;
         }
         else if(heroesLoose()){
-            System.out.println(Messages.BATTLE_LOSS);
+            io.printLine(Messages.BATTLE_LOSS);
             exit = true;
         }
     }
 
-    public void run(){
+    public String run(){
         double i = Math.random();
         if(i > 0.5){
-            System.out.println(Messages.PLAYER_RUNS);
-            System.out.println();
             heroes.get(turn - 1).setEscaped(true);
+            return Messages.PLAYER_RUNS + Messages.NEW_LINE;
         }
         else{
-            System.out.println(Messages.PLAYER_RUNFAIL);
-            System.out.println();
+            return Messages.PLAYER_RUNFAIL;
         }
     }
 }
