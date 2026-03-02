@@ -13,9 +13,12 @@ public class ClevernessItem extends Item{
         this.mod = mod;
     }
 
-    @Override
     public void use(Character c) {
-        
+        c.changeElement(element, mod);
+    }
+
+    public void revert(Character c) {
+        c.changeElement(element, -mod);
     }
 
 }
