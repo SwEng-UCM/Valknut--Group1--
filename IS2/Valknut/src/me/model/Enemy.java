@@ -3,10 +3,19 @@ package me.model;
 import java.util.List;
 
 public class Enemy extends Character {
-    public Enemy(String name, int life, int max_life) {
+    private final int xpReward;
+    private static String attkDesc;
+
+    public Enemy(String name, int life, int max_life, int xpReward, String attack) {
         super(name, life, max_life);
+        this.xpReward = xpReward;
+        attkDesc = attack;
     }
 
+    public int getXpReward() {
+        return xpReward;
+    }
+//whatever
     public Hero selectTarjet(List<Hero> e){
         int max = 0, i = -1, j = 0;
         for(Hero hero: e){
@@ -21,4 +30,9 @@ public class Enemy extends Character {
         else
             return e.get(i);
     }
+    
+    public String getAttack() {
+		return attkDesc;
+	}
 }
+
