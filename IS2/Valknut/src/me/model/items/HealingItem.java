@@ -17,9 +17,4 @@ public class HealingItem extends Item {
         c.changeLife(heal);
     }
 
-    @Override
-    public void revert(Character c) {
-        //nothing
-    }
-
 }
