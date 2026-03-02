@@ -1,5 +1,7 @@
 package me.model;
 
+import me.view.Messages;
+
 public enum CombatOption {
     WAIT, ATTACK, DEFEND, USE_ITEM, RUN;
 
@@ -7,26 +9,23 @@ public enum CombatOption {
         if (command == null) {
             return ATTACK; 
         }
-        switch (command.toLowerCase()) {
-            case "attack":
-                return ATTACK;
-            case "defend":
-                return DEFEND;
-            case "use_item":
-            case "item":
-                return USE_ITEM;
-            case "run":
-                return RUN;
-            default:
-                return WAIT;
-        }
+        return switch (command.toLowerCase()) {
+            case "attack" -> ATTACK;
+            case "defend" -> DEFEND;
+            case "use_item", "item" -> USE_ITEM;
+            case "run" -> RUN;
+            case "wait" -> WAIT;
+            default -> null;
+        };
     }
 
-    public void print(){
-        for (CombatOption op : CombatOption.values()) {
+    public static String display(){
+        StringBuilder sb = new StringBuilder();
+        for (CombatOption op : CombatOption.values())
             if(op != WAIT)
-                System.out.print(op.name().toUpperCase() + "   ");
-        }
-        System.out.println();
+                sb.append(op.name().toUpperCase()).append("   ");
+        sb.append(Messages.NEW_LINE);
+
+        return sb.toString();
     }
 }

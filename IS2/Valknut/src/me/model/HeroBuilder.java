@@ -2,6 +2,7 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.view.Messages;
 
 public class HeroBuilder {
     static public List<Hero> heroes;
@@ -33,13 +34,17 @@ public class HeroBuilder {
         }
     }
 
-    public void getPossibleHeroes(){
+    public List<Hero> getHeroes(){
+        return heroes;
+    }
+
+    public String getPossibleHeroes(){
+        StringBuilder sb = new StringBuilder();
+
         int i = 1;
-        for(Hero e: heroes){
-            System.out.print(i++ + " --> ");
-            System.out.println(e.toString());
-            e.printElements();
-            System.out.println();
-        }
+        for(Hero e: heroes)
+            sb.append(i++).append(" --> ").append(e.toString()).append(Messages.NEW_LINE).append(e.getStringElements()).append(Messages.NEW_LINE);
+
+        return sb.toString();
     }
 }

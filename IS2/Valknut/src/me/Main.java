@@ -1,23 +1,26 @@
 package me;
 
-import java.util.Scanner;
 import me.model.*;
+import me.view.ConsoleIO;
+import me.view.Messages;
 import me.view.Story;
+
 public class Main {
+
+	public static ConsoleIO io = new ConsoleIO();
 	public static void main(String[] args) {
 		tellIntro();
-		Scanner sc = new Scanner(System.in);
-		Combat cmb = initCmb(sc);
+		Combat cmb = initCmb();
 		while(!cmb.exit()){
-			cmb.playTurn(sc);
+			cmb.playTurn(io);
 		}
 	}
 
-	static public Hero selectCharacter(Scanner sc){
+	static public Hero selectCharacter(){
 		HeroBuilder hb = new HeroBuilder();
-		hb.getPossibleHeroes();
-		System.out.print("Select: ");
-		Integer i = sc.nextInt();
+		io.printLine(hb.getPossibleHeroes());
+		io.print("Select: ");
+		Integer i = io.parseIntInRange(0, hb.getHeroes().size());
 		if(i == 1)
 			return HeroBuilder.buildHero("Freya");
 		else
@@ -31,14 +34,13 @@ public class Main {
 			return EnemyBuilder.buildEnemy("Fire");
 	}
 
-	static public Combat initCmb(Scanner sc){
+	static public Combat initCmb(){
 		Combat cmb = new Combat();
 		for(int i = 1; i < 3; i++){
-			System.out.println("Player " + i + " selects...");
-			System.out.println();
-			cmb.addHero(selectCharacter(sc));
+			io.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
+			cmb.addHero(selectCharacter());
+			io.printLine("");
 			cmb.addEnemy(firstEnemies(i));
-			System.out.println();
 		}
 		return cmb;
 	}

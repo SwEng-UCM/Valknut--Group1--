@@ -2,8 +2,10 @@ package me.model
 
 public class Game(){
 
-    public Game(){
+    Stroy story;
 
+    public Game(){
+        story = new Story();
     }
 
 }
