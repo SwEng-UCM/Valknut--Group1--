@@ -1,28 +1,28 @@
-package simulator.factories;
+// package simulator.factories;
 
-import org.json.JSONObject;
+// import org.json.JSONObject;
 
-import simulator.model.SelectFirst;
-import simulator.model.SelectionStrategy;
+// import simulator.model.SelectFirst;
+// import simulator.model.SelectionStrategy;
 
-public class SelectFirstBuilder extends Builder<SelectionStrategy> {
+// public class SelectFirstBuilder extends Builder<SelectionStrategy> {
 	
-//	{  
-//	  "type": "first", 
-//	  "data": {}  
-//	}
+// //	{  
+// //	  "type": "first", 
+// //	  "data": {}  
+// //	}
 
-	public SelectFirstBuilder(String typeTag, String desc) throws IllegalArgumentException {
-		super(typeTag, desc);
+// 	public SelectFirstBuilder(String typeTag, String desc) throws IllegalArgumentException {
+// 		super(typeTag, desc);
 		
-	}
+// 	}
 
-	protected SelectFirst createInstance(JSONObject data) {
-		return new SelectFirst();//these are simple classes that need no special treatment
-	}
+// 	protected SelectFirst createInstance(JSONObject data) {
+// 		return new SelectFirst();//these are simple classes that need no special treatment
+// 	}
 
-	void fillInData(JSONObject o) {
+// 	void fillInData(JSONObject o) {
 		
-	}
+// 	}
 
-}
+// }
