@@ -1,0 +1,69 @@
+// package simulator.factories;
+
+// import java.util.ArrayList;
+// import java.util.List;
+
+// import org.json.JSONObject;
+
+// import simulator.misc.Constants;
+// import simulator.misc.Utils;
+// import simulator.misc.Vector2D;
+// import simulator.model.Animal;
+// import simulator.model.SelectClosest;
+// import simulator.model.SelectFirst;
+// import simulator.model.SelectYoungest;
+// import simulator.model.SelectionStrategy;
+// import simulator.model.Wolf;
+
+// public class WolfBuilder extends Builder<Animal>{
+// 	List <Builder<SelectionStrategy>> bss = new ArrayList<>();
+// 	Factory<SelectionStrategy> strategy_factory;
+// //	{
+// //	  "type": "wolf",
+// //	  "data": {
+// //	    "mate_strategy" : { … },
+// //	    "hunt_strategy" : { … },
+// //	    "pos" : {
+// //	      "x_range" : [100.0, 200.0],
+// //	      "y_range" : [100.0, 200.0]
+// //	    }
+// //	  }
+// //	}
+
+// 	public WolfBuilder(String typeTag, String desc) throws IllegalArgumentException {
+// 		super(typeTag, desc);
+// 		bss.add(new SelectFirstBuilder(Constants.TYPE_SELECT_FIRST, Constants.DESC_SELECT_FIRST));
+// 		bss.add(new SelectClosestBuilder(Constants.TYPE_SELECT_CLOSEST, Constants.DESC_SELECT_CLOSEST));
+// 		bss.add(new SelectYoungestBuilder(Constants.TYPE_SELECT_YOUNGEST, Constants.DESC_SELECT_YOUNGEST));
+// 		strategy_factory = new BuilderBasedFactory<SelectionStrategy>(bss);
+// 	}
+	
+// 	//same as for sheep createInstance
+// 	protected Animal createInstance(JSONObject data) {
+// 		Vector2D p = null;
+		
+// 		SelectionStrategy sel_mate = new SelectFirst(), sel_hunt = new SelectYoungest();
+// 		if(data.has("pos")) {
+// 			JSONObject pos = data.getJSONObject("pos");
+// 			int max_x = pos.getJSONArray("x_range").getInt(1);
+// 			int min_x = pos.getJSONArray("x_range").getInt(0);
+// 			int max_y = pos.getJSONArray("y_range").getInt(1);
+// 			int min_y = pos.getJSONArray("y_range").getInt(0);
+// 			double x = Utils.RAND.nextDouble(max_x - min_x) + min_x;
+// 			double y = Utils.RAND.nextDouble(max_y - min_y) + min_y;
+// 			p = new Vector2D(x, y);
+// 		}
+
+// 		if (data.has("mate_strategy")) {
+// 			sel_mate = strategy_factory.createInstance(data.getJSONObject("mate_strategy"));
+// 		}
+// 		if (data.has("hunt_strategy")) {
+// 			sel_hunt = strategy_factory.createInstance(data.getJSONObject("hunt_strategy"));
+// 		}
+		
+// 		return new Wolf(sel_mate, sel_hunt, p);
+// 	}
+
+// 	void fillInData(JSONObject o) {
+// 	}
+// }

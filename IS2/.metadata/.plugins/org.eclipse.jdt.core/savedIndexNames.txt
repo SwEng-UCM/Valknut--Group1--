@@ -1,2 +1,0 @@
-INDEX VERSION 1.134+C:\Users\ninja\Desktop\GitHub_Carpeta\create-your-main-project-repository-spain\IS2\.metadata\.plugins\org.eclipse.jdt.core
-1865797976.index
