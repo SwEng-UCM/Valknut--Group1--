@@ -22,7 +22,7 @@ public class HeroBuilder {
                 return freya;
             case "loki":
                 Hero loki = new Hero("Laki", 100, 100, "Forgotten Child of Loki");
-                element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
+                element.add(2); element.add(3); element.add(2); element.add(1); element.add(5);
                 loki.setElementStats(element);
                 return loki;
             default:
