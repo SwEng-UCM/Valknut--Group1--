@@ -19,7 +19,7 @@ public class Messages {
 	public static final String ENEMY_MISS = "MISS: NO HERO FIGHTING"; // To be made into 2 different messages maybe
 	
 	// Player Actions
-	public static final String PLAYER_RUNS = "YOU ESCAPED TO FIGHT AGAIN HERO";
+	public static final String PLAYER_RUNS = "YOU ESCAPED TO FIGHT LUCKY HERO";
 	public static final String PLAYER_RUNFAIL = "YOU FAILED IN YOUR ESCAPE";
 	
 	// Enemies Names
