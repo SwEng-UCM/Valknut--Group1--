@@ -6,19 +6,13 @@ public class AgilityItem extends Item{
 
     int mod;
 
-    public AgilityItem(String name, int cost, int mod){
+    public AgilityItem(String name, int cost){
         super(name, cost);
-        this.mod = mod;
     }
 
     @Override
     public void use(Character c) {
-       c.changeAgility(mod);
-    }
-
-    @Override
-    public void revert(Character c) {
-        c.changeAgility(-mod);
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

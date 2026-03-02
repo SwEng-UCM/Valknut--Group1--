@@ -4,19 +4,21 @@ import me.model.Character;
 
 public class DamageItem extends Item{
 
-    private int mod;
+    private double mod;
 
-    public DamageItem(String name, int cost, int mod){
+    public DamageItem(String name, int cost, double mod){
         super(name, cost);
         this.mod = mod;
     }
 
+    @Override
     public void use(Character c) {
-        c.changeStrength(mod);
+        
     }
 
+    @Override
     public void revert(Character c) {
-        c.changeStrength(-mod);
+        
     }
 
 }

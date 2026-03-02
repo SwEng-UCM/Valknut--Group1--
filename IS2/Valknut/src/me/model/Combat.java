@@ -3,7 +3,6 @@ package me.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import me.view.Messages;
 
 public class Combat {
     private List<Hero> heroes;
@@ -29,19 +28,8 @@ public class Combat {
     }
 
     private void rmvEnemies(){
-        for (int i = 0; i < enemies.size(); i++) {
-            Enemy enemy = enemies.get(i);
-
-            if (!enemy.isAlive()) {
-                System.out.println(enemy.name().toUpperCase() + " was defeated!");
-
-                // Give XP to heroes who participated (alive + not escaped)
-                for (Hero h : heroes) {
-                    if (h.isAlive() && !h.escaped()) {
-                        h.gainXp(enemy.getXpReward());
-                    }
-                }
-
+        for(int i = 0; i < enemies.size(); i++){
+            if(!enemies.get(i).isAlive()){
                 enemies.remove(i);
                 i--;
             }
@@ -57,7 +45,7 @@ public class Combat {
     }
 
     private void printEnemyTurn(){
-        System.out.println(Messages.ENEMY_TURN);
+        System.out.println("ENEMIES's TURN...");
             System.out.println();
     }
 
@@ -111,8 +99,8 @@ public class Combat {
         return exit;
     }
 
-    private void printHeroTargets(){
-        System.out.print("Targets... ");
+    private void printHeroTarjets(){
+        System.out.print("Tarjets... ");
             int i = 1;
             for(Enemy e: enemies){
                 System.out.print(i + ". " + e.name().toUpperCase() + " ");
@@ -125,7 +113,7 @@ public class Combat {
 
     public void attack(Scanner sc){
         if(turn < 3){
-            printHeroTargets();
+            printHeroTarjets();
             int i = sc.nextInt();
             Hero h = heroes.get(turn - 1);
             h.attack(enemies.get(i - 1), h.getMainElement(), 20);
@@ -136,14 +124,13 @@ public class Combat {
             Hero h = e.selectTarjet(heroes);
             if(h != null){
                 System.out.println(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
-                System.out.println(e.getAttack());
                 int damage;
                 if(h.isDefending()){damage = 10;}else{damage = 20;}
                 e.attack(h, e.getMainElement(), damage);
                 System.out.println();
             }
             else{
-                System.out.println(e.name().toUpperCase() + Messages.ENEMY_MISS);
+                System.out.println(e.name().toUpperCase() + " MISS: NO HERO FIGHTING");
                 System.out.println();
             }
         }
@@ -184,15 +171,15 @@ public class Combat {
     public void update() {
         rmvEnemies();
         if(enemies.isEmpty()){
-            System.out.println(Messages.BATTLE_WIN);
+            System.out.println("THE HEROES WIN. GREAT TEAM.");
             exit = true;
         }
         else if(allEscaped()){
-            System.out.println(Messages.BATTLE_ESCAPE);
+            System.out.println("THE HEROES ESCAPED THE FIGTH.");
             exit = true;
         }
         else if(heroesLoose()){
-            System.out.println(Messages.BATTLE_LOSS);
+            System.out.println("THE HEROES LOOSE. KEEP TRYING.");
             exit = true;
         }
     }
@@ -200,12 +187,12 @@ public class Combat {
     public void run(){
         double i = Math.random();
         if(i > 0.5){
-            System.out.println(Messages.PLAYER_RUNS);
+            System.out.println("YOU ESCAPED LUCKY HERO");
             System.out.println();
             heroes.get(turn - 1).setEscaped(true);
         }
         else{
-            System.out.println(Messages.PLAYER_RUNFAIL);
+            System.out.println("YOU FAILED IN YOUR ESCAPE");
             System.out.println();
         }
     }

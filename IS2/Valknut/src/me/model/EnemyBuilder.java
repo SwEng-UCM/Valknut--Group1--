@@ -2,7 +2,6 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.view.Messages;
 
 public class EnemyBuilder {
     static public List <Enemy> enemies;
@@ -15,17 +14,17 @@ public class EnemyBuilder {
         List<Integer> element = new ArrayList<>();
         switch (str.toLowerCase()) {
             case "ice":
-                Enemy iceGiant = new Enemy(Messages.ICEGIANT, 100, 100, 60, Messages.ICEGIANT_ATTACK);
+                Enemy iceGiant = new Enemy("Ice Giant", 100, 100);
                 element.add(2); element.add(1); element.add(1); element.add(1); element.add(1);
                 iceGiant.setElementStats(element);
                 return iceGiant;
             case "fire":
-                Enemy fireGiant = new Enemy(Messages.FIREGIANT, 100, 100, 70, Messages.FIREGIANT_ATTACK);
+                Enemy loki = new Enemy("Fire Giant", 100, 100);
                 element.add(1); element.add(1); element.add(1); element.add(1); element.add(2);
-                fireGiant.setElementStats(element);
-                return fireGiant;
+                loki.setElementStats(element);
+                return loki;
             default:
-                Enemy df = new Enemy(Messages.ICEGIANT, 100, 100, 60, Messages.ICEGIANT_ATTACK);
+                Enemy df = new Enemy("Ice Giant", 100, 100);
                 element.add(2); element.add(1); element.add(1); element.add(1); element.add(1);
                 df.setElementStats(element);
                 return df;
