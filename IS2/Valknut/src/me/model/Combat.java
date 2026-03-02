@@ -87,7 +87,7 @@ public class Combat {
             for(Hero e: heroes){
                 if(e.isAlive() && !e.escaped()){
                     combOpt = selectAction(io, e);
-                    action(combOpt, io);
+                    action(e, combOpt, io);
                     update(io);
                 }
                 turn++;
@@ -103,12 +103,11 @@ public class Combat {
         }
     }
 
-    private void action(CombatOption co, ConsoleIO io){
+    private void action(Hero h, CombatOption co, ConsoleIO io){
         switch(co){
             case ATTACK -> attack(io);
             case DEFEND -> defend();
-            case USE_ITEM -> {
-            }
+            case USE_ITEM -> useItem(h, io);
             case RUN -> io.printLine(run());
             default -> {
             }
@@ -151,7 +150,7 @@ public class Combat {
                 int damage;
                 if(h.isDefending()){damage = 10;}else{damage = 20;}
                 e.attack(h, e.getMainElement(), damage);
-                System.out.println();
+                io.printLine(" ");
             }
             else{
                 io.printLine(e.name().toUpperCase() + Messages.ENEMY_MISS);
@@ -178,6 +177,10 @@ public class Combat {
         }
 
         return yes;
+    }
+
+    private void useItem(Hero h, ConsoleIO io){
+        io.printLine(h.displayInventory());
     }
 
     private boolean heroesLoose(){
@@ -216,7 +219,7 @@ public class Combat {
             return Messages.PLAYER_RUNS + Messages.NEW_LINE;
         }
         else{
-            return Messages.PLAYER_RUNFAIL;
+            return Messages.PLAYER_RUNFAIL + Messages.NEW_LINE;
         }
     }
 }

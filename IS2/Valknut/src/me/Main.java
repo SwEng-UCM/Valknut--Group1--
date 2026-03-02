@@ -1,6 +1,9 @@
 package me;
 
 import me.model.*;
+import me.model.items.DamageItem;
+import me.model.items.HealingItem;
+import me.model.items.ShieldItem;
 import me.view.ConsoleIO;
 import me.view.Messages;
 import me.view.Story;
@@ -38,7 +41,15 @@ public class Main {
 		Combat cmb = new Combat();
 		for(int i = 1; i < 3; i++){
 			io.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
-			cmb.addHero(selectCharacter());
+			Hero e = selectCharacter();
+			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1));
+			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20));
+			e.addItem(new HealingItem("Curing Crystal Stone", 200, 80));
+			e.addItem(new DamageItem("Uru Gantlet", 1000, 5));
+			cmb.addHero(e);
 			io.printLine("");
 			cmb.addEnemy(firstEnemies(i));
 		}

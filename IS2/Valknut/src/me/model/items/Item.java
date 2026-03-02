@@ -6,15 +6,31 @@ public abstract class Item {
 
     private String name;
     protected boolean used;
+    private int cuantity;
     private int cost;
 
     public Item(String name, int cost){
         this.name = name;
+        this.cuantity = 0;
         this.cost = cost;
     }
 
-    public int getValue(){
+    public int getCost(){
         return cost;
+    }
+
+    public void addCuantity(){
+        cuantity++;
+    }
+
+    public void subCuantity(){
+        cuantity--;
+        if(cuantity < 0)
+            cuantity = 0;
+    }
+
+    public int getCuantity(){
+        return cuantity;
     }
 
     public String getName(){
@@ -22,6 +38,7 @@ public abstract class Item {
     }
 
     public abstract void use(Character c);
+    public abstract String toString();
 
     public boolean isUsed(){
         return used;

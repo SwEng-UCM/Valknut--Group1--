@@ -1,7 +1,8 @@
 package me.model;
 
-import me.model.items.Inventory;
 import java.util.Random;
+import me.model.items.Inventory;
+import me.model.items.Item;
 
 public class Hero extends Character {
 
@@ -54,23 +55,17 @@ public class Hero extends Character {
         //Increase 2 stats (greatest and random)
         changeElement(getMainElement(), 1);
         switch(rand.nextInt(5)) {
-        case 0:
-        	changeElement(Element.BLOOD, 1);
-        	break;
-        case 1:
-        	changeElement(Element.CHAOS, 1);
-        	break;
-        case 2:
-        	changeElement(Element.FIRE, 1);
-        	break;
-        case 3:
-        	changeElement(Element.ICE, 1);
-        	break;
-        case 4:
-        	changeElement(Element.NATURE, 1);
-        	break;
+        case 0 -> changeElement(Element.BLOOD, 1);
+        case 1 -> changeElement(Element.CHAOS, 1);
+        case 2 -> changeElement(Element.FIRE, 1);
+        case 3 -> changeElement(Element.ICE, 1);
+        case 4 -> changeElement(Element.NATURE, 1);
         }
         
+    }
+
+    public boolean addItem(Item i){
+        return inventory.addItem(i);
     }
 
     public Inventory getInventory(){
@@ -79,5 +74,9 @@ public class Hero extends Character {
 
     public String toString(){
         return name.toUpperCase() + ", " + surname.toUpperCase();
+    }
+
+    public String displayInventory(){
+        return inventory.getInfo();
     }
 }

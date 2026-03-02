@@ -1,34 +1,42 @@
 package me.model.items;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import me.model.Character;
+import me.view.Messages;
 
 public class Inventory {
 
        private final static String EMPTY_INV = "Your inventory is empty.";
        private final static int INIT_INV_CAP = 10;
-       private List <Item> inventory;
+       private Map <String, Item> inventory;
        private int inventory_cap;
 
        public Inventory(){
               inventory_cap = INIT_INV_CAP;
-              inventory = new ArrayList<>(inventory_cap);
+              inventory = new HashMap<>(inventory_cap);
        }
 
        public boolean addItem(Item i){
               if(!isFull()){
-                     inventory.add(i);
+                     if(!inventory.containsKey(i.getName()))
+                            inventory.put(i.getName(), i);  
+                     inventory.get(i.getName()).addCuantity();
                      return true;
               }
               return false;
        }
 
-       public boolean useItem(int idx, Character c){ //This is thought to use after selecting the item from a visual inventory 
+       public boolean useItem(Item i, Character c){ //This is thought to use after selecting the item from a visual inventory 
        // where the user enters the number position in the inventory 
               if(!inventory.isEmpty()){
-                     inventory.get(idx).use(c);
-                     inventory.remove(idx);
+                     i.use(c);
+                     if(inventory.get(i.getName()).getCuantity() < 2)
+                            inventory.remove(i.getName());
+                     else{
+                            inventory.put(i.getName(), i);
+                            inventory.get(i.getName()).subCuantity();
+                     }
                      return true;
               }
               return false;
@@ -38,9 +46,12 @@ public class Inventory {
               return inventory.size() == inventory_cap;
        }
 
-       public boolean dropItem(int idx){
+       public boolean dropItem(Item i){
               if(!inventory.isEmpty()){
-                     inventory.remove(idx);
+                     if(inventory.get(i.getName()).getCuantity() < 2)
+                            inventory.remove(i.getName());
+                     else
+                            inventory.put(i.getName(), i);
                      return true;
               }
               return false;
@@ -52,22 +63,16 @@ public class Inventory {
               }
 
               StringBuilder sb = new StringBuilder();
-              int j = 1;
-              for (Item i : inventory) {
-                     sb.append(j)
-                     .append(". ")
-                     .append(i.getName())
-                     .append(" - ")
-                     .append(i.getValue())
-                     .append(System.lineSeparator()); 
-                     j++;
+
+              for(Map.Entry<String, Item> i : inventory.entrySet()){
+                     sb.append("> ").append(i.getValue().toString());
+                     sb.append("  Cuantity: ").append(i.getValue().getCuantity()).append(Messages.NEW_LINE);
               }
+
               return sb.toString();
        }
 
        public void increaseCapacity(int mod){
               inventory_cap += mod;
        }
-
-
 }
