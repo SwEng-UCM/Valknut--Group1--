@@ -1,6 +1,7 @@
 package me.model;
 
 import me.model.items.Inventory;
+import java.util.Random;
 
 public class Hero extends Character {
 
@@ -38,6 +39,7 @@ public class Hero extends Character {
     }
 
     private void levelUp() {
+    	Random rand = new Random();
         level++;
         System.out.println(name().toUpperCase() + " LEVEL UP! Now level " + level);
 
@@ -48,6 +50,27 @@ public class Hero extends Character {
         // small stat bumps
         changeAgility(1);
         changeShield(1); // uses RESISTANCE as shield stat
+        
+        //Increase 2 stats (greatest and random)
+        changeElement(getMainElement(), 1);
+        switch(rand.nextInt(5)) {
+        case 0:
+        	changeElement(Element.BLOOD, 1);
+        	break;
+        case 1:
+        	changeElement(Element.CHAOS, 1);
+        	break;
+        case 2:
+        	changeElement(Element.FIRE, 1);
+        	break;
+        case 3:
+        	changeElement(Element.ICE, 1);
+        	break;
+        case 4:
+        	changeElement(Element.NATURE, 1);
+        	break;
+        }
+        
     }
 
     public Inventory getInventory(){

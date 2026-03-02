@@ -96,7 +96,16 @@ public abstract class Character {
     }
 
     public void receiveDamage(int damage, Element element) {
-        changeLife(-damage);
+        if (getMainElement().getWeakness() == element) {
+        	damage *= 2;
+        }
+        
+        else if (element.getWeakness() == getMainElement()) {
+        	damage -= 10;
+        }
+        
+    	changeLife(-damage);
+        
         System.out.println(name.toUpperCase() + " has received " + damage + " point of damage.");
         System.out.println(name.toUpperCase() + "'s health points: " + life);
     }
