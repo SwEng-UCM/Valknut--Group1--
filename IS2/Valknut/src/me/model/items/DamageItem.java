@@ -1,22 +1,23 @@
 package me.model.items;
 
-import me.model.Character;
 import me.view.Messages;
 
 public class DamageItem extends Item{
 
     private int mod;
 
-    public DamageItem(String name, int cost, int mod){
-        super(name, cost);
+    public DamageItem(String name, int cost, int mod, int time){
+        super(name, cost, time);
         this.mod = mod;
     }
 
-    public void use(Character c) {
+    @Override
+    public void use() {
         c.changeStrength(mod);
     }
 
-    public void revert(Character c) {
+    @Override
+    public void revert() {
         c.changeStrength(-mod);
     }
 
@@ -24,7 +25,8 @@ public class DamageItem extends Item{
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod).append(Messages.NEW_LINE);
+        sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod);
+        sb.append("  Turns: ").append(getTurn()).append(Messages.NEW_LINE);
 
         return sb.toString();
     }

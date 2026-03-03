@@ -16,7 +16,7 @@ public class Combat {
     public Combat(){
         heroes = new ArrayList<>(4);
         enemies = new ArrayList<>(5);
-        combOpt = CombatOption.parseCommand("X"); // Set wait as default 
+        combOpt = CombatOption.parseCommand("wait"); // Set wait as default 
         turn = 1; 
         exit = false;
     }
@@ -42,7 +42,7 @@ public class Combat {
                         h.gainXp(enemy.getXpReward());
                     }
                 }
-
+                System.out.println();
                 enemies.remove(i);
                 i--;
             }
@@ -85,7 +85,7 @@ public class Combat {
     public void playTurn(ConsoleIO io) {
         if (turn == 1) {
             for(Hero e: heroes){
-                if(e.isAlive() && !e.escaped()){
+                if(e.isAlive() && !e.escaped() && !enemies.isEmpty()){
                     combOpt = selectAction(io, e);
                     action(e, combOpt, io);
                     update(io);
@@ -109,6 +109,7 @@ public class Combat {
             case DEFEND -> defend();
             case USE_ITEM -> useItem(h, io);
             case RUN -> io.printLine(run());
+            case STATS -> io.printLine(showStats(h));
             default -> {
             }
         }
@@ -159,6 +160,15 @@ public class Combat {
         }
     }
 
+    private String showStats(Character c){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Life: ").append(c.getLife()).append(" hp").append(Messages.NEW_LINE);
+        sb.append(c.getStringElements());
+
+        return  sb.toString();
+    }
+
     private void defend(){
         heroes.get(turn - 1).defend();
     }
@@ -180,6 +190,7 @@ public class Combat {
     }
 
     private void useItem(Hero h, ConsoleIO io){
+        io.printLine("INVENTORY... ");
         io.printLine(h.displayInventory());
     }
 

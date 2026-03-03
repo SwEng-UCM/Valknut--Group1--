@@ -42,24 +42,25 @@ public class Main {
 		for(int i = 1; i < 3; i++){
 			io.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
 			Hero e = selectCharacter();
-			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1));
-			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20));
-			e.addItem(new HealingItem("Curing Crystal Stone", 200, 80));
-			e.addItem(new DamageItem("Uru Gantlet", 1000, 5));
+			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1, 8));
+			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1, 8));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20,1));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1));
+			e.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1));
+			e.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8));
 			cmb.addHero(e);
 			io.printLine("");
 			cmb.addEnemy(firstEnemies(i));
+			cmb.addEnemy(EnemyBuilder.buildEnemy("Ice"));
 		}
 		return cmb;
 	}
 	
 	static public void tellIntro() {
-		System.out.println(Story.IntroLines);
-		System.out.println();
-		System.out.println();
+		io.printLine(Messages.NEW_LINE);
+		io.printLine(Story.IntroLines);
+		io.printLine(Messages.NEW_LINE);
 	}
 	
 }
