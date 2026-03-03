@@ -1,4 +1,5 @@
 package me.view;
+import java.awt.Color;
 
 public class Messages {
 	
