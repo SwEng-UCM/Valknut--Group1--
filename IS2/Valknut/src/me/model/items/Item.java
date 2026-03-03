@@ -8,11 +8,18 @@ public abstract class Item {
     protected boolean used;
     private int cuantity;
     private int cost;
+    private int turn;
+    protected Character c;
 
-    public Item(String name, int cost){
+    public Item(String name, int cost, int time){
         this.name = name;
         this.cuantity = 0;
         this.cost = cost;
+        this.turn = time;
+    }
+
+    public int getTurn(){
+        return turn;
     }
 
     public int getCost(){
@@ -29,6 +36,13 @@ public abstract class Item {
             cuantity = 0;
     }
 
+    public void decreaseTime(){
+        turn--;
+        if(turn == 0){
+            delete();
+        }
+    }
+
     public int getCuantity(){
         return cuantity;
     }
@@ -37,17 +51,22 @@ public abstract class Item {
         return name;
     }
 
-    public abstract void use(Character c);
+    public void assignCharacter(Character c){
+        this.c = c;
+    }
+
+    public abstract void use();
+    public abstract void revert();
     public abstract String toString();
 
     public boolean isUsed(){
         return used;
     }
 
-    public void delete(Character c){
-        revert(c);
+    public void delete(){
+        revert();
     }
 
-    public abstract void revert(Character c);
+    
 
 }

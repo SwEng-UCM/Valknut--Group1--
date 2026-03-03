@@ -43,6 +43,7 @@ public class Hero extends Character {
     	Random rand = new Random();
         level++;
         System.out.println(name().toUpperCase() + " LEVEL UP! Now level " + level);
+        System.out.println();
 
         // rewards: more max HP + heal a bit
         increaseMaxLife(10);
@@ -65,6 +66,7 @@ public class Hero extends Character {
     }
 
     public boolean addItem(Item i){
+        i.assignCharacter(this);
         return inventory.addItem(i);
     }
 

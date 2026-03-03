@@ -27,10 +27,9 @@ public class Inventory {
               return false;
        }
 
-       public boolean useItem(Item i, Character c){ //This is thought to use after selecting the item from a visual inventory 
-       // where the user enters the number position in the inventory 
+       public boolean useItem(Item i, Character c){  
               if(!inventory.isEmpty()){
-                     i.use(c);
+                     i.use();
                      if(inventory.get(i.getName()).getCuantity() < 2)
                             inventory.remove(i.getName());
                      else{

@@ -1,24 +1,23 @@
 package me.model.items;
 
-import me.model.Character;
 import me.view.Messages;
 
 public class ShieldItem extends Item{
 
     private int mod;
 
-    public ShieldItem(String name, int value, int shield){
-        super(name, value);
+    public ShieldItem(String name, int value, int shield, int time){
+        super(name, value, time);
         this.mod = shield;
     }
 
     @Override
-    public void use(Character c) {
+    public void use() {
        c.changeShield(mod);
     }
 
     @Override
-    public void revert(Character c) {
+    public void revert() {
         c.changeShield(-mod);
     }
 
@@ -26,7 +25,8 @@ public class ShieldItem extends Item{
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod).append(Messages.NEW_LINE);
+        sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod);
+        sb.append("  Turns: ").append(getTurn()).append(Messages.NEW_LINE);
 
         return sb.toString();
     }

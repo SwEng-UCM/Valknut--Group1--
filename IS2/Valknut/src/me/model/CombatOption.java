@@ -3,7 +3,7 @@ package me.model;
 import me.view.Messages;
 
 public enum CombatOption {
-    WAIT, ATTACK, DEFEND, USE_ITEM, RUN;
+    WAIT, ATTACK, DEFEND, USE_ITEM, RUN, STATS;
 
     public static CombatOption parseCommand(String command) {
         if (command == null) {
@@ -15,6 +15,7 @@ public enum CombatOption {
             case "use_item", "item" -> USE_ITEM;
             case "run" -> RUN;
             case "wait" -> WAIT;
+            case "stats" -> STATS;
             default -> null;
         };
     }
