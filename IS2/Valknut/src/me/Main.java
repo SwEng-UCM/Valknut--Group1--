@@ -58,7 +58,9 @@ public class Main {
 	}
 	
 	static public void tellIntro() {
-		io.printLine(Messages.NEW_LINE);
+		// Source - https://stackoverflow.com/a/5762502
+		// Posted by WhiteFang34, modified by community. See post 'Timeline' for change history
+		// Retrieved 2026-03-03, License - CC BY-SA 3.0
 		io.printLine(Story.IntroLines);
 		io.printLine(Messages.NEW_LINE);
 	}
