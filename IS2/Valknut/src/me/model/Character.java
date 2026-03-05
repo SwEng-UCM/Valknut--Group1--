@@ -7,7 +7,7 @@ import java.util.Map;
 import me.view.Messages;
 
 public abstract class Character {
-    protected String name;
+    protected final String name;
     private boolean alive;
     private Map<Element, Integer> elements; // Representing the five elements stats with a Map
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
@@ -100,7 +100,8 @@ public abstract class Character {
         return yes;
     }
 
-    public void receiveDamage(int damage, Element element) {
+    public String receiveDamage(int damage, Element element) {
+        StringBuilder sb = new StringBuilder();
         if (getMainElement().getWeakness() == element) {
         	damage *= 2;
         }
@@ -111,13 +112,18 @@ public abstract class Character {
         
     	changeLife(-damage);
         
-        System.out.println(name.toUpperCase() + " has received " + damage + " point of damage.");
-        System.out.println(name.toUpperCase() + "'s health points: " + life);
+        sb.append(name.toUpperCase()).append(" has received ").append(damage).append( " point of damage.").append(Messages.NEW_LINE);
+        sb.append(name.toUpperCase()).append("'s health points: ").append(life).append(Messages.NEW_LINE);
+
+        return sb.toString();
     }
 
-    public void attack(Character e, Element element, int damage) {
+    public String attack(Character e, Element element, int damage) {
+        StringBuilder sb = new StringBuilder();
         int var = damage + (int)(damage*mod);
-        e.receiveDamage(var, element);
+        sb.append(e.receiveDamage(var, element)).append(Messages.NEW_LINE);
+
+        return sb.toString();
     }
 
     public void changeLife(int value){
