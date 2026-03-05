@@ -7,18 +7,20 @@ import me.view.Messages;
 
 
 public class Combat {
-    private List<Hero> heroes;
-    private List<Enemy> enemies;
+    private final List<Hero> heroes;
+    private final List<Enemy> enemies;
     private static CombatOption combOpt;
     private int turn;
     private boolean exit;
+    private final ConsoleIO io; //Combat has many messages on its own that decided to pass the console as an attribute
 
-    public Combat(){
+    public Combat(ConsoleIO io){
         heroes = new ArrayList<>(4);
         enemies = new ArrayList<>(5);
         combOpt = CombatOption.parseCommand("wait"); // Set wait as default 
         turn = 1; 
         exit = false;
+        this.io = io;
     }
 
     public void addHero(Hero e){
@@ -34,15 +36,15 @@ public class Combat {
             Enemy enemy = enemies.get(i);
 
             if (!enemy.isAlive()) {
-                System.out.println(enemy.name().toUpperCase() + " was defeated!");
+                io.printLine(enemy.name().toUpperCase() + " was defeated!");
 
                 // Give XP to heroes who participated (alive + not escaped)
                 for (Hero h : heroes) {
                     if (h.isAlive() && !h.escaped()) {
-                        h.gainXp(enemy.getXpReward());
+                        io.printLine(h.gainXp(enemy.getXpReward()));
                     }
                 }
-                System.out.println();
+                io.printLine("");
                 enemies.remove(i);
                 i--;
             }
@@ -65,8 +67,8 @@ public class Combat {
         return sb.toString();
     }
 
-    public CombatOption selectAction(ConsoleIO io, Character c){
-        CombatOption co = null;
+    public CombatOption selectAction(Character c){
+        CombatOption co;
         io.print(turnToString(c));
         String aux = io.readPrompt();
         io.printLine("");
@@ -82,32 +84,32 @@ public class Combat {
         return co;
     }
 
-    public void playTurn(ConsoleIO io) {
+    public void playTurn() {
         if (turn == 1) {
             for(Hero e: heroes){
                 if(e.isAlive() && !e.escaped() && !enemies.isEmpty()){
-                    combOpt = selectAction(io, e);
-                    action(e, combOpt, io);
-                    update(io);
+                    combOpt = selectAction(e);
+                    action(e, combOpt);
+                    update();
                 }
                 turn++;
             }
         } else {
             enemyTurnToString();
             for(Enemy e: enemies){
-                attack(io);
+                attack();
                 turn++;
             }
-            update(io);
+            update();
             turn = 1;
         }
     }
 
-    private void action(Hero h, CombatOption co, ConsoleIO io){
+    private void action(Hero h, CombatOption co){
         switch(co){
-            case ATTACK -> attack(io);
+            case ATTACK -> attack();
             case DEFEND -> defend();
-            case USE_ITEM -> useItem(h, io);
+            case USE_ITEM -> useItem(h);
             case RUN -> io.printLine(run());
             case STATS -> io.printLine(showStats(h));
             default -> {
@@ -134,7 +136,7 @@ public class Combat {
             return sb.toString();
     }
 
-    public void attack(ConsoleIO io){
+    public void attack(){
         if(turn < 3){
             io.print(heroTargetsToString());
             int i = io.parseIntInRange(1, enemies.size());
@@ -155,7 +157,7 @@ public class Combat {
             }
             else{
                 io.printLine(e.name().toUpperCase() + Messages.ENEMY_MISS);
-                System.out.println();
+                io.printLine("");
             }
         }
     }
@@ -189,7 +191,7 @@ public class Combat {
         return yes;
     }
 
-    private void useItem(Hero h, ConsoleIO io){
+    private void useItem(Hero h){
         io.printLine("INVENTORY... ");
         io.printLine(h.displayInventory());
     }
@@ -206,7 +208,7 @@ public class Combat {
         return yes;
     }
 
-    public void update(ConsoleIO io) {
+    public void update() {
         rmvEnemies();
         if(enemies.isEmpty()){
         	

@@ -26,9 +26,9 @@ Small --> Fire Gantlet - +2 st - 100 coins
 
 Big --> Uru Gantlet - + 5 st - 1000 coins
 
-Elemental --> Mistletoe's Essence - +4 st - 500 coins
+Elemental --> Mistletoe's Essence - +4 st - 500 coins ---- COMPLEMENT
 
-Physical --> Gungnir's Piece - +4 st - 500 coins
+Physical --> Gungnir's Piece - +4 st - 500 coins ---- COMPLEMENT
 
 # Agility Items
 

@@ -15,7 +15,7 @@ public class Main {
 		tellIntro();
 		Combat cmb = initCmb();
 		while(!cmb.exit()){
-			cmb.playTurn(io);
+			cmb.playTurn();
 		}
 	}
 
@@ -38,7 +38,7 @@ public class Main {
 	}
 
 	static public Combat initCmb(){
-		Combat cmb = new Combat();
+		Combat cmb = new Combat(io);
 		for(int i = 1; i < 3; i++){
 			io.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
 			Hero e = selectCharacter();

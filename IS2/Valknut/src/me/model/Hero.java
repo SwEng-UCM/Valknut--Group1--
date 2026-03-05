@@ -3,10 +3,11 @@ package me.model;
 import java.util.Random;
 import me.model.items.Inventory;
 import me.model.items.Item;
+import me.view.Messages;
 
 public class Hero extends Character {
 
-    private String surname;
+    private final String surname;
     private Inventory inventory; // Representing 'item'
     private int level = 1;
     private int xp = 0;
@@ -28,23 +29,27 @@ public class Hero extends Character {
         return 100 + (level - 1) * 50;
     }
 
-    public void gainXp(int amount) {
-        if (amount <= 0) return;
+    public String gainXp(int amount) {
+        StringBuilder sb = new StringBuilder();
+        if (amount <= 0) return sb.toString();
         xp += amount;
-        System.out.println(name().toUpperCase() + " gained " + amount + " XP. (" + xp + "/" + xpToNextLevel() + ")");
+        sb.append(name().toUpperCase()).append(" gained ").append(amount);
+        sb.append(" XP. (").append(xp).append("/").append(xpToNextLevel()).append( ")").append(Messages.NEW_LINE);
 
         while (xp >= xpToNextLevel()) {
             xp -= xpToNextLevel();
-            levelUp();
+            sb.append(levelUp());
         }
+
+        return sb.toString();
     }
 
-    private void levelUp() {
+    private String levelUp() {
+        StringBuilder sb = new StringBuilder();
     	Random rand = new Random();
         level++;
-        System.out.println(name().toUpperCase() + " LEVEL UP! Now level " + level);
-        System.out.println();
-
+        sb.append(name().toUpperCase()).append(" LEVEL UP! Now level ").append(level).append(Messages.NEW_LINE);
+        
         // rewards: more max HP + heal a bit
         increaseMaxLife(10);
         changeLife(10);
@@ -62,7 +67,7 @@ public class Hero extends Character {
         case 3 -> changeElement(Element.ICE, 1);
         case 4 -> changeElement(Element.NATURE, 1);
         }
-        
+        return sb.toString();
     }
 
     public boolean addItem(Item i){
