@@ -150,9 +150,10 @@ public class Combat {
         return yes;
     }
 
-    public void useItem(Hero h){
-        io.printLine("INVENTORY... ");
-        io.printLine(h.displayInventory());
+    public void useItem(Hero h){ 
+        StringBuilder sb = new StringBuilder();
+        sb.append("INVENTORY... ").append(Messages.NEW_LINE);
+        sb.append(h.displayInventory()).append(Messages.NEW_LINE);
     }
 
     public boolean heroesLoose(){

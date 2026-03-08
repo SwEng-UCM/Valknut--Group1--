@@ -96,7 +96,7 @@ public class Controller {
     }
 
     public Hero selectCharacter(){
-		Integer i = cv.selectCharacter();
+		Integer i = sv.selectCharacter();
 		if(i == 1)
 			return HeroBuilder.buildHero("Freya");
 		else

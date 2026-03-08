@@ -1,5 +1,7 @@
 package me.view;
 
+import me.model.HeroBuilder;
+
 public class StoryView extends ConsoleIO{
 
     private static StoryView sv;
@@ -21,5 +23,13 @@ public class StoryView extends ConsoleIO{
 		printLine(Story.IntroLines);
 		printLine(Messages.NEW_LINE);
 	}
+
+    public Integer selectCharacter(){
+		HeroBuilder hb = new HeroBuilder();
+		printLine(hb.getPossibleHeroes());
+		print("Select: ");
+		Integer i = parseIntInRange(1, hb.getHeroes().size());
+        return i;
+    }
 
 }
