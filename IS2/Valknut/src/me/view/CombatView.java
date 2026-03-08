@@ -2,7 +2,6 @@ package me.view;
 
 import me.model.Character;
 import me.model.CombatOption;
-import me.model.HeroBuilder;
 
 public class CombatView extends ConsoleIO{
 
@@ -19,14 +18,6 @@ public class CombatView extends ConsoleIO{
         }
 
         return cv;
-    }
-
-    public Integer selectCharacter(){
-		HeroBuilder hb = new HeroBuilder();
-		printLine(hb.getPossibleHeroes());
-		print("Select: ");
-		Integer i = parseIntInRange(1, hb.getHeroes().size());
-        return i;
     }
 
     public CombatOption selectAction(Character c){
@@ -60,5 +51,9 @@ public class CombatView extends ConsoleIO{
         int i = parseIntInRange(1, maxRange);
 
         return i;
+    }
+
+    public void selectItem(String s){ 
+        printLine(s);
     }
 }
