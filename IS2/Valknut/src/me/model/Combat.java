@@ -23,6 +23,14 @@ public class Combat {
         this.io = io;
     }
 
+    public List<Hero> getHeroes(){
+        return heroes;
+    }
+
+    public List<Enemy> getEnemies(){
+        return enemies;
+    }
+
     public void addHero(Hero e){
         heroes.add(e);
     }
@@ -51,15 +59,15 @@ public class Combat {
         }
     }
 
-    private String turnToString(Character c){
-        StringBuilder sb = new StringBuilder();
-        sb.append(c.name().toUpperCase()).append("'s TURN...").append(Messages.NEW_LINE).append(Messages.NEW_LINE);
-        sb.append(CombatOption.display()).append(Messages.NEW_LINE).append("Option: ");
-
-        return sb.toString();
+    public int turn(){
+        return turn;
     }
 
-    private String enemyTurnToString(){
+    public void setTurn(int i){
+        turn = i;
+    }
+
+    public String enemyTurnToString(){
         StringBuilder sb = new StringBuilder();
 
         sb.append(Messages.ENEMY_TURN).append(Messages.NEW_LINE);
@@ -67,61 +75,11 @@ public class Combat {
         return sb.toString();
     }
 
-    public CombatOption selectAction(Character c){
-        CombatOption co;
-        io.print(turnToString(c));
-        String aux = io.readPrompt();
-        io.printLine("");
-        co = CombatOption.parseCommand(aux);
-        while(co == null || co == CombatOption.WAIT){
-            io.printLine(Messages.ENTER_VV + Messages.NEW_LINE);
-            io.print(turnToString(c));
-            aux = io.readPrompt();
-            io.printLine("");
-            co = CombatOption.parseCommand(aux);
-        }
-
-        return co;
-    }
-
-    public void playTurn() {
-        if (turn == 1) {
-            for(Hero e: heroes){
-                if(e.isAlive() && !e.escaped() && !enemies.isEmpty()){
-                    combOpt = selectAction(e);
-                    action(e, combOpt);
-                    update();
-                }
-                turn++;
-            }
-        } else {
-            enemyTurnToString();
-            for(Enemy e: enemies){
-                attack();
-                turn++;
-            }
-            update();
-            turn = 1;
-        }
-    }
-
-    private void action(Hero h, CombatOption co){
-        switch(co){
-            case ATTACK -> attack();
-            case DEFEND -> defend();
-            case USE_ITEM -> useItem(h);
-            case RUN -> io.printLine(run());
-            case STATS -> io.printLine(showStats(h));
-            default -> {
-            }
-        }
-    }
-
     public boolean exit() {
         return exit;
     }
 
-    private String heroTargetsToString(){
+    public String heroTargetsToString(){
         StringBuilder sb = new StringBuilder();
 
         sb.append("Targets... ").append(Messages.NEW_LINE);
@@ -136,33 +94,34 @@ public class Combat {
             return sb.toString();
     }
 
-    public void attack(){
+    public String attack(int i){
+        StringBuilder sb = new StringBuilder();
+        
         if(turn < 3){
-            io.print(heroTargetsToString());
-            int i = io.parseIntInRange(1, enemies.size());
             Hero h = heroes.get(turn - 1);
-            h.attack(enemies.get(i - 1), h.getMainElement(), 20);
-            io.printLine(Messages.NEW_LINE); //double '\n'
+            sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20));
         }
         else{
             Enemy e = enemies.get(turn - 3);
             Hero h = e.selectTarjet(heroes);
             if(h != null){
-                io.printLine(e.name().toUpperCase() + " attacks " + h.name().toUpperCase());
-                io.printLine(e.getAttack());
+                sb.append(e.name().toUpperCase()).append(" attacks ").append(h.name().toUpperCase()).append(Messages.NEW_LINE);
+                sb.append(e.getAttack()).append(Messages.NEW_LINE);
                 int damage;
                 if(h.isDefending()){damage = 10;}else{damage = 20;}
-                e.attack(h, e.getMainElement(), damage);
-                io.printLine(" ");
+                sb.append(e.attack(h, e.getMainElement(), damage)).append(Messages.NEW_LINE);
             }
             else{
-                io.printLine(e.name().toUpperCase() + Messages.ENEMY_MISS);
-                io.printLine("");
+                sb.append(e.name().toUpperCase()).append(Messages.ENEMY_MISS).append(Messages.NEW_LINE);
             }
         }
+
+        return sb.toString();
     }
 
-    private String showStats(Character c){
+    
+
+    public String showStats(Character c){
         StringBuilder sb = new StringBuilder();
 
         sb.append("Life: ").append(c.getLife()).append(" hp").append(Messages.NEW_LINE);
@@ -171,11 +130,11 @@ public class Combat {
         return  sb.toString();
     }
 
-    private void defend(){
+    public void defend(){
         heroes.get(turn - 1).defend();
     }
 
-    private boolean allEscaped(){
+    public boolean allEscaped(){
         boolean yes = true;
 
         for(int i = 0; i < heroes.size() && yes; i++){
@@ -191,12 +150,12 @@ public class Combat {
         return yes;
     }
 
-    private void useItem(Hero h){
+    public void useItem(Hero h){
         io.printLine("INVENTORY... ");
         io.printLine(h.displayInventory());
     }
 
-    private boolean heroesLoose(){
+    public boolean heroesLoose(){
         boolean yes = true;
 
         for(int i = 0; i < heroes.size(); i++){

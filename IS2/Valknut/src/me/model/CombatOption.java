@@ -5,6 +5,8 @@ import me.view.Messages;
 public enum CombatOption {
     WAIT, ATTACK, DEFEND, USE_ITEM, RUN, STATS;
 
+    private CombatOption co;
+
     public static CombatOption parseCommand(String command) {
         if (command == null) {
             return ATTACK; 
