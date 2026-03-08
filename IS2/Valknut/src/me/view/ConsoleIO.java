@@ -3,9 +3,9 @@ package me.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ConsoleIO {
+public abstract class ConsoleIO {
 
-    private final Scanner sc;
+    protected final Scanner sc;
 
     public ConsoleIO() {
         this.sc = new Scanner(System.in);
@@ -32,16 +32,16 @@ public class ConsoleIO {
 
     public int parseIntInRange(int j, int k) {
         int i = -50;
-        try{
-            while (i < j || i > k) {
-                i = sc.nextInt();
+        while (i < j || i > k) {
+            try{
+                i = sc.nextInt(); 
                 if (i < j || i > k) {
                     System.err.println("Please enter a number between " + j + " and " + k + ".");
-                }
-            }     
-        }
-        catch (InputMismatchException imme) {
-                    System.err.println(imme.getMessage());
+                }   
+            }
+            catch (InputMismatchException imme) {
+                    System.err.println("Please enter a number between " + j + " and " + k + ".");
+            }
         }
 
         return i;

@@ -104,16 +104,18 @@ public abstract class Character {
         StringBuilder sb = new StringBuilder();
         if (getMainElement().getWeakness() == element) {
         	damage *= 2;
+            sb.append(name.toUpperCase()).append(Messages.HERO_WEAK).append(element.toString()).append(Messages.NEW_LINE);
         }
         
         else if (element.getWeakness() == getMainElement()) {
         	damage -= 10;
+            sb.append(name.toUpperCase()).append(Messages.HERO_RESISTANT).append(element.toString()).append(Messages.NEW_LINE);
         }
         
     	changeLife(-damage);
         
         sb.append(name.toUpperCase()).append(" has received ").append(damage).append( " point of damage.").append(Messages.NEW_LINE);
-        sb.append(name.toUpperCase()).append("'s health points: ").append(life).append(Messages.NEW_LINE);
+        sb.append("Health points: ").append(life).append(Messages.NEW_LINE);
 
         return sb.toString();
     }

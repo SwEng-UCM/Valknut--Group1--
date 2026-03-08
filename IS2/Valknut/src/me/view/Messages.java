@@ -1,5 +1,4 @@
 package me.view;
-import java.awt.Color;
 
 public class Messages {
 	
@@ -10,6 +9,8 @@ public class Messages {
 	public static final String BATTLE_ESCAPE = "THE HEROES ESCAPED THE FIGTH.";
 	public static final String ENEMY_TURN = "ENEMIES' TURN...";
 	public static final String HERO_TURN = "HEROES' TURN...";
+	public static final String HERO_WEAK = " is WEAK to ";
+	public static final String HERO_RESISTANT = " is RESISTANT to ";
 	
 	// Enemies attacks
 	public static final String ICEGIANT_ATTACK = "The giant swings his club in your direction";
