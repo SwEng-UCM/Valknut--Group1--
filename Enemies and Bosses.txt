@@ -1,0 +1,59 @@
+Basic Enemies
+
+	Ice Giant:
+
+		Attack --> The giant swings his club in your direction
+
+		Elemental attack --> The monster uses its magic to call upon a blizzard to freeze you
+
+		Element --> Ice
+
+	Fire Giant:
+
+		Attack --> The flaming monster charges at you with its sword
+
+		Elemental attack --> The giant uses his fiery breath and unleashes a fire torrent angainst you
+
+		Element --> Fire
+
+	Animal Shapeshifter:
+
+		Attack --> In his animal form the shapeshifter slashes you with its claws
+
+		Elemental attack --> Using all of their power the shapeshifter tranforms into a giant bear to maul you
+
+		Element --> Chaos
+
+	Berserker:
+
+		Attack --> The warrior launches a barrage of punches and axe slashes
+
+		Elemental attack --> The berserker drinks its potion and lunges torwards you with amplified strength and might 
+
+		Element --> Blood
+
+	Elf:
+
+		Attack --> Chanels the magic of the runes to harm you
+
+		Elemental attack --> The elf uses the rune of Frey to manipulate the sorrounding nature and make it attack you
+
+		Element --> Nature
+
+Bosses
+
+	Fisrt Boss: Thrym. Thrym was the giant who stole Thor's hammer. He is the king of ice giants.
+
+		Special mechanic --> Can change attacks depending on the weapon he uses (more damage to individual / hits all players at once) 
+
+		Attack --> Thrym attacks you with his gigantic axe, leaving a huge hole on the floor under you
+
+		Special attack 1 (multi hit) --> Thrym throws Mjolnir at you, and it ricochets between you and your partners
+
+		Special attack 2 (ignores defend) --> Thrym commands Summarbrander and makes it slash you
+
+		Special attack 3 (always hits) --> Thrym throws Gungnir torwards you, and it doesn't stop until it reaches you
+
+		Element --> Ice
+
+	Second Boss: Fafnir. A dwarf turned into a fiery dragon.
