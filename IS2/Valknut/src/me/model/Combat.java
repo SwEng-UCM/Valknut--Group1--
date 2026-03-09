@@ -9,7 +9,6 @@ import me.view.Messages;
 public class Combat {
     private final List<Hero> heroes;
     private final List<Enemy> enemies;
-    private static CombatOption combOpt;
     private int turn;
     private boolean exit;
     private final ConsoleIO io; //Combat has many messages on its own that decided to pass the console as an attribute
@@ -17,7 +16,6 @@ public class Combat {
     public Combat(ConsoleIO io){
         heroes = new ArrayList<>(4);
         enemies = new ArrayList<>(5);
-        combOpt = CombatOption.parseCommand("wait"); // Set wait as default 
         turn = 1; 
         exit = false;
         this.io = io;
@@ -70,6 +68,7 @@ public class Combat {
     public String enemyTurnToString(){
         StringBuilder sb = new StringBuilder();
 
+        sb.append(Messages.NEW_LINE);
         sb.append(Messages.ENEMY_TURN).append(Messages.NEW_LINE);
 
         return sb.toString();

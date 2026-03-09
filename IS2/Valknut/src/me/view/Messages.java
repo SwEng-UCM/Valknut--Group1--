@@ -19,7 +19,7 @@ public class Messages {
 	public static final String SHAPESHIFTER_ATTACK = "In his animal form the shapeshifter slashes you with its claws";
 	public static final String BERSERKER_ATTACK = "The warrior launches a barrage of punches and axe slashes at you";
 	public static final String ELF_ATTACK = "The elf chanels the magic of the runes to harm you";
-	public static final String ENEMY_MISS = "MISS: NO HERO FIGHTING"; // To be made into 2 different messages maybe
+	public static final String ENEMY_MISS = " miss: NO HERO FIGHTING"; // To be made into 2 different messages maybe
 	
 	// Player Actions
 	public static final String PLAYER_RUNS = "YOU ESCAPED TO FIGHT LUCKY HERO";
