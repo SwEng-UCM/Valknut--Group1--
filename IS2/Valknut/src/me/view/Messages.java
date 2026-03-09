@@ -11,6 +11,7 @@ public class Messages {
 	public static final String HERO_TURN = "HEROES' TURN...";
 	public static final String HERO_WEAK = " is WEAK to ";
 	public static final String HERO_RESISTANT = " is RESISTANT to ";
+	public static final String DEFEND = " defends";
 	
 	// Enemies attacks
 	public static final String ICEGIANT_ATTACK = "The giant swings his club in your direction";

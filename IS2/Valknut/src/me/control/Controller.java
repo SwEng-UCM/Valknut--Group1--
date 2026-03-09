@@ -85,9 +85,9 @@ public class Controller {
 
     public void action(Hero h, CombatOption co){
         switch(co){
-            case ATTACK -> cb.attack(cv.selectTarject(cb.heroTargetsToString(), cb.getEnemies().size()));
-            case DEFEND -> cb.defend();
-            case USE_ITEM -> cb.useItem(h);
+            case ATTACK -> cv.printLine(cb.attack(cv.selectTarject(cb.heroTargetsToString(), cb.getEnemies().size())));
+            case DEFEND -> cv.printLine(cb.defend());
+            case USE_ITEM -> cv.printLine(cb.useItem(h));
             case RUN -> cv.printLine(cb.run());
             case STATS -> cv.printLine(cb.showStats(h));
             default -> {
