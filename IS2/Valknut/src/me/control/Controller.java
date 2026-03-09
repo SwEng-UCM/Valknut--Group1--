@@ -73,7 +73,7 @@ public class Controller {
                 //to a certain value. So, functions turn() and setTurn() are needed. Function incTurn() is considered to be setTurn(turn() + 1);
             }
         } else {
-            cv.printLine(cb.enemyTurnToString());
+            cv.print(cb.enemyTurnToString());
             for(Enemy e: cb.getEnemies()){
                 cv.print(cb.attack(0));
                 cb.setTurn(cb.turn() + 1);

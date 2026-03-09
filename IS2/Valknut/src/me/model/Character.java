@@ -115,7 +115,7 @@ public abstract class Character {
     	changeLife(-damage);
         
         sb.append(name.toUpperCase()).append(" has received ").append(damage).append( " point of damage.").append(Messages.NEW_LINE);
-        sb.append("Health points: ").append(life).append(Messages.NEW_LINE);
+        sb.append("Health points: ").append(life);
 
         return sb.toString();
     }

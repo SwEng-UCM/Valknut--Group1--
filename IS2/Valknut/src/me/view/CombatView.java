@@ -39,6 +39,7 @@ public class CombatView extends ConsoleIO{
 
     public String turnToString(Character c){
         StringBuilder sb = new StringBuilder();
+        sb.append(Messages.NEW_LINE);
         sb.append(c.name().toUpperCase()).append("'s TURN...").append(Messages.NEW_LINE).append(Messages.NEW_LINE);
         sb.append(CombatOption.display()).append(Messages.NEW_LINE).append("Option: ");
 
