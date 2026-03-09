@@ -96,7 +96,8 @@ public class Combat {
 
     public String attack(int i){
         StringBuilder sb = new StringBuilder();
-        
+        sb.append(Messages.NEW_LINE);
+
         if(turn < 3){
             Hero h = heroes.get(turn - 1);
             sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20));
@@ -119,8 +120,6 @@ public class Combat {
         return sb.toString();
     }
 
-    
-
     public String showStats(Character c){
         StringBuilder sb = new StringBuilder();
 
@@ -130,8 +129,12 @@ public class Combat {
         return  sb.toString();
     }
 
-    public void defend(){
-        heroes.get(turn - 1).defend();
+    public String defend(){
+        StringBuilder sb = new StringBuilder();
+        Hero e = heroes.get(turn - 1);
+        e.defend();
+        sb.append(e.name().toUpperCase()).append(Messages.DEFEND).append(Messages.NEW_LINE);
+        return sb.toString();
     }
 
     public boolean allEscaped(){
@@ -150,10 +153,12 @@ public class Combat {
         return yes;
     }
 
-    public void useItem(Hero h){ 
+    public String useItem(Hero h){ 
         StringBuilder sb = new StringBuilder();
         sb.append("INVENTORY... ").append(Messages.NEW_LINE);
         sb.append(h.displayInventory()).append(Messages.NEW_LINE);
+
+        return sb.toString();
     }
 
     public boolean heroesLoose(){
