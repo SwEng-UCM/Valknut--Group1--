@@ -1,23 +1,32 @@
-- The Vanir Freyr has an unnamed sword that is one of the few weapons that is capable of fighting on its own
+ 
+- The Vanir Freyr has a magical sword Summarbrander  that is one of the few weapons that is capable of fighting on its own and can cut through anything
+
 Element: Nature
+SP: Ignores defend
 
 - Gram (Old Norse: Gramr, "ill-tempered"), is a magical sword wielded by the hero Sigurd. He uses it to slay Fafnir, a dwarf transformed into a dragon.
+
 Element: Blood
 
 - Gungnir (/ˈɡʌŋ.nɪər/, "the rocking") is the spear of the god Odin. It is said to always hit the target of the attacker.
-Element: Fire
+
+Element: Ice
+SP: Always hits the target (ignores run/dodge)
 
 - Hǫfuð ("man-head",[7] Norwegian hovud, Danish hoved, Swedish huvud and Icelandic höfuð) is the sword of the Æsir Heimdall.
-Element: Ice
+
+Element: Chaos
 
 - Mjölnir is Thor's hammer, used both as a weapon and as a spiritual focus with which to perform divine acts. 
-Element: Chaos
+
+Element: Fire
+SP: It can ricochet between enemies
+
+
 
 //Elements can be changed around
 
-
 Each weapon needs to have: 
-
 - Some sort of special mechanique
 - A % or set-number increase for some stats (maybe up to 3?)
 - An element it attacks with / has better affinity with.
