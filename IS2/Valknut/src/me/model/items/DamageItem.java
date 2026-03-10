@@ -11,7 +11,7 @@ public class DamageItem extends Item{
         super(name, cost, time, type);
         this.mod = mod;
     }
-
+ 
     @Override
     public void use() {
         c.changeStrength(mod);
@@ -23,7 +23,7 @@ public class DamageItem extends Item{
     }
 
     @Override
-    public String toString() {
+    public String toString()  //comentario
         StringBuilder sb = new StringBuilder();
 
         sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod);
