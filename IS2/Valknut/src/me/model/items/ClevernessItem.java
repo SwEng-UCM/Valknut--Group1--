@@ -1,5 +1,6 @@
 package me.model.items;
 
+import me.model.Attribute;
 import me.model.Element;
 import me.view.Messages;
 
@@ -8,8 +9,8 @@ public class ClevernessItem extends Item{
     int mod;
     Element element;
 
-    public ClevernessItem(String name, int cost, int mod, int time){
-        super(name, cost, time);
+    public ClevernessItem(String name, int cost, int mod, int time,  Attribute type){
+        super(name, cost, time, type);
         this.mod = mod;
     }
 

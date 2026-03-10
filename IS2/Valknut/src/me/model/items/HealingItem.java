@@ -1,5 +1,6 @@
 package me.model.items;
 
+import me.model.Attribute;
 import me.view.Messages;
 
 
@@ -7,8 +8,8 @@ public class HealingItem extends Item {
 
     private int heal;
 
-    public HealingItem(String name, int cost, int heal, int time){
-        super(name, cost, time);
+    public HealingItem(String name, int cost, int heal, int time, Attribute type){
+        super(name, cost, time, type);
         this.heal = heal;
     }
 

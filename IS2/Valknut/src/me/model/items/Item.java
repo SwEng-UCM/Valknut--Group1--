@@ -1,21 +1,24 @@
 package me.model.items;
 
+import me.model.Attribute;
 import me.model.Character;
 
 public abstract class Item {
 
-    private String name;
+    private final String name;
     protected boolean used;
     private int cuantity;
-    private int cost;
+    private final int cost;
     private int turn;
+    private Attribute type;
     protected Character c;
 
-    public Item(String name, int cost, int time){
+    public Item(String name, int cost, int time, Attribute type){
         this.name = name;
         this.cuantity = 0;
         this.cost = cost;
         this.turn = time;
+        this.type = type;
     }
 
     public int getTurn(){
