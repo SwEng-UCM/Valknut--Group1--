@@ -1,13 +1,14 @@
 package me.model.items;
 
+import me.model.Attribute;
 import me.view.Messages;
 
 public class ShieldItem extends Item{
 
     private int mod;
 
-    public ShieldItem(String name, int value, int shield, int time){
-        super(name, value, time);
+    public ShieldItem(String name, int value, int shield, int time, Attribute type){
+        super(name, value, time, type);
         this.mod = shield;
     }
 

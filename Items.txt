@@ -16,9 +16,9 @@ Medium --> Protection Ring - +2 sh - 70 coins
 
 Big --> Thor's Shield - +4 sh - 300 coins
 
-Elemental --> Svalinn's Fragment - +4 sh (against elemental attacks) - 500 coins
+Elemental --> Svalinn's Fragment - +4 sh (against elemental attacks) - 500 coins ---- COMPLEMENT
 
-Physical --> Megingjörð's Piece - +4 sh (against physical attacks) - 500 coins
+Physical --> Megingjörð's Piece - +4 sh (against physical attacks) - 500 coins ---- COMPLEMENT
 
 # Damage Items
 
@@ -46,12 +46,12 @@ Medium --> Breeze's Words - +2 cl - 70 coins
 
 Big --> Edda's Fragment - +3 cl - 300 coins
 
-Chaos --> Chaos Essence - +2 cl - 200 coins
+Chaos --> Chaos Essence - +2 cl - 200 coins ---- COMPLEMENT
 
-Fire --> Fire Essence - +2 cl - 200 coins
+Fire --> Fire Essence - +2 cl - 200 coins ---- COMPLEMENT
 
-Ice --> Ice Essence - +2 cl - 200 coins
+Ice --> Ice Essence - +2 cl - 200 coins ---- COMPLEMENT
 
-Nature --> Nature Essence - +2 cl - 200 coins
+Nature --> Nature Essence - +2 cl - 200 coins ---- COMPLEMENT
 
-Blood --> Blood Essence - +2 cl - 200 coins
+Blood --> Blood Essence - +2 cl - 200 coins ---- COMPLEMENT

@@ -171,6 +171,7 @@ public class Combat {
     }
 
     public String update() {
+        //Implement a fucntion set escaped with one turn of delay so if The Boss with the Odin's Spear (Gungnir) uses the special attacks, ,it hits the heroes that just escpaed
         StringBuilder sb = new StringBuilder();
         sb.append(rmvEnemies());
         if(enemies.isEmpty()){

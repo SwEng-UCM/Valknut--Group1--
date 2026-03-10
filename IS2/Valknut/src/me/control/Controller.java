@@ -45,13 +45,13 @@ public class Controller {
 		for(int i = 1; i < 3; i++){
 			cv.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
 			Hero e = selectCharacter();
-			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1, 8));
-			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1, 8));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20,1));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1));
-			e.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1));
-			e.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8));
+			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1, 8, Attribute.RESISTANCE));
+			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1, 8, Attribute.RESISTANCE));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
+			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
+			e.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, null));
+			e.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, Attribute.STRENGTH));
 			cmb.addHero(e);
 			cv.printLine("");
 			cmb.addEnemy(firstEnemies(i));
@@ -87,7 +87,7 @@ public class Controller {
         switch(co){
             case ATTACK -> cv.printLine(cb.attack(cv.selectTarject(cb.heroTargetsToString(), cb.getEnemies().size())));
             case DEFEND -> cv.printLine(cb.defend());
-            case USE_ITEM -> cv.printLine(cb.useItem(h));
+            case USE_ITEM -> cv.print(cb.useItem(h));
             case RUN -> cv.printLine(cb.run());
             case STATS -> cv.printLine(cb.showStats(h));
             default -> {
