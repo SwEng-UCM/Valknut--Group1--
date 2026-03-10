@@ -41,7 +41,7 @@ public class Controller {
     }
 
     public Combat initCmb(){
-		Combat cmb = new Combat(cv);
+		Combat cmb = new Combat();
 		for(int i = 1; i < 3; i++){
 			cv.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
 			Hero e = selectCharacter();
@@ -67,9 +67,9 @@ public class Controller {
                 if(e.isAlive() && !e.escaped() && !cb.getEnemies().isEmpty()){
                     co = cv.selectAction(e);
                     action(e, co);
-                    cb.update();
+                    cv.print(cb.update());
                 }
-                cb.setTurn(cb.turn() + 1); //following this idea of turns, sometimes yoou will want to know the turn, to increase the turn by one or to set the turn
+                cb.setTurn(cb.turn() + 1); //following this idea of turns, sometimes you will want to know the turn, to increase the turn by one or to set the turn
                 //to a certain value. So, functions turn() and setTurn() are needed. Function incTurn() is considered to be setTurn(turn() + 1);
             }
         } else {
@@ -78,7 +78,7 @@ public class Controller {
                 cv.print(cb.attack(0));
                 cb.setTurn(cb.turn() + 1);
             }
-            cb.update();
+            cv.print(cb.update());
             cb.setTurn(1);
         }
     }

@@ -2,7 +2,6 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.view.ConsoleIO;
 import me.view.Messages;
 
 
@@ -11,14 +10,12 @@ public class Combat {
     private final List<Enemy> enemies;
     private int turn;
     private boolean exit;
-    private final ConsoleIO io; //Combat has many messages on its own that decided to pass the console as an attribute
 
-    public Combat(ConsoleIO io){
+    public Combat(){
         heroes = new ArrayList<>(4);
         enemies = new ArrayList<>(5);
         turn = 1; 
         exit = false;
-        this.io = io;
     }
 
     public List<Hero> getHeroes(){
@@ -37,24 +34,25 @@ public class Combat {
         enemies.add(e);
     }
 
-    private void rmvEnemies(){
+    private String rmvEnemies(){
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < enemies.size(); i++) {
             Enemy enemy = enemies.get(i);
 
             if (!enemy.isAlive()) {
-                io.printLine(enemy.name().toUpperCase() + " was defeated!");
+                sb.append(enemy.name().toUpperCase()).append(" was defeated!").append(Messages.NEW_LINE);
 
                 // Give XP to heroes who participated (alive + not escaped)
                 for (Hero h : heroes) {
                     if (h.isAlive() && !h.escaped()) {
-                        io.printLine(h.gainXp(enemy.getXpReward()));
+                        sb.append(h.gainXp(enemy.getXpReward())).append(Messages.NEW_LINE);
                     }
                 }
-                io.printLine("");
                 enemies.remove(i);
                 i--;
             }
         }
+        return sb.toString();
     }
 
     public int turn(){
@@ -172,21 +170,24 @@ public class Combat {
         return yes;
     }
 
-    public void update() {
-        rmvEnemies();
+    public String update() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(rmvEnemies());
         if(enemies.isEmpty()){
         	
-            io.printLine(Messages.BATTLE_WIN);
+            sb.append(Messages.BATTLE_WIN);
             exit = true;
         }
         else if(allEscaped()){
-            io.printLine(Messages.BATTLE_ESCAPE);
+            sb.append(Messages.BATTLE_ESCAPE);
             exit = true;
         }
         else if(heroesLoose()){
-            io.printLine(Messages.BATTLE_LOSS);
+            sb.append(Messages.BATTLE_LOSS);
             exit = true;
         }
+
+        return sb.toString();
     }
 
     public String run(){
