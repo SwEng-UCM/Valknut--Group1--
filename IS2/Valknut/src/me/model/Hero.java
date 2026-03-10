@@ -51,8 +51,8 @@ public class Hero extends Character {
         sb.append(name().toUpperCase()).append(" LEVEL UP! Now level ").append(level).append(Messages.NEW_LINE);
         
         // rewards: more max HP + heal a bit
-        increaseMaxLife(10);
-        changeLife(10);
+        increaseMaxLife(20);
+        changeLife(max_life);
 
         // small stat bumps
         changeAgility(1);

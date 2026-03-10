@@ -12,7 +12,7 @@ public abstract class Character {
     private Map<Element, Integer> elements; // Representing the five elements stats with a Map
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
     private int life;
-    private int max_life;
+    protected int max_life;
     private double mod;
     private boolean escaped;
     private boolean defend;
