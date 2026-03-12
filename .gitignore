@@ -1,18 +1,11 @@
 <<<<<<< HEAD
 IS2/.metadata/.lock_info
-IS2/.metadata/.lock_info
-/IS2/.metadata
-/IS2/.metadata
-/IS2/.metadata
-=======
-IS2/.metadata/
+/IS2/.metadata/
+IS2/Valknut/bin/
 IS2/.settings/
 IS2/.project
 IS2/.classpath
-IS2/*.class
-IS2/Valknut/bin
-
-
+=======
 # macOS / IDE / build
 .DS_Store
 .idea/
@@ -20,9 +13,3 @@ out/
 .Rhistory
 IS2 2/
 >>>>>>> parent of 231fe37 (Merge branch 'main' of https://github.com/SwEng-UCM/Valknut--Group1--)
-IS2/Valknut/bin/me/model/Combat.class
-IS2/Valknut/bin/me/model/items/HealingItem.class
-IS2/Valknut/bin/me/model/items/HealingItem.class
-IS2/Valknut/bin/me/model/items/HealingItem.class
-*.class
-*.class
