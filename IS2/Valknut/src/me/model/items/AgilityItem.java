@@ -5,11 +5,8 @@ import me.view.Messages;
 
 public class AgilityItem extends Item{
 
-    int mod;
-
     public AgilityItem(String name, int cost, int mod, int time,  Attribute type){
-        super(name, cost, time, type);
-        this.mod = mod;
+        super(name, cost, mod, time, type);
     }
 
     @Override
