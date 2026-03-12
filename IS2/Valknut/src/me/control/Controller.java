@@ -45,8 +45,8 @@ public class Controller {
 		for(int i = 1; i < 3; i++){
 			cv.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
 			Hero e = selectCharacter();
-			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1, 8, Attribute.RESISTANCE));
-			e.addItem(new ShieldItem("Iron Armor Piece", 5, 1, 8, Attribute.RESISTANCE));
+			e.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 8, Attribute.RESISTANCE));
+			e.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 8, Attribute.RESISTANCE));
 			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
 			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
 			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));

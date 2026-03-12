@@ -3,13 +3,10 @@ package me.model.items;
 import me.model.Attribute;
 import me.view.Messages;
 
-public class ShieldItem extends Item{
+public class ResistanceItem extends Item{
 
-    private int mod;
-
-    public ShieldItem(String name, int value, int shield, int time, Attribute type){
-        super(name, value, time, type);
-        this.mod = shield;
+    public ResistanceItem(String name, int value, int mod, int time, Attribute type){
+        super(name, value, mod, time, type);
     }
 
     @Override

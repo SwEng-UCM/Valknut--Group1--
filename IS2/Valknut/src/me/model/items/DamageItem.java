@@ -4,12 +4,9 @@ import me.model.Attribute;
 import me.view.Messages;
 
 public class DamageItem extends Item{
-
-    private int mod;
-
+    
     public DamageItem(String name, int cost, int mod, int time,  Attribute type){
-        super(name, cost, time, type);
-        this.mod = mod;
+        super(name, cost, mod, time, type);
     }
 
     @Override
