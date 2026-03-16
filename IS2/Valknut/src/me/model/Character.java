@@ -13,7 +13,6 @@ public abstract class Character {
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
     private int life;
     protected int max_life;
-    private double mod;
     private boolean escaped;
     private boolean defend;
 
@@ -30,6 +29,26 @@ public abstract class Character {
         this.max_life = max_life;
         this.escaped = false;
         this.defend = false;
+    }
+
+    public int getStrength(){
+        return attributes.get(Attribute.STRENGTH);
+    }
+
+    public int getResistance(){
+        return attributes.get(Attribute.RESISTANCE);
+    }
+
+    public int getAgility(){
+        return attributes.get(Attribute.AGILITY);
+    }
+
+    public int getSpeed(){
+        return attributes.get(Attribute.SPEED);
+    }
+
+    public int getCleverness(){
+        return attributes.get(Attribute.CLEVERNESS);
     }
 
     public void increaseMaxLife(int amount) {
@@ -112,7 +131,7 @@ public abstract class Character {
     public String receiveDamage(int damage, Element element) {
         StringBuilder sb = new StringBuilder();
         if (getMainElement().getWeakness() == element) {
-        	damage *= 2;
+        	damage *= 1.5;
             sb.append(name.toUpperCase()).append(Messages.HERO_WEAK).append(element.toString()).append(Messages.NEW_LINE);
         }
         
@@ -128,10 +147,20 @@ public abstract class Character {
 
         return sb.toString();
     }
+    public int computeDamage(Character e, int damage){
+
+        int result = (int) (damage + damage * 0.5 * getStrength());
+        result -= (int) (damage * 0.5 * e.getResistance());
+
+        if(result < 0)
+            result = 0;
+
+        return result;
+    }
 
     public String attack(Character e, Element element, int damage) {
         StringBuilder sb = new StringBuilder();
-        int var = damage + (int)(damage*mod);
+        int var = computeDamage(e, damage);
         sb.append(e.receiveDamage(var, element)).append(Messages.NEW_LINE);
 
         return sb.toString();
