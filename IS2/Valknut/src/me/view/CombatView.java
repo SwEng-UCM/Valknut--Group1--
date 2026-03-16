@@ -66,7 +66,6 @@ public class CombatView extends ConsoleIO{
         if(!h.getInventory().isEmpty()){
             boolean valid = false;
             Item i = null;
-            sc.nextLine();
             while(!valid){
                 print("Select (item full name) (e to exit): ");
                 String item = sc.nextLine();
