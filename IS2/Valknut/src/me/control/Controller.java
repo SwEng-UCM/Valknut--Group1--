@@ -21,7 +21,7 @@ public class Controller {
     public void run(){
         tellIntro();
         enterCombat();
-        
+        tellFirstLinesChapterOne();
     }
 
     public static Controller getInstance(){
@@ -125,4 +125,10 @@ public class Controller {
     public void tellIntro() {
 		sv.tellIntro();
 	}
+
+    public void tellFirstLinesChapterOne(){
+        sv.clear();
+        sv.tellFirstLinesChapterOne(cb.getHeroes().get(0), cb.getHeroes().get(1));
+        sv.pause();
+    }
 }
