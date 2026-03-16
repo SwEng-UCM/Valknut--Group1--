@@ -46,7 +46,15 @@ public class Messages {
 	public static final String PRESS_EN = "Press enter to continue...";
 
 	//Story
-	public static final String INTRO_LINES = "For The Viking Warriors the greatest honor upon death was to enter Valhalla, the Hall of Heroes. \n" 
-	+ "This is a majestic hall located in Asgard and presided over by the god Odin where our heroes will live untill Ragnarök \n"  
-	+ "when they will march out of its many doors to fight in aid of Odin against the jötnare, the ice giants." ;
+	public static final String INTRO_LINES = """
+                                                 For The Viking Warriors the greatest honor upon death was to enter VALHALLA, the Hall of Heroes. 
+                                                 This is a majestic hall located in ASGARD and presided over by the god ODIN where our heroes will live untill RAGNAROK, 
+                                                 when they will march out of its many doors to fight in aid of ODIN against the JOTNARE, the ice giants.""" ;
+	
+	public static final String CHOOSE = "CHOOSE YOUR HEROES";
+	public static final String CHAPTER_ONE_BEGINING = "For your journey to Vahalla you will first need to find an appropiate weapon. These weapons can be obtained by defeating the most powerful enemies along your journey." + NEW_LINE + //
+				NEW_LINE + //
+				"There are rumors a tribe of GIANTS have taken refuge over a nearby forest. If you defeat them you may find clues to the location of a powerful foe whose weapon collection you can pillage." + NEW_LINE + //
+				NEW_LINE + //
+				"Good luck in your journey heroes!";
 }
