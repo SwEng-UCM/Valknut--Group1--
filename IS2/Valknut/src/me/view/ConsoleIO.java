@@ -1,6 +1,5 @@
 package me.view;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class ConsoleIO {
@@ -34,13 +33,15 @@ public abstract class ConsoleIO {
         int i = -50;
         while (i < j || i > k) {
             try{
-                i = sc.nextInt(); 
+                print("Select (ex: 1): ");
+                String x = sc.nextLine(); 
+                i = Integer.parseInt(x);
                 if (i < j || i > k) {
-                    System.err.println("Please enter a number between " + j + " and " + k + ".");
+                    System.err.println("Please enter a number between " + j + " and " + k + "." + Messages.NEW_LINE);
                 }   
             }
-            catch (InputMismatchException imme) {
-                    System.err.println("Please enter a number between " + j + " and " + k + ".");
+            catch (NumberFormatException imme) {
+                    System.err.println("Please enter a number between " + j + " and " + k + "." + Messages.NEW_LINE);
             }
         }
 

@@ -27,7 +27,6 @@ public class StoryView extends ConsoleIO{
     public Integer selectCharacter(){
 		HeroBuilder hb = new HeroBuilder();
 		print(hb.getPossibleHeroes());
-		print("Select: ");
 		Integer i = parseIntInRange(1, hb.getHeroes().size());
         return i;
     }
