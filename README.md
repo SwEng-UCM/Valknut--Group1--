@@ -11,7 +11,7 @@ This is the repository our team is using to develope the game. Feel free to brow
 ```
 └── src/                            
     └── me/                                        # Intermediate directory to avoid conflicts with names
-        ├── control/                               # Control part of the program where there is Singleton based Controller
+        ├── control/                               # Control part of the program where there is a Singleton based Controller
         │   └── Controller.java
         ├── factories/                             # Future implementation of Factory based pattern
         ├── model/                                 # All the logic of the game
@@ -35,11 +35,11 @@ This is the repository our team is using to develope the game. Feel free to brow
         │   ├── Hero.java                          # General hero logic
         │   └── HeroBuilder.java                   # Fix for heroes creation
         ├── view/
-        │   ├── CombatView.java                    # In charge of combat inputs and outputs
+        │   ├── CombatView.java                    # In charge of combat input - output
         │   ├── ConsoleColors.java                 # Util class
         │   ├── ConsoleIO.java                     # Abstract class for the different views
         │   ├── MenuView.java                      # In charge of the menu input - output
         │   ├── Messages.java                      # Util class to put all general messages
         │   ├── Story.java                         # Class where to place the text of the story
         │   └── StoryView.java                     # In charge of the story input - output
-        └── Main.java                              # Start poit of the program
+        └── Main.java                              # Start point of the program
