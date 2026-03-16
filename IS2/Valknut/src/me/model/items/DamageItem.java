@@ -23,7 +23,7 @@ public class DamageItem extends Item{
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod);
+        sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod).append(" dmg");;
         sb.append("  Turns: ").append(getTurn()).append(Messages.NEW_LINE);
 
         return sb.toString();

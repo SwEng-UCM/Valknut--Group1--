@@ -9,6 +9,7 @@ public class Hero extends Character {
 
     private final String surname;
     private Inventory inventory; // Representing 'item'
+    private Inventory using;
     private int level = 1;
     private int xp = 0;
 
@@ -20,6 +21,7 @@ public class Hero extends Character {
         else
             this.surname = " ";
         inventory = new Inventory();
+        using = new Inventory();
     }
     public int getLevel() { return level; }
     public int getXp() { return xp; }
@@ -79,11 +81,35 @@ public class Hero extends Character {
         return inventory;
     }
 
+    @Override
     public String toString(){
         return name.toUpperCase() + ", " + surname.toUpperCase();
     }
 
-    public String displayInventory(){
+    private String displayInv(){
         return inventory.getInfo();
+    }
+
+     public String displayInventory(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("INVENTORY... ").append(Messages.NEW_LINE);
+        sb.append(displayInv());
+
+        return sb.toString();
+    }
+
+    public String useItem(Item i){
+        StringBuilder sb = new StringBuilder();
+        if(using.contains(i.toString()) == null){
+            inventory.dropItem(i);
+            i.use();
+            using.addItem(i);
+            sb.append(Messages.USED_ITEM).append(i.toString());
+        }
+        else
+            sb.append(Messages.USING_ITEM).append(i.toString());
+        
+        return sb.toString();
     }
 }

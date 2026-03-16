@@ -32,7 +32,7 @@ public class ClevernessItem extends Item{
         StringBuilder sb = new StringBuilder();
 
         sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost());
-        sb.append(" coins  Mod: +").append(mod);
+        sb.append(" coins  Mod: +").append(mod).append(" cl");;
         sb.append("  Turns: ").append(getTurn()).append("  Element: ").append(element.toString().toUpperCase()).append(Messages.NEW_LINE);
 
         return sb.toString();

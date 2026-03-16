@@ -2,18 +2,21 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.model.items.Item;
 import me.view.Messages;
 
 
 public class Combat {
     private final List<Hero> heroes;
     private final List<Enemy> enemies;
+    private List<Item> items;
     private int turn;
     private boolean exit;
 
     public Combat(){
-        heroes = new ArrayList<>(4);
+        heroes = new ArrayList<>(4); //initial values are almost random
         enemies = new ArrayList<>(5);
+        items = new ArrayList<>(5);
         turn = 1; 
         exit = false;
     }
@@ -121,7 +124,8 @@ public class Combat {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Life: ").append(c.getLife()).append(" hp").append(Messages.NEW_LINE);
-        sb.append(c.getStringElements());
+        sb.append(c.getStringElements()).append(Messages.NEW_LINE);
+        sb.append(c.getStringAttributes());
 
         return  sb.toString();
     }
@@ -150,12 +154,11 @@ public class Combat {
         return yes;
     }
 
-    public String useItem(Hero h){ 
-        StringBuilder sb = new StringBuilder();
-        sb.append("INVENTORY... ").append(Messages.NEW_LINE);
-        sb.append(h.displayInventory()).append(Messages.NEW_LINE);
-
-        return sb.toString();
+    public void useItem(Hero h, Item i){ 
+        if(i != null){
+            h.useItem(i);
+            items.add(i);
+        }
     }
 
     public boolean heroesLoose(){
@@ -189,6 +192,12 @@ public class Combat {
         }
 
         return sb.toString();
+    }
+
+    public void updateItems(){
+        for(Item i : items){
+            i.update();
+        }
     }
 
     public String run(){

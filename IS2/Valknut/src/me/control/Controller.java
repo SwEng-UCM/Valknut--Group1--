@@ -45,8 +45,8 @@ public class Controller {
 		for(int i = 1; i < 3; i++){
 			cv.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
 			Hero e = selectCharacter();
-			e.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 8, Attribute.RESISTANCE));
-			e.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 8, Attribute.RESISTANCE));
+			e.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, Attribute.RESISTANCE));
+			e.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, Attribute.RESISTANCE));
 			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
 			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
 			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
@@ -55,24 +55,31 @@ public class Controller {
 			cmb.addHero(e);
 			cv.printLine("");
 			cmb.addEnemy(firstEnemies(i));
-			cmb.addEnemy(EnemyBuilder.buildEnemy("Ice"));
 		}
 		return cmb;
 	}
 
 	public void playTurn() {
-        CombatOption co;
         if (cb.turn() == 1) {
+            boolean finished = false;
+            cb.updateItems();
             for(Hero e: cb.getHeroes()){
-                if(e.isAlive() && !e.escaped() && !cb.getEnemies().isEmpty()){
-                    co = cv.selectAction(e);
-                    action(e, co);
-                    cv.print(cb.update());
+                cv.turnHeader(e);
+                CombatOption co;
+                while(!finished){
+                    if(e.isAlive() && !e.escaped() && !cb.getEnemies().isEmpty()){
+                        co = cv.selectAction(e);
+                        finished = action(e, co);
+                        cv.print(cb.update());
+                    }
                 }
-                cb.setTurn(cb.turn() + 1); //following this idea of turns, sometimes you will want to know the turn, to increase the turn by one or to set the turn
-                //to a certain value. So, functions turn() and setTurn() are needed. Function incTurn() is considered to be setTurn(turn() + 1);
+                cb.setTurn(cb.turn() + 1); //following this idea of turns, sometimes you will want to know the turn, 
+                    //to increase the turn by one or to set the turn
+                    //to a certain value. So, functions turn() and setTurn() are needed
+                    //Function incTurn() is considered to be setTurn(turn() + 1);
             }
         } else {
+            cv.pause();
             cv.print(cb.enemyTurnToString());
             for(Enemy e: cb.getEnemies()){
                 cv.print(cb.attack(0));
@@ -83,16 +90,18 @@ public class Controller {
         }
     }
 
-    public void action(Hero h, CombatOption co){
+    public boolean action(Hero h, CombatOption co){
+        boolean f = false;
         switch(co){
-            case ATTACK -> cv.printLine(cb.attack(cv.selectTarject(cb.heroTargetsToString(), cb.getEnemies().size())));
-            case DEFEND -> cv.printLine(cb.defend());
-            case USE_ITEM -> cv.print(cb.useItem(h));
-            case RUN -> cv.printLine(cb.run());
-            case STATS -> cv.printLine(cb.showStats(h));
+            case ATTACK -> {cv.printLine(cb.attack(cv.selectTarject(cb.heroTargetsToString(), cb.getEnemies().size()))); f = true;}
+            case DEFEND -> {cv.printLine(cb.defend()); f = true;}
+            case USE_ITEM -> cb.useItem(h, cv.selectItem(h.displayInventory(), h));
+            case RUN -> {cv.printLine(cb.run()); f = true;}
+            case STATS -> cv.print(cb.showStats(h));
             default -> {
             }
         }
+        return f;
     }
 
     public Hero selectCharacter(){
