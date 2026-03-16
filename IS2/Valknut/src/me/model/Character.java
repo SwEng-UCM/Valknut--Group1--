@@ -134,12 +134,14 @@ public abstract class Character {
         	damage *= 1.5;
             sb.append(name.toUpperCase()).append(Messages.HERO_WEAK).append(element.toString()).append(Messages.NEW_LINE);
         }
-        
         else if (element.getWeakness() == getMainElement()) {
         	damage -= 10;
             sb.append(name.toUpperCase()).append(Messages.HERO_RESISTANT).append(element.toString()).append(Messages.NEW_LINE);
         }
         
+        if(damage < 0)
+            damage = 0;
+
     	changeLife(-damage);
         
         sb.append(name.toUpperCase()).append(" has received ").append(damage).append( " point of damage.").append(Messages.NEW_LINE);

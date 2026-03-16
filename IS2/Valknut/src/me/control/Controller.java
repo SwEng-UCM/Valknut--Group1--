@@ -55,6 +55,7 @@ public class Controller {
 			cmb.addHero(e);
 			cv.printLine("");
 			cmb.addEnemy(firstEnemies(i));
+            cmb.addEnemy(firstEnemies(i));
 		}
 		return cmb;
 	}

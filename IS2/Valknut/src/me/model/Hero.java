@@ -69,6 +69,13 @@ public class Hero extends Character {
         case 3 -> changeElement(Element.ICE, 1);
         case 4 -> changeElement(Element.NATURE, 1);
         }
+
+        switch(rand.nextInt(3)) {
+        case 0 -> changeStrength(1);
+        case 1 -> changeShield(1);
+        case 2 -> changeAgility(1);
+        }
+
         return sb.toString();
     }
 

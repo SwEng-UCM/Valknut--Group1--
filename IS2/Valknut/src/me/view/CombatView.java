@@ -68,10 +68,10 @@ public class CombatView extends ConsoleIO{
             Item i = null;
             sc.nextLine();
             while(!valid){
-                print("Select: ");
+                print("Select (e to exit): ");
                 String item = sc.nextLine();
                 i = h.getInventory().contains(item.toLowerCase());
-                valid = i != null;
+                valid = (i != null) || (item.equals("e"));
                 if(!valid){
                     printLine(Messages.INVALID_ITEM + item);
                     printLine("");
