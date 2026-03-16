@@ -20,10 +20,12 @@ public abstract class ConsoleIO {
 
     public String readPrompt() {
         String input = sc.next();
+        sc.nextLine(); //clean buffer
 
         while (input.isEmpty()) {
             System.err.println("Error: Empty String. Please try again.");
             input = sc.next();
+            sc.nextLine(); //clean buffer
         }
 
         return input;
@@ -34,7 +36,8 @@ public abstract class ConsoleIO {
         while (i < j || i > k) {
             try{
                 print("Select (ex: 1): ");
-                String x = sc.nextLine(); 
+                String x = sc.next();
+                sc.nextLine(); //clean buffer 
                 i = Integer.parseInt(x);
                 if (i < j || i > k) {
                     System.err.println("Please enter a number between " + j + " and " + k + "." + Messages.NEW_LINE);
@@ -50,7 +53,6 @@ public abstract class ConsoleIO {
 
     public void pause(){
         printLine(Messages.PRESS_EN);
-        sc.nextLine();
         String s = sc.nextLine();
     }
 }
