@@ -71,7 +71,7 @@ public class Controller {
                     while(!finished){
                         co = cv.selectAction(e);
                         finished = action(e, co);
-                        cv.print(cb.update());
+                        cv.printLine(cb.update());
                     }
                 }
                 finished = false;
@@ -86,7 +86,7 @@ public class Controller {
                 cv.print(cb.attack(0));
                 cb.setTurn(cb.turn() + 1);
             }
-            cv.print(cb.update());
+            cv.printLine(cb.update());
             cb.setTurn(1);
         }
         cv.pause();
