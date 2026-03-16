@@ -8,13 +8,12 @@ Valknut is a turn-based combat game inspired in Norse mythology. In this game, o
 This is the repository our team is using to develope the game. Feel free to browse around!
 
 # Project Structure
-
 .
 └── src/
     └── me/
         ├── control/
         │   └── Controller.java
-        ├── factories
+        ├── factories/
         ├── model/
         │   ├── items/
         │   │   ├── AgilityItem.java
