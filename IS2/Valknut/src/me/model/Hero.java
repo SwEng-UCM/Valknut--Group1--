@@ -98,17 +98,20 @@ public class Hero extends Character {
 
         return sb.toString();
     }
+    public boolean isUsing(Item i){
+        return using.contains(i.getName()) != null;
+    }
 
     public String useItem(Item i){
         StringBuilder sb = new StringBuilder();
-        if(using.contains(i.toString()) == null){
+        if(!isUsing(i)){
             inventory.dropItem(i);
             i.use();
             using.addItem(i);
-            sb.append(Messages.USED_ITEM).append(i.toString());
+            sb.append(Messages.USED_ITEM).append(i.getName().toUpperCase());
         }
         else
-            sb.append(Messages.USING_ITEM).append(i.toString());
+            sb.append(Messages.USING_ITEM).append(i.getName().toUpperCase());
         
         return sb.toString();
     }

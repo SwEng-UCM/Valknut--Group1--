@@ -154,11 +154,14 @@ public class Combat {
         return yes;
     }
 
-    public void useItem(Hero h, Item i){ 
+    public String useItem(Hero h, Item i){ 
+        StringBuilder sb = new StringBuilder();
         if(i != null){
-            h.useItem(i);
+            sb.append(h.useItem(i));
             items.add(i);
         }
+
+        return sb.toString();
     }
 
     public boolean heroesLoose(){
