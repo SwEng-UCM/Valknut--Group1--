@@ -9,37 +9,37 @@ This is the repository our team is using to develope the game. Feel free to brow
 
 # Project Structure
 ```
-└── src/
-    └── me/
-        ├── control/
+└── src/                            
+    └── me/                                        # Intermediate directory to avoid conflicts with names
+        ├── control/                               # Control part of the program where there is Singleton based Controller
         │   └── Controller.java
-        ├── factories/
-        ├── model/
-        │   ├── items/
-        │   │   ├── AgilityItem.java
+        ├── factories/                             # Future implementation of Factory based pattern
+        ├── model/                                 # All the logic of the game
+        │   ├── items/                             # Items that can be use in the game
+        │   │   ├── AgilityItem.java               
         │   │   ├── ClevernessItem.java
-        │   │   ├── Complement.java
+        │   │   ├── Complement.java                # Interface for items that complement other items
         │   │   ├── DamageItem.java
-        │   │   ├── Healing.java
-        │   │   ├── Inventory.java
-        │   │   ├── item.java
-        │   │   ├── ItemComplement.java
+        │   │   ├── HealingItem.java
+        │   │   ├── Inventory.java                 # Logic for the usage of items per character 
+        │   │   ├── item.java                      # Abstact class that is extended by all items
+        │   │   ├── ItemComplement.java            # Class for items that are complements
         │   │   └── ResistanceItem.java
-        │   ├── Attribute.java
-        │   ├── Character.java
-        │   ├── Combat.java
-        │   ├── CombatOption.java
-        │   ├── Element.java
-        │   ├── Enemy.java
-        │   ├── EnemyBuilder.java
-        │   ├── Hero.java
-        │   └── HeroBuilder.java
+        │   ├── Attribute.java                     # Physical related stats 
+        │   ├── Character.java                     # Absract class for enemies and heroes
+        │   ├── Combat.java                        # Logic for combats
+        │   ├── CombatOption.java                  # Enum type for options for combats
+        │   ├── Element.java                       # Elemental related stats
+        │   ├── Enemy.java                         # General enemy logic
+        │   ├── EnemyBuilder.java                  # Fix for enemies creation
+        │   ├── Hero.java                          # General hero logic
+        │   └── HeroBuilder.java                   # Fix for heroes creation
         ├── view/
-        │   ├── CombatView.java
-        │   ├── ConsoleColors.java
-        │   ├── ConsoleIO.java
-        │   ├── MenuView.java
-        │   ├── Messages.java
-        │   ├── Story.java
-        │   └── StoryView.java
-        └── Main.java
+        │   ├── CombatView.java                    # In charge of combat inputs and outputs
+        │   ├── ConsoleColors.java                 # Util class
+        │   ├── ConsoleIO.java                     # Abstract class for the different views
+        │   ├── MenuView.java                      # In charge of the menu input - output
+        │   ├── Messages.java                      # Util class to put all general messages
+        │   ├── Story.java                         # Class where to place the text of the story
+        │   └── StoryView.java                     # In charge of the story input - output
+        └── Main.java                              # Start poit of the program
