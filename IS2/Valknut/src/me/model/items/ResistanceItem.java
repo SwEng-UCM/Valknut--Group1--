@@ -23,7 +23,7 @@ public class ResistanceItem extends Item{
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod);
+        sb.append(getName().toUpperCase()).append("  Cost: ").append(getCost()).append(" coins  Mod: +").append(mod).append(" rst");
         sb.append("  Turns: ").append(getTurn()).append(Messages.NEW_LINE);
 
         return sb.toString();

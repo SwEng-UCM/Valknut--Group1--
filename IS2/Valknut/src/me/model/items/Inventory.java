@@ -17,14 +17,23 @@ public class Inventory {
               inventory = new HashMap<>(inventory_cap);
        }
 
+       public boolean isEmpty(){
+              return inventory.isEmpty();
+       }
+
        public boolean addItem(Item i){
               if(!isFull()){
                      if(!inventory.containsKey(i.getName()))
-                            inventory.put(i.getName(), i);  
-                     inventory.get(i.getName()).addCuantity();
+                            inventory.put(i.getName(), i);
+                     else  
+                            inventory.get(i.getName()).addCuantity();
                      return true;
               }
               return false;
+       }
+
+       public Item contains(String s){ 
+              return inventory.get(s);
        }
 
        public boolean useItem(Item i, Character c){  
@@ -33,7 +42,6 @@ public class Inventory {
                      if(inventory.get(i.getName()).getCuantity() < 2)
                             inventory.remove(i.getName());
                      else{
-                            inventory.put(i.getName(), i);
                             inventory.get(i.getName()).subCuantity();
                      }
                      return true;
@@ -50,7 +58,7 @@ public class Inventory {
                      if(inventory.get(i.getName()).getCuantity() < 2)
                             inventory.remove(i.getName());
                      else
-                            inventory.put(i.getName(), i);
+                            inventory.get(i.getName()).subCuantity();
                      return true;
               }
               return false;

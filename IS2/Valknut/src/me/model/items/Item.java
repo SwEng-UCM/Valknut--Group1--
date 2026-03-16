@@ -17,9 +17,9 @@ public abstract class Item {
     protected Complement complement;
 
     public Item(String name, int cost, int mod, int time, Attribute type){
-        this.name = name;
+        this.name = name.toLowerCase();
         this.mod = mod;
-        this.cuantity = 0;
+        this.cuantity = 1;
         this.cost = cost;
         this.turn = time;
         this.type = type;
@@ -49,7 +49,7 @@ public abstract class Item {
 
     public void decreaseTime(){
         turn--;
-        if(turn == 0){
+        if(turn < 0){
             delete();
         }
     }
@@ -106,5 +106,8 @@ public abstract class Item {
         return null;
     }
     
+    public void update(){
+        decreaseTime();
+    }
 
 }

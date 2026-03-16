@@ -46,4 +46,10 @@ public abstract class ConsoleIO {
 
         return i;
     }
+
+    public void pause(){
+        printLine(Messages.PRESS_EN);
+        sc.nextLine();
+        String s = sc.nextLine();
+    }
 }

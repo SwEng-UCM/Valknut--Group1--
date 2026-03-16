@@ -16,6 +16,10 @@ public class Messages {
 	// Item Miscellaneous
 	public static final String NON_MATCHED_ITEM = "The types of the objects don't match. Try different";
 	public static final String MATCHED_ITEM = "Complement added";
+	public static final String EMPTY_INV = "Empty inventory";
+	public static final String INVALID_ITEM = "\nInvalid Item --> ";
+	public static final String USING_ITEM = "Item in use --> ";
+	public static final String USED_ITEM = "Item used --> ";
 	
 	// Enemies attacks
 	public static final String ICEGIANT_ATTACK = "The giant swings his club in your direction";
@@ -39,6 +43,7 @@ public class Messages {
 	// Utils
 	public static final String NEW_LINE = System.lineSeparator();
 	public static final String ENTER_VV = "Enter valid value";
+	public static final String PRESS_EN = "Press enter to continue...";
 
 	//Story
 	public static final String INTRO_LINES = "For The Viking Warriors the greatest honor upon death was to enter Valhalla, the Hall of Heroes. \n" 

@@ -81,6 +81,15 @@ public abstract class Character {
         return sb.toString();
     }
 
+    public String getStringAttributes(){
+        StringBuilder sb = new StringBuilder();
+
+        for(Attribute a: Attribute.values())
+            sb.append(a.toString()).append(": ").append(attributes.get(a)).append(Messages.NEW_LINE);
+
+        return sb.toString();
+    }
+
     public int getLife(){
         return life;
     }

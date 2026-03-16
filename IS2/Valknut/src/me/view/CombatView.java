@@ -2,6 +2,8 @@ package me.view;
 
 import me.model.Character;
 import me.model.CombatOption;
+import me.model.Hero;
+import me.model.items.Item;
 
 public class CombatView extends ConsoleIO{
 
@@ -37,10 +39,15 @@ public class CombatView extends ConsoleIO{
         return co;
     }
 
+    public void turnHeader(Character c){
+        StringBuilder sb = new StringBuilder();
+        sb.append(Messages.NEW_LINE).append(c.name().toUpperCase()).append("'s TURN...").append(Messages.NEW_LINE);
+        print(sb.toString());
+    }
+
     public String turnToString(Character c){
         StringBuilder sb = new StringBuilder();
         sb.append(Messages.NEW_LINE);
-        sb.append(c.name().toUpperCase()).append("'s TURN...").append(Messages.NEW_LINE).append(Messages.NEW_LINE);
         sb.append(CombatOption.display()).append(Messages.NEW_LINE).append("Option: ");
 
         return sb.toString();
@@ -54,7 +61,25 @@ public class CombatView extends ConsoleIO{
         return i;
     }
 
-    public void selectItem(String s){ 
+    public Item selectItem(String s, Hero h){ 
         printLine(s);
+        if(!h.getInventory().isEmpty()){
+            boolean valid = false;
+            Item i = null;
+            sc.nextLine();
+            while(!valid){
+                print("Select: ");
+                String item = sc.nextLine();
+                i = h.getInventory().contains(item.toLowerCase());
+                valid = i != null;
+                if(!valid){
+                    printLine(Messages.INVALID_ITEM + item);
+                    printLine("");
+                    printLine(s);
+                }
+            }
+            return i;
+        }
+        return null;
     }
 }
