@@ -48,7 +48,7 @@ public class CombatView extends ConsoleIO{
     public String turnToString(Character c){
         StringBuilder sb = new StringBuilder();
         sb.append(Messages.NEW_LINE);
-        sb.append(CombatOption.display()).append(Messages.NEW_LINE).append("Option: ");
+        sb.append(CombatOption.display()).append(Messages.NEW_LINE).append("Option (ex: item): ");
 
         return sb.toString();
     }
@@ -68,7 +68,7 @@ public class CombatView extends ConsoleIO{
             Item i = null;
             sc.nextLine();
             while(!valid){
-                print("Select (e to exit): ");
+                print("Select (item full name) (e to exit): ");
                 String item = sc.nextLine();
                 i = h.getInventory().contains(item.toLowerCase());
                 valid = (i != null) || (item.equals("e"));

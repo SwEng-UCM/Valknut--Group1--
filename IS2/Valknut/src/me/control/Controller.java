@@ -35,6 +35,7 @@ public class Controller {
 
     private void enterCombat(){
         cb = initCmb();
+
         while(!cb.exit()){
 			playTurn();
 		}
