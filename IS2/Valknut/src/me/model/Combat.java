@@ -89,7 +89,6 @@ public class Combat {
                 i++;
             }
             sb.append(Messages.NEW_LINE).append(Messages.NEW_LINE);
-            sb.append("Select (ex: 1): ");
 
             return sb.toString();
     }
