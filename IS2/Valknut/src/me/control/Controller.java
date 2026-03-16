@@ -73,13 +73,13 @@ public class Controller {
                         cv.print(cb.update());
                     }
                 }
+                finished = false;
                 cb.setTurn(cb.turn() + 1); //following this idea of turns, sometimes you will want to know the turn, 
                     //to increase the turn by one or to set the turn
                     //to a certain value. So, functions turn() and setTurn() are needed
                     //Function incTurn() is considered to be setTurn(turn() + 1);
             }
         } else {
-            cv.pause();
             cv.print(cb.enemyTurnToString());
             for(Enemy e: cb.getEnemies()){
                 cv.print(cb.attack(0));
@@ -88,6 +88,7 @@ public class Controller {
             cv.print(cb.update());
             cb.setTurn(1);
         }
+        cv.pause();
     }
 
     public boolean action(Hero h, CombatOption co){
@@ -95,7 +96,7 @@ public class Controller {
         switch(co){
             case ATTACK -> {cv.printLine(cb.attack(cv.selectTarject(cb.heroTargetsToString(), cb.getEnemies().size()))); f = true;}
             case DEFEND -> {cv.printLine(cb.defend()); f = true;}
-            case USE_ITEM -> cb.useItem(h, cv.selectItem(h.displayInventory(), h));
+            case USE_ITEM -> cv.printLine(cb.useItem(h, cv.selectItem(h.displayInventory(), h)));
             case RUN -> {cv.printLine(cb.run()); f = true;}
             case STATS -> cv.print(cb.showStats(h));
             default -> {

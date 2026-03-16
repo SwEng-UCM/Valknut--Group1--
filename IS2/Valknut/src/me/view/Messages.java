@@ -18,7 +18,7 @@ public class Messages {
 	public static final String MATCHED_ITEM = "Complement added";
 	public static final String EMPTY_INV = "Empty inventory";
 	public static final String INVALID_ITEM = "\nInvalid Item --> ";
-	public static final String USING_ITEM = "Item in use --> ";
+	public static final String USING_ITEM = "WRONG. Item already in use --> ";
 	public static final String USED_ITEM = "Item used --> ";
 	
 	// Enemies attacks
