@@ -64,10 +64,10 @@ public class Controller {
             boolean finished = false;
             cb.updateItems();
             for(Hero e: cb.getHeroes()){
-                cv.turnHeader(e);
-                CombatOption co;
-                while(!finished){
-                    if(e.isAlive() && !e.escaped() && !cb.getEnemies().isEmpty()){
+                if(e.isAlive() && !e.escaped() && !cb.getEnemies().isEmpty()){
+                    cv.turnHeader(e);
+                    CombatOption co;
+                    while(!finished){
                         co = cv.selectAction(e);
                         finished = action(e, co);
                         cv.print(cb.update());
