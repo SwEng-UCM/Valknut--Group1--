@@ -20,8 +20,9 @@ public class Controller {
 
     public void run(){
         tellIntro();
-        enterCombat();
+        cb = initCmb();
         tellFirstLinesChapterOne();
+        enterCombat();
     }
 
     public static Controller getInstance(){
@@ -34,8 +35,6 @@ public class Controller {
     }
 
     private void enterCombat(){
-        cb = initCmb();
-
         while(!cb.exit()){
 			playTurn();
 		}
