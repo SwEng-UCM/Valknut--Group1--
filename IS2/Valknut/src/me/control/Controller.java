@@ -20,7 +20,8 @@ public class Controller {
     }
 
     public void run(){
-    	CtrlPanel controlPanel = new CtrlPanel();
+    	CtrlPanel controlPanel = new CtrlPanel(this);
+    	controlPanel.onGameStart();
         tellIntro();
         cb = initCmb();
         tellFirstLinesChapterOne();
@@ -41,20 +42,13 @@ public class Controller {
 			playTurn();
 		}
     }
+    
+    
 
     public Combat initCmb(){
 		Combat cmb = new Combat();
 		for(int i = 1; i < 3; i++){
 			cv.printLine("Player " + i + " selects..." + Messages.NEW_LINE);
-			Hero e = selectCharacter();
-			e.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, Attribute.RESISTANCE));
-			e.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, Attribute.RESISTANCE));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
-			e.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
-			e.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, null));
-			e.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, Attribute.STRENGTH));
-			cmb.addHero(e);
 			cv.printLine("");
 			cmb.addEnemy(firstEnemies(i));
             cmb.addEnemy(firstEnemies(i));
@@ -108,12 +102,20 @@ public class Controller {
         return f;
     }
 
-    public Hero selectCharacter(){
-		Integer i = sv.selectCharacter();
-		if(i == 1)
-			return HeroBuilder.buildHero("Freya");
+    public void selectCharacter(int i){
+    	Hero new_hero;
+		if(i == 0)
+			new_hero = HeroBuilder.buildHero("Freya");
 		else
-			return HeroBuilder.buildHero("Loki");
+			new_hero = HeroBuilder.buildHero("Loki");
+		new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, Attribute.RESISTANCE));
+		new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, Attribute.RESISTANCE));
+		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
+		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
+		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
+		new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, null));
+		new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, Attribute.STRENGTH));
+		cb.addHero(new_hero);
 	}
 
     public Enemy firstEnemies(Integer i){
