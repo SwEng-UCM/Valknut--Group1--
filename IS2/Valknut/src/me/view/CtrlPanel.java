@@ -18,7 +18,7 @@ public class CtrlPanel extends JFrame{
 	
 	private void characterSelectionGUI() {
 		JButton gersemiButton, valiButton;
-		JPanel gersemiDescriptionPanel, valiDescriptionPanel;
+		JLabel gersemiLabel, valiLabel;
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
@@ -28,18 +28,30 @@ public class CtrlPanel extends JFrame{
 		gersemiButton.setSize(187, 417);
 		gersemiButton.setIcon( new ImageIcon("resources/images/gersemi.png") );
 		gersemiButton.addActionListener( (e) -> {
-				 mainPanel.setBackground(Color.red);
+				 combatGUI();
 		});
 		mainPanel.add(gersemiButton);
 		
+		gersemiLabel = new JLabel();
+		gersemiLabel.setLocation(181, 620);
+		gersemiLabel.setSize(225, 15);
+		gersemiLabel.setText("GERSEMI, BELOVED CHILD OF FREYA");
+		mainPanel.add(gersemiLabel);
+		
 		valiButton = new JButton("");
-		valiButton.setLocation(500, 200);
+		valiButton.setLocation(500, 246);
 		valiButton.setSize(280, 371);
 		valiButton.setIcon( new ImageIcon("resources/images/vali.png") );
 		valiButton.addActionListener( (e) -> {
-				 mainPanel.setBackground(Color.red);
+			combatGUI();
 		});
 		mainPanel.add(valiButton);
+		
+		valiLabel = new JLabel();
+		valiLabel.setLocation(539, 620);
+		valiLabel.setSize(202, 15);
+		valiLabel.setText("VÁLI, FORGOTTEN CHILD OF LOKI");
+		mainPanel.add(valiLabel);
 		
 		this.setContentPane(mainPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,7 +138,7 @@ public class CtrlPanel extends JFrame{
 //		panelForPanels.add(bluePanel);
 		this.setContentPane(mainPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(550, 100);
+		this.setSize(1000, 1000);
 		this.setVisible(true);
 	}
 }
