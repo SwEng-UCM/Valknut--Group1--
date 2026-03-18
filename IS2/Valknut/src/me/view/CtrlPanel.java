@@ -41,8 +41,6 @@ public class CtrlPanel extends JFrame{
 		});
 		mainPanel.add(valiButton);
 		
-		vali
-		
 		this.setContentPane(mainPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1000, 1000);
