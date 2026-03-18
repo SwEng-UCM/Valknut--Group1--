@@ -12,15 +12,35 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CtrlPanel extends JFrame{
+import me.control.Controller;
+import me.model.CharacterSelectionObserver;
+
+public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	JPanel titlePanel, scorePanel, buttonPanel, mainPanel;
 	JLabel redLabel, blueLabel, redScore, blueScore;
+	Controller _ctrl;
 		
-	public CtrlPanel() {
-		characterSelectionGUI();
+	public CtrlPanel(Controller ctrl) {
+		_ctrl = ctrl;
 	}
 	
-	private void characterSelectionGUI() {
+	public void onSelection() {
+		
+	}
+	
+	public void onError(String msg) {
+		
+	}
+	
+	public void onQuit() {
+		
+	}
+	
+	public void onGameStart() {
+		createCharacterSelector();
+	}
+	
+	private void createCharacterSelector() {
 		JButton gersemiButton, valiButton;
 		JLabel gersemiLabel, valiLabel;
 		
@@ -38,7 +58,7 @@ public class CtrlPanel extends JFrame{
 		gersemiButton.setSize(187, 417);
 		gersemiButton.setIcon( new ImageIcon("resources/images/gersemi.png") );
 		gersemiButton.addActionListener( (e) -> {
-				 combatGUI();
+			_ctrl.selectCharacter(0);
 		});
 		mainPanel.add(gersemiButton);
 		
@@ -54,7 +74,7 @@ public class CtrlPanel extends JFrame{
 		valiButton.setSize(280, 371);
 		valiButton.setIcon( new ImageIcon("resources/images/vali.png") );
 		valiButton.addActionListener( (e) -> {
-			combatGUI();
+			_ctrl.selectCharacter(1);
 		});
 		mainPanel.add(valiButton);
 		
@@ -80,12 +100,6 @@ public class CtrlPanel extends JFrame{
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
-		
-//		buttonPanel = new JPanel();
-//		buttonPanel.setLayout(null);
-//		buttonPanel.setLocation(10, 40);
-//		buttonPanel.setSize(540, 50);
-//		mainPanel.add(buttonPanel);
 		
 		attackButton = new JButton("Attack");
 		attackButton.setLocation(0, 0);
@@ -124,34 +138,6 @@ public class CtrlPanel extends JFrame{
 		});
 		mainPanel.add(runButton);
 		
-
-//		JPanel textPanel = new JPanel();
-//		textPanel.setLayout(null);
-//		textPanel.setLocation(10, 0);
-//		textPanel.setSize(260, 30);
-//		mainPanel.add(textPanel);
-//		JLabel redLabel = new JLabel("Red");
-//		redLabel.setLocation(0, 0);
-//		redLabel.setSize(50, 40);
-//		redLabel.setHorizontalAlignment(JLabel.CENTER);
-//		textPanel.add(redLabel);
-//		
-//		JPanel panelForPanels = new JPanel();
-//		panelForPanels.setLayout(null);
-//		panelForPanels.setLocation(10, 40);
-//		panelForPanels.setSize(260, 50);
-//		mainPanel.add(panelForPanels);
-//		JPanel redPanel = new JPanel();
-//		redPanel.setBackground(Color.red);
-//		redPanel.setLocation(0, 0);
-//		redPanel.setSize(50, 50);
-//		panelForPanels.add(redPanel);
-//		
-//		JPanel bluePanel = new JPanel();
-//		bluePanel.setBackground(Color.blue);
-//		bluePanel.setLocation(200, 0);
-//		bluePanel.setSize(50, 50);
-//		panelForPanels.add(bluePanel);
 		this.setContentPane(mainPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1000, 1000);

@@ -35,12 +35,4 @@ public class StoryView extends ConsoleIO{
         printLine(st.startFirstChapter());
         print(Messages.NEW_LINE);
     }
-
-    public Integer selectCharacter(){
-		HeroBuilder hb = new HeroBuilder();
-		print(hb.getPossibleHeroes());
-		Integer i = parseIntInRange(1, hb.getHeroes().size());
-        return i;
-    }
-
 }
