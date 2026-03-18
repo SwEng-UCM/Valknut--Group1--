@@ -4,6 +4,7 @@ import me.model.*;
 import me.model.items.*;
 import me.view.*;
 
+
 public class Controller {
 
     private static StoryView sv;
@@ -19,6 +20,7 @@ public class Controller {
     }
 
     public void run(){
+    	CtrlPanel controlPanel = new CtrlPanel();
         tellIntro();
         cb = initCmb();
         tellFirstLinesChapterOne();
