@@ -1,7 +1,11 @@
 package me.view;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,8 +27,14 @@ public class CtrlPanel extends JFrame{
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
 		
+		JLabel backgroundLabel = new JLabel();
+		backgroundLabel.setIcon( new ImageIcon("resources/images/ba.png"));
+		backgroundLabel.setLocation(0, 0);
+		backgroundLabel.setSize(1200, 849);
+		
+		
 		gersemiButton = new JButton("");
-		gersemiButton.setLocation(200, 200);
+		gersemiButton.setLocation(300, 200);
 		gersemiButton.setSize(187, 417);
 		gersemiButton.setIcon( new ImageIcon("resources/images/gersemi.png") );
 		gersemiButton.addActionListener( (e) -> {
@@ -33,13 +43,14 @@ public class CtrlPanel extends JFrame{
 		mainPanel.add(gersemiButton);
 		
 		gersemiLabel = new JLabel();
-		gersemiLabel.setLocation(181, 620);
+		gersemiLabel.setLocation(281, 620);
 		gersemiLabel.setSize(225, 15);
+		gersemiLabel.setForeground(Color.white);
 		gersemiLabel.setText("GERSEMI, BELOVED CHILD OF FREYA");
 		mainPanel.add(gersemiLabel);
 		
 		valiButton = new JButton("");
-		valiButton.setLocation(500, 246);
+		valiButton.setLocation(600, 246);
 		valiButton.setSize(280, 371);
 		valiButton.setIcon( new ImageIcon("resources/images/vali.png") );
 		valiButton.addActionListener( (e) -> {
@@ -48,15 +59,19 @@ public class CtrlPanel extends JFrame{
 		mainPanel.add(valiButton);
 		
 		valiLabel = new JLabel();
-		valiLabel.setLocation(539, 620);
+		valiLabel.setLocation(639, 620);
 		valiLabel.setSize(202, 15);
+		valiLabel.setForeground(Color.white);
 		valiLabel.setText("VÁLI, FORGOTTEN CHILD OF LOKI");
 		mainPanel.add(valiLabel);
 		
+		mainPanel.add(backgroundLabel);
+		
 		this.setContentPane(mainPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1000, 1000);
+		this.setSize(1200, 849);
 		this.setVisible(true);
+		
 		
 	}
 	
@@ -65,6 +80,7 @@ public class CtrlPanel extends JFrame{
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
+		
 //		buttonPanel = new JPanel();
 //		buttonPanel.setLayout(null);
 //		buttonPanel.setLocation(10, 40);
