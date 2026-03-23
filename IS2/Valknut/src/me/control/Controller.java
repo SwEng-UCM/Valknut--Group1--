@@ -1,5 +1,7 @@
 package me.control;
 
+import java.util.List;
+
 import me.model.*;
 import me.model.items.*;
 import me.view.*;
@@ -13,6 +15,7 @@ public class Controller {
     private static Controller instance;
     private Combat cb;
     private CtrlPanel controlPanel = new CtrlPanel(this);
+    int turn = 1;
 
     private Controller(){
         sv = StoryView.getInstance();
@@ -71,7 +74,6 @@ public class Controller {
                     CombatOption co;
                     while(!finished){
                         co = cv.selectAction(e);
-                        finished = action(e, co);
                         cv.printLine(cb.update());
                     }
                 }
@@ -93,17 +95,28 @@ public class Controller {
         cv.pause();
     }
 
-    public boolean action(Hero h, CombatOption co){
+    public boolean action(int combatOption, int target){
         boolean f = false;
-        switch(co){
-            case ATTACK -> {cv.printLine(cb.attack(cv.selectTarject(cb.heroTargetsToString(), cb.getEnemies().size()))); f = true;}
-            case DEFEND -> {cv.printLine(cb.defend()); f = true;}
-            case USE_ITEM -> cv.printLine(cb.useItem(h, cv.selectItem(h.displayInventory(), h)));
-            case RUN -> {cv.printLine(cb.run()); f = true;}
-            case STATS -> cv.print(cb.showStats(h));
+        Hero current_hero;
+        if (turn % 2 == 1) {
+        	current_hero = cb.getHeroes().get(0);
+        }
+        else {
+        	current_hero = cb.getHeroes().get(1);
+        }
+        
+        switch(combatOption){
+            case 1 -> {cv.printLine(cb.attack(target)); f = true;}
+            case 2 -> {cv.printLine(cb.defend()); f = true;}
+            case 3 -> cv.printLine(cb.useItem(current_hero, cv.selectItem(current_hero.displayInventory(), current_hero)));
+            case 4 -> {cv.printLine(cb.run()); f = true;}
+            case 5 -> cv.print(cb.showStats(current_hero));
             default -> {
             }
         }
+        
+        turn++;
+        
         return f;
     }
 
