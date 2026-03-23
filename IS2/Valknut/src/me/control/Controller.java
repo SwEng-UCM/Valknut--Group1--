@@ -15,7 +15,6 @@ public class Controller {
     private static Controller instance;
     private Combat cb;
     private CtrlPanel controlPanel = new CtrlPanel(this);
-    int turn = 1;
 
     private Controller(){
         sv = StoryView.getInstance();
@@ -44,15 +43,7 @@ public class Controller {
 
         return instance;
     }
-
-    private void enterCombat(){
-        while(!cb.exit()){
-			playTurn();
-		}
-    }
     
-    
-
     public Combat initCmb(){
 		Combat cmb = new Combat();
 		for(int i = 1; i < 3; i++){
@@ -64,47 +55,20 @@ public class Controller {
 		return cmb;
 	}
 
-	public void playTurn() {
-        if (cb.turn() == 1) {
-            boolean finished = false;
-            cb.updateItems();
-            for(Hero e: cb.getHeroes()){
-                if(e.isAlive() && !e.escaped() && !cb.getEnemies().isEmpty()){
-                    cv.turnHeader(e);
-                    CombatOption co;
-                    while(!finished){
-                        co = cv.selectAction(e);
-                        cv.printLine(cb.update());
-                    }
-                }
-                finished = false;
-                cb.setTurn(cb.turn() + 1); //following this idea of turns, sometimes you will want to know the turn, 
-                    //to increase the turn by one or to set the turn
-                    //to a certain value. So, functions turn() and setTurn() are needed
-                    //Function incTurn() is considered to be setTurn(turn() + 1);
-            }
-        } else {
-            cv.print(cb.enemyTurnToString());
-            for(Enemy e: cb.getEnemies()){
-                cv.print(cb.attack(0));
-                cb.setTurn(cb.turn() + 1);
-            }
-            cv.printLine(cb.update());
-            cb.setTurn(1);
-        }
-        cv.pause();
-    }
-
     public boolean action(int combatOption, int target){
-        boolean f = false;
+    	boolean f = false;
+    	
+    	cb.updateItems();
+        
         Hero current_hero;
-        if (turn % 2 == 1) {
+        if (cb.turn() == 1) {
         	current_hero = cb.getHeroes().get(0);
         }
         else {
         	current_hero = cb.getHeroes().get(1);
         }
         
+        if (current_hero.isAlive() && !current_hero.escaped() && !cb.getEnemies().isEmpty())
         switch(combatOption){
             case 1 -> {cv.printLine(cb.attack(target)); f = true;}
             case 2 -> {cv.printLine(cb.defend()); f = true;}
@@ -115,7 +79,17 @@ public class Controller {
             }
         }
         
-        if (combatOption != 5) turn++;
+        if (combatOption != 5) cb.setTurn(cb.turn() + 1);
+        
+        if (cb.turn() == 3) {
+        	cv.print(cb.enemyTurnToString());
+            for(Enemy e: cb.getEnemies()){
+                cv.print(cb.attack(0));
+                cb.setTurn(cb.turn() + 1);
+            }
+            cb.setTurn(1);
+            cv.printLine(cb.update());
+        }
         
         controlPanel.onSelection();
         
