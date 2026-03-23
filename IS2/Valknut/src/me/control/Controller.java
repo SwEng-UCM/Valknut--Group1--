@@ -12,6 +12,7 @@ public class Controller {
 	private static MenuView mv;
     private static Controller instance;
     private Combat cb;
+    private CtrlPanel controlPanel = new CtrlPanel(this);
 
     private Controller(){
         sv = StoryView.getInstance();
@@ -20,12 +21,16 @@ public class Controller {
     }
 
     public void run(){
-    	CtrlPanel controlPanel = new CtrlPanel(this);
+    	cb = initCmb();
     	controlPanel.onGameStart();
+    }
+    
+    public void startStory() {
         tellIntro();
-        cb = initCmb();
+        
         tellFirstLinesChapterOne();
-        enterCombat();
+        
+        //enterCombat();
     }
 
     public static Controller getInstance(){
@@ -116,6 +121,11 @@ public class Controller {
 		new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, null));
 		new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, Attribute.STRENGTH));
 		cb.addHero(new_hero);
+		
+		if (cb.getHeroes().size() > 1) {
+			controlPanel.onSelection();
+			startStory();
+		}
 	}
 
     public Enemy firstEnemies(Integer i){
@@ -132,6 +142,5 @@ public class Controller {
     public void tellFirstLinesChapterOne(){
         sv.clear();
         sv.tellFirstLinesChapterOne(cb.getHeroes().get(0), cb.getHeroes().get(1));
-        sv.pause();
     }
 }
