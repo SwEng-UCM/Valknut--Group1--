@@ -118,13 +118,13 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		valiLabel.setSize(300, 300);
 		mainPanel.add(valiLabel);
 		
-		JPanel redPanel = new JPanel();
-		redPanel.setBackground(Color.red);
-		redPanel.setLocation(0, 600);
-		redPanel.setSize(1200, 850);
+		JPanel orangePanel = new JPanel();
+		orangePanel.setBackground(Color.orange);
+		orangePanel.setLocation(0, 600);
+		orangePanel.setSize(1200, 850);
 		
 		attackButton = new JButton("Attack");
-		attackButton.setLocation(40, 700);
+		attackButton.setLocation(140, 700);
 		attackButton.setSize(120, 30);
 		attackButton.addActionListener( (e) -> {
 			attackGUI();
@@ -136,27 +136,35 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		defendButton.setLocation(340, 700);
 		defendButton.setSize(120, 30);
 		defendButton.addActionListener( (e) -> {
-				 
+			_ctrl.action(2, 1);
 		});
 		mainPanel.add(defendButton);
 		
 		useItemButton = new JButton("Use Item");
-		useItemButton.setLocation(640, 700);
+		useItemButton.setLocation(540, 700);
 		useItemButton.setSize(120, 30);
 		useItemButton.addActionListener((e) -> {
-				 mainPanel.setBackground(Color.blue);
+			_ctrl.action(3, 1);
 		});
 		mainPanel.add(useItemButton);
 		
 		runButton = new JButton("Run");
-		runButton.setLocation(940, 700);
+		runButton.setLocation(740, 700);
 		runButton.setSize(120, 30);
 		runButton.addActionListener((e) -> {
-				 mainPanel.setBackground(Color.yellow);
+			_ctrl.action(4, 1);
 		});
 		mainPanel.add(runButton);
 		
-		mainPanel.add(redPanel);
+		runButton = new JButton("Stats");
+		runButton.setLocation(940, 700);
+		runButton.setSize(120, 30);
+		runButton.addActionListener((e) -> {
+			_ctrl.action(5, 1);
+		});
+		mainPanel.add(runButton);
+		
+		mainPanel.add(orangePanel);
 		
 		mainPanel.add(backgroundLabel);
 		
@@ -168,8 +176,6 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	
 	private void attackGUI() {
 		JButton enemy1Button, enemy2Button;
-		
-		System.out.println("We got here");
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
@@ -191,10 +197,10 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		valiLabel.setSize(300, 300);
 		mainPanel.add(valiLabel);
 		
-		JPanel redPanel = new JPanel();
-		redPanel.setBackground(Color.orange);
-		redPanel.setLocation(0, 600);
-		redPanel.setSize(1200, 850);
+		JPanel orangePanel = new JPanel();
+		orangePanel.setBackground(Color.orange);
+		orangePanel.setLocation(0, 600);
+		orangePanel.setSize(1200, 850);
 		
 		enemy1Button = new JButton("Giant 1");
 		enemy1Button.setLocation(360, 700);
@@ -213,7 +219,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		});
 		mainPanel.add(enemy2Button);
 		
-		mainPanel.add(redPanel);
+		mainPanel.add(orangePanel);
 		
 		mainPanel.add(backgroundLabel);
 		
