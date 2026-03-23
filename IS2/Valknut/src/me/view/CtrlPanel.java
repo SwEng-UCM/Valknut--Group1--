@@ -25,7 +25,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 	
 	public void onSelection() {
-		
+		combatGUI();
 	}
 	
 	public void onError(String msg) {
@@ -48,7 +48,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		mainPanel.setLayout(null);
 		
 		JLabel backgroundLabel = new JLabel();
-		backgroundLabel.setIcon( new ImageIcon("resources/images/ba.png"));
+		backgroundLabel.setIcon( new ImageIcon("resources/images/selection_screen.png"));
 		backgroundLabel.setLocation(0, 0);
 		backgroundLabel.setSize(1200, 849);
 		
@@ -96,15 +96,37 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 	
 	private void combatGUI() {
-		JButton attackButton, defendButton, useItemButton, runButton, blueButton, resetButton;
-
+		JButton attackButton, defendButton, useItemButton, runButton;
+		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
 		
+		JLabel backgroundLabel = new JLabel();
+		backgroundLabel.setIcon( new ImageIcon("resources/images/jotunheimr.png"));
+		backgroundLabel.setLocation(0, -100);
+		backgroundLabel.setSize(1200, 849);
+		
+		JLabel gersemiLabel = new JLabel();
+		gersemiLabel.setIcon( new ImageIcon("resources/images/gersemi_big.png"));
+		gersemiLabel.setLocation(200, 0);
+		gersemiLabel.setSize(300, 300);
+		mainPanel.add(gersemiLabel);
+		
+		JLabel valiLabel = new JLabel();
+		valiLabel.setIcon( new ImageIcon("resources/images/vali_big.png"));
+		valiLabel.setLocation(200, 200);
+		valiLabel.setSize(300, 300);
+		mainPanel.add(valiLabel);
+		
+		JPanel redPanel = new JPanel();
+		redPanel.setBackground(Color.red);
+		redPanel.setLocation(0, 600);
+		redPanel.setSize(1200, 850);
+		
 		attackButton = new JButton("Attack");
-		attackButton.setLocation(0, 0);
+		attackButton.setLocation(40, 700);
 		attackButton.setSize(120, 30);
-		attackButton.setIcon( new ImageIcon("resources/icons/exit.png") );
+		attackButton.setIcon( new ImageIcon("resources/icons/gersemi_small.png") );
 		attackButton.addActionListener( (e) -> {
 				 mainPanel.setBackground(Color.red);
 		});
@@ -112,35 +134,68 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		mainPanel.add(attackButton);
 		
 		defendButton = new JButton("Defend");
-		defendButton.setLocation(140, 0);
+		defendButton.setLocation(340, 700);
 		defendButton.setSize(120, 30);
-		defendButton.setIcon( new ImageIcon("resources/icons/cloud.png") );
+		defendButton.setIcon( new ImageIcon("resources/icons/gersemi_small.png") );
 		defendButton.addActionListener( (e) -> {
 				 mainPanel.setBackground(Color.green);
 		});
 		mainPanel.add(defendButton);
 		
 		useItemButton = new JButton("Use Item");
-		useItemButton.setLocation(280, 0);
+		useItemButton.setLocation(640, 700);
 		useItemButton.setSize(120, 30);
-		useItemButton.setIcon( new ImageIcon("resources/icons/sun.png") );
+		useItemButton.setIcon( new ImageIcon("resources/icons/vanir_small.png") );
 		useItemButton.addActionListener((e) -> {
 				 mainPanel.setBackground(Color.blue);
 		});
 		mainPanel.add(useItemButton);
 		
 		runButton = new JButton("Run");
-		runButton.setLocation(420, 0);
+		runButton.setLocation(940, 700);
 		runButton.setSize(120, 30);
-		runButton.setIcon( new ImageIcon("resources/icons/storm.png") );
+		runButton.setIcon( new ImageIcon("resources/icons/vanir_small.png") );
 		runButton.addActionListener((e) -> {
 				 mainPanel.setBackground(Color.yellow);
 		});
 		mainPanel.add(runButton);
 		
+		mainPanel.add(redPanel);
+		
+		mainPanel.add(backgroundLabel);
+		
 		this.setContentPane(mainPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1000, 1000);
+		this.setSize(1200, 850);
 		this.setVisible(true);
+	}
+	
+	private void attackGUI() {
+		JButton enemy1Button, enemy2Button;
+		JPanel redPanel = new JPanel();
+		redPanel.setBackground(Color.red);
+		redPanel.setLocation(0, 600);
+		redPanel.setSize(1200, 250);
+		
+		enemy1Button = new JButton("Attack");
+		enemy1Button.setLocation(40, 700);
+		enemy1Button.setSize(120, 30);
+		enemy1Button.setIcon( new ImageIcon("resources/icons/gersemi_small.png") );
+		enemy1Button.addActionListener( (e) -> {
+				 mainPanel.setBackground(Color.red);
+		});
+		
+		mainPanel.add(enemy1Button);
+		
+		enemy1Button = new JButton("Defend");
+		enemy1Button.setLocation(340, 700);
+		enemy1Button.setSize(120, 30);
+		enemy1Button.setIcon( new ImageIcon("resources/icons/gersemi_small.png") );
+		enemy1Button.addActionListener( (e) -> {
+				 mainPanel.setBackground(Color.green);
+		});
+		mainPanel.add(enemy1Button);
+		
+		mainPanel.add(redPanel);
 	}
 }
