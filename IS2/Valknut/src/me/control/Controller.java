@@ -115,7 +115,9 @@ public class Controller {
             }
         }
         
-        turn++;
+        if (combatOption != 5) turn++;
+        
+        controlPanel.onSelection();
         
         return f;
     }

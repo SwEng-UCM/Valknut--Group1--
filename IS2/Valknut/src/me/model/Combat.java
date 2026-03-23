@@ -123,8 +123,8 @@ public class Combat {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Life: ").append(c.getLife()).append(" hp").append(Messages.NEW_LINE);
-        sb.append(c.getStringElements()).append(Messages.NEW_LINE);
         sb.append(c.getStringAttributes());
+        sb.append(c.getStringElements()).append(Messages.NEW_LINE);
 
         return  sb.toString();
     }
