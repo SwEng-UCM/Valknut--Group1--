@@ -35,6 +35,8 @@ public class Messages {
 	public static final String THRYM_SP1_ATTACK = "Thrym throws Mjolnir at you, and it ricochets between you and your partners";
 	public static final String THRYM_SP2_ATTACK = "Thrym commands Summarbrander and makes it slash you";
 	public static final String THRYM_SP3_ATTACK = "Thrym throws Gungnir torwards you, and it doesn't stop until it reaches you";
+	public static final String FAFNIR_ATTACK = "Fafnir sends you flying with a powerful wingbeat";
+	public static final String FAFNIR_SP_ATTACK = "Fafnir makes fire rain down from the skies, burning you and everything near you";
 	
 	// Player Actions
 	public static final String PLAYER_RUNS = "YOU ESCAPED TO FIGHT ANOTHER DAY, LUCKY HERO";
