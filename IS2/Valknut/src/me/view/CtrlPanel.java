@@ -175,7 +175,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 	
 	private void attackGUI() {
-		JButton enemy1Button, enemy2Button;
+		JButton enemyButton;
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
@@ -202,22 +202,27 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		orangePanel.setLocation(0, 600);
 		orangePanel.setSize(1200, 850);
 		
-		enemy1Button = new JButton("Giant 1");
-		enemy1Button.setLocation(360, 700);
-		enemy1Button.setSize(120, 30);
-		enemy1Button.addActionListener( (e) -> {
-				 _ctrl.action(1, 1);
-		});
 		
-		mainPanel.add(enemy1Button);
 		
-		enemy2Button = new JButton("Giant 2");
-		enemy2Button.setLocation(740, 700);
-		enemy2Button.setSize(120, 30);
-		enemy2Button.addActionListener( (e) -> {
-				 _ctrl.action(1, 2);
-		});
-		mainPanel.add(enemy2Button);
+//		enemy2Button = new JButton("Giant 2");
+//		enemy2Button.setLocation(740, 700);
+//		enemy2Button.setSize(120, 30);
+//		enemy2Button.addActionListener( (e) -> {
+//				 _ctrl.action(1, 2);
+//		});
+//		mainPanel.add(enemy2Button);
+		
+		for (int i = 0; i < _ctrl.getNumEnemies(); i++) {
+			int giant_num = i + 1;
+			enemyButton = new JButton("Giant " + giant_num);
+			enemyButton.setLocation(i*300, 700);
+			enemyButton.setSize(120, 30);
+			enemyButton.addActionListener( (e) -> {
+					 _ctrl.action(1, giant_num);
+			});
+			
+			mainPanel.add(enemyButton);
+		}
 		
 		mainPanel.add(orangePanel);
 		
