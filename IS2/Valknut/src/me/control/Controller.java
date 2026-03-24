@@ -15,11 +15,16 @@ public class Controller {
     private static Controller instance;
     private Combat cb;
     private CtrlPanel controlPanel = new CtrlPanel(this);
+    private int num_enemies;
 
     private Controller(){
         sv = StoryView.getInstance();
 		cv = CombatView.getInstance();
 		mv = MenuView.getInstance();
+    }
+    
+    public int getNumEnemies() {
+    	return num_enemies;
     }
 
     public void run(){
@@ -51,6 +56,7 @@ public class Controller {
 			cv.printLine("");
 			cmb.addEnemy(firstEnemies(i));
             cmb.addEnemy(firstEnemies(i));
+            num_enemies += 2;
 		}
 		return cmb;
 	}
