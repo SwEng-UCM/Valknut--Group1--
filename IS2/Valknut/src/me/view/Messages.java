@@ -27,10 +27,17 @@ public class Messages {
 	public static final String SHAPESHIFTER_ATTACK = "In his animal form the shapeshifter slashes you with its claws";
 	public static final String BERSERKER_ATTACK = "The warrior launches a barrage of punches and axe slashes at you";
 	public static final String ELF_ATTACK = "The elf chanels the magic of the runes to harm you";
+	public static final String DRAUGR_ATTACK = "The undead warrior picks up his weapon and lunges at you with a freezing glare";
 	public static final String ENEMY_MISS = " miss: NO HERO FIGHTING"; // To be made into 2 different messages maybe
 	
+	// Bosses attacks
+	public static final String THRYM_ATTACK = "Thrym attacks you with his gigantic axe, leaving a huge hole on the floor under you";
+	public static final String THRYM_SP1_ATTACK = "Thrym throws Mjolnir at you, and it ricochets between you and your partners";
+	public static final String THRYM_SP2_ATTACK = "Thrym commands Summarbrander and makes it slash you";
+	public static final String THRYM_SP3_ATTACK = "Thrym throws Gungnir torwards you, and it doesn't stop until it reaches you";
+	
 	// Player Actions
-	public static final String PLAYER_RUNS = "YOU ESCAPED TO FIGHT LUCKY HERO";
+	public static final String PLAYER_RUNS = "YOU ESCAPED TO FIGHT ANOTHER DAY, LUCKY HERO";
 	public static final String PLAYER_RUNFAIL = "YOU FAILED IN YOUR ESCAPE";
 	
 	// Enemies Names
@@ -39,7 +46,14 @@ public class Messages {
 	public static final String SHAPESHIFTER = "Shapeshifter";
 	public static final String BERSERKER = "Berserker";
 	public static final String ELF = "Elf";
+	public static final String DRAUGR = "Draugr";
 
+	// Bosses names
+	public static final String THRYM = "Thrym";
+	public static final String FAFNIR = "Fafnir";
+	public static final String SKOLL = "Sköll";
+	public static final String HATI = "Hati";
+	
 	// Utils
 	public static final String NEW_LINE = System.lineSeparator();
 	public static final String ENTER_VV = "Enter valid value";
