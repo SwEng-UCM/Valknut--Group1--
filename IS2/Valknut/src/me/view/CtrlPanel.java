@@ -1,17 +1,11 @@
 package me.view;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import me.control.Controller;
 import me.model.CharacterSelectionObserver;
 
@@ -123,7 +117,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		orangePanel.setLocation(0, 600);
 		orangePanel.setSize(1200, 850);
 		
-		attackButton = new JButton("Attack");
+		attackButton = new JButton(Messages.ATTACK);
 		attackButton.setLocation(140, 700);
 		attackButton.setSize(120, 30);
 		attackButton.addActionListener( (e) -> {
@@ -132,7 +126,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		
 		mainPanel.add(attackButton);
 		
-		defendButton = new JButton("Defend");
+		defendButton = new JButton(Messages.DEFEND_ACTION);
 		defendButton.setLocation(340, 700);
 		defendButton.setSize(120, 30);
 		defendButton.addActionListener( (e) -> {
@@ -140,7 +134,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		});
 		mainPanel.add(defendButton);
 		
-		useItemButton = new JButton("Use Item");
+		useItemButton = new JButton(Messages.USE_ITEM);
 		useItemButton.setLocation(540, 700);
 		useItemButton.setSize(120, 30);
 		useItemButton.addActionListener((e) -> {
@@ -148,7 +142,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		});
 		mainPanel.add(useItemButton);
 		
-		runButton = new JButton("Run");
+		runButton = new JButton(Messages.RUN);
 		runButton.setLocation(740, 700);
 		runButton.setSize(120, 30);
 		runButton.addActionListener((e) -> {
@@ -156,7 +150,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		});
 		mainPanel.add(runButton);
 		
-		runButton = new JButton("Stats");
+		runButton = new JButton(Messages.STATS);
 		runButton.setLocation(940, 700);
 		runButton.setSize(120, 30);
 		runButton.addActionListener((e) -> {
@@ -214,7 +208,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		
 		for (int i = 0; i < _ctrl.getNumEnemies(); i++) {
 			int giant_num = i + 1;
-			enemyButton = new JButton("Giant " + giant_num);
+			enemyButton = new JButton("GIANT " + giant_num);
 			enemyButton.setLocation(i*300, 700);
 			enemyButton.setSize(120, 30);
 			enemyButton.addActionListener( (e) -> {
