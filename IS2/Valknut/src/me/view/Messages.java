@@ -73,4 +73,12 @@ public class Messages {
 				"There are rumors a tribe of GIANTS have taken refuge over a nearby forest. If you defeat them you may find clues to the location of a powerful foe whose weapon collection you can pillage." + NEW_LINE + //
 				NEW_LINE + //
 				"Good luck in your journey heroes!";
+
+	//Button Names
+	public static final String ATTACK = "ATTACK";
+	public static final String DEFEND_ACTION = "DEFEND";
+	public static final String USE_ITEM = "USE ITEM";
+	public static final String RUN = "RUN";
+	public static final String STATS = "STATS";
+	
 }

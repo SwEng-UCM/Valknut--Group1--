@@ -1,7 +1,5 @@
 package me.control;
 
-import java.util.List;
-
 import me.model.*;
 import me.model.items.*;
 import me.view.*;
@@ -63,6 +61,7 @@ public class Controller {
 
     public boolean action(int combatOption, int target){
     	boolean f = false;
+        CombatOption co;
     	
     	cb.updateItems();
         
@@ -73,8 +72,21 @@ public class Controller {
         else {
         	current_hero = cb.getHeroes().get(1);
         }
-        
-        if (current_hero.isAlive() && !current_hero.escaped() && !cb.getEnemies().isEmpty())
+
+        if(current_hero.isAutonomous()){
+            AutonomousHero au = (AutonomousHero) current_hero;
+            co = CombatOption.parseCommand(au.selectAction());
+            switch(co){
+                case ATTACK -> {cv.printLine(cb.attack(target)); f = true;}
+                case DEFEND -> {cv.printLine(cb.defend()); f = true;}
+                case USE_ITEM -> cv.printLine(cb.useItem(current_hero, cv.selectItem(current_hero.displayInventory(), current_hero)));
+                case RUN -> {cv.printLine(cb.run()); f = true;}
+                case STATS -> cv.print(cb.showStats(current_hero));
+                default -> {
+                }
+            }
+        }
+        else if (current_hero.isAlive() && !current_hero.escaped() && !cb.getEnemies().isEmpty())
         switch(combatOption){
             case 1 -> {cv.printLine(cb.attack(target)); f = true;}
             case 2 -> {cv.printLine(cb.defend()); f = true;}
@@ -85,7 +97,7 @@ public class Controller {
             }
         }
         
-        if (combatOption != 5) cb.setTurn(cb.turn() + 1);
+        if (combatOption != 5){} cb.setTurn(cb.turn() + 1);
         
         if (cb.turn() == 3) {
         	cv.print(cb.enemyTurnToString());

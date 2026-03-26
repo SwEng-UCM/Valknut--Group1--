@@ -8,6 +8,7 @@ import me.view.Messages;
 public class Hero extends Character {
 
     private final String surname;
+    private boolean autonomous; 
     private Inventory inventory; // Representing 'item'
     private Inventory using;
     private int level = 1;
@@ -23,6 +24,8 @@ public class Hero extends Character {
         inventory = new Inventory();
         using = new Inventory();
     }
+    public void setAutonomous(boolean x){ autonomous = x; }
+    public boolean isAutonomous(){ return autonomous; }
     public int getLevel() { return level; }
     public int getXp() { return xp; }
 
