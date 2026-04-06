@@ -1,10 +1,8 @@
 package me.model.items;
 
-import me.model.Attribute;
-
 public class ItemComplement extends Item implements Complement{
 
-    public ItemComplement(String name, int cost, int mod, int time, Attribute type){
+    public ItemComplement(String name, int cost, int mod, int time, ItemType type){
         super(name, cost, mod, time, type);
     }
 
@@ -34,7 +32,7 @@ public class ItemComplement extends Item implements Complement{
     }
 
     @Override
-    public Attribute getType() {
+    public ItemType getType() {
         return type;
     }
 

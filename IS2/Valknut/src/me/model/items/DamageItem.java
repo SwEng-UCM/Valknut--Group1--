@@ -1,11 +1,10 @@
 package me.model.items;
 
-import me.model.Attribute;
 import me.view.Messages;
 
 public class DamageItem extends Item{
     
-    public DamageItem(String name, int cost, int mod, int time,  Attribute type){
+    public DamageItem(String name, int cost, int mod, int time,  ItemType type){
         super(name, cost, mod, time, type);
     }
 

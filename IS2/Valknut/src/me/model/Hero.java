@@ -109,7 +109,7 @@ public class Hero extends Character {
         return sb.toString();
     }
     public boolean isUsing(Item i){
-        return using.contains(i.getName()) != null;
+        return using.constains(i);
     }
 
     public String useItem(Item i){
