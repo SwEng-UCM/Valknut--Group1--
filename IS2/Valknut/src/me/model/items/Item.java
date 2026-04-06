@@ -1,6 +1,5 @@
 package me.model.items;
 
-import me.model.Attribute;
 import me.model.Character;
 import me.view.Messages;
 
@@ -12,17 +11,25 @@ public abstract class Item {
     private int cuantity;
     private final int cost;
     private int turn;
-    protected Attribute type;
+    protected ItemType type;
     protected Character c;
     protected Complement complement;
 
-    public Item(String name, int cost, int mod, int time, Attribute type){
+    public Item(String name, int cost, int mod, int time, ItemType type){
         this.name = name.toLowerCase();
         this.mod = mod;
         this.cuantity = 1;
         this.cost = cost;
         this.turn = time;
         this.type = type;
+    }
+
+    public ItemType getType(){
+        return type;
+    }
+
+    public Item parseItem(){
+        return null;
     }
 
     public int getTurn(){

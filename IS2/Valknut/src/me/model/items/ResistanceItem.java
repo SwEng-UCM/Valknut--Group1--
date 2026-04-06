@@ -1,11 +1,10 @@
 package me.model.items;
 
-import me.model.Attribute;
 import me.view.Messages;
 
 public class ResistanceItem extends Item{
 
-    public ResistanceItem(String name, int value, int mod, int time, Attribute type){
+    public ResistanceItem(String name, int value, int mod, int time, ItemType type){
         super(name, value, mod, time, type);
     }
 

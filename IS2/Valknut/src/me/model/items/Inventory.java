@@ -9,7 +9,7 @@ public class Inventory {
 
        private final static String EMPTY_INV = "Your inventory is empty.";
        private final static int INIT_INV_CAP = 10;
-       private Map <String, Item> inventory;
+       private final Map <ItemType, Map<Item, Integer>> inventory;
        private int inventory_cap;
 
        public Inventory(){
@@ -23,26 +23,27 @@ public class Inventory {
 
        public boolean addItem(Item i){
               if(!isFull()){
-                     if(!inventory.containsKey(i.getName()))
-                            inventory.put(i.getName(), i);
-                     else  
-                            inventory.get(i.getName()).addCuantity();
+                     ItemType it = i.getType();
+                     if(!inventory.containsKey(it))
+                            inventory.get(it).put(i, 1);
+                     else  {
+                            Integer j = inventory.get(it).get(i);
+                            inventory.get(it).put(i, j + 1);
+                     }
                      return true;
               }
               return false;
        }
 
-       public Item contains(String s){ 
-              return inventory.get(s);
-       }
-
        public boolean useItem(Item i, Character c){  
               if(!inventory.isEmpty()){
                      i.use();
-                     if(inventory.get(i.getName()).getCuantity() < 2)
-                            inventory.remove(i.getName());
+                     ItemType it = i.getType();
+                     if(inventory.get(it).get(i) < 2)
+                            inventory.remove(it);
                      else{
-                            inventory.get(i.getName()).subCuantity();
+                            Integer j = inventory.get(it).get(i);
+                            inventory.get(it).put(i, j - 1);
                      }
                      return true;
               }
@@ -55,13 +56,20 @@ public class Inventory {
 
        public boolean dropItem(Item i){
               if(!inventory.isEmpty()){
-                     if(inventory.get(i.getName()).getCuantity() < 2)
-                            inventory.remove(i.getName());
-                     else
-                            inventory.get(i.getName()).subCuantity();
+                     ItemType it = i.getType();
+                     if(inventory.get(it).get(i) < 2)
+                            inventory.remove(it);
+                     else{
+                            Integer j = inventory.get(it).get(i);
+                            inventory.get(it).put(i, j - 1);
+                     }
                      return true;
               }
               return false;
+       }
+
+       public boolean constains(Item i){
+              return inventory.get(i.getType()).containsKey(i);
        }
 
        public String getInfo() {
@@ -71,9 +79,11 @@ public class Inventory {
 
               StringBuilder sb = new StringBuilder();
 
-              for(Map.Entry<String, Item> i : inventory.entrySet()){
-                     sb.append("> ").append(i.getValue().toString());
-                     sb.append("  Cuantity: ").append(i.getValue().getCuantity()).append(Messages.NEW_LINE);
+              for(Map.Entry<ItemType, Map<Item, Integer>> i : inventory.entrySet()){
+                     for(Map.Entry<Item, Integer> it : i.getValue().entrySet()){
+                            sb.append("> ").append(it.getKey().toString());
+                            sb.append("  Cuantity: ").append(it.getValue()).append(Messages.NEW_LINE);
+                     }
               }
 
               return sb.toString();

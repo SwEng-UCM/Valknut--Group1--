@@ -1,11 +1,10 @@
 package me.model.items;
 
-import me.model.Attribute;
 import me.view.Messages;
 
 public class AgilityItem extends Item{
 
-    public AgilityItem(String name, int cost, int mod, int time,  Attribute type){
+    public AgilityItem(String name, int cost, int mod, int time,  ItemType type){
         super(name, cost, mod, time, type);
     }
 

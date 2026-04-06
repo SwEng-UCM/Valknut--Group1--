@@ -1,12 +1,11 @@
 package me.model.items;
 
-import me.model.Attribute;
 import me.view.Messages;
 
 
 public class HealingItem extends Item {
 
-    public HealingItem(String name, int cost, int mod, int time, Attribute type){
+    public HealingItem(String name, int cost, int mod, int time, ItemType type){
         super(name, cost, mod, time, type);
     }
 

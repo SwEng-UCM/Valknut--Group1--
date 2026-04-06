@@ -120,13 +120,13 @@ public class Controller {
 			new_hero = HeroBuilder.buildHero("Freya");
 		else
 			new_hero = HeroBuilder.buildHero("Loki");
-		new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, Attribute.RESISTANCE));
-		new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, Attribute.RESISTANCE));
-		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
-		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
-		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, null));
-		new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, null));
-		new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, Attribute.STRENGTH));
+		new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
+		new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
+		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+		new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+		new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
+		new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
 		cb.addHero(new_hero);
 		
 		if (cb.getHeroes().size() > 1) {
