@@ -155,6 +155,13 @@ public class Messages {
              think for a moment what you’re proposing we do” “I am well aware, and I doubt you can stop me if you get in my way” 
              * player * ’s voice lowers, saddened but confident; “I guess we will find out now”. """ ;
 
+	// Story Final chapter
+	
+	public static final String CHAPTER_FINAL = """
+           Everything turns silent, as player who lost’s body crumbles to the ground, lifeless. “You won the battle, but at what cost? 
+           You lost your comrade and it seems you have not got that much life left in you. I just hope Valhalla treats you better than this realm has.”
+           With one final groan, you lay down on the floor next to your friend, you couldn’t have wished for a better resting place. 
+           You give one last glimpse to your ally, your partner, your friend; and everything goes black. """ ;
 	
 	//Button Names
 	public static final String ATTACK = "ATTACK";
