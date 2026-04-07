@@ -9,7 +9,7 @@ public class Hero extends Character {
 
     private final String surname;
     private boolean autonomous; 
-    private Inventory inventory; // Representing 'item'
+    protected Inventory inventory; // Representing 'item'
     private Inventory using;
     private int level = 1;
     private int xp = 0;
