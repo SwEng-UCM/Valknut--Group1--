@@ -29,4 +29,19 @@ public class AgilityItem extends Item{
         return sb.toString();
     }
 
+    public Item createInstanceOf(String s){
+        switch (s) {
+            case "Tied Shoe" -> {
+                return new AgilityItem(s, 150, 2, 8, ItemType.AGILITY);
+            }
+            case "Evasive Ring" -> {
+                return new AgilityItem(s, 500, 4, 8, ItemType.AGILITY);
+            }
+            case "Huliðshjálmr's Fragment" -> {
+                return new AgilityItem(s, 1000, 8, 8, ItemType.AGILITY);
+            }
+            default -> throw new AssertionError();
+        }
+    }
+
 }

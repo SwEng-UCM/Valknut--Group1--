@@ -28,4 +28,22 @@ public class DamageItem extends Item{
         return sb.toString();
     }
 
+    public Item createInstanceOf(String s){
+        switch (s) {
+            case "Fire Gantlet" -> {
+                return new DamageItem(s, 100, 2, 4, ItemType.DAMAGE);
+            }
+            case "Uru Gantlet" -> {
+                return new DamageItem(s, 1000, 5, 8, ItemType.DAMAGE);
+            }
+            case "Mistletoe's Essence" -> {
+                return new DamageItem(s, 500, 4, 2, ItemType.DAMAGE);
+            }
+            case "Gungnir's Piece" -> {
+                return new DamageItem(s, 500, 4, 8, ItemType.DAMAGE);
+            }
+            default -> throw new AssertionError();
+        }
+    }
+
 }

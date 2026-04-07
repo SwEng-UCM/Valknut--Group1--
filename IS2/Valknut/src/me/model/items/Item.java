@@ -75,6 +75,7 @@ public abstract class Item {
 
     public abstract void use();
     public abstract void revert();
+    public abstract Item createInstanceOf(String s);
 
     @Override
     public abstract String toString();

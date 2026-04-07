@@ -1,6 +1,7 @@
 package me.model;
 
-import me.model.items.ItemType;
+import me.model.items.HealingItem;
+import me.model.items.Item;
 import me.view.Messages;
 
 public class AutonomousHero extends Hero {
@@ -15,10 +16,12 @@ public class AutonomousHero extends Hero {
     }
 
     public void doHarmed(){
-        if(!inventory.containsType(ItemType.HEAL)){
+        Item item = new HealingItem(null, 0, 0, 0, null);
+        if(inventory.containsType(item)){
+        } else {
             return;
         }
-        inventory.useFirstOfType(ItemType.HEAL);
+        inventory.useFirstOfType(item);
 
         if(getLife() > 50)
             combatState = State.FOLLOWER;
