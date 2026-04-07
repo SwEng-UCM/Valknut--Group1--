@@ -1,7 +1,6 @@
 package me.view;
 
 import me.model.Hero;
-import me.model.HeroBuilder;
 
 public class StoryView extends ConsoleIO{
 
