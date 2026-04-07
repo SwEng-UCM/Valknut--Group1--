@@ -149,6 +149,7 @@ public class Controller {
 		// new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
 		// new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
 		cb.addHero(new_hero);
+        sb.append(Messages.NEW_LINE);
 
         return sb.toString();
 	}

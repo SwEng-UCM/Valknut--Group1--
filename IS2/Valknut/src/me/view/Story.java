@@ -6,7 +6,6 @@ public class Story {
 
 	public static final String IntroLines = Messages.INTRO_LINES;
 	public static final String ChapterOneBegins = Messages.CHAPTER_ONE_BEGINING;
-	public String Welcome;
 	public Hero h1;
 	public Hero h2; 
 			
@@ -24,8 +23,10 @@ public class Story {
 	}
 
 	public String startFirstChapter(){
-		Welcome = "Welcome " + h1.name().toUpperCase() + " and " + h2.name().toUpperCase() + "! ";
-		return Welcome + ChapterOneBegins;
+		StringBuilder sb = new StringBuilder();
+		sb.append("Welcome ").append(h1.name().toUpperCase()).append(" and ").append(h2.name().toUpperCase()).append("! ").append(Messages.NEW_LINE);
+		sb.append(ChapterOneBegins).append(Messages.NEW_LINE);
+		return sb.toString();
 	}
 
 }
