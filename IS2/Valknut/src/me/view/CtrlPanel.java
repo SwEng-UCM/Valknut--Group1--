@@ -1,6 +1,7 @@
 package me.view;
 
 import java.awt.Color;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,9 +56,10 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		
 		
 		gersemiButton = new JButton("");
-		gersemiButton.setLocation(300, 200);
-		gersemiButton.setSize(187, 417);
-		gersemiButton.setIcon( new ImageIcon("resources/images/gersemi.png") );
+		gersemiButton.setLocation(250, 246);
+		gersemiButton.setSize(280, 371);
+		ImageIcon scaled_g_icon = rescalate(280, 371, new ImageIcon("resources/images/gersemi.png"));
+		gersemiButton.setIcon(scaled_g_icon);
 		gersemiButton.addActionListener( (e) -> {
 			_ctrl.combatPrint("Player " + selectionNumber++ + " selects...");
 			_ctrl.combatPrint(_ctrl.selectCharacter(0, selectionNumber));
@@ -245,5 +247,13 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1200, 850);
 		this.setVisible(true);
+	}
+
+	private ImageIcon rescalate(int width, int height, ImageIcon icon){
+		ImageIcon scalated_icon;
+		Image im_icon = icon.getImage();
+		Image scalated_im = im_icon.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		scalated_icon = new ImageIcon(scalated_im);
+		return scalated_icon;
 	}
 }
