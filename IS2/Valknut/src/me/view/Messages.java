@@ -137,6 +137,25 @@ public class Messages {
 	
 	//Story chapter 5
 	
+	public static final String CHAPTER_FIVE = """
+            You have finally reached the end of your journey; the place were Fenrir resides: The island of Lyngvi.
+             The walk from the coast to the wolf’s location is quick, more so than you would’ve liked. As you approach the beast,
+             you hear its voice, far deeper and more menacing than you could’ve ever imagined. “State your purpose in my island,
+             travelers, for no-one dares to enter this land without good reason”. “We come in search of the legendary weapon
+             you have under your guard!”. The wolf bursts out in laughter. “You think the gods left me a parting gift before 
+             chaining me to this desolate place? I don’t know who fooled you, but it seems they did a pretty good job at it, 
+             although it does not seem all too difficult”. “He must be lying! It’s impossible that all those battles were for nothing!
+             If you won’t willingly tell us were the weapon is, I’ll just torture you myself into giving up its location” * player * ’s eyes 
+             are glowing red, * other player * has seen that red glow somewhere else but can’t recall where. “ * player * stop, I don’t think he’s lying,
+             we should’ve never believed in the Dragursin the first place”. “Nonsense, I bet he’s hiding the weapon all to himself. 
+             And if not, I can always make one myself out of his carved bones”. Fenrir’s tone is now one of curiosity rather than the taunting
+             one he had before. “Oh? I see you’ve encountered Fafnir before arriving here and it seems he left you a parting gift” 
+             * player * realizes; [“That’s it, the red glow from player’s eyes is the same as that of Fafnir when we encountered him! 
+             It would also explain player’s violent nature”] “ * Brother/Sister/Whatever * stop, the cloud that Fafnir hit you with is changing you,
+             think for a moment what you’re proposing we do” “I am well aware, and I doubt you can stop me if you get in my way” 
+             * player * ’s voice lowers, saddened but confident; “I guess we will find out now”. """ ;
+
+	
 	//Button Names
 	public static final String ATTACK = "ATTACK";
 	public static final String DEFEND_ACTION = "DEFEND";
