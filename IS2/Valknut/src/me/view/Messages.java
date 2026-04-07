@@ -114,8 +114,28 @@ public class Messages {
             “Yeah, I got scared for a moment because of the gas, but I feel just fine”. After the dust settles, you spot a claw and a 
             scale that seem to have fallen from the dragon during the battle. These will make good weapons until you achieve your goal. """ ;
 	
-	//Stoye chapter 4
+	//Story chapter 4
 	
+	public static final String CHAPTER_FOUR_BEGGINING = """
+            You continue along the tumultuous path, when you start to notice something strange. Some nights seem to last days 
+            and others a couple minutes; day and night don’t seem to follow a pattern. The first few times this isn’t an issue, but as the 
+            trend continues you start to feel weak and tired because of your abnormal sleep schedule, until finally, the cause of this 
+            abnormality appears, or rather, the causes. Two massive wolves appear, doing circles around you as if you were some sort 
+            of prey. “It seems like our guests can’t handle our rhythm brother” squeals one of them. “Not surprised, at the end of the day,
+            humans are weak”. As you raise your sight from the ground to get a better look at them, you catch a glimpse of Sköll and Hati, 
+            Fenrir’s sons and the wolves who chase the moon and sun, destined to send the world into total darkness when they finally 
+            catch their prey during Ragnarok. Slowly but surely, you stand up from the ground, trying not to fall over from the weight
+            of your body and weapons alone. “So you think humans are weak” infected player mutters. “We’ll see about that”. """ ;
+	
+	public static final String CHAPTER_FOUR_END = """
+            “It seems like underestimating us will cost you your life”. player that was infected. “Wait, what? We are definitely not killing them” 
+            * player that was not infected. * “Why not? They were trying to kill us first, and we already killed Fafnir, what’s different from this
+            situation?” “The difference is that we didn’t have a choice with Fafnir, these two are still alive and they will remain that way when
+            we leave” “No they won’t, I’m going to kill them either with or without you” “Over my dead body” You both hesitate for a moment, knowing that 
+            the other doesn’t seem to be willing to change their decision. “Fine, we’ll leave them alive, maybe it’ll mean that Fenrir gives us
+            the mythical weapon without much of a fight” Non-infected player breathes a sigh of relief, since the outcome could’ve been much worse.""" ;
+	
+	//Story chapter 5
 	
 	//Button Names
 	public static final String ATTACK = "ATTACK";
