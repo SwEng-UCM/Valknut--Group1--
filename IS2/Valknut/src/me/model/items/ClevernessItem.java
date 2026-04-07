@@ -37,6 +37,7 @@ public class ClevernessItem extends Item{
         return sb.toString();
     }
 
+    @Override
     public Item createInstanceOf(String s){
         switch (s) {
             case "Brief Unknown Parchment" -> {

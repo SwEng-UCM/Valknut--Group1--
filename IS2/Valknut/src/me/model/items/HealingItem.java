@@ -29,6 +29,7 @@ public class HealingItem extends Item {
         return sb.toString();
     }
 
+    @Override
     public Item createInstanceOf(String s){
         switch (s) {
             case "Seidr's Herb Sprouts" -> {
