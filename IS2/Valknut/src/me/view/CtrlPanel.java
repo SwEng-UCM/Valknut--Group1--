@@ -120,13 +120,13 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		backgroundLabel.setSize(1200, 849);
 		
 		JLabel gersemiLabel = new JLabel();
-		gersemiLabel.setIcon( new ImageIcon("resources/images/gersemi_big.png"));
+		gersemiLabel.setIcon( new ImageIcon("resources/images/gersemi_icon.png"));
 		gersemiLabel.setLocation(200, 0);
 		gersemiLabel.setSize(300, 300);
 		mainPanel.add(gersemiLabel);
 		
 		JLabel valiLabel = new JLabel();
-		valiLabel.setIcon( new ImageIcon("resources/images/vali_big.png"));
+		valiLabel.setIcon( new ImageIcon("resources/images/vali_icon.png"));
 		valiLabel.setLocation(200, 200);
 		valiLabel.setSize(300, 300);
 		mainPanel.add(valiLabel);
@@ -199,13 +199,13 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		backgroundLabel.setSize(1200, 849);
 		
 		JLabel gersemiLabel = new JLabel();
-		gersemiLabel.setIcon( new ImageIcon("resources/images/gersemi_big.png"));
+		gersemiLabel.setIcon( new ImageIcon("resources/images/gersemi_icon.png"));
 		gersemiLabel.setLocation(200, 0);
 		gersemiLabel.setSize(300, 300);
 		mainPanel.add(gersemiLabel);
 		
 		JLabel valiLabel = new JLabel();
-		valiLabel.setIcon( new ImageIcon("resources/images/vali_big.png"));
+		valiLabel.setIcon( new ImageIcon("resources/images/vali_icon.png"));
 		valiLabel.setLocation(200, 200);
 		valiLabel.setSize(300, 300);
 		mainPanel.add(valiLabel);
