@@ -10,26 +10,33 @@ import me.control.Controller;
 import me.model.CharacterSelectionObserver;
 
 public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
-	JPanel titlePanel, scorePanel, buttonPanel, mainPanel;
-	JLabel redLabel, blueLabel, redScore, blueScore;
-	Controller _ctrl;
+	private JPanel titlePanel, scorePanel, buttonPanel, mainPanel;
+	private JLabel redLabel, blueLabel, redScore, blueScore;
+	private int selectionNumber;
+	private Controller _ctrl;
 		
 	public CtrlPanel(Controller ctrl) {
 		_ctrl = ctrl;
+		selectionNumber = 1;
+		_ctrl.startStory();
 	}
 	
+    @Override
 	public void onSelection() {
 		combatGUI();
 	}
 	
+    @Override
 	public void onError(String msg) {
 		
 	}
 	
+    @Override
 	public void onQuit() {
 		
 	}
 	
+    @Override
 	public void onGameStart() {
 		createCharacterSelector();
 	}
@@ -52,7 +59,13 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		gersemiButton.setSize(187, 417);
 		gersemiButton.setIcon( new ImageIcon("resources/images/gersemi.png") );
 		gersemiButton.addActionListener( (e) -> {
-			_ctrl.selectCharacter(0);
+			_ctrl.combatPrint("Player " + selectionNumber++ + " selects...");
+			_ctrl.combatPrint(_ctrl.selectCharacter(0, selectionNumber));
+			if(selectionNumber == 3){
+				onSelection();
+				_ctrl.tellFirstLinesChapterOne();
+				selectionNumber = 1;
+			}
 		});
 		mainPanel.add(gersemiButton);
 		
@@ -68,7 +81,13 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		valiButton.setSize(280, 371);
 		valiButton.setIcon( new ImageIcon("resources/images/vali.png") );
 		valiButton.addActionListener( (e) -> {
-			_ctrl.selectCharacter(1);
+			_ctrl.combatPrint("Player " + selectionNumber++ + " selects...");
+			_ctrl.combatPrint(_ctrl.selectCharacter(1, selectionNumber));
+			if(selectionNumber == 3){
+				onSelection();
+				_ctrl.tellFirstLinesChapterOne();
+				selectionNumber = 1;
+			}
 		});
 		mainPanel.add(valiButton);
 		
@@ -83,7 +102,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		
 		this.setContentPane(mainPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1200, 849);
+		this.setSize(1200, 750);
 		this.setVisible(true);
 		
 		
