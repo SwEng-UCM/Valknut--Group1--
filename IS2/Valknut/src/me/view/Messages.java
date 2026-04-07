@@ -68,17 +68,16 @@ public class Messages {
                                                  when they will march out of its many doors to fight in aid of ODIN against the JOTNARE, the ice giants.""" ;
 	
 	public static final String CHOOSE = "CHOOSE YOUR HEROES";
-	public static final String CHAPTER_ONE_BEGINING = "For your journey to Vahalla you will first need to find an appropiate weapon. These weapons can be obtained by defeating the most powerful enemies along your journey." + NEW_LINE + //
-				NEW_LINE + //
-				"There are rumors a tribe of GIANTS have taken refuge over a nearby forest. If you defeat them you may find clues to the location of a powerful foe whose weapon collection you can pillage." + NEW_LINE + //
-				NEW_LINE + //
-				"Good luck in your journey heroes!";
+	public static final String CHAPTER_ONE_BEGINING = """
+				For your journey to Vahalla you will first need to find an appropiate weapon. These weapons can be obtained by defeating the most powerful enemies along your journey.
+				There are rumors a tribe of GIANTS have taken refuge over a nearby forest. If you defeat them you may find clues to the location of a powerful foe whose weapon collection you can pillage.
+				Good luck in your journey heroes!""";
+
 	public static final String CHAPTER_ONE_MIDDLE = """
             Congratulations on your victory. You've now reached an intersection. Which path will you follow?"""  + NEW_LINE + 
             "You can see a dark forest on your right and a dry plain on your right. Where will you go?";
 	
 	public static final String CHAPTER_ONE_END = " "; //Pending review
-	
 	
 	// Story chapter 2
 	public static final String CHAPTER_TWO_BEGINING = """
