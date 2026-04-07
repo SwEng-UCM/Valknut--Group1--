@@ -20,6 +20,13 @@ public class Inventory {
        public boolean isEmpty(){
               return inventory.isEmpty();
        }
+       public int size(){
+              int acc = 0;
+              for(Map.Entry <ItemType, Map<Item, Integer>> entry : inventory.entrySet()){
+                     acc += entry.getValue().size();
+              }
+              return acc;
+       }
 
        public boolean addItem(Item i){
               if(!isFull()){
@@ -33,6 +40,18 @@ public class Inventory {
                      return true;
               }
               return false;
+       }
+
+       public void useFirstOfType(ItemType it){
+              Item i = inventory.get(it).keySet().iterator().next();
+              i.use();
+              int aux = inventory.get(it).get(i);
+              if(aux <= 1){
+                     inventory.get(it).remove(i);
+              }
+              else{
+                     inventory.get(it).put(i, aux - 1);
+              }
        }
 
        public boolean useItem(Item i, Character c){  
@@ -66,6 +85,10 @@ public class Inventory {
                      return true;
               }
               return false;
+       }
+
+       public boolean containsType(ItemType it){
+              return inventory.containsKey(it);
        }
 
        public boolean constains(Item i){
