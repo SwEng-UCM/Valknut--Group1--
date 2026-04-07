@@ -37,6 +37,10 @@ public class Messages {
 	public static final String THRYM_SP3_ATTACK = "Thrym throws Gungnir torwards you, and it doesn't stop until it reaches you";
 	public static final String FAFNIR_ATTACK = "Fafnir sends you flying with a powerful wingbeat";
 	public static final String FAFNIR_SP_ATTACK = "Fafnir makes fire rain down from the skies, burning you and everything near you";
+	public static final String SKOLL_ATTACK = "Skoll runs at you with its maw open ready to eat you in one piece";
+	public static final String SKOLL_SP_ATTACK = "Sköll slashes you with its claws while you are recovering from Hati's attack";
+	public static final String HATI_ATTACK = "Hati jups at you ready to split you in two with its claws";
+	public static final String HATI_SP_ATTACK = "Hati bites you with its sharp teeth while you are recovering from Sköll's attack";
 	
 	// Player Actions
 	public static final String PLAYER_RUNS = "YOU ESCAPED TO FIGHT ANOTHER DAY, LUCKY HERO";
