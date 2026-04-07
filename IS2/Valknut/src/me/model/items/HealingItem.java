@@ -29,4 +29,22 @@ public class HealingItem extends Item {
         return sb.toString();
     }
 
+    public Item createInstanceOf(String s){
+        switch (s) {
+            case "Seidr's Herb Sprouts" -> {
+                return new HealingItem(s, 10, 20, 1, ItemType.HEAL);
+            }
+            case "Ancient Yarrow" -> {
+                return new HealingItem(s, 60, 40, 1, ItemType.HEAL);
+            }
+            case "Curing Crystal Stone" -> {
+                return new HealingItem(s, 200, 80, 1, ItemType.HEAL);
+            }
+            case "Drop of Eitr's Elixir" -> {
+                return new HealingItem(s, 300, 0, 1, ItemType.HEAL);
+            }
+            default -> throw new AssertionError();
+        }
+    }
+
 }

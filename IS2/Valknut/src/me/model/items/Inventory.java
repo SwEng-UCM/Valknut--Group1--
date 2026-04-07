@@ -9,12 +9,12 @@ public class Inventory {
 
        private final static String EMPTY_INV = "Your inventory is empty.";
        private final static int INIT_INV_CAP = 10;
-       private final Map <ItemType, Map<Item, Integer>> inventory;
+       private final Map <Item, Map<String, Integer>> inventory;
        private int inventory_cap;
 
        public Inventory(){
               inventory_cap = INIT_INV_CAP;
-              inventory = new HashMap<>(inventory_cap);
+              inventory = new HashMap<>(5);
        }
 
        public boolean isEmpty(){
@@ -22,7 +22,7 @@ public class Inventory {
        }
        public int size(){
               int acc = 0;
-              for(Map.Entry <ItemType, Map<Item, Integer>> entry : inventory.entrySet()){
+              for(Map.Entry <Item, Map<String, Integer>> entry : inventory.entrySet()){
                      acc += entry.getValue().size();
               }
               return acc;
@@ -30,39 +30,43 @@ public class Inventory {
 
        public boolean addItem(Item i){
               if(!isFull()){
-                     ItemType it = i.getType();
-                     if(!inventory.containsKey(it))
-                            inventory.get(it).put(i, 1);
+                     String name = i.getName();
+                     if(!inventory.containsKey(i)){
+                            Map <String, Integer> x = new HashMap<>();
+                            x.put(name, 1);
+                            inventory.put(i, x);
+                     }
                      else  {
-                            Integer j = inventory.get(it).get(i);
-                            inventory.get(it).put(i, j + 1);
+                            Integer j = inventory.get(i).get(name);
+                            inventory.get(i).put(name, j + 1);
                      }
                      return true;
               }
               return false;
        }
 
-       public void useFirstOfType(ItemType it){
-              Item i = inventory.get(it).keySet().iterator().next();
-              i.use();
-              int aux = inventory.get(it).get(i);
+       public void useFirstOfType(Item it){
+              String name = it.getName();
+              Item item = it.createInstanceOf(name);
+              item.use();
+              int aux = inventory.get(it).get(name);
               if(aux <= 1){
-                     inventory.get(it).remove(i);
+                     inventory.get(it).remove(name);
               }
               else{
-                     inventory.get(it).put(i, aux - 1);
+                     inventory.get(it).put(name, aux - 1);
               }
        }
 
        public boolean useItem(Item i, Character c){  
               if(!inventory.isEmpty()){
                      i.use();
-                     ItemType it = i.getType();
-                     if(inventory.get(it).get(i) < 2)
-                            inventory.remove(it);
+                     String name = i.getName();
+                     if(inventory.get(i).get(name) < 2)
+                            inventory.remove(i);
                      else{
-                            Integer j = inventory.get(it).get(i);
-                            inventory.get(it).put(i, j - 1);
+                            Integer j = inventory.get(i).get(name);
+                            inventory.get(i).put(name, j - 1);
                      }
                      return true;
               }
@@ -75,24 +79,24 @@ public class Inventory {
 
        public boolean dropItem(Item i){
               if(!inventory.isEmpty()){
-                     ItemType it = i.getType();
-                     if(inventory.get(it).get(i) < 2)
-                            inventory.remove(it);
+                     String name = i.getName();
+                     if(inventory.get(i).get(name) < 2)
+                            inventory.remove(i);
                      else{
-                            Integer j = inventory.get(it).get(i);
-                            inventory.get(it).put(i, j - 1);
+                            Integer j = inventory.get(i).get(name);
+                            inventory.get(i).put(name, j - 1);
                      }
                      return true;
               }
               return false;
        }
 
-       public boolean containsType(ItemType it){
-              return inventory.containsKey(it);
+       public boolean containsType(Item i){
+              return inventory.containsKey(i);
        }
 
-       public boolean constains(Item i){
-              return inventory.get(i.getType()).containsKey(i);
+       public boolean containsItem(Item i, String s){
+              return inventory.get(i).containsKey(s);
        }
 
        public String getInfo() {
@@ -102,9 +106,9 @@ public class Inventory {
 
               StringBuilder sb = new StringBuilder();
 
-              for(Map.Entry<ItemType, Map<Item, Integer>> i : inventory.entrySet()){
-                     for(Map.Entry<Item, Integer> it : i.getValue().entrySet()){
-                            sb.append("> ").append(it.getKey().toString());
+              for(Map.Entry<Item, Map<String, Integer>> i : inventory.entrySet()){
+                     for(Map.Entry<String, Integer> it : i.getValue().entrySet()){
+                            sb.append("> ").append(i.toString());
                             sb.append("  Cuantity: ").append(it.getValue()).append(Messages.NEW_LINE);
                      }
               }

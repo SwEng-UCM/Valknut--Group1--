@@ -36,4 +36,37 @@ public class ItemComplement extends Item implements Complement{
         return type;
     }
 
+    public Item createInstanceOf(String s){
+        switch (s) {
+            case "Mistletoe's Essence" -> {
+                return new DamageItem(s, 500, 4, 2, ItemType.DAMAGE);
+            }
+            case "Gungnir's Piece" -> {
+                return new DamageItem(s, 500, 4, 8, ItemType.DAMAGE);
+            }
+                        case "Chaos Essence" -> {
+                return new ClevernessItem(s, 200, 2, 8, ItemType.ELEMENTAL);
+            }
+            case "Fire Essence" -> {
+                return new ClevernessItem(s, 200, 2, 8, ItemType.ELEMENTAL);
+            }
+            case "Ice Essence" -> {
+                return new ClevernessItem(s, 200, 2, 8, ItemType.ELEMENTAL);
+            }
+            case "Nature Essence" -> {
+                return new ClevernessItem(s, 200, 2, 8, ItemType.ELEMENTAL);
+            }
+            case "Blood Essence" -> {
+                return new ClevernessItem(s, 200, 2, 8, ItemType.ELEMENTAL);
+            }
+                        case "Svalinn's Fragment" -> {
+                return new ResistanceItem(s, 500, 4, 1, ItemType.RESITANCE);
+            }
+            case "Megingjörð's Piece" -> {
+                return new ResistanceItem(s, 500, 4, 1, ItemType.RESITANCE);
+            }
+            default -> throw new AssertionError();
+        }
+    }
+
 }

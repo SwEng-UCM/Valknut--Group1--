@@ -27,5 +27,20 @@ public class ResistanceItem extends Item{
 
         return sb.toString();
     }
+
+    public Item createInstanceOf(String s){
+        switch (s) {
+            case "Iron Armor Piece" -> {
+                return new ResistanceItem(s, 5, 1, 3, ItemType.RESITANCE);
+            }
+            case "Protection Ring" -> {
+                return new ResistanceItem(s, 70, 2, 3, ItemType.RESITANCE);
+            }
+            case "Thor's Shield" -> {
+                return new ResistanceItem(s, 300, 4, 5, ItemType.RESITANCE);
+            }
+            default -> throw new AssertionError();
+        }
+    }
     
 }

@@ -37,4 +37,20 @@ public class ClevernessItem extends Item{
         return sb.toString();
     }
 
+    public Item createInstanceOf(String s){
+        switch (s) {
+            case "Brief Unknown Parchment" -> {
+                return new ClevernessItem(s, 10, 1, 2, ItemType.ELEMENTAL);
+            }
+            case "Breeze's Words" -> {
+                return new ClevernessItem(s, 70, 2, 2, ItemType.ELEMENTAL);
+            }
+            case "Edda's Fragment" -> {
+                return new ClevernessItem(s, 300, 3, 2, ItemType.ELEMENTAL);
+            }
+            default -> throw new AssertionError();
+        }
+    }
+    
+
 }
