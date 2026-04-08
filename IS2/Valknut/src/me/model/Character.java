@@ -117,6 +117,10 @@ public abstract class Character {
         return alive;
     }
 
+    public boolean isWeak(Element e){
+        return false;
+    }
+
     public void defend(){
         defend = true;
     }
@@ -130,7 +134,7 @@ public abstract class Character {
 
     public String receiveDamage(int damage, Element element) {
         StringBuilder sb = new StringBuilder();
-        if (getMainElement().getWeakness() == element) {
+        if (isWeak(element)) {
         	damage *= 1.5;
             sb.append(name.toUpperCase()).append(Messages.HERO_WEAK).append(element.toString()).append(Messages.NEW_LINE);
         }

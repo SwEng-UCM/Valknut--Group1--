@@ -11,6 +11,7 @@ public class Hero extends Character {
     private boolean autonomous; 
     protected Inventory inventory; // Representing 'item'
     private Inventory using;
+    protected Combat cmbt;
     private int level = 1;
     private int xp = 0;
 
@@ -124,5 +125,9 @@ public class Hero extends Character {
             sb.append(Messages.USING_ITEM).append(i.getName().toUpperCase());
         
         return sb.toString();
+    }
+
+    public void setCombat(Combat cb){
+        this.cmbt = cb;
     }
 }
