@@ -65,6 +65,8 @@ public class Controller {
 		Combat cmb = new Combat();
 		cmb.addEnemy(firstEnemies(1));
         cmb.addEnemy(firstEnemies(2));
+        cmb.addEnemy(firstEnemies(1));
+        cmb.addEnemy(firstEnemies(2));
         num_enemies = 4;
 		return cmb;
 	}
@@ -92,9 +94,9 @@ public class Controller {
 
         if(current_hero.isAutonomous()){
             AutonomousHero au = (AutonomousHero) current_hero;
-            co = CombatOption.parseCommand(au.selectAction());
+            co = au.selectAction();
             switch(co){
-                case ATTACK -> {cv.printLine(cb.attack(target)); f = true;}
+                case ATTACK -> {target = au.selectTarjet(); cv.printLine(cb.attack(target)); f = true;}
                 case DEFEND -> {cv.printLine(cb.defend()); f = true;}
                 case USE_ITEM -> cv.printLine(cb.useItem(current_hero, cv.selectItem(current_hero.displayInventory(), current_hero)));
                 case RUN -> {cv.printLine(cb.run()); f = true;}
@@ -150,6 +152,7 @@ public class Controller {
 		new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
 		new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
 		cb.addHero(new_hero);
+        new_hero.setCombat(cb);
         sb.append(Messages.NEW_LINE);
 
         return sb.toString();

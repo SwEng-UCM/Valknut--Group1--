@@ -1,5 +1,6 @@
 package me.model;
 
+import java.util.List;
 import me.model.items.HealingItem;
 import me.model.items.Item;
 import me.view.Messages;
@@ -7,7 +8,6 @@ import me.view.Messages;
 public class AutonomousHero extends Hero {
     
     private State combatState;
-    private Combat cmbt;
 
     public AutonomousHero(String name, int life, int max_life, String surname){
         super(name, life, max_life, surname);
@@ -27,17 +27,30 @@ public class AutonomousHero extends Hero {
             combatState = State.FOLLOWER;
         
     }
+    
 
-    public void initCombat(Combat cmbt){
-        this.cmbt = cmbt;
+    public int doLeader(){
+        int idx = 0;
+
+        List<Enemy> enemies = cmbt.getEnemies();
+        for(Enemy e : enemies){
+            
+        }
+
+        return idx;
     }
 
-    public void doLeader(){
-        
+    public int doFollower(){
+        int idx = 0;
+        return idx;
     }
 
-    public void doFollower(){
-        
+    public int selectTarjet(){
+        return switch (combatState) {
+            case LEADER -> doLeader();
+            case FOLLOWER -> doFollower();
+            default -> doFollower();
+        };
     }
 
     public void doDefensive(){
@@ -63,21 +76,21 @@ public class AutonomousHero extends Hero {
         return sb.toString();
     }
 
-    public String selectAction(){
-        StringBuilder sb = new StringBuilder();
+    public CombatOption selectAction(){
+        CombatOption co;
         switch (combatState) {
-            case HARMED -> doHarmed();
-            case LEADER -> doLeader();
-            case FOLLOWER -> doFollower();
-            case DEFENSIVE -> doDefensive();
-            case SCARED -> sb.append(doScared());
-            default -> throw new AssertionError();
+            case HARMED -> co = CombatOption.USE_ITEM;
+            case LEADER -> co = CombatOption.ATTACK;
+            case FOLLOWER -> co = CombatOption.ATTACK;
+            case DEFENSIVE -> co = CombatOption.DEFEND;
+            case SCARED -> co = CombatOption.RUN;
+            default -> co = CombatOption.ATTACK;
         }
         double i = Math.random();
         if(i > 0.3){
             combatState = State.FOLLOWER;
         }
-        return sb.toString();
+        return co;
     }
     
 }

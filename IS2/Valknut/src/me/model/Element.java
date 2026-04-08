@@ -28,14 +28,14 @@ public enum Element {
             };
     }
     
-    public Element getWeakness() {
+    public boolean isWeak(Element e) {
             return switch (this) {
-                case ICE -> FIRE;
-                case CHAOS -> NATURE;
-                case NATURE -> BLOOD;
-                case BLOOD -> ICE;
-                case FIRE -> CHAOS;
-                default -> CHAOS;
+                case ICE -> e == FIRE || e == CHAOS;
+                case CHAOS -> e == NATURE || e == BLOOD;
+                case NATURE -> e == BLOOD || e == FIRE;
+                case BLOOD -> e == ICE || e == NATURE;
+                case FIRE -> e == CHAOS || e == ICE;
+                default -> false;
             };
     }
 }
