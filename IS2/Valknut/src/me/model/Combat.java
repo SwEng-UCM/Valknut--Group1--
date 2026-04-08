@@ -12,6 +12,7 @@ public class Combat {
     private List<Item> items;
     private int turn;
     private boolean exit;
+    private int lastTarjet;
 
     public Combat(){
         heroes = new ArrayList<>(4); //initial values are almost random
@@ -27,6 +28,10 @@ public class Combat {
 
     public List<Enemy> getEnemies(){
         return enemies;
+    }
+
+    public int getLastTarjet(){
+        return lastTarjet;
     }
 
     public void addHero(Hero e){
@@ -100,6 +105,7 @@ public class Combat {
         if(turn < 3){
             Hero h = heroes.get(turn - 1);
             sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20));
+            lastTarjet = i - 1;
         }
         else{
             Enemy e = enemies.get(turn - 3);

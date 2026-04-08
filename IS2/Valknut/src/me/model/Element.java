@@ -38,4 +38,15 @@ public enum Element {
                 default -> false;
             };
     }
+
+    public boolean isResistant(Element e) {
+            return switch (this) {
+                case ICE -> e == BLOOD;
+                case CHAOS -> e == ICE;
+                case NATURE -> e == CHAOS;
+                case BLOOD -> e == FIRE;
+                case FIRE -> e == NATURE;
+                default -> false;
+            };
+    }
 }
