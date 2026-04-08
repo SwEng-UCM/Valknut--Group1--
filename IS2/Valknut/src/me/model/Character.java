@@ -118,7 +118,11 @@ public abstract class Character {
     }
 
     public boolean isWeak(Element e){
-        return false;
+        return getMainElement().isWeak(e);
+    }
+
+    public boolean isResistant(Element e){
+        return getMainElement().isResistant(e);
     }
 
     public void defend(){
@@ -138,7 +142,7 @@ public abstract class Character {
         	damage *= 1.5;
             sb.append(name.toUpperCase()).append(Messages.HERO_WEAK).append(element.toString()).append(Messages.NEW_LINE);
         }
-        else if (element.getWeakness() == getMainElement()) {
+        else if (isResistant(element)) {
         	damage -= 10;
             sb.append(name.toUpperCase()).append(Messages.HERO_RESISTANT).append(element.toString()).append(Messages.NEW_LINE);
         }

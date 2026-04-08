@@ -45,17 +45,22 @@ public class Inventory {
               return false;
        }
 
-       public void useFirstOfType(Item it){
+       public boolean useFirstOfType(Item it){
               String name = it.getName();
-              Item item = it.createInstanceOf(name);
-              item.use();
-              int aux = inventory.get(it).get(name);
-              if(aux <= 1){
-                     inventory.get(it).remove(name);
+              boolean used = inventory.get(it).containsKey(name);
+              if(used){
+                     Item item = it.createInstanceOf(name);
+                     item.use();
+                     int aux = inventory.get(it).get(name);
+                     if(aux <= 1){
+                            inventory.get(it).remove(name);
+                     }
+                     else{
+                            inventory.get(it).put(name, aux - 1);
+                     }
               }
-              else{
-                     inventory.get(it).put(name, aux - 1);
-              }
+
+              return used;
        }
 
        public boolean useItem(Item i, Character c){  

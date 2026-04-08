@@ -96,8 +96,8 @@ public class Controller {
             AutonomousHero au = (AutonomousHero) current_hero;
             co = au.selectAction();
             switch(co){
-                case ATTACK -> {target = au.selectTarjet(); cv.printLine(cb.attack(target)); f = true;}
-                case DEFEND -> {cv.printLine(cb.defend()); f = true;}
+                case ATTACK -> {target = au.selectTarjet(); if(target != -1){ cv.printLine(cb.attack(target));} f = true;}
+                case DEFEND -> {au.doDefensive(); cv.printLine(cb.defend()); f = true;}
                 case USE_ITEM -> cv.printLine(cb.useItem(current_hero, cv.selectItem(current_hero.displayInventory(), current_hero)));
                 case RUN -> {cv.printLine(cb.run()); f = true;}
                 case STATS -> cv.print(cb.showStats(current_hero));
