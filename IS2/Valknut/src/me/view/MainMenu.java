@@ -73,13 +73,13 @@ public class MainMenu extends JPanel{
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        btnPlay = createButton();
-        btnMP = createButton();
-        btnSettings = createButton();
+        btnPlay = createButton("resources/images/playButton_NS.png", "resources/images/playButton_S.png");
+        btnMP = createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
+        btnSettings = createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
 
         gbc.gridx = 0;
         gbc.fill = GridBagConstraints.NONE; // Cambia a NONE para que no intente estirar el botón
-        gbc.insets = new Insets(0, 0, -30, 0); // Puedes usar valores negativos si quieres pegarlos aún más
+        gbc.insets = new Insets(-20, 0, 0, 0); // Puedes usar valores negativos si quieres pegarlos aún más
         gbc.weighty = 0.0; 
 
         gbc.gridy = 0; buttonPanel.add(btnPlay, gbc);
@@ -90,13 +90,15 @@ public class MainMenu extends JPanel{
 
     }
 
-    private JButton createButton(){
+    private JButton createButton(String path, String over){
         JButton jb = new JButton();
-        jb.setIcon(rescalate(300, 150, new ImageIcon("resources/images/menuButtons.png")));
+        jb.setIcon(rescalate(400, 150, new ImageIcon(path)));
         jb.setContentAreaFilled(false); 
         jb.setBorderPainted(false);     
         jb.setFocusPainted(false);      
         jb.setOpaque(false);
+        jb.setRolloverEnabled(true);
+        jb.setRolloverIcon(rescalate(400, 150, new ImageIcon(over)));
         return jb;
     }
 
