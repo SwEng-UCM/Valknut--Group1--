@@ -1,11 +1,13 @@
 package me.model.items;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import me.model.Character;
 import me.view.Messages;
 
-public class Inventory {
+public class Inventory implements Serializable {
+       private static final long serialVersionUID = 1L;
 
        private final static String EMPTY_INV = "Your inventory is empty.";
        private final static int INIT_INV_CAP = 10;

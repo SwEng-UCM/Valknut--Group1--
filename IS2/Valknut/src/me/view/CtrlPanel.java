@@ -35,6 +35,30 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 
 		_ctrl.startStory();
 
+		// SAVE with Ctrl+S
+		mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+				.put(KeyStroke.getKeyStroke("control S"), "saveGame");
+
+		mainPanel.getActionMap().put("saveGame", new AbstractAction() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				_ctrl.saveGame();
+				JOptionPane.showMessageDialog(null, "Game saved!");
+			}
+		});
+
+// LOAD with Ctrl+L
+		mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+				.put(KeyStroke.getKeyStroke("control L"), "loadGame");
+
+		mainPanel.getActionMap().put("loadGame", new AbstractAction() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				_ctrl.loadGame();
+				JOptionPane.showMessageDialog(null, "Game loaded!");
+			}
+		});
+
 		this.setVisible(true);
 	}
 	
