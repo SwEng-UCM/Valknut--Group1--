@@ -26,7 +26,8 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		selectionNumber = 1;
 		this.setSize(1408, 768); 
 		this.setLocationRelativeTo(null); 
-		this.setVisible(true); 
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_ctrl.startStory();
 	}
 	
