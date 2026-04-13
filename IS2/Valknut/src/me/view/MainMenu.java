@@ -1,6 +1,7 @@
 package me.view;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
@@ -76,12 +77,15 @@ public class MainMenu extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
 
         btnPlay = createButton("resources/images/playButton_NS.png", "resources/images/playButton_S.png");
+        btnPlay.addActionListener(e -> {
+            _ctrl.charactersScreen();
+        });
         btnMP = createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
         btnSettings = createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
 
         gbc.gridx = 0;
-        gbc.fill = GridBagConstraints.NONE; // Cambia a NONE para que no intente estirar el botón
-        gbc.insets = new Insets(-20, 0, 0, 0); // Puedes usar valores negativos si quieres pegarlos aún más
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(-20, 0, 0, 0);
         gbc.weighty = 0.0; 
 
         gbc.gridy = 0; buttonPanel.add(btnPlay, gbc);
@@ -104,13 +108,11 @@ public class MainMenu extends JPanel{
         jb.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                // Este código se ejecuta cuando el ratón entra en el área del botón
                 am.sound("resources/sounds/selection.wav");
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                // Opcional: puedes detener el sonido o hacer otra acción al salir
             }
         });
         return jb;

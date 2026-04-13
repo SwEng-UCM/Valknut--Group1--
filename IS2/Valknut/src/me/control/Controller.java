@@ -42,6 +42,10 @@ public class Controller {
     	cb = initCmb();
     	controlPanel.onGameStart();
     }
+
+    public void charactersScreen(){
+        controlPanel.onSelection();
+    }
     
     public void startStory() {
         sv.tellIntro();
