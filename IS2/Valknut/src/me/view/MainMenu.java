@@ -1,12 +1,22 @@
 package me.view;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import me.control.Controller;
 
 public class MainMenu extends JPanel{
 
     private static MainMenu instance;
+    private AudioManager am;
     private Controller _ctrl;
     private Image backGround;
 
@@ -18,7 +28,7 @@ public class MainMenu extends JPanel{
 
     private MainMenu(Controller ctrl){
         _ctrl = ctrl;
-        
+        am = AudioManager.getInstance();
         initGUI();
         setComponents();
     }
@@ -99,6 +109,18 @@ public class MainMenu extends JPanel{
         jb.setOpaque(false);
         jb.setRolloverEnabled(true);
         jb.setRolloverIcon(rescalate(400, 150, new ImageIcon(over)));
+        jb.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // Este código se ejecuta cuando el ratón entra en el área del botón
+                am.sound("resources/sounds/selection.wav");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // Opcional: puedes detener el sonido o hacer otra acción al salir
+            }
+        });
         return jb;
     }
 
