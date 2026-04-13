@@ -3,6 +3,8 @@ package me.control;
 import me.model.*;
 import me.model.items.*;
 import me.view.*;
+import me.model.save.SaveGameData;
+import me.model.save.SaveGameManager;
 
 
 public class Controller {
@@ -135,6 +137,25 @@ public class Controller {
         controlPanel.onSelection();
         
         return f;
+    }
+
+    public void saveGame() {
+
+        if (cb != null) {
+            SaveGameData data = new SaveGameData(cb);
+            SaveGameManager.saveGame(data);
+        }
+    }
+
+    public void loadGame() {
+
+        SaveGameData data = SaveGameManager.loadGame();
+
+        if (data != null) {
+            this.cb = data.getCombat();
+            controlPanel.onCombat();   // switch to combat screen
+            System.out.println("Game loaded successfully.");
+        }
     }
 
     public String selectCharacter(int i, int player){

@@ -77,14 +77,26 @@ public class MainMenu extends JPanel{
         btnMP = createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
         btnSettings = createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
 
+        JButton btnLoad = new JButton("LOAD GAME");
+
+        btnLoad.setPreferredSize(new Dimension(400, 80));
+        btnLoad.setFocusPainted(false);
+        btnLoad.setContentAreaFilled(false);
+        btnLoad.setBorderPainted(true);
+
+        btnLoad.addActionListener(e -> {
+            _ctrl.loadGame();
+        });
+
         gbc.gridx = 0;
         gbc.fill = GridBagConstraints.NONE;
         gbc.insets = new Insets(-20, 0, 0, 0);
-        gbc.weighty = 0.0; 
+        gbc.weighty = 0.0;
 
         gbc.gridy = 0; buttonPanel.add(btnPlay, gbc);
-        gbc.gridy = 1; buttonPanel.add(btnMP, gbc);
-        gbc.gridy = 2; buttonPanel.add(btnSettings, gbc);
+        gbc.gridy = 1; buttonPanel.add(btnLoad, gbc);
+        gbc.gridy = 2; buttonPanel.add(btnMP, gbc);
+        gbc.gridy = 3; buttonPanel.add(btnSettings, gbc);
 
         this.add(buttonPanel, gbcMenu);
 

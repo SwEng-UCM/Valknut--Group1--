@@ -1,12 +1,14 @@
 package me.model;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import me.view.Messages;
 
-public abstract class Character {
+public abstract class Character implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected final String name;
     private boolean alive;
     private Map<Element, Integer> elements; // Representing the five elements stats with a Map
