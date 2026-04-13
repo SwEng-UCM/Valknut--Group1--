@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import me.control.Controller;
 
-public class CombatScreen {
+public class CombatScreen extends JPanel{
     private static CombatScreen instance;
     private AudioManager am;
     private Controller _ctrl;
@@ -17,7 +17,15 @@ public class CombatScreen {
         setComponents();
     }
 
-    public static CombatScreen getInstace(Controller ctrl){
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backGround != null) {
+            g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
+    public static CombatScreen getInstance(Controller ctrl){
         if(instance == null)
             instance = new CombatScreen(ctrl);
         return instance;
@@ -25,7 +33,6 @@ public class CombatScreen {
 
     private void initGUI(){
         this.backGround = new ImageIcon("resources/images/MainMenu.png").getImage();
-        this.setLayout(new BorderLayout());
         this.setVisible(true);
         this.setOpaque(false);
     }

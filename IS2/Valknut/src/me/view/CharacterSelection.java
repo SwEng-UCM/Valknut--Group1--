@@ -18,7 +18,15 @@ public class CharacterSelection extends JPanel{
         setComponents();
     }
 
-    public static CharacterSelection getInstace(Controller ctrl){
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backGround != null) {
+            g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
+    public static CharacterSelection getInstance(Controller ctrl){
         if(instance == null)
             instance = new CharacterSelection(ctrl);
         return instance;
@@ -26,7 +34,6 @@ public class CharacterSelection extends JPanel{
 
     private void initGUI(){
         this.backGround = new ImageIcon("resources/images/MainMenu.png").getImage();
-        this.setLayout(new BorderLayout());
         this.setVisible(true);
         this.setOpaque(false);
     }
