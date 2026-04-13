@@ -5,4 +5,5 @@ public interface CharacterSelectionObserver {
 	public void onSelection();
 	public void onError(String msg);
 	public void onQuit();
+	public void onCombat();
 }

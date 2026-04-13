@@ -4,23 +4,22 @@ import java.awt.*;
 import javax.swing.*;
 import me.control.Controller;
 
-public class CharacterSelection extends JPanel{
-
-    private static CharacterSelection instance;
+public class CombatScreen {
+    private static CombatScreen instance;
     private AudioManager am;
     private Controller _ctrl;
     private Image backGround;
 
-    private CharacterSelection(Controller ctrl){
+    private CombatScreen(Controller ctrl){
          _ctrl = ctrl;
         am = AudioManager.getInstance();
         initGUI();
         setComponents();
     }
 
-    public static CharacterSelection getInstace(Controller ctrl){
+    public static CombatScreen getInstace(Controller ctrl){
         if(instance == null)
-            instance = new CharacterSelection(ctrl);
+            instance = new CombatScreen(ctrl);
         return instance;
     }
 
@@ -38,5 +37,4 @@ public class CharacterSelection extends JPanel{
         gbcMenu.fill = GridBagConstraints.NONE; 
         gbcMenu.anchor = GridBagConstraints.NORTH;
     }
-
 }

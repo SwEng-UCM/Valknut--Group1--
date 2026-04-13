@@ -34,14 +34,10 @@ public class MainMenu extends JPanel{
     }
 
     private void initGUI() {
-        try {
-            this.backGround = new ImageIcon("resources/images/MainMenu.png").getImage();
-            this.setLayout(new BorderLayout());
-            this.setVisible(true);
-            this.setOpaque(false);
-        } catch (Exception e) {
-            System.err.println("Error: Couldn't upload music.");
-        }
+        this.backGround = new ImageIcon("resources/images/MainMenu.png").getImage();
+        this.setLayout(new BorderLayout());
+        this.setVisible(true);
+        this.setOpaque(false);
     }
 
     @Override
