@@ -3,13 +3,6 @@ package me.view;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import me.control.Controller;
 
@@ -17,7 +10,7 @@ public class MainMenu extends JPanel{
 
     private static MainMenu instance;
     private AudioManager am;
-    private Controller _ctrl;
+    private final Controller _ctrl;
     private Image backGround;
 
     //Components
@@ -46,7 +39,7 @@ public class MainMenu extends JPanel{
             this.setVisible(true);
             this.setOpaque(false);
         } catch (Exception e) {
-            System.err.println("Error: No se pudo cargar el fondo del menú.");
+            System.err.println("Error: Couldn't upload music.");
         }
     }
 
@@ -63,10 +56,9 @@ public class MainMenu extends JPanel{
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbcMenu = new GridBagConstraints();
         gbcMenu.gridx = 0;
-        gbcMenu.fill = GridBagConstraints.NONE; // El título no necesita estirarse
+        gbcMenu.fill = GridBagConstraints.NONE; 
         gbcMenu.anchor = GridBagConstraints.NORTH;
 
-        // 2. Añadir el Título (Fila 0)
         title = new JLabel(rescalate(1100, 600, new ImageIcon("resources/images/valknut_logo.png")));
         gbcMenu.gridy = 0;
         gbcMenu.weighty = 0.0; 

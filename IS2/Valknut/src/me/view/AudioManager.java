@@ -17,8 +17,8 @@ class AudioManager {
 
         public void playMusic(String path) {
             try {
-                File archivo = new File(path);
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivo);
+                File file = new File(path);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
                 
                 clip = AudioSystem.getClip();
                 clip.open(audioStream);
@@ -28,7 +28,7 @@ class AudioManager {
                 clip.start();
                 
             } catch (Exception e) {
-                System.err.println("Error al cargar la música: " + e.getMessage());
+                System.err.println("Music play error: " + e.getMessage());
             }
         }
 
@@ -46,11 +46,11 @@ class AudioManager {
             clip.open(audioInputStream);
             clip.start();
         } catch (Exception e) {
-            System.out.println("Error al reproducir el sonido: " + e.getMessage());
+            System.out.println("Sound play error: " + e.getMessage());
         }
     }
 
-        public void ajustarVolumen(float db) {
-            // Aquí podrías acceder directamente a componentes de la clase externa
+        public void setVolumen(float db) {
+           
         }
     }
