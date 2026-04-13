@@ -8,8 +8,8 @@ import me.model.CharacterSelectionObserver;
 public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private CardLayout cardLayout;
 	private JPanel mainPanel;
-	private MainMenu mainMenu;
-	private CharacterSelection characterSelection;
+	private final MainMenu mainMenu;
+	private final CharacterSelection characterSelection;
 	private CombatScreen combatScreen;
 	private final Controller _ctrl;
 	private final AudioManager am;
@@ -64,7 +64,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 
 	private void showMainMenu(){
-		am.sound("resources/sounds/titleMusic.wav");
+		// am.sound("resources/sounds/titleMusic.wav");
 		cardLayout.show(mainPanel, "MENU");
 		this.revalidate();
         this.repaint();
