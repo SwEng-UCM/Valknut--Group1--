@@ -1,5 +1,6 @@
 package me.view;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -11,14 +12,21 @@ import me.control.Controller;
 import me.model.CharacterSelectionObserver;
 
 public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
-	private JPanel titlePanel, scorePanel, buttonPanel, mainPanel;
-	private JLabel redLabel, blueLabel, redScore, blueScore;
+	private CardLayout cardLayout;
+	private JPanel mainPanel;
+	private MainMenu mainMenu;
 	private int selectionNumber;
 	private Controller _ctrl;
 		
 	public CtrlPanel(Controller ctrl) {
+		cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+		this.add(mainPanel);
 		_ctrl = ctrl;
 		selectionNumber = 1;
+		this.setSize(1408, 768); 
+		this.setLocationRelativeTo(null); 
+		this.setVisible(true); 
 		_ctrl.startStory();
 	}
 	
@@ -39,7 +47,16 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	
     @Override
 	public void onGameStart() {
-		createCharacterSelector();
+		showMainMenu();
+		// createCharacterSelector();
+	}
+
+	private void showMainMenu(){
+		mainMenu = MainMenu.getInstance(_ctrl);
+		mainPanel.add(mainMenu, "MENU");
+		cardLayout.show(mainPanel, "MENU");
+		this.revalidate();
+        this.repaint();
 	}
 	
 	private void createCharacterSelector() {
