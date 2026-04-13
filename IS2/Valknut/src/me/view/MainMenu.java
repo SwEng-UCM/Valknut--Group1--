@@ -32,7 +32,7 @@ public class MainMenu extends JPanel{
     private void initGUI() {
         try {
             this.backGround = new ImageIcon("resources/images/MainMenu.png").getImage();
-            this.setLayout(new GridBagLayout());
+            this.setLayout(new BorderLayout());
             this.setVisible(true);
             this.setOpaque(false);
         } catch (Exception e) {
@@ -48,13 +48,16 @@ public class MainMenu extends JPanel{
         }
     }
 
-    private void setComponents(){}
+    private void setComponents(){
+        title = new JLabel(rescalate(900, 500, new ImageIcon("resources\\images\\valknut_logo.png")));
+        this.add(title, BorderLayout.PAGE_START);
+    }
 
-    // private ImageIcon rescalate(int width, int height, ImageIcon icon){
-	// 	ImageIcon scalated_icon;
-	// 	Image im_icon = icon.getImage();
-	// 	Image scalated_im = im_icon.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-	// 	scalated_icon = new ImageIcon(scalated_im);
-	// 	return scalated_icon;
-	// }
+    private ImageIcon rescalate(int width, int height, ImageIcon icon){
+		ImageIcon scalated_icon;
+		Image im_icon = icon.getImage();
+		Image scalated_im = im_icon.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		scalated_icon = new ImageIcon(scalated_im);
+		return scalated_icon;
+	}
 }
