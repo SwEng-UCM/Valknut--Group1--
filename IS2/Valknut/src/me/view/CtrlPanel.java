@@ -17,6 +17,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private MainMenu mainMenu;
 	private int selectionNumber;
 	private Controller _ctrl;
+	private AudioManager am;
 		
 	public CtrlPanel(Controller ctrl) {
 		cardLayout = new CardLayout();
@@ -29,10 +30,12 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_ctrl.startStory();
+		am = AudioManager.getInstance();
 	}
 	
     @Override
 	public void onSelection() {
+		am.stopMusic();
 		combatGUI();
 	}
 	
@@ -53,6 +56,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 
 	private void showMainMenu(){
+		am.sound("resources/sounds/titleMusic.wav");
 		mainMenu = MainMenu.getInstance(_ctrl);
 		mainPanel.add(mainMenu, "MENU");
 		cardLayout.show(mainPanel, "MENU");
