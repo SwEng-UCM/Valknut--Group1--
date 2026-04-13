@@ -35,8 +35,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	
     @Override
 	public void onSelection() {
-		am.stopMusic();
-		combatGUI();
+		createCharacterSelector();
 	}
 	
     @Override
