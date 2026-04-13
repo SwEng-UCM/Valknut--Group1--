@@ -49,8 +49,55 @@ public class MainMenu extends JPanel{
     }
 
     private void setComponents(){
-        title = new JLabel(rescalate(900, 500, new ImageIcon("resources\\images\\valknut_logo.png")));
-        this.add(title, BorderLayout.PAGE_START);
+
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbcMenu = new GridBagConstraints();
+        gbcMenu.gridx = 0;
+        gbcMenu.fill = GridBagConstraints.NONE; // El título no necesita estirarse
+        gbcMenu.anchor = GridBagConstraints.NORTH;
+
+        // 2. Añadir el Título (Fila 0)
+        title = new JLabel(rescalate(1100, 600, new ImageIcon("resources/images/valknut_logo.png")));
+        gbcMenu.gridy = 0;
+        gbcMenu.weighty = 0.0; 
+        gbcMenu.insets = new Insets(0, 0, -60, 0);
+        this.add(title, gbcMenu);
+
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setOpaque(false);
+
+        
+        gbcMenu.gridy = 1;
+        gbcMenu.weighty = 0.1; 
+        gbcMenu.anchor = GridBagConstraints.NORTH; // Horizontal stretch
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        btnPlay = createButton();
+        btnMP = createButton();
+        btnSettings = createButton();
+
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.NONE; // Cambia a NONE para que no intente estirar el botón
+        gbc.insets = new Insets(0, 0, -30, 0); // Puedes usar valores negativos si quieres pegarlos aún más
+        gbc.weighty = 0.0; 
+
+        gbc.gridy = 0; buttonPanel.add(btnPlay, gbc);
+        gbc.gridy = 1; buttonPanel.add(btnMP, gbc);
+        gbc.gridy = 2; buttonPanel.add(btnSettings, gbc);
+
+        this.add(buttonPanel, gbcMenu);
+
+    }
+
+    private JButton createButton(){
+        JButton jb = new JButton();
+        jb.setIcon(rescalate(300, 150, new ImageIcon("resources/images/menuButtons.png")));
+        jb.setContentAreaFilled(false); 
+        jb.setBorderPainted(false);     
+        jb.setFocusPainted(false);      
+        jb.setOpaque(false);
+        return jb;
     }
 
     private ImageIcon rescalate(int width, int height, ImageIcon icon){
