@@ -43,7 +43,6 @@ public class MainMenu extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Dibujamos la imagen para que ocupe todo el panel (reescalable)
         if (backGround != null) {
             g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
         }
