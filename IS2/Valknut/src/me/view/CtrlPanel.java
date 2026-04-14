@@ -61,7 +61,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	
     @Override
 	public void onGameStart() {
-		AudioManager.getInstance().sound("resources/sounds/titleMusic.wav");
+		AudioManager.getInstance().playMusic("resources/sounds/titleMusic.wav");
 		showMainMenu();
 	}
 

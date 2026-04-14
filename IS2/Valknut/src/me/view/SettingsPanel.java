@@ -6,10 +6,14 @@ import me.control.Controller;
 
 public class SettingsPanel extends JPanel{
     private static SettingsPanel instance;
-    private JSlider js;
     private Controller _ctrl;
     private Image backGround;
     private JButton exit;
+    private JButton stop;
+    private JButton increase;
+    private JButton decrease;
+    private int volume = 50;
+    private JLabel lblVolumen;
 
     private SettingsPanel(Controller ctrl){
          _ctrl = ctrl;
@@ -40,34 +44,61 @@ public class SettingsPanel extends JPanel{
     private void setComponents(){
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        JLabel lblVolumen = new JLabel("Volume:");
+        lblVolumen = new JLabel("Music: " + volume);
         lblVolumen.setForeground(Color.WHITE); 
         gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(100, 10, 100, 10);
+        gbc.gridy = 0;
+        gbc.insets = new Insets(100, 10, 200, 10);
         this.add(lblVolumen, gbc);
 
-        js = new JSlider(0, 100, 50);
-        js.setMajorTickSpacing(2);
-        js.setPaintTicks(true);     
-        js.setPaintLabels(true);    
-        js.setOpaque(false);
-        js.addChangeListener(e -> {
-            int valor = js.getValue();
-            AudioManager.getInstance().setVolume(valor);
-        });
-        gbc.gridx = 1; 
-        gbc.gridy = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL; 
-        gbc.weightx = 1.0; 
-        gbc.weighty = 2.0;
-        this.add(js, gbc);
 
-        exit = ViewUtils.createButton("resources/images/menuButtons.png", "resources/images/menuButtons.png");
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setOpaque(false);
+
+        GridBagConstraints gbcPanel = new GridBagConstraints();
+
+        gbcPanel.gridx = 0; 
+        gbcPanel.gridy = 0;
+        gbcPanel.fill = GridBagConstraints.HORIZONTAL; 
+        gbcPanel.weightx = 1.0; 
+        
+        increase = ViewUtils.createButton("resources\\images\\Buttons\\addButton_NS.png", "resources\\images\\Buttons\\addButton_S.png");
+        increase.addActionListener(e ->{
+            volume += 5;
+            volume = Math.min(volume, 100);
+            AudioManager.getInstance().setVolume(volume);
+            String s = (volume == 100 ? "Music:" : volume > 9 ? "Music: " : "Music:  ");
+            lblVolumen.setText(s + volume);
+        });
+        decrease = ViewUtils.createButton("resources\\images\\Buttons\\subButton_NS.png", "resources\\images\\Buttons\\subButton_S.png");
+        decrease.addActionListener(e ->{
+            volume -= 5;
+            volume = Math.max(0, volume);
+            AudioManager.getInstance().setVolume(volume);
+            String s = (volume == 100 ? "Music:" : volume > 9 ? "Music: " : "Music:  ");
+            lblVolumen.setText(s + volume);
+        });
+        stop = ViewUtils.createButton("resources\\images\\Buttons\\stopButton_NS.png", "resources\\images\\Buttons\\stopButton_S.png");
+        stop.addActionListener(e ->{
+            volume = 50;
+            AudioManager.getInstance().stopMusic();
+            lblVolumen.setText("Volume: " + volume);
+        });
+
+        gbcPanel.gridx = 0; buttonPanel.add(increase, gbcPanel);
+        gbcPanel.gridx = 1; buttonPanel.add(decrease, gbcPanel);
+        gbcPanel.gridx = 2; buttonPanel.add(stop, gbcPanel);
+
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.NORTH; 
+
+        this.add(buttonPanel, gbc);
+
+        exit = ViewUtils.createButton("resources\\images\\Buttons\\exitButton_NS.png", "resources\\images\\Buttons\\exitButton_S.png");
         exit.addActionListener(e ->{
             _ctrl.menuScreen();
         });
-        gbc.gridy = 2;
+        gbc.gridy = 1;
         gbc.fill = GridBagConstraints.NONE;
         gbc.insets = new Insets(100, 20, 0, 20);
         gbc.weightx = 0.1; 
