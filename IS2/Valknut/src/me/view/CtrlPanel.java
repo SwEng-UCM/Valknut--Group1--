@@ -8,23 +8,24 @@ import me.model.CharacterSelectionObserver;
 public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private CardLayout cardLayout;
 	private JPanel mainPanel;
+	private SettingsPanel settingsPanel;
 	private final MainMenu mainMenu;
 	private final CharacterSelection characterSelection;
 	private CombatScreen combatScreen;
 	private final Controller _ctrl;
-	private final AudioManager am;
 		
 	public CtrlPanel(Controller ctrl) {
-		am = AudioManager.getInstance();
 		_ctrl = ctrl;
 
 		cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 		mainMenu = MainMenu.getInstance(_ctrl);
+		settingsPanel = SettingsPanel.getInstance(_ctrl);
 		characterSelection = CharacterSelection.getInstance(_ctrl);
 		combatScreen = CombatScreen.getInstance(_ctrl);
 
 		mainPanel.add(mainMenu, "MENU");
+		mainPanel.add(settingsPanel, "SETTINGS");
 		mainPanel.add(characterSelection, "CHARACTER SELECTION");
 		mainPanel.add(combatScreen, "COMBAT SCREEN");
 
@@ -60,11 +61,15 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	
     @Override
 	public void onGameStart() {
+		AudioManager.getInstance().sound("resources/sounds/titleMusic.wav");
 		showMainMenu();
 	}
 
-	private void showMainMenu(){
-		// am.sound("resources/sounds/titleMusic.wav");
+	public void settingScreen(){
+		cardLayout.show(mainPanel, "SETTINGS");
+	}
+
+	public void showMainMenu(){
 		cardLayout.show(mainPanel, "MENU");
 		this.revalidate();
         this.repaint();
@@ -137,12 +142,4 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 // 		this.setSize(1200, 850);
 // 		this.setVisible(true);
 // 	}
-
-	private ImageIcon rescalate(int width, int height, ImageIcon icon){
-		ImageIcon scalated_icon;
-		Image im_icon = icon.getImage();
-		Image scalated_im = im_icon.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		scalated_icon = new ImageIcon(scalated_im);
-		return scalated_icon;
-	}
 }
