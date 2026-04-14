@@ -68,12 +68,12 @@ public class MainMenu extends JPanel{
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        btnPlay = ViewUtils.createButton("resources/images/playButton_NS.png", "resources/images/playButton_S.png");
+        btnPlay = ViewUtils.createButton("resources/images/Buttons/playButton_NS.png", "resources/images/Buttons/playButton_S.png");
         btnPlay.addActionListener(e -> {
             _ctrl.charactersScreen();
         });
-        btnMP = ViewUtils.createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
-        btnSettings = ViewUtils.createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
+        btnMP = ViewUtils.createButton("resources/images/Buttons/multiButton_NS.png", "resources/images/Buttons/multiButton_S.png");
+        btnSettings = ViewUtils.createButton("resources/images/Buttons/settingsButton_NS.png", "resources/images/Buttons/settingsButton_S.png");
         btnSettings.addActionListener(e -> {
             _ctrl.settingScreen();
         });
