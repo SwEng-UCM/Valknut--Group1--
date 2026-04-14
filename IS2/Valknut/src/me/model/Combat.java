@@ -1,12 +1,14 @@
 package me.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import me.model.items.Item;
 import me.view.Messages;
 
 
-public class Combat {
+public class Combat implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final List<Hero> heroes;
     private final List<Enemy> enemies;
     private List<Item> items;
