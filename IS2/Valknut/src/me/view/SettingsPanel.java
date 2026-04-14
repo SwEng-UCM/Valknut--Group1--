@@ -96,6 +96,7 @@ public class SettingsPanel extends JPanel{
 
         exit = ViewUtils.createButton("resources\\images\\Buttons\\exitButton_NS.png", "resources\\images\\Buttons\\exitButton_S.png");
         exit.addActionListener(e ->{
+            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             _ctrl.menuScreen();
         });
         gbc.gridy = 1;
