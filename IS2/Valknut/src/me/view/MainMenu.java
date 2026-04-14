@@ -51,22 +51,21 @@ public class MainMenu extends JPanel{
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbcMenu = new GridBagConstraints();
         gbcMenu.gridx = 0;
-        gbcMenu.fill = GridBagConstraints.NONE; 
+        gbcMenu.fill = GridBagConstraints.NONE;
         gbcMenu.anchor = GridBagConstraints.NORTH;
 
-        title = new JLabel(rescalate(1100, 600, new ImageIcon("resources/images/valknut_logo.png")));
+        title = new JLabel(rescalate(1200, 600, new ImageIcon("resources/images/valknut_logo.png")));
         gbcMenu.gridy = 0;
-        gbcMenu.weighty = 0.0; 
-        gbcMenu.insets = new Insets(0, 0, -60, 0);
+        gbcMenu.weighty = 0.0;
+        gbcMenu.insets = new Insets(-20, 0, -60, 0);
         this.add(title, gbcMenu);
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setOpaque(false);
 
-        
         gbcMenu.gridy = 1;
-        gbcMenu.weighty = 0.1; 
-        gbcMenu.anchor = GridBagConstraints.NORTH; // Horizontal stretch
+        gbcMenu.weighty = 0.1;
+        gbcMenu.anchor = GridBagConstraints.NORTH;
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -74,43 +73,38 @@ public class MainMenu extends JPanel{
         btnPlay.addActionListener(e -> {
             _ctrl.charactersScreen();
         });
-        btnMP = createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
-        btnSettings = createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
 
         JButton btnLoad = new JButton("LOAD GAME");
-
-        btnLoad.setPreferredSize(new Dimension(400, 80));
-        btnLoad.setFocusPainted(false);
-        btnLoad.setContentAreaFilled(false);
-        btnLoad.setBorderPainted(true);
-
+        btnLoad.setPreferredSize(new Dimension(200, 80));
         btnLoad.addActionListener(e -> {
             _ctrl.loadGame();
         });
 
-        gbc.gridx = 0;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.insets = new Insets(-20, 0, 0, 0);
-        gbc.weighty = 0.0;
+        btnMP = createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
+        btnSettings = createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
 
-        gbc.gridy = 0; buttonPanel.add(btnPlay, gbc);
-        gbc.gridy = 1; buttonPanel.add(btnLoad, gbc);
-        gbc.gridy = 2; buttonPanel.add(btnMP, gbc);
-        gbc.gridy = 3; buttonPanel.add(btnSettings, gbc);
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(250, 20, 0, 20);
+        gbc.weightx = 0.1;
+
+        gbc.gridx = 0; buttonPanel.add(btnMP, gbc);
+        gbc.gridx = 1; buttonPanel.add(btnPlay, gbc);
+        gbc.gridx = 2; buttonPanel.add(btnLoad, gbc);
+        gbc.gridx = 3; buttonPanel.add(btnSettings, gbc);
 
         this.add(buttonPanel, gbcMenu);
-
     }
 
     private JButton createButton(String path, String over){
         JButton jb = new JButton();
-        jb.setIcon(rescalate(400, 150, new ImageIcon(path)));
+        jb.setIcon(rescalate(300, 100, new ImageIcon(path)));
         jb.setContentAreaFilled(false); 
         jb.setBorderPainted(false);     
         jb.setFocusPainted(false);      
         jb.setOpaque(false);
         jb.setRolloverEnabled(true);
-        jb.setRolloverIcon(rescalate(400, 150, new ImageIcon(over)));
+        jb.setRolloverIcon(rescalate(300, 100, new ImageIcon(over)));
         jb.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
