@@ -1,8 +1,6 @@
 package me.view;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.*;
 import me.control.Controller;
 
@@ -54,7 +52,7 @@ public class MainMenu extends JPanel{
         gbcMenu.fill = GridBagConstraints.NONE; 
         gbcMenu.anchor = GridBagConstraints.NORTH;
 
-        title = new JLabel(rescalate(1200, 600, new ImageIcon("resources/images/valknut_logo.png")));
+        title = new JLabel(ViewUtils.rescalate(1200, 600, new ImageIcon("resources/images/valknut_logo.png")));
         gbcMenu.gridy = 0;
         gbcMenu.weighty = 0.0; 
         gbcMenu.insets = new Insets(-20, 0, -60, 0);
@@ -70,12 +68,15 @@ public class MainMenu extends JPanel{
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        btnPlay = createButton("resources/images/playButton_NS.png", "resources/images/playButton_S.png");
+        btnPlay = ViewUtils.createButton("resources/images/playButton_NS.png", "resources/images/playButton_S.png");
         btnPlay.addActionListener(e -> {
             _ctrl.charactersScreen();
         });
-        btnMP = createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
-        btnSettings = createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
+        btnMP = ViewUtils.createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
+        btnSettings = ViewUtils.createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
+        btnSettings.addActionListener(e -> {
+            _ctrl.settingScreen();
+        });
 
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.NONE;
@@ -89,34 +90,5 @@ public class MainMenu extends JPanel{
         this.add(buttonPanel, gbcMenu);
 
     }
-
-    private JButton createButton(String path, String over){
-        JButton jb = new JButton();
-        jb.setIcon(rescalate(300, 100, new ImageIcon(path)));
-        jb.setContentAreaFilled(false); 
-        jb.setBorderPainted(false);     
-        jb.setFocusPainted(false);      
-        jb.setOpaque(false);
-        jb.setRolloverEnabled(true);
-        jb.setRolloverIcon(rescalate(300, 100, new ImageIcon(over)));
-        jb.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                am.sound("resources/sounds/selection.wav");
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
-        return jb;
-    }
-
-    private ImageIcon rescalate(int width, int height, ImageIcon icon){
-		ImageIcon scalated_icon;
-		Image im_icon = icon.getImage();
-		Image scalated_im = im_icon.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		scalated_icon = new ImageIcon(scalated_im);
-		return scalated_icon;
-	}
+    
 }
