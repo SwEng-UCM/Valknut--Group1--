@@ -88,6 +88,18 @@ public class Story {
 	
 	// Chapter 2
 	
+	public String startSecondChapter() {
+		return Messages.CHAPTER_TWO_BEGINING;
+	}
+	
+	public String middleSecondChapter() {
+		return String.format(Messages.CHAPTER_TWO_MIDDLE, formatNames(getHeroNames(heroes)));
+	}
+	
+	public String endSecongChapter() {
+		return Messages.CHAPTER_TWO_END;
+	}
+ 	
 	
 
 }
