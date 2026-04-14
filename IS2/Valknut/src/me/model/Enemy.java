@@ -1,6 +1,7 @@
 package me.model;
 
 import java.io.Serializable;
+//for saving and loading
 import java.util.List;
 
 public class Enemy extends Character implements Serializable {
