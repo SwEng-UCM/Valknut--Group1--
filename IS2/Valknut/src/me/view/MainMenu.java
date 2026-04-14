@@ -1,8 +1,6 @@
 package me.view;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.*;
 import me.control.Controller;
 
@@ -17,6 +15,7 @@ public class MainMenu extends JPanel{
     private JButton btnPlay;
     private JButton btnSettings;
     private JButton btnMP;
+    private JButton btnExit;
     private JLabel title;
 
     private MainMenu(Controller ctrl){
@@ -54,10 +53,10 @@ public class MainMenu extends JPanel{
         gbcMenu.fill = GridBagConstraints.NONE; 
         gbcMenu.anchor = GridBagConstraints.NORTH;
 
-        title = new JLabel(rescalate(1100, 600, new ImageIcon("resources/images/valknut_logo.png")));
+        title = new JLabel(ViewUtils.rescalate(1200, 600, new ImageIcon("resources/images/valknut_logo.png")));
         gbcMenu.gridy = 0;
         gbcMenu.weighty = 0.0; 
-        gbcMenu.insets = new Insets(0, 0, -60, 0);
+        gbcMenu.insets = new Insets(-20, 0, -60, 0);
         this.add(title, gbcMenu);
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
@@ -70,53 +69,32 @@ public class MainMenu extends JPanel{
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        btnPlay = createButton("resources/images/playButton_NS.png", "resources/images/playButton_S.png");
+        btnPlay = ViewUtils.createButton("resources/images/Buttons/playButton_NS.png", "resources/images/Buttons/playButton_S.png");
         btnPlay.addActionListener(e -> {
             _ctrl.charactersScreen();
         });
-        btnMP = createButton("resources/images/multiButton_NS.png", "resources/images/multiButton_S.png");
-        btnSettings = createButton("resources/images/settingsButton_NS.png", "resources/images/settingsButton_S.png");
+        btnMP = ViewUtils.createButton("resources/images/Buttons/multiButton_NS.png", "resources/images/Buttons/multiButton_S.png");
+        btnSettings = ViewUtils.createButton("resources/images/Buttons/settingsButton_NS.png", "resources/images/Buttons/settingsButton_S.png");
+        btnSettings.addActionListener(e -> {
+            _ctrl.settingScreen();
+        });
+        btnExit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");
+        btnExit.addActionListener(e -> {
+            _ctrl.exit();
+        });
 
-        gbc.gridx = 0;
+        gbc.gridy = 0;
         gbc.fill = GridBagConstraints.NONE;
-        gbc.insets = new Insets(-20, 0, 0, 0);
-        gbc.weighty = 0.0; 
+        gbc.insets = new Insets(250, 20, 0, 20);
+        gbc.weightx = 0.1; 
 
-        gbc.gridy = 0; buttonPanel.add(btnPlay, gbc);
-        gbc.gridy = 1; buttonPanel.add(btnMP, gbc);
-        gbc.gridy = 2; buttonPanel.add(btnSettings, gbc);
+        gbc.gridx = 1; buttonPanel.add(btnPlay, gbc);
+        gbc.gridx = 0; buttonPanel.add(btnMP, gbc);
+        gbc.gridx = 2; buttonPanel.add(btnSettings, gbc);
+        gbc.gridx = 3; buttonPanel.add(btnExit, gbc);
 
         this.add(buttonPanel, gbcMenu);
 
     }
-
-    private JButton createButton(String path, String over){
-        JButton jb = new JButton();
-        jb.setIcon(rescalate(400, 150, new ImageIcon(path)));
-        jb.setContentAreaFilled(false); 
-        jb.setBorderPainted(false);     
-        jb.setFocusPainted(false);      
-        jb.setOpaque(false);
-        jb.setRolloverEnabled(true);
-        jb.setRolloverIcon(rescalate(400, 150, new ImageIcon(over)));
-        jb.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                am.sound("resources/sounds/selection.wav");
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
-        return jb;
-    }
-
-    private ImageIcon rescalate(int width, int height, ImageIcon icon){
-		ImageIcon scalated_icon;
-		Image im_icon = icon.getImage();
-		Image scalated_im = im_icon.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		scalated_icon = new ImageIcon(scalated_im);
-		return scalated_icon;
-	}
+    
 }

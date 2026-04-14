@@ -43,8 +43,16 @@ public class Controller {
     	controlPanel.onGameStart();
     }
 
+    public void menuScreen(){
+        controlPanel.showMainMenu();
+    }
+
     public void charactersScreen(){
         controlPanel.onSelection();
+    }
+
+    public void settingScreen(){
+        controlPanel.settingScreen();
     }
     
     public void startStory() {
@@ -161,4 +169,8 @@ public class Controller {
 
         return sb.toString();
 	}
+
+    public void exit(){
+        controlPanel.onQuit();
+    }
 }
