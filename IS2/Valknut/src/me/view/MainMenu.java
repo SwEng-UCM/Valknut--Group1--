@@ -15,6 +15,7 @@ public class MainMenu extends JPanel{
     private JButton btnPlay;
     private JButton btnSettings;
     private JButton btnMP;
+    private JButton btnExit;
     private JLabel title;
 
     private MainMenu(Controller ctrl){
@@ -77,6 +78,10 @@ public class MainMenu extends JPanel{
         btnSettings.addActionListener(e -> {
             _ctrl.settingScreen();
         });
+        btnExit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");
+        btnExit.addActionListener(e -> {
+            _ctrl.exit();
+        });
 
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.NONE;
@@ -86,6 +91,7 @@ public class MainMenu extends JPanel{
         gbc.gridx = 1; buttonPanel.add(btnPlay, gbc);
         gbc.gridx = 0; buttonPanel.add(btnMP, gbc);
         gbc.gridx = 2; buttonPanel.add(btnSettings, gbc);
+        gbc.gridx = 3; buttonPanel.add(btnExit, gbc);
 
         this.add(buttonPanel, gbcMenu);
 

@@ -169,4 +169,8 @@ public class Controller {
 
         return sb.toString();
 	}
+
+    public void exit(){
+        controlPanel.onQuit();
+    }
 }
