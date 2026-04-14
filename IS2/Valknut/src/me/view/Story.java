@@ -99,7 +99,20 @@ public class Story {
 	public String endSecongChapter() {
 		return Messages.CHAPTER_TWO_END;
 	}
+	
+	//Chapter 3
+	
+	public String startThridChapter() {
+		return Messages.CHAPTER_THREE_BEGGINING;
+	}
  	
+	public String conflictThridChapter() { //Decide
+		return "";
+	}
+	
+	public String endThridChapter() {
+		return Messages.CHAPTER_THREE_END;
+	}
 	
 
 }
