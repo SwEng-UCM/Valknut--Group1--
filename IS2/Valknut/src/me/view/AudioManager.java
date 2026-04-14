@@ -7,7 +7,7 @@ import javax.sound.sampled.*;
 class AudioManager {
     public Clip music;
     private static AudioManager am_instance;
-    private float currentVolumeDB = (float) Math.log10((50 / 100.0) * 20.0);
+    private float currentVolumeDB = 0.0f;
 
     public static AudioManager getInstance(){
         if(am_instance == null)
@@ -21,7 +21,7 @@ class AudioManager {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(path));
             music = AudioSystem.getClip();
             music.open(audioStream);
-
+            setVolume(50);
             applyVolume();
 
             music.loop(Clip.LOOP_CONTINUOUSLY);
