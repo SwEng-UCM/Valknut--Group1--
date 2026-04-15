@@ -93,7 +93,7 @@ public class Messages {
 
 	public static final String CHAPTER_TWO_MIDDLE = """
             As you approach the undead warriors, the fog becomes denser and the smell more putrid. A voice calls from beyond  
-            your range of sight “Who goes there and what is your business in these lands?” “We are * and *, and we come in search   
+            your range of sight “Who goes there and what is your business in these lands?” “We are %s, and we come in search   
             enough of clues to find a legendary weapon to carry to battle”. The voice abruptly bursts into laughter. “There are no 
             swords here, but there IS battle!” """ ;
 	
@@ -133,7 +133,7 @@ public class Messages {
 	
 	public static final String CHAPTER_FOUR_END = """
             “It seems like underestimating us will cost you your life”. player that was infected. “Wait, what? We are definitely not killing them” 
-            * player that was not infected. * “Why not? They were trying to kill us first, and we already killed Fafnir, what’s different from this
+            %s “Why not? They were trying to kill us first, and we already killed Fafnir, what’s different from this
             situation?” “The difference is that we didn’t have a choice with Fafnir, these two are still alive and they will remain that way when
             we leave” “No they won’t, I’m going to kill them either with or without you” “Over my dead body” You both hesitate for a moment, knowing that 
             the other doesn’t seem to be willing to change their decision. “Fine, we’ll leave them alive, maybe it’ll mean that Fenrir gives us
@@ -149,15 +149,15 @@ public class Messages {
              you have under your guard!”. The wolf bursts out in laughter. “You think the gods left me a parting gift before 
              chaining me to this desolate place? I don’t know who fooled you, but it seems they did a pretty good job at it, 
              although it does not seem all too difficult”. “He must be lying! It’s impossible that all those battles were for nothing!
-             If you won’t willingly tell us were the weapon is, I’ll just torture you myself into giving up its location” * player * ’s eyes 
-             are glowing red, * other player * has seen that red glow somewhere else but can’t recall where. “ * player * stop, I don’t think he’s lying,
+             If you won’t willingly tell us were the weapon is, I’ll just torture you myself into giving up its location” %s ’s eyes 
+             are glowing red, %s has seen that red glow somewhere else but can’t recall where. “ %s stop, I don’t think he’s lying,
              we should’ve never believed in the Dragursin the first place”. “Nonsense, I bet he’s hiding the weapon all to himself. 
              And if not, I can always make one myself out of his carved bones”. Fenrir’s tone is now one of curiosity rather than the taunting
              one he had before. “Oh? I see you’ve encountered Fafnir before arriving here and it seems he left you a parting gift” 
-             * player * realizes; [“That’s it, the red glow from player’s eyes is the same as that of Fafnir when we encountered him! 
-             It would also explain player’s violent nature”] “ * Brother/Sister/Whatever * stop, the cloud that Fafnir hit you with is changing you,
+             %s realizes; [“That’s it, the red glow from player’s eyes is the same as that of Fafnir when we encountered him! 
+             It would also explain player’s violent nature”] “ %s stop, the cloud that Fafnir hit you with is changing you,
              think for a moment what you’re proposing we do” “I am well aware, and I doubt you can stop me if you get in my way” 
-             * player * ’s voice lowers, saddened but confident; “I guess we will find out now”. """ ;
+             %s ’s voice lowers, saddened but confident; “I guess we will find out now”. """ ;
 
 	// Story Final chapter
 	
