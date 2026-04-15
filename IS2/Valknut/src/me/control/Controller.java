@@ -11,7 +11,6 @@ public class Controller {
 
     private static StoryView sv;
 	private static CombatView cv;
-	private static MenuView mv;
     private static Controller instance;
     private Combat cb;
     private final CtrlPanel controlPanel;
@@ -20,7 +19,6 @@ public class Controller {
     private Controller(){
         sv = StoryView.getInstance();
 		cv = CombatView.getInstance();
-		mv = MenuView.getInstance();
         controlPanel = new CtrlPanel(this);
     }
 
@@ -30,10 +28,6 @@ public class Controller {
 
     public void combatPrint(String s){
         cv.printLine(s);
-    }
-
-    public void menuPrint(String s){
-        mv.printLine(s);
     }
     
     public int getNumEnemies() {

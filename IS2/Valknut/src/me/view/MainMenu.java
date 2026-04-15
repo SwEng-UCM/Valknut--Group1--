@@ -67,7 +67,7 @@ public class MainMenu extends JPanel {
         );
 
         gbcMenu.gridy = 0;
-        gbcMenu.insets = new Insets(-20, 0, -60, 0);
+        gbcMenu.insets = new Insets(0, 0, -60, 0);
         this.add(title, gbcMenu);
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
@@ -81,31 +81,36 @@ public class MainMenu extends JPanel {
                 "resources/images/Buttons/playButton_NS.png",
                 "resources/images/Buttons/playButton_S.png"
         );
-        btnPlay.addActionListener(e -> _ctrl.charactersScreen());
+        btnPlay.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.charactersScreen();});
 
         btnLoad = new JButton("LOAD GAME");
         btnLoad.setPreferredSize(new Dimension(200, 80));
-        btnLoad.addActionListener(e -> _ctrl.loadGame());
+        btnLoad.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.loadGame();});
 
         btnMP = ViewUtils.createButton(
                 "resources/images/Buttons/multiButton_NS.png",
                 "resources/images/Buttons/multiButton_S.png"
         );
+        btnMP.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.startMultiplayer();});
 
         btnSettings = ViewUtils.createButton(
                 "resources/images/Buttons/settingsButton_NS.png",
                 "resources/images/Buttons/settingsButton_S.png"
         );
-        btnSettings.addActionListener(e -> _ctrl.settingScreen());
+        btnSettings.addActionListener(e ->{
+            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            _ctrl.setPreviousScreenToSettings("MENU"); 
+            _ctrl.settingScreen();
+        });
 
         btnExit = ViewUtils.createButton(
                 "resources/images/Buttons/exitButton_NS.png",
                 "resources/images/Buttons/exitButton_S.png"
         );
-        btnExit.addActionListener(e -> _ctrl.exit());
+        btnExit.addActionListener(e ->_ctrl.exit());
 
         gbc.gridy = 0;
-        gbc.insets = new Insets(250, 20, 0, 20);
+        gbc.insets = new Insets(300, 20, 220, 20);
 
         gbc.gridx = 0;
         buttonPanel.add(btnMP, gbc);
