@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
 
-class AudioManager {
+public class AudioManager {
     public Clip music;
     private static AudioManager am_instance;
     private float currentVolumeDB = 0.0f;

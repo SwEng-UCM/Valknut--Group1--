@@ -1,5 +1,7 @@
 package me.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import me.model.Hero;
 
 public class StoryView extends ConsoleIO{
@@ -30,7 +32,9 @@ public class StoryView extends ConsoleIO{
 	}
 
     public void tellFirstLinesChapterOne(Hero h1, Hero h2){
-        st.addHeroes(h1, h2);
+        List<Hero> aux = new ArrayList<>();
+        aux.add(h1); aux.add(h2);
+        st.addHeroes(aux);
         printLine(st.startFirstChapter());
         print(Messages.NEW_LINE);
     }

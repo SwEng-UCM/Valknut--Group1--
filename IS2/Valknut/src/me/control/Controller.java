@@ -2,9 +2,9 @@ package me.control;
 
 import me.model.*;
 import me.model.items.*;
-import me.view.*;
 import me.model.save.SaveGameData;
 import me.model.save.SaveGameManager;
+import me.view.*;
 
 
 public class Controller {
@@ -42,7 +42,12 @@ public class Controller {
 
     public void run(){
     	cb = initCmb();
-    	controlPanel.onGameStart();
+    	startGame();
+    }
+    public void startGame(){
+        AudioManager.getInstance().stopMusic();
+        AudioManager.getInstance().playMusic("resources/sounds/titleMusic.wav");
+        controlPanel.onGameStart();
     }
 
     public void menuScreen(){
@@ -53,8 +58,22 @@ public class Controller {
         controlPanel.onSelection();
     }
 
+    public void setPreviousScreenToSettings(String s){
+        controlPanel.setPreviousScreenToSettings(s);
+    }
+
     public void settingScreen(){
         controlPanel.settingScreen();
+    }
+
+    public void startMultiplayer(){
+        AudioManager.getInstance().stopMusic();
+        AudioManager.getInstance().playMusic("resources/sounds/internetMusic.wav");
+        multiplayerScreen();
+    }
+
+    public void multiplayerScreen(){
+        controlPanel.multiplayerScreen();
     }
     
     public void startStory() {
