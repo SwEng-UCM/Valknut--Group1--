@@ -8,10 +8,11 @@ import me.model.CharacterSelectionObserver;
 public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private CardLayout cardLayout;
 	private JPanel mainPanel;
-	private SettingsPanel settingsPanel;
+	private final SettingsPanel settingsPanel;
 	private final MainMenu mainMenu;
 	private final CharacterSelection characterSelection;
-	private CombatScreen combatScreen;
+	private final CombatScreen combatScreen;
+	private final MultiPlayerScreen multiPlayerScreen;
 	private final Controller _ctrl;
 		
 	public CtrlPanel(Controller ctrl) {
@@ -19,15 +20,17 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 
 		cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
-		mainMenu = MainMenu.getInstance(_ctrl);
-		settingsPanel = SettingsPanel.getInstance(_ctrl);
-		characterSelection = CharacterSelection.getInstance(_ctrl);
-		combatScreen = CombatScreen.getInstance(_ctrl);
+		mainMenu = MainMenu.getInstance(ctrl);
+		settingsPanel = SettingsPanel.getInstance(ctrl);
+		characterSelection = CharacterSelection.getInstance(ctrl);
+		combatScreen = CombatScreen.getInstance(ctrl);
+		multiPlayerScreen = MultiPlayerScreen.getInstance(ctrl);
 
 		mainPanel.add(mainMenu, "MENU");
 		mainPanel.add(settingsPanel, "SETTINGS");
 		mainPanel.add(characterSelection, "CHARACTER SELECTION");
 		mainPanel.add(combatScreen, "COMBAT SCREEN");
+		mainPanel.add(multiPlayerScreen, "MULTIPLAYER");
 
 		this.add(mainPanel);
 		this.setSize(1408, 768); 
@@ -89,6 +92,11 @@ public void onQuit() {
 	public void onGameStart() {
 		AudioManager.getInstance().playMusic("resources/sounds/titleMusic.wav");
 		showMainMenu();
+	}
+
+	public void multiplayerScreen(){
+		AudioManager.getInstance().stopMusic();
+		cardLayout.show(mainPanel, "MULTIPLAYER");
 	}
 
 	public void settingScreen(){

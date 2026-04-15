@@ -91,6 +91,7 @@ public class MainMenu extends JPanel {
                 "resources/images/Buttons/multiButton_NS.png",
                 "resources/images/Buttons/multiButton_S.png"
         );
+        btnMP.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.multiplayerScreen();});
 
         btnSettings = ViewUtils.createButton(
                 "resources/images/Buttons/settingsButton_NS.png",

@@ -2,9 +2,9 @@ package me.control;
 
 import me.model.*;
 import me.model.items.*;
-import me.view.*;
 import me.model.save.SaveGameData;
 import me.model.save.SaveGameManager;
+import me.view.*;
 
 
 public class Controller {
@@ -42,7 +42,10 @@ public class Controller {
 
     public void run(){
     	cb = initCmb();
-    	controlPanel.onGameStart();
+    	startGame();
+    }
+    public void startGame(){
+        controlPanel.onGameStart();
     }
 
     public void menuScreen(){
@@ -55,6 +58,10 @@ public class Controller {
 
     public void settingScreen(){
         controlPanel.settingScreen();
+    }
+
+    public void multiplayerScreen(){
+        controlPanel.multiplayerScreen();
     }
     
     public void startStory() {
