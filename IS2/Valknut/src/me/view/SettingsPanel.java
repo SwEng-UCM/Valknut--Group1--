@@ -86,8 +86,9 @@ public class SettingsPanel extends JPanel{
         stop = ViewUtils.createButton("resources\\images\\Buttons\\stopButton_NS.png", "resources\\images\\Buttons\\stopButton_S.png");
         stop.addActionListener(e ->{
             volume = 50;
+            AudioManager.getInstance().setVolume(volume);
             AudioManager.getInstance().stopMusic();
-            lblVolumen.setText("Volume: " + volume);
+            lblVolumen.setText("Music: " + volume);
         });
 
         gbcPanel.gridx = 0; buttonPanel.add(increase, gbcPanel);

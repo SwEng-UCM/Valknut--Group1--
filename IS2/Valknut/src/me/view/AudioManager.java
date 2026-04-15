@@ -22,7 +22,6 @@ public class AudioManager {
             music = AudioSystem.getClip();
             music.open(audioStream);
             applyVolume();
-
             music.loop(Clip.LOOP_CONTINUOUSLY);
             music.start();
             
