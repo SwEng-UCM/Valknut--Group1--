@@ -1,10 +1,7 @@
 package me.view;
 
 import java.awt.*;
-import java.lang.reflect.InaccessibleObjectException;
-
 import javax.swing.*;
-import javax.swing.text.View;
 import me.control.Controller;
 
 public class MultiPlayerScreen extends JPanel{
@@ -52,6 +49,12 @@ public class MultiPlayerScreen extends JPanel{
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             _ctrl.startGame();
         });
+        JButton settings = ViewUtils.createButton("resources/images/Buttons/settingsButton_NS.png", "resources/images/Buttons/settingsButton_S.png");
+        settings.addActionListener(e -> {
+            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            _ctrl.setPreviousScreenToSettings("MULTIPLAYER"); 
+            _ctrl.settingScreen();
+        });
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -71,8 +74,12 @@ public class MultiPlayerScreen extends JPanel{
 
         gbc.gridx = 0;     
         gbc.gridy = 1;      
-        gbc.gridwidth = 2;  
-        gbc.anchor = GridBagConstraints.CENTER; 
+        gbc.gridwidth = 1;  
+        this.add(settings, gbc);
+
+        gbc.gridx = 1;     
+        gbc.gridy = 1;      
+        gbc.gridwidth = 1;  
         this.add(exit, gbc);
 
         this.add(exit, gbc);

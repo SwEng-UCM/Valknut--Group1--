@@ -45,6 +45,8 @@ public class Controller {
     	startGame();
     }
     public void startGame(){
+        AudioManager.getInstance().stopMusic();
+        AudioManager.getInstance().playMusic("resources/sounds/titleMusic.wav");
         controlPanel.onGameStart();
     }
 
@@ -56,8 +58,18 @@ public class Controller {
         controlPanel.onSelection();
     }
 
+    public void setPreviousScreenToSettings(String s){
+        controlPanel.setPreviousScreenToSettings(s);
+    }
+
     public void settingScreen(){
         controlPanel.settingScreen();
+    }
+
+    public void startMultiplayer(){
+        AudioManager.getInstance().stopMusic();
+        AudioManager.getInstance().playMusic("resources/sounds/internetMusic.wav");
+        multiplayerScreen();
     }
 
     public void multiplayerScreen(){

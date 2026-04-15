@@ -51,7 +51,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 			}
 		});
 
-// LOAD with Ctrl+L
+		// LOAD with Ctrl+L
 		mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
 				.put(KeyStroke.getKeyStroke("control L"), "loadGame");
 
@@ -90,13 +90,15 @@ public void onQuit() {
 	
     @Override
 	public void onGameStart() {
-		AudioManager.getInstance().playMusic("resources/sounds/titleMusic.wav");
 		showMainMenu();
 	}
 
 	public void multiplayerScreen(){
-		AudioManager.getInstance().stopMusic();
 		cardLayout.show(mainPanel, "MULTIPLAYER");
+	}
+
+	public void setPreviousScreenToSettings(String s){
+		settingsPanel.setPreviousScreen(s);
 	}
 
 	public void settingScreen(){

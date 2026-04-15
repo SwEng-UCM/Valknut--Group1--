@@ -91,13 +91,17 @@ public class MainMenu extends JPanel {
                 "resources/images/Buttons/multiButton_NS.png",
                 "resources/images/Buttons/multiButton_S.png"
         );
-        btnMP.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.multiplayerScreen();});
+        btnMP.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.startMultiplayer();});
 
         btnSettings = ViewUtils.createButton(
                 "resources/images/Buttons/settingsButton_NS.png",
                 "resources/images/Buttons/settingsButton_S.png"
         );
-        btnSettings.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.settingScreen();});
+        btnSettings.addActionListener(e ->{
+            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            _ctrl.setPreviousScreenToSettings("MENU"); 
+            _ctrl.settingScreen();
+        });
 
         btnExit = ViewUtils.createButton(
                 "resources/images/Buttons/exitButton_NS.png",

@@ -14,6 +14,7 @@ public class SettingsPanel extends JPanel{
     private JButton decrease;
     private int volume = 50;
     private JLabel lblVolumen;
+    private String previousScreen;
 
     private SettingsPanel(Controller ctrl){
          _ctrl = ctrl;
@@ -27,6 +28,10 @@ public class SettingsPanel extends JPanel{
         if (backGround != null) {
             g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
         }
+    }
+
+    public void setPreviousScreen(String s){
+        previousScreen = s;
     }
 
     public static SettingsPanel getInstance(Controller ctrl){
@@ -97,7 +102,11 @@ public class SettingsPanel extends JPanel{
         exit = ViewUtils.createButton("resources\\images\\Buttons\\exitButton_NS.png", "resources\\images\\Buttons\\exitButton_S.png");
         exit.addActionListener(e ->{
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
-            _ctrl.menuScreen();
+            switch (previousScreen) {
+                case "MENU" -> _ctrl.menuScreen();
+                case "MULTIPLAYER" -> _ctrl.multiplayerScreen();
+                default -> _ctrl.menuScreen();
+            }
         });
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.NONE;
@@ -105,6 +114,5 @@ public class SettingsPanel extends JPanel{
         gbc.weightx = 0.1; 
         this.add(exit, gbc);
     }
-
     
 }
