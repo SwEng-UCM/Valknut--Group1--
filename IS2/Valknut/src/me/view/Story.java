@@ -106,7 +106,7 @@ public class Story {
 		return Messages.CHAPTER_THREE_BEGGINING;
 	}
  	
-	public String conflictThridChapter() { //Decide
+	public String conflictThridChapter() { //Decide how to announce whitch player gets transformed
 		return "";
 	}
 	
@@ -114,5 +114,14 @@ public class Story {
 		return Messages.CHAPTER_THREE_END;
 	}
 	
+	//Chapter 4 
+	
+	public String startFourthChapter() {
+		String mutter = "mutters";
+		if(infected.size() > 1) {
+			mutter = "mutter";
+		}
+		return String.format(Messages.CHAPTER_FOUR_BEGGINING, formatNames(getHeroNames(infected)), mutter);
+	}
 
 }

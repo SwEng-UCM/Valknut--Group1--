@@ -129,15 +129,15 @@ public class Messages {
             humans are weak”. As you raise your sight from the ground to get a better look at them, you catch a glimpse of Sköll and Hati, 
             Fenrir’s sons and the wolves who chase the moon and sun, destined to send the world into total darkness when they finally 
             catch their prey during Ragnarok. Slowly but surely, you stand up from the ground, trying not to fall over from the weight
-            of your body and weapons alone. “So you think humans are weak” infected player mutters. “We’ll see about that”. """ ;
+            of your body and weapons alone. “So you think humans are weak” %s %s. “We’ll see about that”. """ ; //Infected player(s) - mutter(s)
 	
 	public static final String CHAPTER_FOUR_END = """
-            “It seems like underestimating us will cost you your life”. player that was infected. “Wait, what? We are definitely not killing them” 
+            “It seems like underestimating us will cost you your life”. %s %s “Wait, what? We are definitely not killing them” 
             %s “Why not? They were trying to kill us first, and we already killed Fafnir, what’s different from this
             situation?” “The difference is that we didn’t have a choice with Fafnir, these two are still alive and they will remain that way when
             we leave” “No they won’t, I’m going to kill them either with or without you” “Over my dead body” You both hesitate for a moment, knowing that 
             the other doesn’t seem to be willing to change their decision. “Fine, we’ll leave them alive, maybe it’ll mean that Fenrir gives us
-            the mythical weapon without much of a fight” Non-infected player breathes a sigh of relief, since the outcome could’ve been much worse.""" ;
+            the mythical weapon without much of a fight” %s breathes a sigh of relief, since the outcome could’ve been much worse.""" ; //infected, say(s), non-infected, non-infected
 	
 	//Story chapter 5
 	
