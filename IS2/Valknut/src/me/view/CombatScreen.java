@@ -38,10 +38,16 @@ public class CombatScreen extends JPanel{
     }
 
     private void setComponents(){
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints gbcMenu = new GridBagConstraints();
+        this.setLayout(new BorderLayout());
+    
+        
+        
+        /* GridBagConstraints gbcMenu = new GridBagConstraints();
         gbcMenu.gridx = 0;
         gbcMenu.fill = GridBagConstraints.NONE; 
-        gbcMenu.anchor = GridBagConstraints.NORTH;
+        gbcMenu.anchor = GridBagConstraints.NORTH;*/
+        
     }
+    
+    
 }

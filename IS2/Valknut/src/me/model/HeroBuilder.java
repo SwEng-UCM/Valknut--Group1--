@@ -20,11 +20,13 @@ public class HeroBuilder {
                 Hero freya = new Hero("Gersemi", 100, 100, "Beloved Child of Freya");
                 element.add(1); element.add(2); element.add(3); element.add(1); element.add(2);
                 freya.setElementStats(element);
+                freya.setSprite("resources/images/Characters/gersemi_icon.png");
                 return freya;
             case "loki":
                 Hero loki = new Hero("Váli", 100, 100, "Forgotten Child of Loki");
                 element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
                 loki.setElementStats(element);
+                loki.setSprite("resources/images/Characters/vali_icon.png");
                 return loki;
             default:
                 Hero hero = new Hero("Váli", 100, 100, "Forgotten Child of Loki");

@@ -1,10 +1,14 @@
 package me.model;
 
+import java.awt.Image;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.ImageIcon;
+
 import me.view.Messages;
 
 public abstract class Character implements Serializable {
@@ -17,6 +21,7 @@ public abstract class Character implements Serializable {
     protected int max_life;
     private boolean escaped;
     private boolean defend;
+    private ImageIcon sprite;
 
     public Character(String name, int life, int max_life) {
         this.name = name;
@@ -31,6 +36,14 @@ public abstract class Character implements Serializable {
         this.max_life = max_life;
         this.escaped = false;
         this.defend = false;
+    }
+    
+    public ImageIcon getSprite() {
+    	return this.sprite;
+    }
+    
+    public void setSprite(String img) {
+    	this.sprite = new ImageIcon(img);
     }
 
     public int getStrength(){
