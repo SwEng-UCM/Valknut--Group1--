@@ -50,14 +50,15 @@ public class CombatScreen extends JPanel{
         List<Enemy> enemies = _ctrl.getEnemies();
 
         for (Enemy e : enemies) {
-            JButton enemyButton = new JButton(e.getSprite());
-            enemyButton.setBorderPainted(false);
-            enemyButton.setContentAreaFilled(false);
-//          enemyButton.addActionListener(ev -> { i dont know exactly how to make it so that clicking on an enemy only works when attacking to select target
-//
-//          });
-
-            enemyPanel.add(enemyButton);
+        	if (e.isAlive()) {
+	            JButton enemyButton = new JButton(e.getSprite());
+	            enemyButton.setBorderPainted(false);
+	            enemyButton.setContentAreaFilled(false);
+	//          enemyButton.addActionListener(ev -> { i dont know exactly how to make it so that clicking on an enemy only works when attacking to select target
+	//
+	//          });
+	            enemyPanel.add(enemyButton);
+        	}
         }
         
         JPanel heroPanel = new JPanel();
@@ -67,11 +68,11 @@ public class CombatScreen extends JPanel{
         java.util.List<Hero> heroes = _ctrl.getHeroes();
 
         for (Hero h : heroes) {
-            JLabel heroLabel = new JLabel(h.getSprite());
-
-            // optional spacing
-            heroPanel.add(heroLabel);
-            heroPanel.add(Box.createVerticalStrut(10));
+        	if (h.isAlive()) {
+	            JLabel heroLabel = new JLabel(h.getSprite());
+	            heroPanel.add(heroLabel);
+	            heroPanel.add(Box.createVerticalStrut(10));
+        	}
         }
 
         this.add(heroPanel, BorderLayout.WEST);
