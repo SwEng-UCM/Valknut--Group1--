@@ -1,8 +1,11 @@
 package me.view;
 
 import java.awt.*;
+import java.util.List;
 import javax.swing.*;
 import me.control.Controller;
+import me.model.Enemy;
+import me.model.Hero;
 
 public class CombatScreen extends JPanel{
     private static CombatScreen instance;
@@ -39,15 +42,40 @@ public class CombatScreen extends JPanel{
 
     private void setComponents(){
         this.setLayout(new BorderLayout());
-    
         
+        JPanel enemyPanel = new JPanel();
+        enemyPanel.setOpaque(false); // keep background visible
+        enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
+
+        List<Enemy> enemies = _ctrl.getEnemies();
+
+        for (Enemy e : enemies) {
+            JButton enemyButton = new JButton(e.getSprite());
+            enemyButton.setBorderPainted(false);
+            enemyButton.setContentAreaFilled(false);
+//          enemyButton.addActionListener(ev -> { i dont know exactly how to make it so that clicking on an enemy only works when attacking to select target
+//
+//          });
+
+            enemyPanel.add(enemyButton);
+        }
         
-        /* GridBagConstraints gbcMenu = new GridBagConstraints();
-        gbcMenu.gridx = 0;
-        gbcMenu.fill = GridBagConstraints.NONE; 
-        gbcMenu.anchor = GridBagConstraints.NORTH;*/
-        
+        JPanel heroPanel = new JPanel();
+        heroPanel.setOpaque(false);
+        heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
+
+        java.util.List<Hero> heroes = _ctrl.getHeroes();
+
+        for (Hero h : heroes) {
+            JLabel heroLabel = new JLabel(h.getSprite());
+
+            // optional spacing
+            heroPanel.add(heroLabel);
+            heroPanel.add(Box.createVerticalStrut(10));
+        }
+
+        this.add(heroPanel, BorderLayout.WEST);
+        this.add(enemyPanel, BorderLayout.EAST);
     }
-    
     
 }

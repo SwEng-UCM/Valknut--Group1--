@@ -1,5 +1,7 @@
 package me.control;
 
+import java.util.List;
+
 import me.command.Command;
 import me.command.CommandFactory;
 import me.model.AutonomousHero;
@@ -100,6 +102,14 @@ public class Controller {
         }
 
         return instance;
+    }
+    
+    public List<Enemy> getEnemies(){
+        return cb.getEnemies();
+    }
+    
+    public List<Hero> getHeroes(){
+        return cb.getHeroes();
     }
 
     public Combat initCmb() {
