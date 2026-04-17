@@ -258,6 +258,14 @@ public class Controller {
         return sb.toString();
     }
 
+    /**
+     * Starts a new game after character selection and opens the combat screen.
+    */
+    public void startSelectedGame() {
+        tellFirstLinesChapterOne();
+        controlPanel.onCombat();
+    }
+
     public void exit() {
         controlPanel.onQuit();
     }

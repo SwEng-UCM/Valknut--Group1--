@@ -5,14 +5,15 @@ import javax.swing.*;
 import me.control.Controller;
 
 /**
- * Simple character selection screen.
- * This is a minimal implementation used to enable game flow.
+ * Simple character selection screen with background and character images.
  */
 public class CharacterSelection extends JPanel {
 
     private static CharacterSelection instance;
 
     private final Controller ctrl;
+
+    private Image backGround;
 
     private JButton freyaBtn;
     private JButton lokiBtn;
@@ -43,11 +44,25 @@ public class CharacterSelection extends JPanel {
     }
 
     /**
-     * Initializes the panel layout.
+     * Initializes the panel layout and background image.
      */
     private void initGUI() {
         setLayout(new BorderLayout());
-        setBackground(Color.BLACK);
+        backGround = new ImageIcon("resources/images/selection_screen.png").getImage();
+        setOpaque(false);
+    }
+
+    /**
+     * Paints the background image.
+     *
+     * @param g the graphics context
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backGround != null) {
+            g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
     /**
@@ -61,40 +76,65 @@ public class CharacterSelection extends JPanel {
         title.setFont(new Font("Arial", Font.BOLD, 30));
         add(title, BorderLayout.NORTH);
 
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout(2, 1, 20, 20));
-        centerPanel.setBackground(new Color(220, 225, 232));
-
-        freyaBtn = new JButton("Select Freya");
-        lokiBtn = new JButton("Select Loki");
-        startBtn = new JButton("Start Game");
-
         infoLabel = new JLabel("Player 1: choose a character", SwingConstants.CENTER);
         selectionLabel = new JLabel("No characters selected yet.", SwingConstants.CENTER);
 
         infoLabel.setFont(new Font("Arial", Font.BOLD, 18));
         selectionLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        infoLabel.setForeground(Color.WHITE);
+        selectionLabel.setForeground(Color.WHITE);
 
         JPanel infoPanel = new JPanel(new GridLayout(2, 1));
+        infoPanel.setOpaque(false);
         infoPanel.add(infoLabel);
         infoPanel.add(selectionLabel);
 
-        JPanel buttonsPanel = new JPanel(new GridLayout(1, 2, 20, 20));
-        buttonsPanel.setBackground(new Color(220, 225, 232));
-        buttonsPanel.add(freyaBtn);
-        buttonsPanel.add(lokiBtn);
+        JPanel characterPanel = new JPanel(new GridLayout(1, 2, 40, 0));
+        characterPanel.setOpaque(false);
+
+        JPanel freyaPanel = new JPanel(new BorderLayout());
+        freyaPanel.setOpaque(false);
+
+        JPanel lokiPanel = new JPanel(new BorderLayout());
+        lokiPanel.setOpaque(false);
+
+        JLabel freyaImage = new JLabel(new ImageIcon(
+                new ImageIcon("resources/images/Characters/gersemi.png")
+                        .getImage()
+                        .getScaledInstance(300, 450, Image.SCALE_SMOOTH)
+        ));
+        freyaImage.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel lokiImage = new JLabel(new ImageIcon(
+                new ImageIcon("resources/images/Characters/vali.png")
+                        .getImage()
+                        .getScaledInstance(300, 450, Image.SCALE_SMOOTH)
+        ));
+        lokiImage.setHorizontalAlignment(SwingConstants.CENTER);
+
+        freyaBtn = new JButton("Select Freya");
+        lokiBtn = new JButton("Select Loki");
+        startBtn = new JButton("Start Game");
+
+        freyaPanel.add(freyaImage, BorderLayout.CENTER);
+        freyaPanel.add(freyaBtn, BorderLayout.SOUTH);
+
+        lokiPanel.add(lokiImage, BorderLayout.CENTER);
+        lokiPanel.add(lokiBtn, BorderLayout.SOUTH);
+
+        characterPanel.add(freyaPanel);
+        characterPanel.add(lokiPanel);
 
         JPanel middleWrapper = new JPanel(new BorderLayout());
-        middleWrapper.setBackground(new Color(220, 225, 232));
+        middleWrapper.setOpaque(false);
         middleWrapper.add(infoPanel, BorderLayout.NORTH);
-        middleWrapper.add(buttonsPanel, BorderLayout.CENTER);
+        middleWrapper.add(characterPanel, BorderLayout.CENTER);
 
         add(middleWrapper, BorderLayout.CENTER);
 
         startBtn.setEnabled(false);
         add(startBtn, BorderLayout.SOUTH);
 
-        // Button actions
         freyaBtn.addActionListener(e -> selectCharacter(0, "Freya"));
         lokiBtn.addActionListener(e -> selectCharacter(1, "Loki"));
         startBtn.addActionListener(e -> startGame());
@@ -113,6 +153,14 @@ public class CharacterSelection extends JPanel {
 
         ctrl.selectCharacter(index, player);
         selectionLabel.setText("Player " + player + " selected " + name + ".");
+
+        if (index == 0) {
+            freyaBtn.setEnabled(false);
+            freyaBtn.setBackground(Color.GREEN);
+        } else {
+            lokiBtn.setEnabled(false);
+            lokiBtn.setBackground(Color.GREEN);
+        }
 
         player++;
 
@@ -133,6 +181,7 @@ public class CharacterSelection extends JPanel {
             return;
         }
 
-        ctrl.startStory();
+        selectionLabel.setText("Loading battle...");
+        ctrl.startSelectedGame();
     }
 }
