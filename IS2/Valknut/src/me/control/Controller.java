@@ -59,7 +59,7 @@ public class Controller {
         try {
             player.endServer();
         } catch (IOException ex) {
-            ViewUtils.showErrorMsg("Server Aborted");
+               
         }
     }
 
@@ -67,7 +67,7 @@ public class Controller {
         try {
             player.endClient();
         } catch (IOException ex) {
-            ViewUtils.showErrorMsg("Client Aborted");
+            ViewUtils.showErrorMsg(ex.getMessage());
         }
     }
 

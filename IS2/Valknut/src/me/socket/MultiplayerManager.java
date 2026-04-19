@@ -82,7 +82,11 @@ public class MultiplayerManager {
     public void connectServer() throws IOException{
         server = new ServerSocket(PORT);
         id = 1;
-        client = server.accept();
+        try{
+            client = server.accept();
+        }catch(IOException e){
+            // ViewUtils.showErrorMsg("Server Aborted");
+        }
         initStreams(); //stablish the communication canal
         startListener(); //create the independent thread for listening other side communication events
     }
