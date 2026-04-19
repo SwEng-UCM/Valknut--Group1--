@@ -64,6 +64,7 @@ public class Messages {
 	public static final String NEW_LINE = System.lineSeparator();
 	public static final String ENTER_VV = "Enter valid value";
 	public static final String PRESS_EN = "Press enter to continue...";
+	public static final String WRONG_REQUEST = "The Request from Client was not Correct: ";
 
 	//Story
 	public static final String INTRO_LINES = """

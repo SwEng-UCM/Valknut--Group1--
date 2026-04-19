@@ -39,6 +39,10 @@ public class Controller {
         return num_enemies;
     }
 
+    public int getTurn(){
+        return cb != null ? cb.turn() : -1;
+    }
+
     public void run() {
         cb = initCmb();
         startGame();

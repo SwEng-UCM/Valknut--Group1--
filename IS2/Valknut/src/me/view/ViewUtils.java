@@ -37,4 +37,23 @@ public class ViewUtils {
 		return scalated_icon;
 	}
 
+    public static void showErrorMsg(String msg) {
+		showErrorMsg(null, msg);
+	}
+
+    public static void showErrorMsg(Component c, String msg) {
+		JOptionPane.showMessageDialog(getWindow(c), msg, "ERROR", JOptionPane.ERROR_MESSAGE);
+	}
+
+    public static Frame getWindow(Component c) {
+		Frame w = null;
+		if (c != null) {
+			if (c instanceof Frame)
+				w = (Frame) c;
+			else
+				w = (Frame) SwingUtilities.getWindowAncestor(c);
+		}
+		return w;
+	}
+
 }

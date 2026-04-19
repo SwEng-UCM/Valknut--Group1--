@@ -14,10 +14,12 @@ public class MultiplayerManager {
     private int id;
     private final Dispatcher dispatcher;
     private final Controller ctrl;
+    private final Validator validator;
 
     public MultiplayerManager(Controller ctrl){
         this.ctrl = ctrl;
         dispatcher = new Dispatcher();
+        validator = new Validator();
     }
 
     public class Listener implements Runnable{
@@ -44,22 +46,22 @@ public class MultiplayerManager {
     private void convertInfo(Object obj){
         Request rq = (Request) obj;
         if(id == 1){ // if I am the server I validate the request and then send it again to the client to treate it and treate it my self
-            if(validateRequest(rq)){
-                send(rq);
-                treatRequest(rq);
-            }
+            if(!validateRequest(rq))
+                rq.setRequestType(Request.RequestType.ERROR);
+            send(rq);
+            treatRequest(rq);
         }
         else{ //if I am the client I manage the Server update
             treatRequest(rq);
         }
     }
 
-    private boolean validateRequest(Request obj){
-        return false;
+    private boolean validateRequest(Request rq){
+        return validator.validate(rq, ctrl.getTurn());
     }
 
     private void treatRequest(Request rq){
-        dispatcher.Dispatch(rq, ctrl);
+        dispatcher.dispatch(rq, ctrl);
     }
 
     public void connectClient(String s){

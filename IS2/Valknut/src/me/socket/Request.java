@@ -5,16 +5,20 @@ import me.model.CombatOption;
 public class Request {
 
     public enum RequestType{
-        COMBAT, STORY;
+        COMBAT, STORY, ERROR;
     }
 
     private CombatOption co;
-    private final RequestType rt;
+    private RequestType rt;
     Object[] parameter;
 
     public Request(RequestType rt){
         this.rt = rt;
         parameter = new Object[2];
+    }
+
+    public void setRequestType(RequestType rt){
+        this.rt = rt;
     }
 
     public void setCombatOption(CombatOption co){
