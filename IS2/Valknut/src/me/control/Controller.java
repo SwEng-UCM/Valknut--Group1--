@@ -1,22 +1,27 @@
 package me.control;
 
+import java.io.IOException;
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
 import me.model.*;
 import me.model.items.*;
 import me.model.save.*;
+import me.socket.MultiplayerManager;
 import me.view.AudioManager;
 import me.view.CombatView;
 import me.view.CtrlPanel;
 import me.view.Messages;
 import me.view.StoryView;
+import me.view.ViewUtils;
 
 public class Controller {
 
     private static StoryView sv;
     private static CombatView cv;
     private static Controller instance;
+    private MultiplayerManager player;
+    private boolean multiplayer = false;
     private Combat cb;
     private final CtrlPanel controlPanel;
     private int num_enemies;
@@ -27,12 +32,43 @@ public class Controller {
         controlPanel = new CtrlPanel(this);
     }
 
-    public void storyPrint(String s) {
-        sv.printLine(s);
+    public static Controller getInstance() {
+        if (instance == null) {
+            instance = new Controller();
+        }
+
+        return instance;
     }
 
-    public void combatPrint(String s) {
-        cv.printLine(s);
+    public void initMultiplayerMode(int i, String ip){
+        player = new MultiplayerManager(instance);
+        try{
+            switch (i) {
+                case 0 -> player.connectServer();
+                case 1 -> player.connectClient(ip);
+                default -> throw new AssertionError();
+            }
+            multiplayer = true;
+        }catch(IOException e){
+            ViewUtils.showErrorMsg(e.getMessage());
+        }
+        
+    }
+
+    public void killServer(){
+        try {
+            player.endServer();
+        } catch (IOException ex) {
+            ViewUtils.showErrorMsg("Server Aborted");
+        }
+    }
+
+    public void killClient(){ // just in case
+        try {
+            player.endClient();
+        } catch (IOException ex) {
+            ViewUtils.showErrorMsg("Client Aborted");
+        }
     }
 
     public int getNumEnemies() {
@@ -87,14 +123,6 @@ public class Controller {
     public void tellFirstLinesChapterOne() {
         sv.clear();
         sv.tellFirstLinesChapterOne(cb.getHeroes().get(0), cb.getHeroes().get(1));
-    }
-
-    public static Controller getInstance() {
-        if (instance == null) {
-            instance = new Controller();
-        }
-
-        return instance;
     }
     
     public List<Enemy> getEnemies(){

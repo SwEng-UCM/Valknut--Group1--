@@ -15,6 +15,7 @@ public class MultiplayerManager {
     private final Dispatcher dispatcher;
     private final Controller ctrl;
     private final Validator validator;
+    private Listener listener;
 
     public MultiplayerManager(Controller ctrl){
         this.ctrl = ctrl;
@@ -23,22 +24,29 @@ public class MultiplayerManager {
     }
 
     public class Listener implements Runnable{
+        private volatile boolean running = true;
+
         @Override
         public void run() {
             try {
-                while(true){
+                while(running){
                     Object obj = in.readObject();
                     convertInfo(obj);
+                    Thread.sleep(1000); // causes a pause of 1 second between interactions to not exceed demand limits
                 }
-            } catch (Exception e) {
-
+            } catch (IOException | ClassNotFoundException | InterruptedException e) {
+                e.printStackTrace();
             }
+        }
+
+        public void stop(){
+            running = false;
         }
 
     }
 
     private void startListener(){
-        Listener listener = new Listener();
+        listener = new Listener();
         Thread thread = new Thread(listener);
         thread.start();
     }
@@ -64,49 +72,43 @@ public class MultiplayerManager {
         dispatcher.dispatch(rq, ctrl);
     }
 
-    public void connectClient(String s){
-        try{
-            client = new Socket(s, PORT);
-            id = 2;
-            initStreams(); //stablish the communication canal
-            startListener(); //create the independent thread for listening other side communication events
-        }
-        catch(IOException ioe){
-            System.err.println(ioe.getMessage());
-        }
+    public void connectClient(String ip) throws IOException{
+        client = new Socket(ip, PORT);
+        id = 2;
+        initStreams(); //stablish the communication canal
+        startListener(); //create the independent thread for listening other side communication events
     }
 
-    public void connectServer(){
-        try{
-            server = new ServerSocket(PORT);
-            id = 1;
-            client = server.accept();
-            initStreams(); //stablish the communication canal
-            startListener(); //create the independent thread for listening other side communication events
-        }
-        catch(IOException ioe){
-            System.err.println(ioe.getMessage());
-        }
+    public void connectServer() throws IOException{
+        server = new ServerSocket(PORT);
+        id = 1;
+        client = server.accept();
+        initStreams(); //stablish the communication canal
+        startListener(); //create the independent thread for listening other side communication events
+    }
+
+    public void endServer() throws IOException{
+            server.close();
+    }
+
+    public void endClient() throws IOException{
+            client.close();
     }
 
     public void endCommunication(){
         try {
-            server.close();
-            client.close();
+            listener.stop();
+            endServer();
+            endClient();
         }
         catch(IOException ioe){
             System.err.println(ioe.getMessage());
         }
     }
 
-    private void initStreams(){
-        try{
+    private void initStreams() throws IOException{
         out = new ObjectOutputStream(client.getOutputStream());
         in = new ObjectInputStream(client.getInputStream());
-        }
-        catch(IOException ioe){
-            System.err.println(ioe.getMessage());
-        }
     }
 
     public void send(Object o) {
@@ -119,4 +121,8 @@ public class MultiplayerManager {
             System.err.println(e.getMessage()); 
         }
     }   
+
+    public int id(){
+        return id;
+    }
 }

@@ -6,11 +6,15 @@ import me.control.Controller;
 
 public class MultiPlayerScreen extends JPanel{
     private static MultiPlayerScreen instance;
+    private Thread searchClient;
+    private boolean searching = false;
     private AudioManager am;
     private Controller _ctrl;
     private Image backGround;
     private JButton join;
     private JButton host;
+    private JButton exit;
+    private JButton settings;
 
     private MultiPlayerScreen(Controller ctrl){
          _ctrl = ctrl;
@@ -43,13 +47,29 @@ public class MultiPlayerScreen extends JPanel{
         this.setLayout(new GridBagLayout());
         
         join = ViewUtils.createButton("resources/images/Buttons/joinButton_NS.png", "resources/images/Buttons/joinButton_S.png");
+        join.addActionListener(e -> {
+            String s = null;
+            //JoinDialog missing here...
+            _ctrl.initMultiplayerMode(1, s);
+            
+        });
         host = ViewUtils.createButton("resources/images/Buttons/hostButton_NS.png", "resources/images/Buttons/hostButton_S.png");
-        JButton exit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");
+        host.addActionListener(e -> {
+            setWaitingClientComponents();
+            searching = true;
+            searchClient = new Thread(() -> {
+                while(searching){
+                    _ctrl.initMultiplayerMode(0, null);
+                }
+            }); //server mode
+            searchClient.start();
+        });
+        exit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");
         exit.addActionListener(e -> {
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             _ctrl.startGame();
         });
-        JButton settings = ViewUtils.createButton("resources/images/Buttons/settingsButton_NS.png", "resources/images/Buttons/settingsButton_S.png");
+        settings = ViewUtils.createButton("resources/images/Buttons/settingsButton_NS.png", "resources/images/Buttons/settingsButton_S.png");
         settings.addActionListener(e -> {
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             _ctrl.setPreviousScreenToSettings("MULTIPLAYER", Messages.MULTISCREEN); 
@@ -84,5 +104,39 @@ public class MultiPlayerScreen extends JPanel{
 
         this.add(exit, gbc);
 
+    }
+
+    private void setWaitingClientComponents(){
+        this.removeAll();
+        this.setLayout(new GridBagLayout());
+
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0; 
+        gbc.gridy = 0; 
+        gbc.insets = new Insets(10, 10, 10, 10); 
+
+        JLabel titulo = new JLabel("Waiting...");
+        titulo.setForeground(Color.WHITE);
+        titulo.setFont(new Font("Arial", Font.BOLD, 24));
+        this.add(titulo, gbc);
+
+        gbc.gridy = 2; 
+        exit.addActionListener(e -> {
+            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            searching = false;
+            searchClient.interrupt();
+            _ctrl.killServer();
+            this.removeAll();
+            setComponents();
+            revalidate();
+            repaint();
+            _ctrl.startGame();
+            
+        });
+        this.add(exit, gbc);
+
+        revalidate();
+        repaint();
     }
 }
