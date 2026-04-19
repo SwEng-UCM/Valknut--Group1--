@@ -43,7 +43,7 @@ public class MultiplayerManager {
 
     private void convertInfo(Object obj){
         Request rq = (Request) obj;
-        if(id == 1){ // I validate the request and then send it again to the client to treate it and treate it my self
+        if(id == 1){ // if I am the server I validate the request and then send it again to the client to treate it and treate it my self
             if(validateRequest(rq)){
                 send(rq);
                 treatRequest(rq);

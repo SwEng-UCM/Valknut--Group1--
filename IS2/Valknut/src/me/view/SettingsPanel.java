@@ -22,6 +22,10 @@ public class SettingsPanel extends JPanel{
         setComponents();
     }
 
+    public void setBackground(String s){
+        backGround = new ImageIcon(s).getImage();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

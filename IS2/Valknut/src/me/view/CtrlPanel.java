@@ -97,8 +97,9 @@ public void onQuit() {
 		cardLayout.show(mainPanel, "MULTIPLAYER");
 	}
 
-	public void setPreviousScreenToSettings(String s){
+	public void setPreviousScreenToSettings(String s, String b){
 		settingsPanel.setPreviousScreen(s);
+		settingsPanel.setBackground(b);
 	}
 
 	public void settingScreen(){

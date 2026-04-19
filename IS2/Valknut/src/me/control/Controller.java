@@ -58,8 +58,8 @@ public class Controller {
         controlPanel.onSelection();
     }
 
-    public void setPreviousScreenToSettings(String s) {
-        controlPanel.setPreviousScreenToSettings(s);
+    public void setPreviousScreenToSettings(String s, String b) {
+        controlPanel.setPreviousScreenToSettings(s, b);
     }
 
     public void settingScreen() {

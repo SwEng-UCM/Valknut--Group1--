@@ -52,7 +52,7 @@ public class MultiPlayerScreen extends JPanel{
         JButton settings = ViewUtils.createButton("resources/images/Buttons/settingsButton_NS.png", "resources/images/Buttons/settingsButton_S.png");
         settings.addActionListener(e -> {
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
-            _ctrl.setPreviousScreenToSettings("MULTIPLAYER"); 
+            _ctrl.setPreviousScreenToSettings("MULTIPLAYER", Messages.MULTISCREEN); 
             _ctrl.settingScreen();
         });
 

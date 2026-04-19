@@ -99,7 +99,7 @@ public class MainMenu extends JPanel {
         );
         btnSettings.addActionListener(e ->{
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
-            _ctrl.setPreviousScreenToSettings("MENU"); 
+            _ctrl.setPreviousScreenToSettings("MENU", Messages.MAINMENU); 
             _ctrl.settingScreen();
         });
 
