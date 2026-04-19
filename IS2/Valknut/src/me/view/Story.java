@@ -123,5 +123,25 @@ public class Story {
 		}
 		return String.format(Messages.CHAPTER_FOUR_BEGGINING, formatNames(getHeroNames(infected)), mutter);
 	}
+	
+	public String endFourthChapter() {
+		String say = "says";
+		if(infected.size() > 1) {
+			say = "say";
+		}
+		return String.format(Messages.CHAPTER_FOUR_END, formatNames(getHeroNames(infected)), say, formatNames(getHeroNames(healthy)), formatNames(getHeroNames(healthy)));
+	}
+	
+	//Chapter 5
+	
+	public String chapterFith() {//infected, healthy, infected,  healthy, infected, healthy
+		return String.format(Messages.CHAPTER_FIVE, formatNames(getHeroNames(infected)), formatNames(getHeroNames(healthy)), formatNames(getHeroNames(infected)), formatNames(getHeroNames(healthy)), formatNames(getHeroNames(infected)), formatNames(getHeroNames(healthy)));
+	}
+	
+	
+	//Final chapter
+	public String chapterFinal(List<Hero> lost) {
+		return String.format(Messages.CHAPTER_FINAL, formatNames(getHeroNames(lost)));
+	}
 
 }
