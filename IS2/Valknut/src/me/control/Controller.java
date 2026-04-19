@@ -187,8 +187,9 @@ public class Controller {
     }
 
     public void saveGame() {
+
         if (cb != null) {
-            SaveGameData data = new SaveGameData(cb);
+            SaveGameData data = cb.save();
             SaveGameManager.saveGame(data);
         }
     }
@@ -196,8 +197,8 @@ public class Controller {
     public void loadGame() {
         SaveGameData data = SaveGameManager.loadGame();
 
-        if (data != null) {
-            this.cb = data.getCombat();
+        if (data != null && cb != null) {
+            cb.restore(data);
             controlPanel.onCombat();
             System.out.println("Game loaded successfully.");
         }
