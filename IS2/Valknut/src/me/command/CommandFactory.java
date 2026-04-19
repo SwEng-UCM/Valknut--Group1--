@@ -3,6 +3,7 @@ package me.command;
 import me.model.Combat;
 import me.model.CombatOption;
 import me.model.Hero;
+import me.model.items.Item;
 import me.view.CombatView;
 
 /**
@@ -29,7 +30,8 @@ public class CommandFactory {
             CombatView combatView,
             Hero currentHero,
             CombatOption option,
-            int target
+            int target,
+            Item item
     ) {
         if (option == null) {
             return null;
@@ -38,7 +40,7 @@ public class CommandFactory {
         return switch (option) {
             case ATTACK -> new AttackCommand(combat, combatView, currentHero, target);
             case DEFEND -> new DefendCommand(combat, combatView, currentHero);
-            case USE_ITEM -> new UseItemCommand(combat, combatView, currentHero);
+            case USE_ITEM -> new UseItemCommand(combat, combatView, currentHero, item);
             case RUN -> new RunCommand(combat, combatView, currentHero);
             case STATS -> new StatsCommand(combat, combatView, currentHero);
             default -> null;

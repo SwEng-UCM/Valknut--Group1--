@@ -2,6 +2,7 @@ package me.socket;
 
 import java.io.*;
 import java.net.*;
+import me.control.Controller;
 
 public class MultiplayerManager {
 
@@ -11,6 +12,13 @@ public class MultiplayerManager {
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private int id;
+    private final Dispatcher dispatcher;
+    private final Controller ctrl;
+
+    public MultiplayerManager(Controller ctrl){
+        this.ctrl = ctrl;
+        dispatcher = new Dispatcher();
+    }
 
     public class Listener implements Runnable{
         @Override
@@ -34,12 +42,24 @@ public class MultiplayerManager {
     }
 
     private void convertInfo(Object obj){
-        if(id == 1){ //if I am the server I manage the Client request
-
+        Request rq = (Request) obj;
+        if(id == 1){ // I validate the request and then send it again to the client to treate it and treate it my self
+            if(validateRequest(rq)){
+                send(rq);
+                treatRequest(rq);
+            }
         }
         else{ //if I am the client I manage the Server update
-
+            treatRequest(rq);
         }
+    }
+
+    private boolean validateRequest(Request obj){
+        return false;
+    }
+
+    private void treatRequest(Request rq){
+        dispatcher.Dispatch(rq, ctrl);
     }
 
     public void connectClient(String s){

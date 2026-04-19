@@ -3,19 +3,9 @@ package me.control;
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
-import me.model.AutonomousHero;
-import me.model.Combat;
-import me.model.CombatOption;
-import me.model.Enemy;
-import me.model.EnemyBuilder;
-import me.model.Hero;
-import me.model.HeroBuilder;
-import me.model.items.DamageItem;
-import me.model.items.HealingItem;
-import me.model.items.ItemType;
-import me.model.items.ResistanceItem;
-import me.model.save.SaveGameData;
-import me.model.save.SaveGameManager;
+import me.model.*;
+import me.model.items.*;
+import me.model.save.*;
 import me.view.AudioManager;
 import me.view.CombatView;
 import me.view.CtrlPanel;
@@ -151,35 +141,6 @@ public class Controller {
     }
 
     /**
-     * Resolves the combat option for the current hero.
-     * Autonomous heroes choose their own action, while player-controlled heroes
-     * use the option passed from the UI.
-     *
-     * @param currentHero the active hero
-     * @param combatOption the numeric option selected by the user
-     * @return the resolved combat option
-     */
-    private CombatOption resolveCombatOption(Hero currentHero, int combatOption) {
-        if (currentHero == null) {
-            return null;
-        }
-
-        if (currentHero.isAutonomous()) {
-            AutonomousHero autonomousHero = (AutonomousHero) currentHero;
-            return autonomousHero.selectAction();
-        }
-
-        return switch (combatOption) {
-            case 1 -> CombatOption.ATTACK;
-            case 2 -> CombatOption.DEFEND;
-            case 3 -> CombatOption.USE_ITEM;
-            case 4 -> CombatOption.RUN;
-            case 5 -> CombatOption.STATS;
-            default -> null;
-        };
-    }
-
-    /**
      * Executes the enemy phase when both heroes have finished their turns.
      */
     private void executeEnemyTurn() {
@@ -196,16 +157,14 @@ public class Controller {
         }
     }
 
-    public boolean action(int combatOption, int target) {
+    public boolean action(CombatOption combatOption, int target,Item item) {
         boolean finishedAction = false;
 
         cb.updateItems();
-
         Hero currentHero = getCurrentHero();
-        CombatOption selectedOption = resolveCombatOption(currentHero, combatOption);
 
         // Build the command that corresponds to the selected action.
-        Command command = CommandFactory.createCommand(cb, cv, currentHero, selectedOption, target);
+        Command command = CommandFactory.createCommand(cb, cv, currentHero, combatOption, target, item);
 
         if (command != null) {
             finishedAction = command.execute();

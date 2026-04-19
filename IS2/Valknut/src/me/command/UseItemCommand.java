@@ -13,11 +13,13 @@ public class UseItemCommand implements Command {
     private final Combat combat;
     private final CombatView combatView;
     private final Hero currentHero;
+    private final Item item;
 
-    public UseItemCommand(Combat combat, CombatView combatView, Hero currentHero) {
+    public UseItemCommand(Combat combat, CombatView combatView, Hero currentHero, Item item) {
         this.combat = combat;
         this.combatView = combatView;
         this.currentHero = currentHero;
+        this.item = item;
     }
 
     @Override
@@ -26,8 +28,7 @@ public class UseItemCommand implements Command {
             return false;
         }
 
-        Item selectedItem = combatView.selectItem(currentHero.displayInventory(), currentHero);
-        combatView.printLine(combat.useItem(currentHero, selectedItem));
+        combat.useItem(currentHero, item);
 
         // The original controller did not mark item usage as a finished turn.
         return false;
