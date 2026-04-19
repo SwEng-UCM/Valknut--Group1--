@@ -35,7 +35,7 @@ public class CombatScreen extends JPanel{
     }
 
     private void initGUI(){
-        this.backGround = new ImageIcon("resources/images/MainMenu.png").getImage();
+        this.backGround = new ImageIcon(Messages.COMBATSCREEN).getImage();
         this.setVisible(true);
         this.setOpaque(false);
     }
@@ -48,31 +48,34 @@ public class CombatScreen extends JPanel{
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
 
         List<Enemy> enemies = _ctrl.getEnemies();
-
-        for (Enemy e : enemies) {
-        	if (e.isAlive()) {
-	            JButton enemyButton = new JButton(e.getSprite());
-	            enemyButton.setBorderPainted(false);
-	            enemyButton.setContentAreaFilled(false);
-	//          enemyButton.addActionListener(ev -> { i dont know exactly how to make it so that clicking on an enemy only works when attacking to select target
-	//
-	//          });
-	            enemyPanel.add(enemyButton);
-        	}
+        if(enemies != null){
+            for (Enemy e : enemies) {
+                if (e.isAlive()) {
+                    JButton enemyButton = new JButton(e.getSprite());
+                    enemyButton.setBorderPainted(false);
+                    enemyButton.setContentAreaFilled(false);
+        //          enemyButton.addActionListener(ev -> { i dont know exactly how to make it so that clicking on an enemy only works when attacking to select target
+        //
+        //          });
+                    enemyPanel.add(enemyButton);
+                }
+            }
         }
+
         
         JPanel heroPanel = new JPanel();
         heroPanel.setOpaque(false);
         heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
 
         java.util.List<Hero> heroes = _ctrl.getHeroes();
-
-        for (Hero h : heroes) {
-        	if (h.isAlive()) {
-	            JLabel heroLabel = new JLabel(h.getSprite());
-	            heroPanel.add(heroLabel);
-	            heroPanel.add(Box.createVerticalStrut(10));
-        	}
+        if(heroes != null){
+            for (Hero h : heroes) {
+                if (h.isAlive()) {
+                    JLabel heroLabel = new JLabel(h.getSprite());
+                    heroPanel.add(heroLabel);
+                    heroPanel.add(Box.createVerticalStrut(10));
+                }
+            }
         }
 
         this.add(heroPanel, BorderLayout.WEST);

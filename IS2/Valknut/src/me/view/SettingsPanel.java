@@ -41,7 +41,7 @@ public class SettingsPanel extends JPanel{
     }
 
     private void initGUI(){
-        this.backGround = new ImageIcon("resources/images/MainMenu.png").getImage();
+        this.backGround = new ImageIcon(Messages.MAINMENU).getImage();
         this.setVisible(true);
         this.setOpaque(false);
     }

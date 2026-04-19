@@ -34,7 +34,7 @@ public class MainMenu extends JPanel {
     private void initGUI() {
 
         this.backGround = new ImageIcon(
-                "resources/images/MainMenu.png"
+                Messages.MAINMENU
         ).getImage();
 
         this.setVisible(true);

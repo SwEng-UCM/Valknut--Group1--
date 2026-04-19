@@ -1,9 +1,8 @@
 package me.model;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Enemy extends Character implements Serializable {
+public class Enemy extends Character {
     private static final long serialVersionUID = 1L;
     private final int xpReward;
     private String attkDesc;

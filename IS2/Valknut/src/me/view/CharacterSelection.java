@@ -48,7 +48,7 @@ public class CharacterSelection extends JPanel {
      */
     private void initGUI() {
         setLayout(new BorderLayout());
-        backGround = new ImageIcon("resources/images/selection_screen.png").getImage();
+        backGround = new ImageIcon(Messages.SELECTIONSCREEN).getImage();
         setOpaque(false);
     }
 

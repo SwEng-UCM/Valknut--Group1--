@@ -34,7 +34,7 @@ public class MultiPlayerScreen extends JPanel{
     }
 
     private void initGUI(){
-        this.backGround = new ImageIcon("resources/images/MultiplayerMenu.png").getImage();
+        this.backGround = new ImageIcon(Messages.MULTISCREEN).getImage();
         this.setVisible(true);
         this.setOpaque(false);
     }

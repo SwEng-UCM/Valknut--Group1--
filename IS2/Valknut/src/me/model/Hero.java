@@ -1,12 +1,11 @@
 package me.model;
 
-import java.io.Serializable;
 import java.util.Random;
 import me.model.items.Inventory;
 import me.model.items.Item;
 import me.view.Messages;
 
-public class Hero extends Character implements Serializable {
+public class Hero extends Character {
     private static final long serialVersionUID = 1L;
 
     private final String surname;
