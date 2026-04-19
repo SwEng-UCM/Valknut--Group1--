@@ -10,18 +10,19 @@ public class Request {
 
     private CombatOption co;
     private final RequestType rt;
-    Object[] parameters;
+    Object[] parameter;
 
     public Request(RequestType rt){
         this.rt = rt;
+        parameter = new Object[2];
     }
 
-    public void setCombatOption(){
-
+    public void setCombatOption(CombatOption co){
+        this.co = co;
     }
 
-    public void addParameter(){
-
+    public void addParameter(Object obj){
+        parameter[0] = obj;
     }
 
     public RequestType getRT(){
@@ -33,7 +34,7 @@ public class Request {
     }
 
     public Object[] getParameters(){
-        return parameters;
+        return parameter;
     }
 
 }
