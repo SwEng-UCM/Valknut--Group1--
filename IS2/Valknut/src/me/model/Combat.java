@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import me.model.items.Item;
+import me.model.save.SaveGameData;
 import me.view.Messages;
 
 
@@ -208,6 +209,27 @@ public class Combat implements Serializable {
         for(Item i : items){
             i.update();
         }
+    }
+
+    public SaveGameData save() {
+        return new SaveGameData(this);
+    }
+
+    public void restore(SaveGameData data) {
+        Combat restored = data.getCombat();
+
+        this.heroes.clear();
+        this.heroes.addAll(restored.getHeroes());
+
+        this.enemies.clear();
+        this.enemies.addAll(restored.getEnemies());
+
+        this.items.clear();
+        this.items.addAll(restored.items);
+
+        this.turn = restored.turn();
+        this.lastTarjet = restored.getLastTarjet();
+        this.exit = restored.exit();
     }
 
     public String run(){
