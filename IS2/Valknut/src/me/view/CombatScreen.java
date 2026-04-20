@@ -33,6 +33,10 @@ public class CombatScreen extends JPanel{
             instance = new CombatScreen(ctrl);
         return instance;
     }
+    
+    public void setHeroes() {
+    	
+    }
 
     private void initGUI(){
         this.backGround = new ImageIcon(Messages.COMBATSCREEN).getImage();
@@ -71,9 +75,9 @@ public class CombatScreen extends JPanel{
         if(heroes != null){
             for (Hero h : heroes) {
                 if (h.isAlive()) {
-                    JLabel heroLabel = new JLabel(h.getSprite());
+                    JLabel heroLabel = new JLabel();
+                    heroLabel.setIcon(h.getSprite());
                     heroPanel.add(heroLabel);
-                    heroPanel.add(Box.createVerticalStrut(10));
                 }
             }
         }
