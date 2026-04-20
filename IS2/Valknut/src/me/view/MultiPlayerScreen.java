@@ -6,8 +6,9 @@ import me.control.Controller;
 
 public class MultiPlayerScreen extends JPanel{
     private static MultiPlayerScreen instance;
-    private Thread searchClient;
+    private Thread searchPlayer;
     private boolean searching = false;
+    private boolean server;
     private AudioManager am;
     private Controller _ctrl;
     private Image backGround;
@@ -53,20 +54,23 @@ public class MultiPlayerScreen extends JPanel{
             joinDialog.setVisible(true);
             
             String ip = joinDialog.getIP();
-            if(ip != null && !ip.isEmpty())
+            server = false;
+            setWaitingComponents();
+            searchPlayer = new Thread(() -> {
                 _ctrl.initMultiplayerMode(1, ip);
+            }); //server mode
+            searchPlayer.start();
             
         });
         host = ViewUtils.createButton("resources/images/Buttons/hostButton_NS.png", "resources/images/Buttons/hostButton_S.png");
         host.addActionListener(e -> {
-            setWaitingClientComponents();
+            server = true;
+            setWaitingComponents();
             searching = true;
-            searchClient = new Thread(() -> {
-                while(searching){
-                    _ctrl.initMultiplayerMode(0, null);
-                }
+            searchPlayer = new Thread(() -> {
+                _ctrl.initMultiplayerMode(0, null);
             }); //server mode
-            searchClient.start();
+            searchPlayer.start();
         });
         exit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");
         exit.addActionListener(e -> {
@@ -110,7 +114,7 @@ public class MultiPlayerScreen extends JPanel{
 
     }
 
-    private void setWaitingClientComponents(){
+    private void setWaitingComponents(){
         this.removeAll();
         this.setLayout(new GridBagLayout());
 
@@ -130,8 +134,9 @@ public class MultiPlayerScreen extends JPanel{
         exit.addActionListener(e -> {
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             searching = false;
-            searchClient.interrupt();
-            _ctrl.killServer();
+            searchPlayer.interrupt();
+            if(server)
+                _ctrl.killServer();
             this.removeAll();
             setComponents();
             revalidate();
