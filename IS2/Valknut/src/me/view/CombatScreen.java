@@ -48,6 +48,7 @@ public class CombatScreen extends JPanel{
         this.setLayout(new BorderLayout());
         
         JPanel enemyPanel = new JPanel();
+        enemyPanel.setSize(new Dimension(500, 500));
         enemyPanel.setOpaque(false); // keep background visible
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
 
@@ -55,7 +56,7 @@ public class CombatScreen extends JPanel{
         if(enemies != null){
             for (Enemy e : enemies) {
                 if (e.isAlive()) {
-                    JButton enemyButton = new JButton(e.getSprite());
+                    JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
                     enemyButton.setBorderPainted(false);
                     enemyButton.setContentAreaFilled(false);
         //          enemyButton.addActionListener(ev -> { i dont know exactly how to make it so that clicking on an enemy only works when attacking to select target
@@ -68,6 +69,7 @@ public class CombatScreen extends JPanel{
 
         
         JPanel heroPanel = new JPanel();
+        heroPanel.setSize(new Dimension(500, 500));
         heroPanel.setOpaque(false);
         heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
 
@@ -76,7 +78,7 @@ public class CombatScreen extends JPanel{
             for (Hero h : heroes) {
                 if (h.isAlive()) {
                     JLabel heroLabel = new JLabel();
-                    heroLabel.setIcon(h.getSprite());
+                    heroLabel.setIcon(h.getSprite(heroPanel.getWidth()/heroes.size(), heroPanel.getHeight()/heroes.size()));
                     heroPanel.add(heroLabel);
                 }
             }

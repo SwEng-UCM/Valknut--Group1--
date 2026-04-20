@@ -111,12 +111,12 @@ public void onQuit() {
 	}
 	
 	private void createCharacterSelector() {
-		combatScreen = CombatScreen.getInstance(_ctrl);
-		mainPanel.add(combatScreen, "COMBAT SCREEN");
 		cardLayout.show(mainPanel, "CHARACTER SELECTION");
 	}
 	
 	private void combatGUI() {
+		combatScreen = CombatScreen.getInstance(_ctrl);
+		mainPanel.add(combatScreen, "COMBAT SCREEN");
 		cardLayout.show(mainPanel, "COMBAT SCREEN");
 	}
 	
