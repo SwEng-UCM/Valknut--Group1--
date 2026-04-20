@@ -11,7 +11,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private final SettingsPanel settingsPanel;
 	private final MainMenu mainMenu;
 	private final CharacterSelection characterSelection;
-	private final CombatScreen combatScreen;
+	private CombatScreen combatScreen;
 	private final MultiPlayerScreen multiPlayerScreen;
 	private final Controller _ctrl;
 		
@@ -23,13 +23,11 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		mainMenu = MainMenu.getInstance(ctrl);
 		settingsPanel = SettingsPanel.getInstance(ctrl);
 		characterSelection = CharacterSelection.getInstance(ctrl);
-		combatScreen = CombatScreen.getInstance(ctrl);
 		multiPlayerScreen = MultiPlayerScreen.getInstance(ctrl);
 
 		mainPanel.add(mainMenu, "MENU");
 		mainPanel.add(settingsPanel, "SETTINGS");
 		mainPanel.add(characterSelection, "CHARACTER SELECTION");
-		mainPanel.add(combatScreen, "COMBAT SCREEN");
 		mainPanel.add(multiPlayerScreen, "MULTIPLAYER");
 
 		this.add(mainPanel);
@@ -113,6 +111,8 @@ public void onQuit() {
 	}
 	
 	private void createCharacterSelector() {
+		combatScreen = CombatScreen.getInstance(_ctrl);
+		mainPanel.add(combatScreen, "COMBAT SCREEN");
 		cardLayout.show(mainPanel, "CHARACTER SELECTION");
 	}
 	
@@ -120,63 +120,4 @@ public void onQuit() {
 		cardLayout.show(mainPanel, "COMBAT SCREEN");
 	}
 	
-// 	private void attackGUI() {
-// 		JButton enemyButton;
-		
-// 		mainPanel = new JPanel();
-// 		mainPanel.setLayout(null);
-		
-// 		JLabel backgroundLabel = new JLabel();
-// 		backgroundLabel.setIcon( new ImageIcon("resources/images/jotunheimr.png"));
-// 		backgroundLabel.setLocation(0, -100);
-// 		backgroundLabel.setSize(1200, 849);
-		
-// 		JLabel gersemiLabel = new JLabel();
-// 		gersemiLabel.setIcon( new ImageIcon("resources/images/gersemi_icon.png"));
-// 		gersemiLabel.setLocation(200, 0);
-// 		gersemiLabel.setSize(300, 300);
-// 		mainPanel.add(gersemiLabel);
-		
-// 		JLabel valiLabel = new JLabel();
-// 		valiLabel.setIcon( new ImageIcon("resources/images/vali_icon.png"));
-// 		valiLabel.setLocation(200, 200);
-// 		valiLabel.setSize(300, 300);
-// 		mainPanel.add(valiLabel);
-		
-// 		JPanel orangePanel = new JPanel();
-// 		orangePanel.setBackground(Color.orange);
-// 		orangePanel.setLocation(0, 600);
-// 		orangePanel.setSize(1200, 850);
-		
-		
-		
-// //		enemy2Button = new JButton("Giant 2");
-// //		enemy2Button.setLocation(740, 700);
-// //		enemy2Button.setSize(120, 30);
-// //		enemy2Button.addActionListener( (e) -> {
-// //				 _ctrl.action(1, 2);
-// //		});
-// //		mainPanel.add(enemy2Button);
-		
-// 		for (int i = 0; i < _ctrl.getNumEnemies(); i++) {
-// 			int giant_num = i + 1;
-// 			enemyButton = new JButton("GIANT " + giant_num);
-// 			enemyButton.setLocation(i*300, 700);
-// 			enemyButton.setSize(120, 30);
-// 			enemyButton.addActionListener( (e) -> {
-// 					 _ctrl.action(1, giant_num);
-// 			});
-			
-// 			mainPanel.add(enemyButton);
-// 		}
-		
-// 		mainPanel.add(orangePanel);
-		
-// 		mainPanel.add(backgroundLabel);
-		
-// 		this.setContentPane(mainPanel);
-// 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-// 		this.setSize(1200, 850);
-// 		this.setVisible(true);
-// 	}
 }
