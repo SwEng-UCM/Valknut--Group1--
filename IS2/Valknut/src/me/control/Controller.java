@@ -209,8 +209,14 @@ public class Controller {
         }
 
         executeEnemyTurn();
-        controlPanel.onSelection();
-
+        
+        if (combatOption == CombatOption.ATTACK) {
+        	controlPanel.onCombat();
+        }
+        
+        else {
+        	controlPanel.onSelection();
+        }
         return finishedAction;
     }
 

@@ -75,11 +75,11 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 	
     @Override
-public void onQuit() {
-    AudioManager.getInstance().stopMusic();
+    public void onQuit() {
+    	AudioManager.getInstance().stopMusic();
     
-    System.exit(0);
-}
+    	System.exit(0);
+    }
 
     @Override
 	public void onCombat(){

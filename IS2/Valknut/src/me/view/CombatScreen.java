@@ -1,9 +1,11 @@
 package me.view;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import me.control.Controller;
+import me.model.CombatOption;
 import me.model.Enemy;
 import me.model.Hero;
 
@@ -12,6 +14,7 @@ public class CombatScreen extends JPanel{
     private AudioManager am;
     private Controller _ctrl;
     private Image backGround;
+    private List<JButton> enemy_buttons, command_buttons;
 
     private CombatScreen(Controller ctrl){
          _ctrl = ctrl;
@@ -53,16 +56,22 @@ public class CombatScreen extends JPanel{
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
 
         List<Enemy> enemies = _ctrl.getEnemies();
+        enemy_buttons = new ArrayList<>(enemies.size());
+        int enemy_num = 1;
         if(enemies != null){
             for (Enemy e : enemies) {
                 if (e.isAlive()) {
+                	e.setEnemyNum(enemy_num);
                     JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
                     enemyButton.setBorderPainted(false);
                     enemyButton.setContentAreaFilled(false);
-        //          enemyButton.addActionListener(ev -> { i dont know exactly how to make it so that clicking on an enemy only works when attacking to select target
-        //
-        //          });
+                    enemyButton.setEnabled(false);
+                    enemy_buttons.add(enemyButton);
+                    enemyButton.addActionListener(ev -> {
+                    	attackEnemy(e);
+                    });
                     enemyPanel.add(enemyButton);
+                    enemy_num++;
                 }
             }
         }
@@ -83,9 +92,52 @@ public class CombatScreen extends JPanel{
                 }
             }
         }
+        
+        JPanel commandsPanel = new JPanel();
+        commandsPanel.setSize(new Dimension(500, 500));
+        commandsPanel.setOpaque(false);
+        commandsPanel.setLayout(new BoxLayout(commandsPanel, BoxLayout.X_AXIS));
+        command_buttons = new ArrayList<>(CombatOption.values().length);
+        
+        for (CombatOption c: CombatOption.values()) {
+        	JButton actionButton = new JButton(c.toString());
+        	actionButton.setPreferredSize(new Dimension(500, 100));
+        	switch(c) {
+        	case ATTACK:
+        		actionButton.addActionListener(ev -> {
+                	attack();
+                });
+        		break;
+        	}
+        	command_buttons.add(actionButton);
+        	commandsPanel.add(actionButton);
+        }
 
         this.add(heroPanel, BorderLayout.WEST);
         this.add(enemyPanel, BorderLayout.EAST);
+        this.add(commandsPanel, BorderLayout.PAGE_END);
+    }
+    
+    private void attack() {
+    	for (int i = 0; i < enemy_buttons.size(); i++) {
+    		enemy_buttons.get(i).setEnabled(true);
+    	}
+    	
+    	for (int i = 0; i < command_buttons.size(); i++) {
+    		command_buttons.get(i).setEnabled(false);
+    	}
+    }
+    
+    private void attackEnemy(Enemy enemy) {
+    	_ctrl.action(CombatOption.ATTACK, enemy.getEnemyNum(), null);
+    	
+    	for (int i = 0; i < enemy_buttons.size(); i++) {
+    		enemy_buttons.get(i).setEnabled(false);
+    	}
+    	
+    	for (int i = 0; i < command_buttons.size(); i++) {
+    		command_buttons.get(i).setEnabled(true);
+    	}
     }
     
 }

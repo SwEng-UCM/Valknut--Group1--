@@ -6,6 +6,7 @@ public class Enemy extends Character {
     private static final long serialVersionUID = 1L;
     private final int xpReward;
     private String attkDesc;
+    private int enemy_num;
 
     public Enemy(String name, int life, int max_life, int xpReward, String attack) {
         super(name, life, max_life);
@@ -35,5 +36,13 @@ public class Enemy extends Character {
     public String getAttack() {
 		return attkDesc;
 	}
+    
+    public void setEnemyNum(int n) {
+    	enemy_num = n;
+    }
+    
+    public int getEnemyNum() {
+    	return enemy_num;
+    }
 }
 
