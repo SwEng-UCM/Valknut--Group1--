@@ -11,6 +11,7 @@ public class MultiPlayerScreen extends JPanel{
     private AudioManager am;
     private Controller _ctrl;
     private Image backGround;
+    private JoinDialog joinDialog;
     private JButton join;
     private JButton host;
     private JButton exit;
@@ -48,9 +49,12 @@ public class MultiPlayerScreen extends JPanel{
         
         join = ViewUtils.createButton("resources/images/Buttons/joinButton_NS.png", "resources/images/Buttons/joinButton_S.png");
         join.addActionListener(e -> {
-            String s = null;
-            //JoinDialog missing here...
-            _ctrl.initMultiplayerMode(1, s);
+            joinDialog = new JoinDialog();
+            joinDialog.setVisible(true);
+            
+            String ip = joinDialog.getIP();
+            if(ip != null && !ip.isEmpty())
+                _ctrl.initMultiplayerMode(1, ip);
             
         });
         host = ViewUtils.createButton("resources/images/Buttons/hostButton_NS.png", "resources/images/Buttons/hostButton_S.png");
@@ -122,6 +126,7 @@ public class MultiPlayerScreen extends JPanel{
         this.add(titulo, gbc);
 
         gbc.gridy = 2; 
+        exit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");;
         exit.addActionListener(e -> {
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             searching = false;
