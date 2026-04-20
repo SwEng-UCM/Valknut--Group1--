@@ -3,6 +3,7 @@ package me.socket;
 import java.io.*;
 import java.net.*;
 import me.control.Controller;
+import me.view.ViewUtils;
 
 public class MultiplayerManager {
 
@@ -73,7 +74,11 @@ public class MultiplayerManager {
     }
 
     public void connectClient(String ip) throws IOException{
-        client = new Socket(ip, PORT);
+        try{
+            client = new Socket(ip, PORT);
+        }catch(UncheckedIOException | IOException uioe){
+            ViewUtils.showErrorMsg("No Valid IP Available: " + ip);
+        }
         id = 2;
         initStreams(); //stablish the communication canal
         startListener(); //create the independent thread for listening other side communication events
@@ -82,11 +87,7 @@ public class MultiplayerManager {
     public void connectServer() throws IOException{
         server = new ServerSocket(PORT);
         id = 1;
-        try{
-            client = server.accept();
-        }catch(IOException e){
-            // ViewUtils.showErrorMsg("Server Aborted");
-        }
+        client = server.accept();
         initStreams(); //stablish the communication canal
         startListener(); //create the independent thread for listening other side communication events
     }

@@ -50,7 +50,7 @@ public class Controller {
             }
             multiplayer = true;
         }catch(IOException e){
-            ViewUtils.showErrorMsg(e.getMessage());
+            ViewUtils.showErrorMsg("Aborted Conexion");
         }
         
     }

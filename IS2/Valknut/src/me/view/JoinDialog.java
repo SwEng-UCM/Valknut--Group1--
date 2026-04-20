@@ -34,6 +34,9 @@ public class JoinDialog extends JDialog{
     mainPanel.add(Box.createVerticalStrut(10)); 
     JButton connectBtn = new JButton("Connect");
     connectBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+    connectBtn.addActionListener(e -> {
+        this.dispose();
+    });
     mainPanel.add(connectBtn);
 
     this.setContentPane(mainPanel);
