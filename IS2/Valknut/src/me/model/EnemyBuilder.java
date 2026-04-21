@@ -56,13 +56,6 @@ public class EnemyBuilder {
                 draugr.setSprite("resources/images/Creatures/dragur.png");
                 return draugr;
             }
-            case "thrym" -> {
-            	Enemy thrym = new Enemy(Messages.THRYM, 400, 500, 200, Messages.THRYM_ATTACK);
-                element.add(5); element.add(1); element.add(1); element.add(1); element.add(1);
-                thrym.setElementStats(element);
-                thrym.setSprite("resources/images/Creatures/ice_giant.png");
-                return thrym;
-            }
             case "fafnir" -> {
             	Enemy fafnir = new Enemy(Messages.FAFNIR, 450, 550, 300, Messages.FAFNIR_ATTACK);
                 element.add(1); element.add(1); element.add(1); element.add(1); element.add(5);
