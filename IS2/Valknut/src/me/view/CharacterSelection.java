@@ -112,8 +112,8 @@ public class CharacterSelection extends JPanel {
         ));
         lokiImage.setHorizontalAlignment(SwingConstants.CENTER);
 
-        freyaBtn = new JButton("Select Freya");
-        lokiBtn = new JButton("Select Loki");
+        freyaBtn = new JButton("Select Gersemi");
+        lokiBtn = new JButton("Select Vali");
         startBtn = new JButton("Start Game");
 
         freyaPanel.add(freyaImage, BorderLayout.CENTER);
