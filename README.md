@@ -1,4 +1,4 @@
-<img width="1024" height="1024" alt="logo" src="https://github.com/user-attachments/assets/621f0d38-4cf7-4860-9dcf-4b1969d5d38a" />
+<img width="1024" height="1024" alt="logo" src="newlogo.png" />
 
 "Let's become Legends by defeating Myths!"
 
