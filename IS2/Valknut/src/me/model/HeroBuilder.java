@@ -28,6 +28,24 @@ public class HeroBuilder {
                 loki.setElementStats(element);
                 loki.setSprite("resources/images/Characters/vali_icon.png");
                 return loki;
+            case "skadi":
+                Hero skadi = new Hero("Jorunn", 100, 100, "Silent Child of Skadi");
+                element.add(3); element.add(1); element.add(2); element.add(2); element.add(1);
+                skadi.setElementStats(element);
+                skadi.setSprite("resources/images/Characters/vali_icon.png");
+                return skadi;
+            case "vidar":
+                Hero vidar = new Hero("Viggo", 100, 100, "Furious Child of Vidar");
+                element.add(1); element.add(2); element.add(1); element.add(2); element.add(3);
+                vidar.setElementStats(element);
+                vidar.setSprite("resources/images/Characters/vali_icon.png");
+                return vidar;
+            case "mortal":
+                Hero mortal = new Hero("Magni", 100, 100, "Mortal Child");
+                element.add(1); element.add(2); element.add(2); element.add(3); element.add(1);
+                mortal.setElementStats(element);
+                mortal.setSprite("resources/images/Characters/vali_icon.png");
+                return mortal;
             default:
                 Hero hero = new Hero("Váli", 100, 100, "Forgotten Child of Loki");
                 element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
