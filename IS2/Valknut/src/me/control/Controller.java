@@ -210,13 +210,13 @@ public class Controller {
 
         executeEnemyTurn();
         
-        if (combatOption == CombatOption.ATTACK) {
+        //if (combatOption == CombatOption.ATTACK) {
         	controlPanel.onCombat();
-        }
+        //}
         
-        else {
-        	controlPanel.onSelection();
-        }
+//        else {
+//        	controlPanel.onSelection();
+//        }
         return finishedAction;
     }
 
