@@ -117,6 +117,18 @@ public class CombatScreen extends JPanel{
         			
         		});
         		break;
+        	case RUN:
+        		actionButton.addActionListener(ev -> {
+        			_ctrl.action(c, 1, null);
+                });
+        	case STATS:
+        		actionButton.addActionListener(ev -> {
+        			_ctrl.action(c, 1, null);
+                });
+        	case WAIT:
+        		actionButton.addActionListener(ev -> {
+        			_ctrl.action(c, 1, null);
+                });
         	}
         	command_buttons.add(actionButton);
         	commandsPanel.add(actionButton);
