@@ -32,6 +32,11 @@ public class Combat implements Serializable {
     public List<Enemy> getEnemies(){
         return enemies;
     }
+    
+    public void SetEnemies(List<Enemy> newEnemies) {
+    	this.enemies.clear();
+        this.enemies.addAll(newEnemies);
+    }
 
     public int getLastTarjet(){
         return lastTarjet;
