@@ -25,12 +25,15 @@ public class Controller {
     private Combat cb;
     private final CtrlPanel controlPanel;
     private int num_enemies;
+    private Storyteller st;
 
     private Controller() {
         sv = StoryView.getInstance();
         cv = CombatView.getInstance();
         controlPanel = new CtrlPanel(this);
+        cb = new Combat();
     }
+    
 
     public static Controller getInstance() {
         if (instance == null) {
@@ -80,6 +83,8 @@ public class Controller {
     }
 
     public void run() {
+    	st = new Storyteller(this);
+    	st.narrate();
         cb = initCmb();
         startGame();
     }
@@ -140,12 +145,12 @@ public class Controller {
     }
     
     public void startNewCmb(List<Enemy> newEnemies) {
-    	cb = new Combat();
     	cb.SetEnemies(newEnemies);
     	num_enemies = newEnemies.size();
     	controlPanel.onCombat();
     	
     }
+    
     public Combat initCmb() {
         Combat cmb = new Combat();
         cmb.addEnemy(firstEnemies(1));

@@ -2,6 +2,8 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.control.Controller;
 import me.model.EnemyBuilder;
 
 public class Storyteller {
@@ -39,6 +41,7 @@ public class Storyteller {
 	
 	//Story.chapterFinal()
 	
+	private Controller ctrl;
 	private final List<Enemy> combat1 = new ArrayList<>();
 	private final List<Enemy> combat2= new ArrayList<>();
 	private final List<Enemy> combat3= new ArrayList<>();
@@ -47,7 +50,8 @@ public class Storyteller {
 	private List<Hero> healthy = new ArrayList<>();
 	private List<Hero> heroes = new ArrayList<>();
 	
-	public Storyteller() {
+	public Storyteller(Controller ctrl) {
+		this.ctrl = ctrl;
 		//1st Combat enemies
 		combat1.add(EnemyBuilder.buildEnemy("ice"));
 		combat1.add(EnemyBuilder.buildEnemy("ice"));
@@ -73,4 +77,7 @@ public class Storyteller {
 	}
 	
 	
+	public void narrate() {
+		
+	}
 }
