@@ -29,4 +29,11 @@ public class Storyteller {
 	
 	//Story.endFourthChapter()
 	
+	//Story.chapterFith()
+	
+	//Combat 5: final combat, battle againt eachother
+	
+	//Story.chapterFinal()
+	
+	
 }
