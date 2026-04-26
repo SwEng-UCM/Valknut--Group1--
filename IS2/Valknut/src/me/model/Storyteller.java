@@ -54,10 +54,11 @@ public class Storyteller {
 		this.ctrl = ctrl;
 		//1st Combat enemies
 		combat1.add(EnemyBuilder.buildEnemy("ice"));
-		combat1.add(EnemyBuilder.buildEnemy("ice"));
 		combat1.add(EnemyBuilder.buildEnemy("fire"));
-		combat1.add(EnemyBuilder.buildEnemy("fire"));
-		
+		if(heroes.size() > 2) {
+			combat1.add(EnemyBuilder.buildEnemy("ice"));
+			combat1.add(EnemyBuilder.buildEnemy("fire"));
+		}
 		//2nd Combat enemies
 		combat2.add(EnemyBuilder.buildEnemy("draug"));
 		combat2.add(EnemyBuilder.buildEnemy("draug"));
@@ -78,6 +79,6 @@ public class Storyteller {
 	
 	
 	public void narrate() {
-		
+		ctrl.startNewCmb(combat1);
 	}
 }

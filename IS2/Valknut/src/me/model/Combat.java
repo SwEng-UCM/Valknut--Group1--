@@ -18,8 +18,8 @@ public class Combat implements Serializable {
     private int lastTarjet;
 
     public Combat(){
-        heroes = new ArrayList<>(4); //initial values are almost random
-        enemies = new ArrayList<>(5);
+        heroes = new ArrayList<>(); //initial values are almost random
+        enemies = new ArrayList<>();
         items = new ArrayList<>(5);
         turn = 1; 
         exit = false;

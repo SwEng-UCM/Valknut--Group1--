@@ -83,10 +83,12 @@ public class Controller {
     }
 
     public void run() {
-    	st = new Storyteller(this);
-    	st.narrate();
-        cb = initCmb();
-        startGame();
+//    	startGame();
+//    	st = new Storyteller(this);
+//    	st.narrate();
+//        //cb = initCmb();
+     cb = initCmb();
+     startGame();
     }
 
     public void startGame() {
@@ -147,7 +149,7 @@ public class Controller {
     public void startNewCmb(List<Enemy> newEnemies) {
     	cb.SetEnemies(newEnemies);
     	num_enemies = newEnemies.size();
-    	controlPanel.onCombat();
+    	//controlPanel.onCombat();
     	
     }
     
