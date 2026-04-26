@@ -1,5 +1,9 @@
 package me.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import me.model.EnemyBuilder;
+
 public class Storyteller {
 
 	//*Players select characters
@@ -34,6 +38,26 @@ public class Storyteller {
 	//Combat 5: final combat, battle againt eachother
 	
 	//Story.chapterFinal()
+	
+	private final List<Enemy> combat1 = new ArrayList<>();
+	private final List<Enemy> combat2= new ArrayList<>();
+	private final List<Enemy> combat3= new ArrayList<>();
+	private final List<Enemy> combat4= new ArrayList<>();
+	private List<Hero> infected;
+	private List<Hero> healthy;
+	
+	public Storyteller() {
+		//1st Combat enemies
+		combat1.add(EnemyBuilder.buildEnemy("ice"));
+		combat1.add(EnemyBuilder.buildEnemy("ice"));
+		combat1.add(EnemyBuilder.buildEnemy("fire"));
+		combat1.add(EnemyBuilder.buildEnemy("fire"));
+		
+		//2nd Combat enemies
+		
+		
+		
+	}
 	
 	
 }
