@@ -14,6 +14,19 @@ public class Storyteller {
 
 	//Second combat call combat against the Dragurs
 
-	//....And so on
+	//Story.endSecondChapter()
+	
+	//Story.StartThirdChapter()
+	
+	//*Combat 3: start combat against the Dragon
+	
+	// --> Set infected/heathy heroes here
+	//Story.endThridChapter()
+	
+	//Story.startFourthChapter()
+	
+	//Combat 4: against the two wolves
+	
+	//Story.endFourthChapter()
 	
 }
