@@ -45,6 +45,7 @@ public class Storyteller {
 	private final List<Enemy> combat4= new ArrayList<>();
 	private List<Hero> infected;
 	private List<Hero> healthy;
+	private List<Hero> heroes;
 	
 	public Storyteller() {
 		//1st Combat enemies
@@ -54,6 +55,16 @@ public class Storyteller {
 		combat1.add(EnemyBuilder.buildEnemy("fire"));
 		
 		//2nd Combat enemies
+		combat2.add(EnemyBuilder.buildEnemy("draug"));
+		combat2.add(EnemyBuilder.buildEnemy("draug"));
+		combat2.add(EnemyBuilder.buildEnemy("draug"));
+		if(heroes.size() > 2) {
+			combat2.add(EnemyBuilder.buildEnemy("draug"));
+			combat2.add(EnemyBuilder.buildEnemy("draug"));
+		}
+		
+		//
+		
 		
 		
 		
