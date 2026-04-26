@@ -3,6 +3,7 @@ package me.command;
 import me.model.AutonomousHero;
 import me.model.Combat;
 import me.model.Hero;
+import me.model.save.SaveGameData;
 import me.view.CombatView;
 
 /**
@@ -13,7 +14,9 @@ public class DefendCommand implements Command {
     private final Combat combat;
     private final CombatView combatView;
     private final Hero currentHero;
+
     private boolean actionExecuted;
+    private SaveGameData previousState;
 
     public DefendCommand(Combat combat, CombatView combatView, Hero currentHero) {
         this.combat = combat;
@@ -24,19 +27,39 @@ public class DefendCommand implements Command {
 
     @Override
     public boolean execute() {
+
+        // SAVE STATE for undo
+        previousState = combat.save();
+
         if (currentHero == null || !currentHero.isAlive() || currentHero.escaped() || combat.getEnemies().isEmpty()) {
+            previousState = null;
             return false;
         }
 
-        // Preserve the old behavior for autonomous heroes.
-        if (currentHero.isAutonomous()) {
-            AutonomousHero autonomousHero = (AutonomousHero) currentHero;
-            autonomousHero.doDefensive();
+        // Autonomous hero behavior
+        if (currentHero instanceof AutonomousHero) {
+            ((AutonomousHero) currentHero).doDefensive();
         }
 
         combatView.printLine(combat.defend());
         actionExecuted = true;
         return true;
+    }
+
+    @Override
+    public boolean undo() {
+        if (previousState == null) {
+            return false;
+        }
+
+        combat.restore(previousState);
+        combatView.printLine("Last combat action was undone.");
+        return true;
+    }
+
+    @Override
+    public boolean canUndo() {
+        return false;
     }
 
     @Override

@@ -103,32 +103,47 @@ public class CombatScreen extends JPanel{
         	JButton actionButton = new JButton(c.toString());
         	actionButton.setPreferredSize(new Dimension(500, 100));
         	switch(c) {
-        	case ATTACK:
-        		actionButton.addActionListener(ev -> {
-                	attack();
-                });
-        		break;
-        	case DEFEND:
-        		actionButton.addActionListener(ev -> {
-        			_ctrl.action(c, 1, null);
-                });
-        	case USE_ITEM:
-        		actionButton.addActionListener(ev -> {
-        			
-        		});
-        		break;
-        	case RUN:
-        		actionButton.addActionListener(ev -> {
-        			_ctrl.action(c, 1, null);
-                });
-        	case STATS:
-        		actionButton.addActionListener(ev -> {
-        			_ctrl.action(c, 1, null);
-                });
-        	case WAIT:
-        		actionButton.addActionListener(ev -> {
-        			_ctrl.action(c, 1, null);
-                });
+                case ATTACK:
+                    actionButton.addActionListener(ev -> {
+                        attack();
+                    });
+                    break;
+
+                case DEFEND:
+                    actionButton.addActionListener(ev -> {
+                        _ctrl.action(c, 1, null);
+                    });
+                    break;
+
+                case USE_ITEM:
+                    actionButton.addActionListener(ev -> {
+                        
+                    });
+                    break;
+
+                case RUN:
+                    actionButton.addActionListener(ev -> {
+                        _ctrl.action(c, 1, null);
+                    });
+                    break;
+
+                case STATS:
+                    actionButton.addActionListener(ev -> {
+                        _ctrl.action(c, 1, null);
+                    });
+                    break;
+
+                case WAIT:
+                    actionButton.addActionListener(ev -> {
+                        _ctrl.action(c, 1, null);
+                    });
+                    break;
+                    
+                case UNDO:
+                    actionButton.addActionListener(ev -> {
+                        _ctrl.action(c, 1, null);
+                    });
+                    break;
         	}
         	command_buttons.add(actionButton);
         	commandsPanel.add(actionButton);

@@ -23,6 +23,7 @@ public class Controller {
     private MultiplayerManager player;
     private boolean multiplayer = false;
     private Combat cb;
+    private Command lastUndoableCommand;
     private final CtrlPanel controlPanel;
     private int num_enemies;
 
@@ -192,6 +193,14 @@ public class Controller {
     public boolean action(CombatOption combatOption, int target,Item item) {
         boolean finishedAction = false;
 
+        if (combatOption == CombatOption.UNDO) {
+            if (lastUndoableCommand != null && lastUndoableCommand.undo()) {
+                lastUndoableCommand = null;
+            }
+            controlPanel.onCombat();
+            return false;
+        }
+
         cb.updateItems();
         Hero currentHero = getCurrentHero();
 
@@ -200,6 +209,10 @@ public class Controller {
 
         if (command != null) {
             finishedAction = command.execute();
+
+            if (finishedAction && command.canUndo()) {
+                lastUndoableCommand = command;
+            }
 
             // Preserve the original behavior:
             // only commands that advance the turn should move combat forward.

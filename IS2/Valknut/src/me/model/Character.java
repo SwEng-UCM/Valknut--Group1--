@@ -9,11 +9,8 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import me.view.Messages;
 
 public abstract class Character implements Serializable {
@@ -41,6 +38,17 @@ public abstract class Character implements Serializable {
         this.max_life = max_life;
         this.escaped = false;
         this.defend = false;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+
+        // optional ali pametno:
+        if (this.life <= 0) {
+            this.alive = false;
+        } else {
+            this.alive = true;
+        }
     }
     
     public ImageIcon getSprite(int width, int height) {
