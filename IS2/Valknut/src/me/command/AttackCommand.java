@@ -3,7 +3,9 @@ package me.command;
 import me.model.AutonomousHero;
 import me.model.Combat;
 import me.model.Hero;
+//import me.model.save.SaveGameData;
 import me.view.CombatView;
+import me.model.Enemy;
 
 /**
  * Command responsible for handling the attack action.
@@ -15,6 +17,9 @@ public class AttackCommand implements Command {
     private final Hero currentHero;
     private int target;
     private boolean actionExecuted;
+    //private SaveGameData previousState;
+    private Enemy attackedEnemy;
+    private int previousEnemyLife;
 
     public AttackCommand(Combat combat, CombatView combatView, Hero currentHero, int target) {
         this.combat = combat;
@@ -26,24 +31,39 @@ public class AttackCommand implements Command {
 
     @Override
     public boolean execute() {
-        if (currentHero == null || !currentHero.isAlive() || currentHero.escaped() || combat.getEnemies().isEmpty()) {
+        //previousState = combat.save();
+
+        if (currentHero instanceof AutonomousHero) {
+            target = ((AutonomousHero) currentHero).selectTarjet() + 1;
+        }
+
+        if (target <= 0) {
+            //previousState = null;
             return false;
         }
 
-        // If the current hero is autonomous, let the hero choose the target.
-        if (currentHero.isAutonomous()) {
-            AutonomousHero autonomousHero = (AutonomousHero) currentHero;
-            target = autonomousHero.selectTarjet() + 1;
-
-            // The old code only attacked when the selected target was valid.
-            if (target <= 0) {
-                return false;
-            }
-        }
+        attackedEnemy = combat.getEnemies().get(target - 1);
+        previousEnemyLife = attackedEnemy.getLife();
 
         combatView.printLine(combat.attack(target));
         actionExecuted = true;
         return true;
+    }
+
+    @Override
+    public boolean undo() {
+        if (attackedEnemy == null) {
+            return false;
+        }
+
+        attackedEnemy.setLife(previousEnemyLife);
+        combatView.printLine("Last combat action was undone.");
+        return true;
+    }
+
+    @Override
+    public boolean canUndo() {
+        return attackedEnemy != null;
     }
 
     @Override

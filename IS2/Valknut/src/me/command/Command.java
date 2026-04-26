@@ -18,4 +18,12 @@ public interface Command {
      * @return true if the turn should advance, false otherwise
      */
     boolean advancesTurn();
+
+    default boolean undo() {
+        return false;
+    }
+
+    default boolean canUndo() {
+        return false;
+    }
 }

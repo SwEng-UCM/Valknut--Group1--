@@ -3,7 +3,7 @@ package me.model;
 import me.view.Messages;
 
 public enum CombatOption {
-    WAIT, ATTACK, DEFEND, USE_ITEM, RUN, STATS;
+    WAIT, ATTACK, DEFEND, USE_ITEM, RUN, STATS, UNDO;
 
     private CombatOption co;
 
@@ -18,6 +18,7 @@ public enum CombatOption {
             case "run" -> RUN;
             case "wait" -> WAIT;
             case "stats" -> STATS;
+            case "undo" -> UNDO;
             default -> null;
         };
     }
