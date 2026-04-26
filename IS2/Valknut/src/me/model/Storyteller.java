@@ -43,9 +43,9 @@ public class Storyteller {
 	private final List<Enemy> combat2= new ArrayList<>();
 	private final List<Enemy> combat3= new ArrayList<>();
 	private final List<Enemy> combat4= new ArrayList<>();
-	private List<Hero> infected;
-	private List<Hero> healthy;
-	private List<Hero> heroes;
+	private List<Hero> infected = new ArrayList<>();
+	private List<Hero> healthy = new ArrayList<>();
+	private List<Hero> heroes = new ArrayList<>();
 	
 	public Storyteller() {
 		//1st Combat enemies
@@ -63,8 +63,12 @@ public class Storyteller {
 			combat2.add(EnemyBuilder.buildEnemy("draug"));
 		}
 		
-		//
+		//3rd Combat enemies
+		combat3.add(EnemyBuilder.buildEnemy("fafnir"));
 		
+		//4rth Combat enemies
+		combat4.add(EnemyBuilder.buildEnemy("skoll"));
+		combat4.add(EnemyBuilder.buildEnemy("hati"));
 		
 		
 		
