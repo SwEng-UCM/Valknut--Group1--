@@ -70,8 +70,6 @@ public class Storyteller {
 		combat4.add(EnemyBuilder.buildEnemy("skoll"));
 		combat4.add(EnemyBuilder.buildEnemy("hati"));
 		
-		
-		
 	}
 	
 	

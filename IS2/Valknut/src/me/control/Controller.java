@@ -129,10 +129,23 @@ public class Controller {
         return (cb == null ? null : cb.getEnemies());
     }
     
+    public void setEnemies(List<Enemy> newEnemies){
+    	if(cb != null) {
+    		cb.SetEnemies(newEnemies);
+    	}
+    }
+    
     public List<Hero> getHeroes(){
         return (cb == null ? null : cb.getHeroes());
     }
-
+    
+    public void startNewCmb(List<Enemy> newEnemies) {
+    	cb = new Combat();
+    	cb.SetEnemies(newEnemies);
+    	num_enemies = newEnemies.size();
+    	controlPanel.onCombat();
+    	
+    }
     public Combat initCmb() {
         Combat cmb = new Combat();
         cmb.addEnemy(firstEnemies(1));
