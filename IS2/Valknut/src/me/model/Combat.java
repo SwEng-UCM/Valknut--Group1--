@@ -6,6 +6,7 @@ import java.util.List;
 import me.model.items.Item;
 import me.model.save.SaveGameData;
 import me.view.Messages;
+import me.model.save.SaveGameManager;
 
 
 public class Combat implements Serializable {
@@ -194,17 +195,20 @@ public class Combat implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append(rmvEnemies());
         if(enemies.isEmpty()){
-        	
+
             sb.append(Messages.BATTLE_WIN);
             exit = true;
+            SaveGameManager.saveGame(save(), "autosave.dat");
         }
         else if(allEscaped()){
             sb.append(Messages.BATTLE_ESCAPE);
             exit = true;
+            SaveGameManager.saveGame(save(), "autosave.dat");
         }
         else if(heroesLoose()){
             sb.append(Messages.BATTLE_LOSS);
             exit = true;
+            SaveGameManager.saveGame(save(), "autosave.dat");
         }
 
         return sb.toString();
