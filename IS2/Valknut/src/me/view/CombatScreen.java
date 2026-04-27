@@ -8,17 +8,17 @@ import me.control.Controller;
 import me.model.CombatOption;
 import me.model.Enemy;
 import me.model.Hero;
+import me.model.items.Item;
 
 public class CombatScreen extends JPanel{
     private static CombatScreen instance;
-    private AudioManager am;
     private Controller _ctrl;
     private Image backGround;
     private List<JButton> enemy_buttons, command_buttons;
+    private JPanel commandsPanel;
 
     private CombatScreen(Controller ctrl){
          _ctrl = ctrl;
-        am = AudioManager.getInstance();
         initGUI();
         setComponents();
     }
@@ -93,7 +93,7 @@ public class CombatScreen extends JPanel{
             }
         }
         
-        JPanel commandsPanel = new JPanel();
+        commandsPanel = new JPanel();
         commandsPanel.setSize(new Dimension(500, 500));
         commandsPanel.setOpaque(false);
         commandsPanel.setLayout(new BoxLayout(commandsPanel, BoxLayout.X_AXIS));
@@ -117,7 +117,7 @@ public class CombatScreen extends JPanel{
 
                 case USE_ITEM:
                     actionButton.addActionListener(ev -> {
-                        
+                        useItem();
                     });
                     break;
 
@@ -174,6 +174,25 @@ public class CombatScreen extends JPanel{
     	for (int i = 0; i < command_buttons.size(); i++) {
     		command_buttons.get(i).setEnabled(true);
     	}
+    }
+    
+    private void useItem() {
+    	this.remove(commandsPanel);
+    	this.revalidate();
+    	this.repaint();
+    	JPanel itemsPanel = new JPanel();
+    	itemsPanel.setSize(new Dimension(500, 500));
+    	itemsPanel.setOpaque(false);
+    	itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.X_AXIS));
+    	for (Item i: _ctrl.getItems()) {
+    		JButton itemChoiceButton = new JButton(i.getName());
+    		itemChoiceButton.setPreferredSize(new Dimension(1000, 100));
+    		itemChoiceButton.addActionListener(ev -> {
+    			_ctrl.action(CombatOption.USE_ITEM, 1, i);
+    		});
+        	itemsPanel.add(itemChoiceButton);
+    	}
+    	this.add(itemsPanel, BorderLayout.PAGE_END);
     }
     
 }

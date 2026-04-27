@@ -116,14 +116,15 @@ public class Hero extends Character {
 
     public String useItem(Item i){
         StringBuilder sb = new StringBuilder();
-        if(!isUsing(i)){
-            inventory.dropItem(i);
+        //if(!isUsing(i)){
+        //    inventory.dropItem(i);
+        i.assignCharacter(this);
             i.use();
-            using.addItem(i);
+        //    using.addItem(i);
             sb.append(Messages.USED_ITEM).append(i.getName().toUpperCase());
-        }
-        else
-            sb.append(Messages.USING_ITEM).append(i.getName().toUpperCase());
+        //}
+        //else
+        //    sb.append(Messages.USING_ITEM).append(i.getName().toUpperCase());
         
         return sb.toString();
     }

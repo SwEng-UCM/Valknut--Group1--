@@ -34,6 +34,10 @@ public class Combat implements Serializable {
         return enemies;
     }
     
+    public List<Item> getItems(){
+        return items;
+    }
+    
     public void SetEnemies(List<Enemy> newEnemies) {
     	this.enemies.clear();
         this.enemies.addAll(newEnemies);
@@ -49,6 +53,10 @@ public class Combat implements Serializable {
 
     public void addEnemy(Enemy e){
         enemies.add(e);
+    }
+    
+    public void addItem(Item e) {
+    	items.add(e);
     }
 
     private String rmvEnemies(){
