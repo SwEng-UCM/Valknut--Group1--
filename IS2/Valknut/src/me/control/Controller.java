@@ -1,26 +1,22 @@
 package me.control;
 
-import java.io.IOException;
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
 import me.model.*;
 import me.model.items.*;
 import me.model.save.*;
-import me.socket.MultiplayerManager;
 import me.view.AudioManager;
 import me.view.CombatView;
 import me.view.CtrlPanel;
 import me.view.Messages;
 import me.view.StoryView;
-import me.view.ViewUtils;
 
 public class Controller {
 
     private static StoryView sv;
     private static CombatView cv;
     private static Controller instance;
-    private MultiplayerManager player;
     private boolean multiplayer = false;
     private Combat cb;
     private Command lastUndoableCommand;
@@ -44,36 +40,36 @@ public class Controller {
         return instance;
     }
 
-    public void initMultiplayerMode(int i, String ip){
-        player = new MultiplayerManager(instance);
-        try{
-            switch (i) {
-                case 0 -> player.connectServer();
-                case 1 -> player.connectClient(ip);
-                default -> throw new AssertionError();
-            }
-            multiplayer = true;
-        }catch(IOException e){
-            ViewUtils.showErrorMsg("Aborted Conexion");
-        }
+    // public void initMultiplayerMode(int i, String ip){
+    //     player = new MultiplayerManager(instance);
+    //     try{
+    //         switch (i) {
+    //             case 0 -> player.connectServer();
+    //             case 1 -> player.connectClient(ip);
+    //             default -> throw new AssertionError();
+    //         }
+    //         multiplayer = true;
+    //     }catch(IOException e){
+    //         ViewUtils.showErrorMsg("Aborted Conexion");
+    //     }
         
-    }
+    // }
 
-    public void killServer(){
-        try {
-            player.endServer();
-        } catch (IOException ex) {
+    // public void killServer(){
+    //     try {
+    //         player.endServer();
+    //     } catch (IOException ex) {
                
-        }
-    }
+    //     }
+    // }
 
-    public void killClient(){ // just in case
-        try {
-            player.endClient();
-        } catch (IOException ex) {
-            ViewUtils.showErrorMsg(ex.getMessage());
-        }
-    }
+    // public void killClient(){ // just in case
+    //     try {
+    //         player.endClient();
+    //     } catch (IOException ex) {
+    //         ViewUtils.showErrorMsg(ex.getMessage());
+    //     }
+    // }
 
     public int getNumEnemies() {
         return num_enemies;

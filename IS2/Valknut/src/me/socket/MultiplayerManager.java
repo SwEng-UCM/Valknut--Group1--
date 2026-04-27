@@ -1,133 +1,62 @@
 package me.socket;
+import javax.swing.*;
+import me.control.*;
 
-import java.io.*;
-import java.net.*;
-import me.control.Controller;
-import me.view.ViewUtils;
+public class MultiplayerManager extends JFrame{
 
-public class MultiplayerManager {
-
-    private final int PORT = 9999;
-    private Socket client;
-    private ServerSocket server;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
-    private int id;
-    private final Dispatcher dispatcher;
-    private final Controller ctrl;
-    private final Validator validator;
-    private Listener listener;
+    ChatScreen cs;
+    Controller ctrl;
+    JPanel mainPanel;
+    UserObject user;
 
     public MultiplayerManager(Controller ctrl){
         this.ctrl = ctrl;
-        dispatcher = new Dispatcher();
-        validator = new Validator();
     }
 
-    public class Listener implements Runnable{
-        private volatile boolean running = true;
-
-        @Override
-        public void run() {
-            try {
-                while(running){
-                    Object obj = in.readObject();
-                    convertInfo(obj);
-                    Thread.sleep(1000); // causes a pause of 1 second between interactions to not exceed demand limits
-                }
-            } catch (IOException | ClassNotFoundException | InterruptedException e) {
-                e.printStackTrace();
+    public void recieveNotification(int id, String ip) {
+        System.out.println((id == 1 ? "Server" : "Client"));
+        switch (id) {
+            case 1 -> { 
+                user = new Server(this); 
+                System.out.println("Server created");
+                user.set();
             }
-        }
-
-        public void stop(){
-            running = false;
-        }
-
-    }
-
-    private void startListener(){
-        listener = new Listener();
-        Thread thread = new Thread(listener);
-        thread.start();
-    }
-
-    private void convertInfo(Object obj){
-        Request rq = (Request) obj;
-        if(id == 1){ // if I am the server I validate the request and then send it again to the client to treate it and treate it my self
-            if(!validateRequest(rq))
-                rq.setRequestType(Request.RequestType.ERROR);
-            send(rq);
-            treatRequest(rq);
-        }
-        else{ //if I am the client I manage the Server update
-            treatRequest(rq);
+            case 2 -> { 
+                user = new Client(ip, this); 
+                System.out.println("Client created");
+                user.set(); 
+                System.out.println("Client seted");
+            }
+            default ->{}
         }
     }
 
-    private boolean validateRequest(Request rq){
-        return validator.validate(rq, ctrl.getTurn());
+    public User getUser(){
+        return user;
     }
 
-    private void treatRequest(Request rq){
-        dispatcher.dispatch(rq, ctrl);
+    public void write(String message){
+        cs.writeInScreen(message);
     }
 
-    public void connectClient(String ip) throws IOException{
-        try{
-            client = new Socket(ip, PORT);
-        }catch(UncheckedIOException | IOException uioe){
-            ViewUtils.showErrorMsg("No Valid IP Available: " + ip);
-        }
-        id = 2;
-        initStreams(); //stablish the communication canal
-        startListener(); //create the independent thread for listening other side communication events
+    public void openChat(){
+        mainPanel.removeAll();
+
+        this.setSize(600, 500); 
+        this.setLocationRelativeTo(this);
+
+        cs = new ChatScreen(this, user);
+        mainPanel.add(cs);
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 
-    public void connectServer() throws IOException{
-        server = new ServerSocket(PORT);
-        id = 1;
-        client = server.accept();
-        initStreams(); //stablish the communication canal
-        startListener(); //create the independent thread for listening other side communication events
+    public void killUser(){
+        user.disconnect();
     }
 
-    public void endServer() throws IOException{
-            server.close();
-    }
-
-    public void endClient() throws IOException{
-            client.close();
-    }
-
-    public void endCommunication(){
-        try {
-            listener.stop();
-            endServer();
-            endClient();
-        }
-        catch(IOException ioe){
-            System.err.println(ioe.getMessage());
-        }
-    }
-
-    private void initStreams() throws IOException{
-        out = new ObjectOutputStream(client.getOutputStream());
-        in = new ObjectInputStream(client.getInputStream());
-    }
-
-    public void send(Object o) {
-        try {
-            out.writeObject(o);
-            out.flush();
-            out.reset(); 
-        } 
-        catch (IOException e) { 
-            System.err.println(e.getMessage()); 
-        }
-    }   
-
-    public int id(){
-        return id;
+    public void start(){
+        ctrl.charactersScreen();
     }
 }
