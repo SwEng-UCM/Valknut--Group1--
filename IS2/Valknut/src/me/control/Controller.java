@@ -133,8 +133,8 @@ public class Controller {
         return (cb == null ? null : cb.getEnemies());
     }
     
-    public List<Item> getItems(){
-        return (cb == null ? null : cb.getItems());
+    public Inventory getHeroItems(){
+        return (cb == null ? null : getCurrentHero().getInventory());
     }
     
     public void setEnemies(List<Enemy> newEnemies){
