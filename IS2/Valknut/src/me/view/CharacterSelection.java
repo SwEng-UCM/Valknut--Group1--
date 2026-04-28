@@ -17,6 +17,9 @@ public class CharacterSelection extends JPanel {
 
     private JButton freyaBtn;
     private JButton lokiBtn;
+    private JButton skadiBtn;
+    private JButton vidarBtn;
+    private JButton mortalBtn;
     private JButton startBtn;
 
     private JLabel infoLabel;
@@ -97,23 +100,56 @@ public class CharacterSelection extends JPanel {
 
         JPanel lokiPanel = new JPanel(new BorderLayout());
         lokiPanel.setOpaque(false);
+        
+        JPanel skadiPanel = new JPanel(new BorderLayout());
+        skadiPanel.setOpaque(false);
+        
+        JPanel vidarPanel = new JPanel(new BorderLayout());
+        vidarPanel.setOpaque(false);
+        
+        JPanel mortalPanel = new JPanel(new BorderLayout());
+        mortalPanel.setOpaque(false);
 
         JLabel freyaImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/gersemi.png")
+                new ImageIcon("resources/images/Characters/newgersemi.png")
                         .getImage()
-                        .getScaledInstance(300, 450, Image.SCALE_SMOOTH)
+                        .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));
         freyaImage.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lokiImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/vali.png")
+                new ImageIcon("resources/images/Characters/newvali.png")
                         .getImage()
-                        .getScaledInstance(300, 450, Image.SCALE_SMOOTH)
+                        .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));
         lokiImage.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        JLabel skadiImage = new JLabel(new ImageIcon(
+                new ImageIcon("resources/images/Characters/jorunn.png")
+                        .getImage()
+                        .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
+        ));
+        skadiImage.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        JLabel vidarImage = new JLabel(new ImageIcon(
+                new ImageIcon("resources/images/Characters/viggo.png")
+                        .getImage()
+                        .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
+        ));
+        vidarImage.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        JLabel mortalImage = new JLabel(new ImageIcon(
+                new ImageIcon("resources/images/Characters/magni.png")
+                        .getImage()
+                        .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
+        ));
+        mortalImage.setHorizontalAlignment(SwingConstants.CENTER);
 
         freyaBtn = new JButton("Select Gersemi");
         lokiBtn = new JButton("Select Vali");
+        skadiBtn = new JButton("Select Jorunn");
+        vidarBtn = new JButton("Select Viggo");
+        mortalBtn = new JButton("Select Magni");
         startBtn = new JButton("Start Game");
 
         freyaPanel.add(freyaImage, BorderLayout.CENTER);
@@ -121,9 +157,21 @@ public class CharacterSelection extends JPanel {
 
         lokiPanel.add(lokiImage, BorderLayout.CENTER);
         lokiPanel.add(lokiBtn, BorderLayout.SOUTH);
+        
+        skadiPanel.add(skadiImage, BorderLayout.CENTER);
+        skadiPanel.add(skadiBtn, BorderLayout.SOUTH);
+        
+        vidarPanel.add(vidarImage, BorderLayout.CENTER);
+        vidarPanel.add(vidarBtn, BorderLayout.SOUTH);
+        
+        mortalPanel.add(mortalImage, BorderLayout.CENTER);
+        mortalPanel.add(mortalBtn, BorderLayout.SOUTH);
 
         characterPanel.add(freyaPanel);
         characterPanel.add(lokiPanel);
+        characterPanel.add(skadiPanel);
+        characterPanel.add(vidarPanel);
+        characterPanel.add(mortalPanel);
 
         JPanel middleWrapper = new JPanel(new BorderLayout());
         middleWrapper.setOpaque(false);
