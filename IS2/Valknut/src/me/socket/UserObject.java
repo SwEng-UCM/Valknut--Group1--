@@ -15,7 +15,6 @@ public abstract class UserObject extends Hero implements User {
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
     Listener listener;
-    Dispatcher dispatcher;
 
     public enum UserType{
         SERVER, CLIENT;
@@ -25,7 +24,11 @@ public abstract class UserObject extends Hero implements User {
         super(null, 0, 0, null);
         this.test = test;
         this.id = id;
-        dispatcher = new Dispatcher();
+    }
+
+    @Override
+    public void does(Request rq){
+        send(rq);
     }
 
     @Override
@@ -64,7 +67,7 @@ public abstract class UserObject extends Hero implements User {
     }
 
     private void treatRequest(Request rq){
-        dispatcher.dispatch(rq, test);
+        test.treatRequest(rq);
     }
 
     protected void startListener(){

@@ -3,6 +3,7 @@ package me.model;
 import java.util.List;
 import me.model.items.HealingItem;
 import me.model.items.Item;
+import me.socket.Request;
 
 public class AutonomousHero extends Hero {
     
@@ -12,6 +13,18 @@ public class AutonomousHero extends Hero {
         super(name, life, max_life, surname);
         setAutonomous(true);
         combatState = State.LEADER;
+    }
+
+    @Override
+    public void does(Request rq){ //Don't use the request but needed for overriding
+        switch (combatState) {
+            case HARMED -> doHarmed();
+            case LEADER -> cmbt.attack(doLeader());
+            case FOLLOWER -> cmbt.attack(doFollower());
+            case DEFENSIVE -> {doDefensive(); cmbt.defend();}
+            case SCARED -> {doScared(); cmbt.run();}
+            default -> cmbt.attack(doLeader());
+        }
     }
 
     public void doHarmed(){
@@ -131,19 +144,6 @@ public class AutonomousHero extends Hero {
             else
                 combatState = State.DEFENSIVE;
         }
-    }
-
-    public CombatOption selectAction(){
-        CombatOption co;
-        switch (combatState) {
-            case HARMED -> co = CombatOption.USE_ITEM;
-            case LEADER -> co = CombatOption.ATTACK;
-            case FOLLOWER -> co = CombatOption.ATTACK;
-            case DEFENSIVE -> co = CombatOption.DEFEND;
-            case SCARED -> co = CombatOption.RUN;
-            default -> co = CombatOption.ATTACK;
-        }
-        return co;
     }
     
 }

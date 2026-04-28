@@ -16,28 +16,28 @@ public class Client extends UserObject{
     }
 
     private void initStreams() throws IOException{
-        System.out.println("[Client:17] Trying to stablish communication");
+        System.out.println("Trying to stablish communication");
         out = new ObjectOutputStream(me.getOutputStream());
-        System.out.println("[Client:19] Half way");
+        System.out.println("Half way");
         in = new ObjectInputStream(me.getInputStream());
-        System.out.println("[Client:21] Communication Stablished");
+        System.out.println("Communication Stablished");
     }
 
     @Override
     public void set() {
         try {
             me = new Socket();
-            System.out.println("[Client:28] New socket");
+            System.out.println("New socket");
 
             me.setReuseAddress(true);
-            System.out.println("[Client:30] Trying to connect to " + ip + ":" + PORT);
+            System.out.println("Trying to connect to " + ip + ":" + PORT);
 
             me.connect(new InetSocketAddress(ip, PORT), 2000);
-            System.out.println("[Client:32] Succesfully connected");
+            System.out.println("Succesfully connected");
 
             initStreams();
             startListener();
-            System.out.println("[Client:35] Listener started");
+            System.out.println("Listener started");
 
             ViewUtils.showErrorMsg("Connected!!");
             test.start();
@@ -52,7 +52,7 @@ public class Client extends UserObject{
             closeStream();
             me.close();
             if(me.isClosed())
-                System.out.println("[Client:48] Client Closed");
+                System.out.println("Client Closed");
         } catch (IOException e) {
            e.printStackTrace();
         }

@@ -20,31 +20,31 @@ public class HeroBuilder {
                 Hero freya = new Hero("Gersemi", 100, 100, "Beloved Child of Freya");
                 element.add(1); element.add(2); element.add(3); element.add(1); element.add(2);
                 freya.setElementStats(element);
-                freya.setSprite("resources/images/Characters/gersemi_icon.png");
+                freya.setSprite("resources/images/Characters/newgersemi.png");
                 return freya;
             case "loki":
                 Hero loki = new Hero("Váli", 100, 100, "Forgotten Child of Loki");
                 element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
                 loki.setElementStats(element);
-                loki.setSprite("resources/images/Characters/vali_icon.png");
+                loki.setSprite("resources/images/Characters/newvali.png");
                 return loki;
             case "skadi":
                 Hero skadi = new Hero("Jorunn", 100, 100, "Silent Child of Skadi");
                 element.add(3); element.add(1); element.add(2); element.add(2); element.add(1);
                 skadi.setElementStats(element);
-                skadi.setSprite("resources/images/Characters/vali_icon.png");
+                skadi.setSprite("resources/images/Characters/jorunn.png");
                 return skadi;
             case "vidar":
                 Hero vidar = new Hero("Viggo", 100, 100, "Furious Child of Vidar");
                 element.add(1); element.add(2); element.add(1); element.add(2); element.add(3);
                 vidar.setElementStats(element);
-                vidar.setSprite("resources/images/Characters/vali_icon.png");
+                vidar.setSprite("resources/images/Characters/viggo.png");
                 return vidar;
             case "mortal":
                 Hero mortal = new Hero("Magni", 100, 100, "Mortal Child");
                 element.add(1); element.add(2); element.add(2); element.add(3); element.add(1);
                 mortal.setElementStats(element);
-                mortal.setSprite("resources/images/Characters/vali_icon.png");
+                mortal.setSprite("resources/images/Characters/magni.png");
                 return mortal;
             default:
                 Hero hero = new Hero("Váli", 100, 100, "Forgotten Child of Loki");
