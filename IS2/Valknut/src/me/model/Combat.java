@@ -203,7 +203,6 @@ public class Combat implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append(rmvEnemies());
         if(enemies.isEmpty()){
-
             sb.append(Messages.BATTLE_WIN);
             exit = true;
             SaveGameManager.saveGame(save(), "autosave.dat");
