@@ -2,9 +2,11 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 import me.control.Controller;
 import me.model.EnemyBuilder;
+import me.view.Story;
 
 public class Storyteller {
 
@@ -49,6 +51,7 @@ public class Storyteller {
 	private List<Hero> infected = new ArrayList<>();
 	private List<Hero> healthy = new ArrayList<>();
 	private List<Hero> heroes = new ArrayList<>();
+	private Queue<Object> toDo;
 	
 	public Storyteller(Controller ctrl) {
 		this.ctrl = ctrl;
@@ -75,6 +78,25 @@ public class Storyteller {
 		combat4.add(EnemyBuilder.buildEnemy("skoll"));
 		combat4.add(EnemyBuilder.buildEnemy("hati"));
 		
+		toDo.add(Story.IntroLines);
+		toDo.add(Story.startFirstChapter());
+		toDo.add(combat1);
+		toDo.add(Story.middleFirstChapter());
+		toDo.add(Story.startSecondChapter());
+		toDo.add(Story.middleSecondChapter());
+		toDo.add(combat2);
+		toDo.add(Story.endSecondChapter());
+		toDo.add(Story.startThirdChapter());
+		toDo.add(combat3);
+		toDo.add(Story.endThirdChapter());
+		toDo.add(Story.startFourthChapter());
+		toDo.add(combat4);
+		toDo.add(Story.endFourthChapter());
+		toDo.add(Story.chapterFith());
+		toDo.add(null);
+		toDo.add(Story.chapterFinal(null));
+		
+		
 	}
 	
 	
@@ -84,7 +106,7 @@ public class Storyteller {
 
 
 	public void next(Combat cb) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 }
