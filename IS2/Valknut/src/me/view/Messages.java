@@ -6,7 +6,7 @@ public class Messages {
 	public static final String BATTLE_START = "NEW ENEMIES CROSS YOUR PATH. A NEW BATTLE STARTS";
 	public static final String BATTLE_WIN = "THE HEROES WIN. ONE STEP CLOSER TO VALHALLA";
 	public static final String BATTLE_LOSS = "THE HEROES LOSE. YOUR ADVENTURE ENDS HERE";
-	public static final String BATTLE_ESCAPE = "THE HEROES ESCAPED THE FIGTH";
+	public static final String BATTLE_ESCAPE = "THE HEROES ESCAPED THE FIGHT";
 	public static final String ENEMY_TURN = "ENEMIES' TURN...";
 	public static final String HERO_TURN = "HEROES' TURN...";
 	public static final String HERO_WEAK = " is WEAK to ";
