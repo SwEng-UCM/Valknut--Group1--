@@ -106,7 +106,20 @@ public class Storyteller {
 
 
 	public void next(Combat cb) {
-		
+		if(toDo.isEmpty()) {
+			
+		}
+		Object n = toDo.remove();
+		if(n.getClass() == "".getClass()) {
+			ctrl.displayStory((String) n);
+		}
+		else if(n.getClass() == combat1.getClass()) {
+			ctrl.setEnemies((List<Enemy>) n);
+		}
+		else if (n == null) {
+			
+		}
 		
 	}
+	
 }
