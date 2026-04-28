@@ -160,8 +160,6 @@ public class Controller {
         cmb.addEnemy(firstEnemies(2));
         cmb.addEnemy(firstEnemies(1));
         cmb.addEnemy(firstEnemies(2));
-        cmb.addItem(new HealingItem("Healing Potion", 10, 20, 1, ItemType.HEAL));
-        cmb.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
         num_enemies = 4;
         return cmb;
     }
