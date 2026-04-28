@@ -8,9 +8,11 @@ public class MultiplayerManager extends JFrame{
     Controller ctrl;
     JPanel mainPanel;
     UserObject user;
+    Dispatcher dispatcher;
 
     public MultiplayerManager(Controller ctrl){
         this.ctrl = ctrl;
+        this.dispatcher = new Dispatcher(ctrl);
     }
 
     public void recieveNotification(int id, String ip) {
@@ -33,6 +35,10 @@ public class MultiplayerManager extends JFrame{
 
     public User getUser(){
         return user;
+    }
+
+    public void treatRequest(Request rq){
+        dispatcher.dispatch(rq, this);
     }
 
     public void write(String message){
