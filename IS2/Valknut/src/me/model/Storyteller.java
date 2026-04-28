@@ -81,4 +81,10 @@ public class Storyteller {
 	public void narrate() {
 		ctrl.startNewCmb(combat1);
 	}
+
+
+	public void next(Combat cb) {
+		// TODO Auto-generated method stub
+		
+	}
 }

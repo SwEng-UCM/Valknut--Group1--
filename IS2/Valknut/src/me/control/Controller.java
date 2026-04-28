@@ -311,4 +311,10 @@ public class Controller {
     public void exit() {
         controlPanel.onQuit();
     }
+
+
+	public void next() {
+		st.next(cb);
+		
+	}
 }
