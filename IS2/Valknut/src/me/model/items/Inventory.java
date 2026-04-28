@@ -1,9 +1,12 @@
 package me.model.items;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import me.model.Character;
+import me.model.CombatOption;
 import me.view.Messages;
 
 public class Inventory implements Serializable {
@@ -121,6 +124,16 @@ public class Inventory implements Serializable {
               }
 
               return sb.toString();
+       }
+       
+       public List<Item> getItems() {
+    	   List<Item> items = new ArrayList<>(inventory.size());
+    	   
+    	   for(Item i : inventory.keySet()){
+               items.add(i);
+    	   }
+    	   
+    	   return items;
        }
 
        public void increaseCapacity(int mod){

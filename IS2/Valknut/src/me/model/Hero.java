@@ -117,7 +117,7 @@ public class Hero extends Character {
     public String useItem(Item i){
         StringBuilder sb = new StringBuilder();
         //if(!isUsing(i)){
-        //    inventory.dropItem(i);
+        inventory.dropItem(i);
         i.assignCharacter(this);
             i.use();
         //    using.addItem(i);

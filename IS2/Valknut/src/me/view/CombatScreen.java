@@ -3,11 +3,14 @@ package me.view;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.swing.*;
 import me.control.Controller;
 import me.model.CombatOption;
 import me.model.Enemy;
 import me.model.Hero;
+import me.model.items.Inventory;
 import me.model.items.Item;
 
 public class CombatScreen extends JPanel{
@@ -184,14 +187,30 @@ public class CombatScreen extends JPanel{
     	itemsPanel.setSize(new Dimension(500, 500));
     	itemsPanel.setOpaque(false);
     	itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.X_AXIS));
-    	for (Item i: _ctrl.getItems()) {
+    	Inventory in = _ctrl.getHeroItems(); 
+    	if (in.getItems().size() == 0) {
+    		System.out.println("No items to use");
+    	}
+    	for(Item i : in.getItems()){
     		JButton itemChoiceButton = new JButton(i.getName());
     		itemChoiceButton.setPreferredSize(new Dimension(1000, 100));
     		itemChoiceButton.addActionListener(ev -> {
     			_ctrl.action(CombatOption.USE_ITEM, 1, i);
+    			this.remove(itemsPanel);
+    			initGUI();
+    			setComponents();
     		});
         	itemsPanel.add(itemChoiceButton);
     	}
+    	JButton returnButton = new JButton("RETURN");
+		returnButton.setPreferredSize(new Dimension(1000, 100));
+		returnButton.addActionListener(ev -> {
+			_ctrl.action(CombatOption.USE_ITEM, 1, null);
+			this.remove(itemsPanel);
+			initGUI();
+			setComponents();
+		});
+		itemsPanel.add(returnButton);
     	this.add(itemsPanel, BorderLayout.PAGE_END);
     }
     
