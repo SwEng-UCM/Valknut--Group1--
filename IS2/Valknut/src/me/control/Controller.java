@@ -11,6 +11,7 @@ import me.view.CombatView;
 import me.view.CtrlPanel;
 import me.view.Messages;
 import me.view.StoryView;
+import me.model.HeroEnum;
 
 public class Controller {
 
@@ -160,8 +161,6 @@ public class Controller {
         cmb.addEnemy(firstEnemies(2));
         cmb.addEnemy(firstEnemies(1));
         cmb.addEnemy(firstEnemies(2));
-        cmb.addItem(new HealingItem("Healing Potion", 10, 20, 1, ItemType.HEAL));
-        cmb.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
         num_enemies = 4;
         return cmb;
     }
@@ -273,17 +272,37 @@ public class Controller {
         }
     }
 
-    public String selectCharacter(int i, int player) {
+    public String selectCharacter(HeroEnum h, int player) {
         StringBuilder sb = new StringBuilder();
-        Hero new_hero;
-
-        if (i == 0) {
-            new_hero = HeroBuilder.buildHero("Freya");
-            sb.append("GERSEMI");
-        } else {
-            new_hero = HeroBuilder.buildHero("Loki");
-            sb.append("VÁLI");
+        Hero new_hero = null;
+        
+        switch (h) {
+        case HeroEnum.GERSEMI:
+        	HeroBuilder.buildHero("Freya");
+        	break;
+        case HeroEnum.VALI:
+        	new_hero = HeroBuilder.buildHero("Loki");
+        	break;
+        case HeroEnum.JORUNN:
+        	new_hero = HeroBuilder.buildHero("Skadi");
+        	break;
+        case HeroEnum.VIGGO:
+        	new_hero = HeroBuilder.buildHero("Vidar");
+        	break;
+        case HeroEnum.MAGNI:
+        	new_hero = HeroBuilder.buildHero("Mortal");
+        	break;
+        default:
+        	break;
         }
+
+//        if (h == HeroEnum.GERSEMI) {
+//            new_hero = HeroBuilder.buildHero("Freya");
+//            sb.append("GERSEMI");
+//        } else {
+//            new_hero = HeroBuilder.buildHero("Loki");
+//            sb.append("VÁLI");
+//        }
 
         new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
         new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));

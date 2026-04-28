@@ -3,6 +3,8 @@ package me.view;
 import java.awt.*;
 import javax.swing.*;
 import me.control.Controller;
+import me.model.HeroBuilder;
+import me.model.HeroEnum;
 
 /**
  * Simple character selection screen with background and character images.
@@ -183,8 +185,8 @@ public class CharacterSelection extends JPanel {
         startBtn.setEnabled(false);
         add(startBtn, BorderLayout.SOUTH);
 
-        freyaBtn.addActionListener(e -> selectCharacter(0, "Freya"));
-        lokiBtn.addActionListener(e -> selectCharacter(1, "Loki"));
+        freyaBtn.addActionListener(e -> selectCharacter(HeroEnum.GERSEMI, "Gersemi"));
+        lokiBtn.addActionListener(e -> selectCharacter(HeroEnum.VALI, "Vali"));
         startBtn.addActionListener(e -> startGame());
     }
 
@@ -194,20 +196,37 @@ public class CharacterSelection extends JPanel {
      * @param index 0 = Freya, 1 = Loki
      * @param name character name for GUI feedback
      */
-    private void selectCharacter(int index, String name) {
+    private void selectCharacter(HeroEnum h, String name) {
         if (player > 2) {
             return;
         }
 
-        ctrl.selectCharacter(index, player);
+        ctrl.selectCharacter(h, player);
         selectionLabel.setText("Player " + player + " selected " + name + ".");
 
-        if (index == 0) {
-            freyaBtn.setEnabled(false);
+        switch (h) {
+        case HeroEnum.GERSEMI:
+        	freyaBtn.setEnabled(false);
             freyaBtn.setBackground(Color.GREEN);
-        } else {
-            lokiBtn.setEnabled(false);
+        	break;
+        case HeroEnum.VALI:
+        	lokiBtn.setEnabled(false);
             lokiBtn.setBackground(Color.GREEN);
+        	break;
+        case HeroEnum.JORUNN:
+        	skadiBtn.setEnabled(false);
+            skadiBtn.setBackground(Color.GREEN);
+        	break;
+        case HeroEnum.VIGGO:
+        	vidarBtn.setEnabled(false);
+            vidarBtn.setBackground(Color.GREEN);
+        	break;
+        case HeroEnum.MAGNI:
+        	mortalBtn.setEnabled(false);
+            mortalBtn.setBackground(Color.GREEN);
+        	break;
+        default:
+        	break;
         }
 
         player++;
