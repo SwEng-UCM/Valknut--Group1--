@@ -1,28 +1,25 @@
 package me.socket;
 
-import me.model.CombatOption;
+import java.io.Serializable;
 
-public class Request {
+public class Request implements Serializable{
 
     public enum RequestType{
-        COMBAT, STORY, ERROR;
+        MESSAGE, CLOSING, COMBATOPTION;
     }
 
-    private CombatOption co;
     private RequestType rt;
+    private int id;
     Object[] parameter;
 
-    public Request(RequestType rt){
+    public Request(RequestType rt, int id){
+        this.id = id;
         this.rt = rt;
-        parameter = new Object[2];
+        parameter = new Object[10];
     }
 
     public void setRequestType(RequestType rt){
         this.rt = rt;
-    }
-
-    public void setCombatOption(CombatOption co){
-        this.co = co;
     }
 
     public void addParameter(Object obj){
@@ -33,8 +30,8 @@ public class Request {
         return rt;
     }
 
-    public CombatOption getCO(){
-        return co;
+    public int getId(){
+        return id;
     }
 
     public Object[] getParameters(){

@@ -3,9 +3,10 @@ package me.model;
 import java.util.Random;
 import me.model.items.Inventory;
 import me.model.items.Item;
+import me.socket.Request;
 import me.view.Messages;
 
-public class Hero extends Character {
+public class Hero extends Character implements Player {
     private static final long serialVersionUID = 1L;
 
     private final String surname;
@@ -82,6 +83,11 @@ public class Hero extends Character {
         }
 
         return sb.toString();
+    }
+
+    @Override
+    public void does(Request rq){
+        
     }
 
     public boolean addItem(Item i){
