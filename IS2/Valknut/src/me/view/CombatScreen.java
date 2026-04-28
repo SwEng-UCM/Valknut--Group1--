@@ -90,7 +90,8 @@ public class CombatScreen extends JPanel{
             for (Hero h : heroes) {
                 if (h.isAlive() && !h.escaped()) {
                     JLabel heroLabel = new JLabel();
-                    heroLabel.setIcon(h.getSprite(heroPanel.getWidth()/heroes.size(), heroPanel.getHeight()/heroes.size()));
+                    heroLabel.setIcon(h.getSprite(150, 150));
+                   // heroLabel.setIcon(h.getSprite(heroPanel.getWidth()/heroes.size(), heroPanel.getHeight()/heroes.size()));
                     heroPanel.add(heroLabel);
                 }
             }
