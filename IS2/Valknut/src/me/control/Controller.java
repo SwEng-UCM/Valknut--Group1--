@@ -11,7 +11,6 @@ import me.view.CombatView;
 import me.view.CtrlPanel;
 import me.view.Messages;
 import me.view.StoryView;
-import me.model.HeroEnum;
 
 public class Controller {
 
@@ -277,24 +276,12 @@ public class Controller {
         Hero new_hero;
         
         switch (h) {
-        case HeroEnum.GERSEMI:
-        	new_hero = HeroBuilder.buildHero("Freya");
-        	break;
-        case HeroEnum.VALI:
-        	new_hero = HeroBuilder.buildHero("Loki");
-        	break;
-        case HeroEnum.JORUNN:
-        	new_hero = HeroBuilder.buildHero("Skadi");
-        	break;
-        case HeroEnum.VIGGO:
-        	new_hero = HeroBuilder.buildHero("Vidar");
-        	break;
-        case HeroEnum.MAGNI:
-        	new_hero = HeroBuilder.buildHero("Mortal");
-        	break;
-        default:
-        	new_hero = HeroBuilder.buildHero("Loki");
-        	break;
+            case HeroEnum.GERSEMI -> new_hero = HeroBuilder.buildHero("Freya", player);
+            case HeroEnum.VALI -> new_hero = HeroBuilder.buildHero("Loki", player);
+            case HeroEnum.JORUNN -> new_hero = HeroBuilder.buildHero("Skadi", player);
+            case HeroEnum.VIGGO -> new_hero = HeroBuilder.buildHero("Vidar", player);
+            case HeroEnum.MAGNI -> new_hero = HeroBuilder.buildHero("Mortal", player);
+            default -> {new_hero = HeroBuilder.buildHero("Freya", player);}
         }
 
 //        if (h == HeroEnum.GERSEMI) {

@@ -9,6 +9,7 @@ import me.view.Messages;
 public class Hero extends Character implements Player {
     private static final long serialVersionUID = 1L;
 
+    protected int id;
     private final String surname;
     private boolean autonomous; 
     protected Inventory inventory; // Representing 'item'
@@ -18,8 +19,9 @@ public class Hero extends Character implements Player {
     private int xp = 0;
 
 
-    public Hero(String name, int life, int max_life, String surname) {
+    public Hero(String name, int life, int max_life, String surname, int id) {
         super(name, life, max_life);
+        this.id = id;
         if(surname != null)
             this.surname = surname;
         else

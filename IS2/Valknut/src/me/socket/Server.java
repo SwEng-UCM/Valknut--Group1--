@@ -12,8 +12,8 @@ public class Server extends UserObject{
     private DatagramSocket socket; // Not really needed as a attribute, but for udp communication
     private static final int PORT = 5000; // If we want a fixed port, like 5000 in this case
 
-    public Server(MultiplayerManager test){
-        super(1, test); // We could think on an interface to limit the user access to the controller
+    public Server(String name, int life, int max_life, String surname, MultiplayerManager test){
+        super(name, life,  max_life, surname, 1, test); // We could think on an interface to limit the user access to the controller
     }
 
     @Override

@@ -15,22 +15,24 @@ public class MultiplayerManager extends JFrame{
         this.dispatcher = new Dispatcher(ctrl);
     }
 
-    public void recieveNotification(int id, String ip) {
+    public UserObject recieveNotification(int id, String ip) {
         System.out.println((id == 1 ? "Server" : "Client"));
         switch (id) {
             case 1 -> { 
-                user = new Server(this); 
+                // user = new Server(this); 
                 System.out.println("Server created");
                 user.set();
             }
             case 2 -> { 
-                user = new Client(ip, this); 
+                // user = new Client(ip, this); 
                 System.out.println("Client created");
                 user.set(); 
                 System.out.println("Client seted");
             }
             default ->{}
         }
+
+        return user;
     }
 
     public User getUser(){

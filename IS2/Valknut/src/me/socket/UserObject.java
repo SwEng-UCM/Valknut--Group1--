@@ -10,7 +10,6 @@ import me.model.Hero;
 
 public abstract class UserObject extends Hero implements User {
 
-    private int id;
     protected MultiplayerManager test;
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
@@ -20,10 +19,9 @@ public abstract class UserObject extends Hero implements User {
         SERVER, CLIENT;
     }
 
-    public UserObject(int id, MultiplayerManager test){
-        super(null, 0, 0, null);
+    public UserObject(String name, int life, int max_life, String surname, int id, MultiplayerManager test){
+        super(name, life, max_life, surname, id);
         this.test = test;
-        this.id = id;
     }
 
     @Override

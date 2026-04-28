@@ -2,6 +2,10 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.model.items.DamageItem;
+import me.model.items.HealingItem;
+import me.model.items.ItemType;
+import me.model.items.ResistanceItem;
 import me.view.Messages;
 
 public class HeroBuilder {
@@ -9,45 +13,67 @@ public class HeroBuilder {
 
     public HeroBuilder(){
         heroes = new ArrayList<>();
-        heroes.add(buildHero("Freya"));
-        heroes.add(buildHero("Loki"));
+        heroes.add(buildHero("Freya", 0));
+        heroes.add(buildHero("Loki", 0));
     }
 
-    static public Hero buildHero(String str){
+    static public Hero selectCharacter(int i, int player) {
+        Hero new_hero;
+
+        if (i == 0)
+            new_hero = HeroBuilder.buildHero("Freya", player);
+        else 
+            new_hero = HeroBuilder.buildHero("Loki", player);
+
+        new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
+        new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
+        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+        new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
+        new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
+
+        // cb.addHero(new_hero);
+        // new_hero.setCombat(cb);
+
+        return new_hero;
+    }
+
+    static public Hero buildHero(String str, int id){
         List<Integer> element = new ArrayList<>();
         switch (str.toLowerCase()) {
             case "freya":
-                Hero freya = new Hero("Gersemi", 100, 100, "Beloved Child of Freya");
+                Hero freya = new Hero("Gersemi", 100, 100, "Beloved Child of Freya", id);
                 element.add(1); element.add(2); element.add(3); element.add(1); element.add(2);
                 freya.setElementStats(element);
                 freya.setSprite("resources/images/Characters/newgersemi.png");
                 return freya;
             case "loki":
-                Hero loki = new Hero("Váli", 100, 100, "Forgotten Child of Loki");
+                Hero loki = new Hero("Váli", 100, 100, "Forgotten Child of Loki", id);
                 element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
                 loki.setElementStats(element);
                 loki.setSprite("resources/images/Characters/newvali.png");
                 return loki;
             case "skadi":
-                Hero skadi = new Hero("Jorunn", 100, 100, "Silent Child of Skadi");
+                Hero skadi = new Hero("Jorunn", 100, 100, "Silent Child of Skadi", id);
                 element.add(3); element.add(1); element.add(2); element.add(2); element.add(1);
                 skadi.setElementStats(element);
                 skadi.setSprite("resources/images/Characters/jorunn.png");
                 return skadi;
             case "vidar":
-                Hero vidar = new Hero("Viggo", 100, 100, "Furious Child of Vidar");
+                Hero vidar = new Hero("Viggo", 100, 100, "Furious Child of Vidar", id);
                 element.add(1); element.add(2); element.add(1); element.add(2); element.add(3);
                 vidar.setElementStats(element);
                 vidar.setSprite("resources/images/Characters/viggo.png");
                 return vidar;
             case "mortal":
-                Hero mortal = new Hero("Magni", 100, 100, "Mortal Child");
+                Hero mortal = new Hero("Magni", 100, 100, "Mortal Child", id);
                 element.add(1); element.add(2); element.add(2); element.add(3); element.add(1);
                 mortal.setElementStats(element);
                 mortal.setSprite("resources/images/Characters/magni.png");
                 return mortal;
             default:
-                Hero hero = new Hero("Váli", 100, 100, "Forgotten Child of Loki");
+                Hero hero = new Hero("Váli", 100, 100, "Forgotten Child of Loki", id);
                 element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
                 hero.setElementStats(element);
                 return hero;

@@ -9,8 +9,8 @@ public class AutonomousHero extends Hero {
     
     private State combatState;
 
-    public AutonomousHero(String name, int life, int max_life, String surname){
-        super(name, life, max_life, surname);
+    public AutonomousHero(String name, int life, int max_life, String surname, int id){
+        super(name, life, max_life, surname, id);
         setAutonomous(true);
         combatState = State.LEADER;
     }

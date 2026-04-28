@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import me.model.Character;
-import me.model.CombatOption;
 import me.view.Messages;
 
 public class Inventory implements Serializable {

@@ -10,8 +10,8 @@ public class Client extends UserObject{
     private static final int PORT = 5000;
     private String ip;
 
-    public Client(String ip, MultiplayerManager test){
-        super(2, test);
+    public Client(String name, int life, int max_life, String surname, String ip, MultiplayerManager test){
+        super(name, life, max_life, surname, 2, test);
         this.ip = ip;
     }
 

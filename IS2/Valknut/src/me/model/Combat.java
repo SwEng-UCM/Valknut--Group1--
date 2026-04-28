@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import me.model.items.Item;
 import me.model.save.SaveGameData;
-import me.view.Messages;
 import me.model.save.SaveGameManager;
+import me.view.Messages;
 
 
 public class Combat implements Serializable {

@@ -2,10 +2,20 @@ package me.model
 
 public class Game(){
 
-    Stroy story;
+    private Controller ctrl;
+    private List<Player> player = new ArrayList<>(4);
+    private Combat combat;
 
-    public Game(){
-        story = new Story();
+    public Game(Controller ctrl){
+        this.ctrl = ctrl;
+    }
+
+    public void initializeCombat(){
+        combat = new Combat();
+    }
+
+    public void addHero(Hero e){
+        player.add(e);
     }
 
 }
