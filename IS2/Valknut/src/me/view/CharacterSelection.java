@@ -187,6 +187,9 @@ public class CharacterSelection extends JPanel {
 
         freyaBtn.addActionListener(e -> selectCharacter(HeroEnum.GERSEMI, "Gersemi"));
         lokiBtn.addActionListener(e -> selectCharacter(HeroEnum.VALI, "Vali"));
+        skadiBtn.addActionListener(e -> selectCharacter(HeroEnum.JORUNN, "Jorunn"));
+        vidarBtn.addActionListener(e -> selectCharacter(HeroEnum.VIGGO, "Viggo"));
+        mortalBtn.addActionListener(e -> selectCharacter(HeroEnum.MAGNI, "Magni"));
         startBtn.addActionListener(e -> startGame());
     }
 

@@ -272,13 +272,13 @@ public class Controller {
         }
     }
 
-    public String selectCharacter(HeroEnum h, int player) {
+    public Hero selectCharacter(HeroEnum h, int player) {
         StringBuilder sb = new StringBuilder();
-        Hero new_hero = null;
+        Hero new_hero;
         
         switch (h) {
         case HeroEnum.GERSEMI:
-        	HeroBuilder.buildHero("Freya");
+        	new_hero = HeroBuilder.buildHero("Freya");
         	break;
         case HeroEnum.VALI:
         	new_hero = HeroBuilder.buildHero("Loki");
@@ -293,6 +293,7 @@ public class Controller {
         	new_hero = HeroBuilder.buildHero("Mortal");
         	break;
         default:
+        	new_hero = HeroBuilder.buildHero("Loki");
         	break;
         }
 
@@ -316,7 +317,7 @@ public class Controller {
         new_hero.setCombat(cb);
         sb.append(Messages.NEW_LINE);
 
-        return sb.toString();
+        return new_hero;
     }
 
     /**
