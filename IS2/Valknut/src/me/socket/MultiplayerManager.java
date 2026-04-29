@@ -19,12 +19,12 @@ public class MultiplayerManager extends JFrame{
         System.out.println((id == 1 ? "Server" : "Client"));
         switch (id) {
             case 1 -> { 
-                // user = new Server(this); 
+                user = new Server(null, 0, 0, null, this); 
                 System.out.println("Server created");
                 user.set();
             }
             case 2 -> { 
-                // user = new Client(ip, this); 
+                user = new Client(null, 0, 0, null, ip, this); 
                 System.out.println("Client created");
                 user.set(); 
                 System.out.println("Client seted");

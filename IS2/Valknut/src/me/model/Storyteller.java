@@ -3,9 +3,7 @@ package me.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
-
 import me.control.Controller;
-import me.model.EnemyBuilder;
 import me.view.Story;
 
 public class Storyteller {
@@ -51,7 +49,7 @@ public class Storyteller {
 	private List<Hero> infected = new ArrayList<>();
 	private List<Hero> healthy = new ArrayList<>();
 	private List<Hero> heroes = new ArrayList<>();
-	private Queue<Object[]> toDo;
+	private Queue<Object> toDo;
 	
 	public Storyteller(Controller ctrl) {
 		this.ctrl = ctrl;
@@ -78,59 +76,23 @@ public class Storyteller {
 		combat4.add(EnemyBuilder.buildEnemy("skoll"));
 		combat4.add(EnemyBuilder.buildEnemy("hati"));
 		
-		Object[] auxS = new Object[2];
-		Object[] auxC = new Object[2];
-		auxS[0] = "story";
-		auxC[0] = "combat";
-		
-		auxS[1] = Story.IntroLines;
-		toDo.add(auxS);
-		
-		auxS[1] = Story.startFirstChapter();
-		toDo.add(auxS);
-		
-		auxC[1] = combat1;
-		toDo.add(auxC);
-		
-		auxS[1] =Story.middleFirstChapter();
-		toDo.add(auxS);
-		
-		auxS[1] = Story.startSecondChapter();
-		toDo.add(auxS);
-		
-		auxS[1] = Story.middleSecondChapter();
-		toDo.add(auxS);
-		
-		auxC[1] = combat2;
-		toDo.add(auxC);
-		
-		auxS[1] = Story.endSecondChapter();
-		toDo.add(auxS);
-		
-		auxS[1] = Story.startThirdChapter();
-		toDo.add(auxS);
-		
-		auxC[1] = combat3;
-		toDo.add(auxC);
-		
-		auxS[1] = Story.endThirdChapter();
-		toDo.add(auxS);
-		
-		auxS[1] = Story.startFourthChapter();
-		toDo.add(auxS);
-		
-		auxC[1] = combat4;
-		toDo.add(auxC);
-		
-		auxS[1] = Story.endFourthChapter();
-		toDo.add(auxS);
-		
-		auxS[1] = Story.chapterFith();
-		toDo.add(auxS);
-		
-		
-//		toDo.add(null);
-//		toDo.add(Story.chapterFinal(null));
+		toDo.add(Story.IntroLines);
+		toDo.add(Story.startFirstChapter());
+		toDo.add(combat1);
+		toDo.add(Story.middleFirstChapter());
+		toDo.add(Story.startSecondChapter());
+		toDo.add(Story.middleSecondChapter());
+		toDo.add(combat2);
+		toDo.add(Story.endSecondChapter());
+		toDo.add(Story.startThirdChapter());
+		toDo.add(combat3);
+		toDo.add(Story.endThirdChapter());
+		toDo.add(Story.startFourthChapter());
+		toDo.add(combat4);
+		toDo.add(Story.endFourthChapter());
+		toDo.add(Story.chapterFith());
+		toDo.add(null);
+		toDo.add(Story.chapterFinal(null));
 		
 		
 	}
@@ -145,12 +107,12 @@ public class Storyteller {
 		if(toDo.isEmpty()) {
 			
 		}
-		Object[] n = toDo.remove();
-		if(n[0] == "story") {
-			//ctrl.displayStory((String) n[1]);
+		Object n = toDo.remove();
+		if(n.getClass() == "".getClass()) {
+			// ctrl.displayStory((String) n);
 		}
-		else if(n[0] == "combat") {
-			ctrl.setEnemies((List<Enemy>) n[1]);
+		else if(n.getClass() == combat1.getClass()) {
+			ctrl.setEnemies((List<Enemy>) n);
 		}
 		else if (n == null) {
 			

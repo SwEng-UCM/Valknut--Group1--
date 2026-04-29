@@ -3,12 +3,11 @@ package me.view;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.*;
 import me.control.Controller;
 import me.model.CombatOption;
 import me.model.Enemy;
+import me.model.Game;
 import me.model.Hero;
 import me.model.items.Inventory;
 import me.model.items.Item;
@@ -16,12 +15,14 @@ import me.model.items.Item;
 public class CombatScreen extends JPanel{
     private static CombatScreen instance;
     private Controller _ctrl;
+    private Game game;
     private Image backGround;
     private List<JButton> enemy_buttons, command_buttons;
     private JPanel commandsPanel, heroPanel, enemyPanel;
 
-    private CombatScreen(Controller ctrl){
+    private CombatScreen(Controller ctrl, Game game){
          _ctrl = ctrl;
+         this.game = game;
         initGUI();
         setComponents();
     }
@@ -34,9 +35,9 @@ public class CombatScreen extends JPanel{
         }
     }
 
-    public static CombatScreen getInstance(Controller ctrl){
+    public static CombatScreen getInstance(Controller ctrl, Game game){
         if(instance == null)
-            instance = new CombatScreen(ctrl);
+            instance = new CombatScreen(ctrl, game);
         return instance;
     }
     
@@ -90,7 +91,8 @@ public class CombatScreen extends JPanel{
             for (Hero h : heroes) {
                 if (h.isAlive() && !h.escaped()) {
                     JLabel heroLabel = new JLabel();
-                    heroLabel.setIcon(h.getSprite(heroPanel.getWidth()/heroes.size(), heroPanel.getHeight()/heroes.size()));
+                    heroLabel.setIcon(h.getSprite(150, 150));
+                   // heroLabel.setIcon(h.getSprite(heroPanel.getWidth()/heroes.size(), heroPanel.getHeight()/heroes.size()));
                     heroPanel.add(heroLabel);
                 }
             }
@@ -106,19 +108,16 @@ public class CombatScreen extends JPanel{
         	JButton actionButton = new JButton(c.toString());
         	actionButton.setPreferredSize(new Dimension(500, 100));
         	switch(c) {
-                case ATTACK:
-                    actionButton.addActionListener(ev -> {
+                case ATTACK -> actionButton.addActionListener(ev -> {
                         attack();
-                        this.remove(enemyPanel);
+                        // this.remove(enemyPanel);
                     	this.revalidate();
                     	this.repaint();
-                        initGUI();
-                        setComponents();
+                        // initGUI();
+                        // setComponents();
                     });
-                    break;
 
-                case DEFEND:
-                    actionButton.addActionListener(ev -> {
+                case DEFEND -> actionButton.addActionListener(ev -> {
                         _ctrl.action(c, 1, null);
                         this.remove(commandsPanel);
                     	this.revalidate();
@@ -126,16 +125,12 @@ public class CombatScreen extends JPanel{
                         initGUI();
                         setComponents();
                     });
-                    break;
 
-                case USE_ITEM:
-                    actionButton.addActionListener(ev -> {
+                case USE_ITEM -> actionButton.addActionListener(ev -> {
                         useItem();
                     });
-                    break;
 
-                case RUN:
-                    actionButton.addActionListener(ev -> {
+                case RUN -> actionButton.addActionListener(ev -> {
                         _ctrl.action(c, 1, null);
                         this.remove(heroPanel);
                     	this.revalidate();
@@ -143,22 +138,12 @@ public class CombatScreen extends JPanel{
                         initGUI();
                         setComponents();
                     });
-                    break;
 
-                case STATS:
-                    actionButton.addActionListener(ev -> {
+                case STATS -> actionButton.addActionListener(ev -> {
                         _ctrl.action(c, 1, null);
                     });
-                    break;
-
-                case WAIT:
-                    actionButton.addActionListener(ev -> {
-                        _ctrl.action(c, 1, null);
-                    });
-                    break;
                     
-                case UNDO:
-                    actionButton.addActionListener(ev -> {
+                case UNDO -> actionButton.addActionListener(ev -> {
                         _ctrl.action(c, 1, null);
                         this.removeAll();
                         this.revalidate();
@@ -166,7 +151,6 @@ public class CombatScreen extends JPanel{
                         initGUI();
                         setComponents();
                     });
-                    break;
         	}
         	command_buttons.add(actionButton);
         	commandsPanel.add(actionButton);
