@@ -280,4 +280,10 @@ public class Controller {
 		st.next(cb);
 		
 	}
+
+
+	public void displayStory(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

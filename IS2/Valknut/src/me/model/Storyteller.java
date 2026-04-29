@@ -87,6 +87,7 @@ public class Storyteller {
 		auxS[1] = Story.startFirstChapter();
 		toDo.add(auxS);
 		
+		
 		auxC[1] = combat1;
 		toDo.add(auxC);
 		
@@ -142,7 +143,7 @@ public class Storyteller {
 	public void next(Combat cb) {
 		Object[] n = toDo.remove();
 		if(n[0] == "story") {
-			//ctrl.displayStory((String) n[1]);
+			ctrl.displayStory((String) n[1]);
 		}
 		
 		else if(n[0] == "combat") {
