@@ -1,34 +1,65 @@
 package me.model;
 
-import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
 import me.model.items.*;
 import me.model.save.*;
+import me.socket.MultiplayerManager;
 import me.view.CombatView;
-import me.view.Messages;
 
 public class Game {
     
     private static CombatView cv;
-    private Controller ctrl;
-    private List<Player> player = new ArrayList<>(4);
+    // private final Storyteller st;
+    private final MultiplayerManager mpm;
+    private me.control.Controller ctrl;
+    private List<Hero> players;
     private Command lastUndoableCommand;
     private Combat cb;
 
-    public Game(Controller ctrl){
-        cv = CombatView.getInstance(); //Temporally
-        this.ctrl = ctrl;
+    public enum GameMode{
+        SOLO, LOCAL, MULTIPLAYER;
     }
 
-    public void initializeCombat(){
+    private GameMode mode;
+
+    public Game(me.control.Controller ctrl){
+        cv = CombatView.getInstance(); //Temporally
+        this.ctrl = ctrl;
+        players = new ArrayList<>(4);
+        mode = GameMode.LOCAL;
+        // st = new Storyteller(this);
+        mpm = MultiplayerManager.getInstacne(ctrl, this);
         cb = new Combat();
     }
 
+     public void initCmb() {
+        cb.addEnemy(firstEnemies(1));
+        cb.addEnemy(firstEnemies(2));
+        cb.addEnemy(firstEnemies(1));
+        cb.addEnemy(firstEnemies(2));
+    }
+
+    public void setMode(GameMode m){
+        mode = m;
+    }
+
+    public boolean isMultiplayer(){
+        return mode == GameMode.MULTIPLAYER;
+    }
+
     public void addHero(Hero e){
-        player.add(e);
+        players.add(e);
+    }
+
+    public int getNumEnemies() {
+        return cb.getEnemies().size();
+    }
+
+    public int getTurn(){
+        return cb != null ? cb.turn() : -1;
     }
 
     public List<Enemy> getEnemies(){
@@ -52,15 +83,6 @@ public class Game {
     public void startNewCmb(List<Enemy> newEnemies) {
     	cb.SetEnemies(newEnemies);
     	//controlPanel.onCombat();
-    }
-    
-    public Combat initCmb() {
-        Combat cmb = new Combat();
-        cmb.addEnemy(firstEnemies(1));
-        cmb.addEnemy(firstEnemies(2));
-        cmb.addEnemy(firstEnemies(1));
-        cmb.addEnemy(firstEnemies(2));
-        return cmb;
     }
 
     public Enemy firstEnemies(Integer i) {
@@ -171,31 +193,55 @@ public class Game {
         }
     }
 
-    public Hero selectCharacter(HeroEnum h, int player) {
-        StringBuilder sb = new StringBuilder();
+    public void selectCharacter(HeroEnum h, int player) {
+
         Hero new_hero;
-        
-        switch (h) {
-            case HeroEnum.GERSEMI -> new_hero = HeroBuilder.buildHero("Freya", player);
-            case HeroEnum.VALI -> new_hero = HeroBuilder.buildHero("Loki", player);
-            case HeroEnum.JORUNN -> new_hero = HeroBuilder.buildHero("Skadi", player);
-            case HeroEnum.VIGGO -> new_hero = HeroBuilder.buildHero("Vidar", player);
-            case HeroEnum.MAGNI -> new_hero = HeroBuilder.buildHero("Mortal", player);
-            default -> {new_hero = HeroBuilder.buildHero("Freya", player);}
+
+        if(mode == GameMode.MULTIPLAYER){
+            new_hero = players.get(player);
+            switch (h) {
+                case HeroEnum.GERSEMI -> HeroBuilder.setUserHero(new_hero, "freya");
+                case HeroEnum.VALI -> HeroBuilder.setUserHero(new_hero, "loki");
+                case HeroEnum.JORUNN -> HeroBuilder.setUserHero(new_hero, "vkadi");
+                case HeroEnum.VIGGO -> HeroBuilder.setUserHero(new_hero, "vidar");
+                case HeroEnum.MAGNI -> HeroBuilder.setUserHero(new_hero, "mortal");
+                default -> HeroBuilder.setUserHero(new_hero, "freya");
+            }
         }
+        else{
+            switch (h) {
+                case HeroEnum.GERSEMI -> new_hero = HeroBuilder.buildHero("freya", player);
+                case HeroEnum.VALI -> new_hero = HeroBuilder.buildHero("loki", player);
+                case HeroEnum.JORUNN -> new_hero = HeroBuilder.buildHero("skadi", player);
+                case HeroEnum.VIGGO -> new_hero = HeroBuilder.buildHero("vidar", player);
+                case HeroEnum.MAGNI -> new_hero = HeroBuilder.buildHero("mortal", player);
+                default -> {new_hero = HeroBuilder.buildHero("Freya", player);}
+            }
 
-        new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
-        new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
-        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-        new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
-        new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
+            new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
+            new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
+            new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+            new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+            new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+            new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
+            new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
 
-        cb.addHero(new_hero);
-        new_hero.setCombat(cb);
-        sb.append(Messages.NEW_LINE);
+            if(mode == GameMode.SOLO && player == 2)
+                new_hero.setAutonomous(true);
 
-        return new_hero;
+            addHero(new_hero);
+            
+            cb.addHero(new_hero);
+            new_hero.setCombat(cb);
+        }
     }
+
+    // public void next() {
+	// 	st.next(cb);
+	// }
+
+
+	public void displayStory(String string) {
+		
+	}
 }

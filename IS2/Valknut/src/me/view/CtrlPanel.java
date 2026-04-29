@@ -7,23 +7,25 @@ import me.model.CharacterSelectionObserver;
 import me.model.Game;
 
 public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
-	private CardLayout cardLayout;
-	private JPanel mainPanel;
+	private final CardLayout cardLayout;
+	private final JPanel mainPanel;
 	private final SettingsPanel settingsPanel;
 	private final MainMenu mainMenu;
 	private final CharacterSelection characterSelection;
 	private CombatScreen combatScreen;
 	private final MultiPlayerScreen multiPlayerScreen;
 	private final Controller _ctrl;
+	private final Game game;
 		
-	public CtrlPanel(Controller ctrl) {
+	public CtrlPanel(Controller ctrl, Game game) {
 		_ctrl = ctrl;
+		this.game = game;
 
 		cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 		mainMenu = MainMenu.getInstance(ctrl);
 		settingsPanel = SettingsPanel.getInstance(ctrl);
-		characterSelection = CharacterSelection.getInstance(ctrl);
+		characterSelection = CharacterSelection.getInstance(ctrl, game);
 		multiPlayerScreen = MultiPlayerScreen.getInstance(ctrl);
 
 		mainPanel.add(mainMenu, "MENU");
@@ -43,7 +45,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		mainPanel.getActionMap().put("saveGame", new AbstractAction() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				_ctrl.saveGame();
+				game.saveGame();
 				JOptionPane.showMessageDialog(null, "Game saved!");
 			}
 		});
@@ -55,7 +57,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		mainPanel.getActionMap().put("loadGame", new AbstractAction() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				_ctrl.loadGame();
+				game.loadGame();
 				JOptionPane.showMessageDialog(null, "Game loaded!");
 			}
 		});
@@ -63,6 +65,11 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		this.setVisible(true);
 	}
 	
+	@Override
+	public void onGameStart() {
+		showMainMenu();
+	}
+
     @Override
 	public void onSelection() {
 		createCharacterSelector();
@@ -83,11 +90,6 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
     @Override
 	public void onCombat(Game game){
 		combatGUI(game);
-	}
-	
-    @Override
-	public void onGameStart() {
-		showMainMenu();
 	}
 
 	public void multiplayerScreen(){

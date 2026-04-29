@@ -3,8 +3,10 @@ package me.view;
 import java.awt.*;
 import javax.swing.*;
 import me.control.Controller;
-import me.model.HeroBuilder;
+import me.model.Game;
 import me.model.HeroEnum;
+import me.socket.MultiplayerManager;
+import me.socket.Request;
 
 /**
  * Simple character selection screen with background and character images.
@@ -14,6 +16,8 @@ public class CharacterSelection extends JPanel {
     private static CharacterSelection instance;
 
     private final Controller ctrl;
+    private final Game game;
+    private MultiplayerManager mpm = null;
 
     private Image backGround;
 
@@ -29,8 +33,11 @@ public class CharacterSelection extends JPanel {
 
     private int player = 1;
 
-    private CharacterSelection(Controller ctrl) {
+    private CharacterSelection(Controller ctrl, Game game) {
         this.ctrl = ctrl;
+        this.game = game;
+        if(game.isMultiplayer())
+            this.mpm = MultiplayerManager.getInstacne(ctrl,game);
         initGUI();
         setComponents();
     }
@@ -41,9 +48,9 @@ public class CharacterSelection extends JPanel {
      * @param ctrl controller reference
      * @return character selection instance
      */
-    public static CharacterSelection getInstance(Controller ctrl) {
+    public static CharacterSelection getInstance(Controller ctrl, Game game) {
         if (instance == null) {
-            instance = new CharacterSelection(ctrl);
+            instance = new CharacterSelection(ctrl, game);
         }
         return instance;
     }
@@ -185,18 +192,74 @@ public class CharacterSelection extends JPanel {
         startBtn.setEnabled(false);
         add(startBtn, BorderLayout.SOUTH);
 
-        freyaBtn.addActionListener(e -> selectCharacter(HeroEnum.GERSEMI, "Gersemi"));
-        lokiBtn.addActionListener(e -> selectCharacter(HeroEnum.VALI, "Vali"));
-        skadiBtn.addActionListener(e -> selectCharacter(HeroEnum.JORUNN, "Jorunn"));
-        vidarBtn.addActionListener(e -> selectCharacter(HeroEnum.VIGGO, "Viggo"));
-        mortalBtn.addActionListener(e -> selectCharacter(HeroEnum.MAGNI, "Magni"));
+        freyaBtn.addActionListener(e ->{
+            if(mpm != null){
+                if(mpm.getUser().getId() == player){
+                    Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
+                    rq.addParameter(HeroEnum.GERSEMI);
+                    rq.addParameter("Gersemi");
+                    mpm.send(rq);
+                }
+            }
+            else
+                selectCharacter(HeroEnum.GERSEMI, "Gersemi");
+        });
+        lokiBtn.addActionListener(e ->{ 
+            if(mpm != null){
+                if(mpm.getUser().getId() == player){
+                    Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
+                    rq.addParameter(HeroEnum.VALI);
+                    rq.addParameter("Vali");
+                    mpm.send(rq);
+                }
+            }
+            else
+                selectCharacter(HeroEnum.VALI, "Vali");
+
+        });
+        skadiBtn.addActionListener(e -> {
+            if(mpm != null){
+                if(mpm.getUser().getId() == player){
+                    Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
+                    rq.addParameter(HeroEnum.JORUNN);
+                    rq.addParameter("Jorunn");
+                    mpm.send(rq);
+                }
+            }
+            else
+                selectCharacter(HeroEnum.JORUNN, "Jorunn");
+        });
+        vidarBtn.addActionListener(e -> {
+            if(mpm != null){
+                if(mpm.getUser().getId() == player){
+                    Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
+                    rq.addParameter(HeroEnum.VIGGO);
+                    rq.addParameter("Viggo");
+                    mpm.send(rq);
+                }
+            }
+            else
+                selectCharacter(HeroEnum.VIGGO, "Viggo");
+
+        });
+        mortalBtn.addActionListener(e -> {
+            if(mpm != null){
+                if(mpm.getUser().getId() == player){
+                    Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
+                    rq.addParameter(HeroEnum.MAGNI);
+                    rq.addParameter("Magni");
+                    mpm.send(rq);
+                }
+            }
+            else
+                selectCharacter(HeroEnum.MAGNI, "Magni");
+        });
         startBtn.addActionListener(e -> startGame());
     }
 
     /**
      * Handles character selection.
      *
-     * @param index 0 = Freya, 1 = Loki
      * @param name character name for GUI feedback
      */
     private void selectCharacter(HeroEnum h, String name) {
@@ -204,40 +267,40 @@ public class CharacterSelection extends JPanel {
             return;
         }
 
-        ctrl.selectCharacter(h, player);
-        selectionLabel.setText("Player " + player + " selected " + name + ".");
+        game.selectCharacter(h, player);
+        selectionLabel.setText("Player " + player + " selected " + name.toUpperCase() + ".");
 
         switch (h) {
-        case HeroEnum.GERSEMI:
-        	freyaBtn.setEnabled(false);
+        case HeroEnum.GERSEMI -> {
+            freyaBtn.setEnabled(false);
             freyaBtn.setBackground(Color.GREEN);
-        	break;
-        case HeroEnum.VALI:
-        	lokiBtn.setEnabled(false);
+            }
+        case HeroEnum.VALI -> {
+            lokiBtn.setEnabled(false);
             lokiBtn.setBackground(Color.GREEN);
-        	break;
-        case HeroEnum.JORUNN:
-        	skadiBtn.setEnabled(false);
+            }
+        case HeroEnum.JORUNN -> {
+            skadiBtn.setEnabled(false);
             skadiBtn.setBackground(Color.GREEN);
-        	break;
-        case HeroEnum.VIGGO:
-        	vidarBtn.setEnabled(false);
+            }
+        case HeroEnum.VIGGO -> {
+            vidarBtn.setEnabled(false);
             vidarBtn.setBackground(Color.GREEN);
-        	break;
-        case HeroEnum.MAGNI:
-        	mortalBtn.setEnabled(false);
+            }
+        case HeroEnum.MAGNI -> {
+            mortalBtn.setEnabled(false);
             mortalBtn.setBackground(Color.GREEN);
-        	break;
-        default:
-        	break;
+            }
+        default -> {
+            }
         }
 
         player++;
 
         if (player == 2) {
             infoLabel.setText("Player 2: choose a character");
-        } else if (player > 2) {
-            infoLabel.setText("Both players selected. Press Start Game.");
+        } else if (player > 1) {
+            infoLabel.setText("Press Start Game.");
             startBtn.setEnabled(true);
         }
     }
@@ -246,8 +309,13 @@ public class CharacterSelection extends JPanel {
      * Starts the game flow after both players are selected.
      */
     private void startGame() {
-        if (player <= 2) {
-            JOptionPane.showMessageDialog(this, "Select both players first!");
+        if(player == 2){
+            game.setMode(Game.GameMode.SOLO);
+            HeroEnum h = HeroEnum.randomEnum();
+            selectCharacter(h, h.toString());
+        }
+        if(mpm != null && player == 2){
+            ViewUtils.showErrorMsg("Player 2 Selects!!");
             return;
         }
 

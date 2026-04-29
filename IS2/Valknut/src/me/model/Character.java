@@ -15,11 +15,11 @@ import me.view.Messages;
 
 public abstract class Character implements Serializable {
     private static final long serialVersionUID = 1L;
-    protected final String name;
+    protected String name;
     private boolean alive;
     private Map<Element, Integer> elements; // Representing the five elements stats with a Map
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
-    private int life;
+    protected int life;
     protected int max_life;
     private boolean escaped;
     private boolean defend;

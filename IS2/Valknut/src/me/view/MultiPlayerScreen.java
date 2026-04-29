@@ -7,8 +7,7 @@ import me.socket.*;
 
 public class MultiPlayerScreen extends JPanel{
     private static MultiPlayerScreen instance;
-    private MultiplayerManager mpm;
-    private boolean server;
+    private final MultiplayerManager mpm;
     private final Controller _ctrl;
     private Image backGround;
     private JButton join;
@@ -17,8 +16,8 @@ public class MultiPlayerScreen extends JPanel{
     private JButton settings;
 
     private MultiPlayerScreen(Controller ctrl){
-         _ctrl = ctrl;
-         mpm = new MultiplayerManager(ctrl);
+        _ctrl = ctrl;
+        mpm = MultiplayerManager.getInstacne(ctrl, null);
         initGUI();
         setComponents();
     }
@@ -50,12 +49,10 @@ public class MultiPlayerScreen extends JPanel{
         join.addActionListener(e -> {
             ServerListScreen slv = new ServerListScreen(mpm, _ctrl);
             slv.setVisible(true);
-            server = false;
             setWaitingComponents();
         });
         host = ViewUtils.createButton("resources/images/Buttons/hostButton_NS.png", "resources/images/Buttons/hostButton_S.png");
         host.addActionListener(e -> {
-            server = true;
             setWaitingComponents();
             new Thread(() -> mpm.recieveNotification(1, null)).start();
         });
@@ -122,8 +119,10 @@ public class MultiPlayerScreen extends JPanel{
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             this.removeAll();
             mpm.killUser();
+            setComponents();
+            this.revalidate();
+            this.repaint();
             _ctrl.startGame();
-            
         });
         this.add(exit, gbc);
 

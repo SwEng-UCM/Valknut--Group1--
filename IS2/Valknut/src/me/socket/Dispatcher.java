@@ -2,14 +2,17 @@ package me.socket;
 
 import me.control.*;
 import me.model.CombatOption;
+import me.model.Game;
 import me.model.items.Item;
 
 public class Dispatcher {
 
     Controller ctrl;
+    Game game;
 
-    public Dispatcher(Controller ctrl){
+    public Dispatcher(Controller ctrl, Game game){
         this.ctrl = ctrl;
+        this.game = game;
     }
     
     public void dispatch(Request rq, MultiplayerManager test){
@@ -17,6 +20,7 @@ public class Dispatcher {
         switch(rt){
             case MESSAGE ->{dispatchMessage(rq, test);}
             case CLOSING ->{dispatchClose(rq, test);}
+            case CHARACTERSELECT ->{dispatchCS(rq, test);}
             case COMBATOPTION -> {dispatchCO(rq);}
             default ->{}
         }
@@ -39,14 +43,18 @@ public class Dispatcher {
             test.killUser();
     }
 
+    public void dispatchCS(Request rq, MultiplayerManager test){
+        
+    }
+
     public void dispatchCO(Request rq){
         CombatOption co = (CombatOption) rq.getParameters()[0];
         switch (co) {
-            case ATTACK -> {ctrl.action(co, (int) rq.getParameters()[1], null);}
-            case DEFEND -> {ctrl.action(co, 0, null);}
-            case RUN -> {ctrl.action(co, 0, null);}
-            case USE_ITEM -> {ctrl.action(co, 0, (Item) rq.getParameters()[1]);}
-            case STATS -> {ctrl.action(co, (int) 0, null);}
+            case ATTACK -> {game.action(co, (int) rq.getParameters()[1], null);}
+            case DEFEND -> {game.action(co, 0, null);}
+            case RUN -> {game.action(co, 0, null);}
+            case USE_ITEM -> {game.action(co, 0, (Item) rq.getParameters()[1]);}
+            case STATS -> {game.action(co, (int) 0, null);}
             default -> {}
         }
     }

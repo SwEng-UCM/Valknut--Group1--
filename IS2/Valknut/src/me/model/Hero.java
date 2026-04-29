@@ -10,7 +10,7 @@ public class Hero extends Character implements Player {
     private static final long serialVersionUID = 1L;
 
     protected int id;
-    private final String surname;
+    protected String surname;
     private boolean autonomous; 
     protected Inventory inventory; // Representing 'item'
     private Inventory using;
@@ -29,6 +29,14 @@ public class Hero extends Character implements Player {
         inventory = new Inventory();
         using = new Inventory();
     }
+
+    public void setHero(String name, int life, int max_life, String surname){
+        this.name = name;
+        this.life = life;
+        this.max_life = max_life;
+        this.surname = surname;
+    }
+
     public void setAutonomous(boolean x){ autonomous = x; }
     public boolean isAutonomous(){ return autonomous; }
     public int getLevel() { return level; }

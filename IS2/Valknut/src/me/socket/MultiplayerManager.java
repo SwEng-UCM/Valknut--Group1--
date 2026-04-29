@@ -1,18 +1,30 @@
 package me.socket;
 import javax.swing.*;
 import me.control.*;
+import me.model.Game;
+import me.model.Hero;
 
 public class MultiplayerManager extends JFrame{
 
-    ChatScreen cs;
-    Controller ctrl;
-    JPanel mainPanel;
-    UserObject user;
-    Dispatcher dispatcher;
+    private static MultiplayerManager instance;
+    private ChatScreen cs;
+    private final Controller ctrl;
+    private final Game game;
+    private JPanel mainPanel;
+    private UserObject user;
+    private final Dispatcher dispatcher;
 
-    public MultiplayerManager(Controller ctrl){
+    private MultiplayerManager(Controller ctrl, Game game){
         this.ctrl = ctrl;
-        this.dispatcher = new Dispatcher(ctrl);
+        this.game = game;
+        this.dispatcher = new Dispatcher(ctrl, game);
+    }
+
+    public static MultiplayerManager getInstacne(Controller ctrl, Game game){
+        if(instance == null){
+            instance = new MultiplayerManager(ctrl, game);
+        }
+        return instance;
     }
 
     public UserObject recieveNotification(int id, String ip) {
@@ -37,6 +49,10 @@ public class MultiplayerManager extends JFrame{
 
     public User getUser(){
         return user;
+    }
+
+    public void send(Request rq){
+        user.send(rq);
     }
 
     public void treatRequest(Request rq){
@@ -65,6 +81,13 @@ public class MultiplayerManager extends JFrame{
     }
 
     public void start(){
+        int id = user.getId();
+        ctrl.setGameMode(me.model.Game.GameMode.MULTIPLAYER);
+        if(id == 2)
+            ctrl.addHero(new Hero(" ", 0, 0, " ", 1));
+        ctrl.addHero(user);
+        if(id == 1)
+            ctrl.addHero(new Hero(" ", 0, 0, " ", 2));
         ctrl.charactersScreen();
     }
 }

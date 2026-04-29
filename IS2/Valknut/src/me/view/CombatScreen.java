@@ -59,10 +59,10 @@ public class CombatScreen extends JPanel{
         enemyPanel.setOpaque(false); // keep background visible
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
 
-        List<Enemy> enemies = _ctrl.getEnemies();
-        enemy_buttons = new ArrayList<>(enemies.size());
-        int enemy_num = 1;
+        List<Enemy> enemies = game.getEnemies();
         if(enemies != null){
+            enemy_buttons = new ArrayList<>(enemies.size());
+        int enemy_num = 1;
             for (Enemy e : enemies) {
                 if (e.isAlive()) {
                 	e.setEnemyNum(enemy_num);
@@ -86,13 +86,12 @@ public class CombatScreen extends JPanel{
         heroPanel.setOpaque(false);
         heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
 
-        java.util.List<Hero> heroes = _ctrl.getHeroes();
+        java.util.List<Hero> heroes = game.getHeroes();
         if(heroes != null){
             for (Hero h : heroes) {
                 if (h.isAlive() && !h.escaped()) {
                     JLabel heroLabel = new JLabel();
                     heroLabel.setIcon(h.getSprite(150, 150));
-                   // heroLabel.setIcon(h.getSprite(heroPanel.getWidth()/heroes.size(), heroPanel.getHeight()/heroes.size()));
                     heroPanel.add(heroLabel);
                 }
             }
@@ -110,20 +109,12 @@ public class CombatScreen extends JPanel{
         	switch(c) {
                 case ATTACK -> actionButton.addActionListener(ev -> {
                         attack();
-                        // this.remove(enemyPanel);
                     	this.revalidate();
                     	this.repaint();
-                        // initGUI();
-                        // setComponents();
                     });
 
                 case DEFEND -> actionButton.addActionListener(ev -> {
-                        _ctrl.action(c, 1, null);
-                        this.remove(commandsPanel);
-                    	this.revalidate();
-                    	this.repaint();
-                        initGUI();
-                        setComponents();
+                        game.action(c, 1, null);
                     });
 
                 case USE_ITEM -> actionButton.addActionListener(ev -> {
@@ -131,20 +122,19 @@ public class CombatScreen extends JPanel{
                     });
 
                 case RUN -> actionButton.addActionListener(ev -> {
-                        _ctrl.action(c, 1, null);
+                        game.action(c, 1, null);
                         this.remove(heroPanel);
-                    	this.revalidate();
-                    	this.repaint();
-                        initGUI();
                         setComponents();
+                        this.revalidate();
+                    	this.repaint();
                     });
 
                 case STATS -> actionButton.addActionListener(ev -> {
-                        _ctrl.action(c, 1, null);
+                        game.action(c, 1, null);
                     });
                     
                 case UNDO -> actionButton.addActionListener(ev -> {
-                        _ctrl.action(c, 1, null);
+                        game.action(c, 1, null);
                         this.removeAll();
                         this.revalidate();
                         this.repaint();
@@ -172,7 +162,7 @@ public class CombatScreen extends JPanel{
     }
     
     private void attackEnemy(Enemy enemy) {
-    	_ctrl.action(CombatOption.ATTACK, enemy.getEnemyNum(), null);
+    	game.action(CombatOption.ATTACK, enemy.getEnemyNum(), null);
     	
     	for (int i = 0; i < enemy_buttons.size(); i++) {
     		enemy_buttons.get(i).setEnabled(false);
@@ -191,7 +181,7 @@ public class CombatScreen extends JPanel{
     	itemsPanel.setSize(new Dimension(500, 500));
     	itemsPanel.setOpaque(false);
     	itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.X_AXIS));
-    	Inventory in = _ctrl.getHeroItems(); 
+    	Inventory in = game.getHeroItems(); 
     	if (in.getItems().size() == 0) {
     		System.out.println("No items to use");
     	}
@@ -199,7 +189,7 @@ public class CombatScreen extends JPanel{
     		JButton itemChoiceButton = new JButton(i.getName());
     		itemChoiceButton.setPreferredSize(new Dimension(1000, 100));
     		itemChoiceButton.addActionListener(ev -> {
-    			_ctrl.action(CombatOption.USE_ITEM, 1, i);
+    			game.action(CombatOption.USE_ITEM, 1, i);
     			this.remove(itemsPanel);
     			initGUI();
     			setComponents();
@@ -209,7 +199,7 @@ public class CombatScreen extends JPanel{
     	JButton returnButton = new JButton("RETURN");
 		returnButton.setPreferredSize(new Dimension(1000, 100));
 		returnButton.addActionListener(ev -> {
-			_ctrl.action(CombatOption.USE_ITEM, 1, null);
+			game.action(CombatOption.USE_ITEM, 1, null);
 			this.remove(itemsPanel);
 			initGUI();
 			setComponents();
