@@ -2,10 +2,9 @@ package me.command;
 
 import me.model.AutonomousHero;
 import me.model.Combat;
-import me.model.Hero;
-//import me.model.save.SaveGameData;
-import me.view.CombatView;
 import me.model.Enemy;
+import me.model.Hero;
+import me.view.CombatView;
 
 /**
  * Command responsible for handling the attack action.

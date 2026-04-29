@@ -28,7 +28,7 @@ public class CombatView extends ConsoleIO{
         String aux = readPrompt();
         printLine("");
         co = CombatOption.parseCommand(aux);
-        while(co == null || co == CombatOption.WAIT){
+        while(co == null){
             printLine(Messages.ENTER_VV + Messages.NEW_LINE);
             print(turnToString(c));
             aux = readPrompt();

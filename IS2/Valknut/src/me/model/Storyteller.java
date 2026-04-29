@@ -3,9 +3,7 @@ package me.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
-
 import me.control.Controller;
-import me.model.EnemyBuilder;
 import me.view.Story;
 
 public class Storyteller {
@@ -111,7 +109,7 @@ public class Storyteller {
 		}
 		Object n = toDo.remove();
 		if(n.getClass() == "".getClass()) {
-			ctrl.displayStory((String) n);
+			// ctrl.displayStory((String) n);
 		}
 		else if(n.getClass() == combat1.getClass()) {
 			ctrl.setEnemies((List<Enemy>) n);

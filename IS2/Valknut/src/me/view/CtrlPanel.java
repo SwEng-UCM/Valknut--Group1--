@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import me.control.Controller;
 import me.model.CharacterSelectionObserver;
+import me.model.Game;
 
 public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private CardLayout cardLayout;
@@ -34,8 +35,6 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		this.setSize(1408, 768); 
 		this.setLocationRelativeTo(null); 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		_ctrl.startStory();
 
 		// SAVE with Ctrl+S
 		mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
@@ -82,8 +81,8 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
     }
 
     @Override
-	public void onCombat(){
-		combatGUI();
+	public void onCombat(Game game){
+		combatGUI(game);
 	}
 	
     @Override
@@ -114,8 +113,8 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		cardLayout.show(mainPanel, "CHARACTER SELECTION");
 	}
 	
-	private void combatGUI() {
-		combatScreen = CombatScreen.getInstance(_ctrl);
+	private void combatGUI(Game game) {
+		combatScreen = CombatScreen.getInstance(_ctrl, game);
 		mainPanel.add(combatScreen, "COMBAT SCREEN");
 		cardLayout.show(mainPanel, "COMBAT SCREEN");
 	}

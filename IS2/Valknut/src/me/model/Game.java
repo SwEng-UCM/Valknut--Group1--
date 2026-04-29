@@ -1,92 +1,36 @@
-package me.control;
+package me.model;
 
+import java.lang.ModuleLayer.Controller;
+import java.util.ArrayList;
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
-import me.model.*;
 import me.model.items.*;
 import me.model.save.*;
-import me.view.AudioManager;
 import me.view.CombatView;
-import me.view.CtrlPanel;
 import me.view.Messages;
 
-public class Controller {
-
+public class Game {
+    
     private static CombatView cv;
-    private static Controller instance;
-    private boolean multiplayer = false;
-    private Combat cb;
+    private Controller ctrl;
+    private List<Player> player = new ArrayList<>(4);
     private Command lastUndoableCommand;
-    private final CtrlPanel controlPanel;
-    private Storyteller st;
-    private Game game;
+    private Combat cb;
 
-    private Controller() {
-        // sv = StoryView.getInstance();
-        cv = CombatView.getInstance();
-        controlPanel = new CtrlPanel(this);
+    public Game(Controller ctrl){
+        cv = CombatView.getInstance(); //Temporally
+        this.ctrl = ctrl;
+    }
+
+    public void initializeCombat(){
         cb = new Combat();
     }
-    
 
-    public static Controller getInstance() {
-        if (instance == null) {
-            instance = new Controller();
-        }
-
-        return instance;
+    public void addHero(Hero e){
+        player.add(e);
     }
 
-    public int getNumEnemies() {
-        return cb.getEnemies().size();
-    }
-
-    public int getTurn(){
-        return cb != null ? cb.turn() : -1;
-    }
-
-    public void run() {
-//    	startGame();
-//    	st = new Storyteller(this);
-//    	st.narrate();
-//        //cb = initCmb();
-     cb = initCmb();
-     startGame();
-    }
-
-    public void startGame() {
-        AudioManager.getInstance().stopMusic();
-        AudioManager.getInstance().playMusic("resources/sounds/titleMusic.wav");
-        controlPanel.onGameStart();
-    }
-
-    public void menuScreen() {
-        controlPanel.showMainMenu();
-    }
-
-    public void charactersScreen() {
-        controlPanel.onSelection();
-    }
-
-    public void setPreviousScreenToSettings(String s, String b) {
-        controlPanel.setPreviousScreenToSettings(s, b);
-    }
-
-    public void settingScreen() {
-        controlPanel.settingScreen();
-    }
-
-    public void startMultiplayer() {
-        AudioManager.getInstance().stopMusic();
-        AudioManager.getInstance().playMusic("resources/sounds/internetMusic.wav");
-        multiplayerScreen();
-    }
-
-    public void multiplayerScreen() {
-        controlPanel.multiplayerScreen();
-    }
-    
     public List<Enemy> getEnemies(){
         return (cb == null ? null : cb.getEnemies());
     }
@@ -108,7 +52,6 @@ public class Controller {
     public void startNewCmb(List<Enemy> newEnemies) {
     	cb.SetEnemies(newEnemies);
     	//controlPanel.onCombat();
-    	
     }
     
     public Combat initCmb() {
@@ -154,15 +97,16 @@ public class Controller {
      */
     private void executeEnemyTurn() {
         if (cb.turn() == 3) {
-            cv.print(cb.enemyTurnToString());
+            // cv.print(cb.enemyTurnToString());
 
             for (Enemy e : cb.getEnemies()) {
-                cv.print(cb.attack(0));
+                // cv.print(cb.attack(0));
                 cb.setTurn(cb.turn() + 1);
             }
 
             cb.setTurn(1);
-            cv.printLine(cb.update());
+            String s = cb.update();
+            // cv.printLine(s);
         }
     }
 
@@ -173,7 +117,7 @@ public class Controller {
             if (lastUndoableCommand != null && lastUndoableCommand.undo()) {
                 lastUndoableCommand = null;
             }
-            controlPanel.onCombat(game);
+            // controlPanel.onCombat();
             return false;
         }
 
@@ -200,7 +144,7 @@ public class Controller {
         executeEnemyTurn();
         
         //if (combatOption == CombatOption.ATTACK) {
-        	controlPanel.onCombat(game);
+        	// controlPanel.onCombat();
         //}
         
 //        else {
@@ -222,7 +166,7 @@ public class Controller {
 
         if (data != null && cb != null) {
             cb.restore(data);
-            controlPanel.onCombat(game);
+            // controlPanel.onCombat();
             System.out.println("Game loaded successfully.");
         }
     }
@@ -240,14 +184,6 @@ public class Controller {
             default -> {new_hero = HeroBuilder.buildHero("Freya", player);}
         }
 
-//        if (h == HeroEnum.GERSEMI) {
-//            new_hero = HeroBuilder.buildHero("Freya");
-//            sb.append("GERSEMI");
-//        } else {
-//            new_hero = HeroBuilder.buildHero("Loki");
-//            sb.append("VÁLI");
-//        }
-
         new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
         new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
         new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
@@ -262,22 +198,4 @@ public class Controller {
 
         return new_hero;
     }
-
-    /**
-     * Starts a new game after character selection and opens the combat screen.
-    */
-    public void startSelectedGame() {
-        // tellFirstLinesChapterOne();
-        controlPanel.onCombat(game);
-    }
-
-    public void exit() {
-        controlPanel.onQuit();
-    }
-
-
-	public void next() {
-		st.next(cb);
-		
-	}
 }
