@@ -200,7 +200,7 @@ public class CharacterSelection extends JPanel {
      * @param name character name for GUI feedback
      */
     private void selectCharacter(HeroEnum h, String name) {
-        if (player > 2) {
+        if (player > 4) {
             return;
         }
 
