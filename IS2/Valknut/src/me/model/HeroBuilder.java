@@ -85,6 +85,53 @@ public class HeroBuilder {
             }
         }
     }
+
+    static public AutonomousHero buildAutonomousHero(String str, int id){
+        List<Integer> element = new ArrayList<>();
+        switch (str.toLowerCase()) {
+            case "freya" -> {
+                AutonomousHero freya = new AutonomousHero("Gersemi", 100, 100, "Beloved Child of Freya", id);
+                element.add(1); element.add(2); element.add(3); element.add(1); element.add(2);
+                freya.setElementStats(element);
+                freya.setSprite("resources/images/Characters/newgersemi.png");
+                return freya;
+            }
+            case "loki" -> {
+                AutonomousHero loki = new AutonomousHero("Váli", 100, 100, "Forgotten Child of Loki", id);
+                element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
+                loki.setElementStats(element);
+                loki.setSprite("resources/images/Characters/newvali.png");
+                return loki;
+            }
+            case "skadi" -> {
+                AutonomousHero skadi = new AutonomousHero("Jorunn", 100, 100, "Silent Child of Skadi", id);
+                element.add(3); element.add(1); element.add(2); element.add(2); element.add(1);
+                skadi.setElementStats(element);
+                skadi.setSprite("resources/images/Characters/jorunn.png");
+                return skadi;
+            }
+            case "vidar" -> {
+                AutonomousHero vidar = new AutonomousHero("Viggo", 100, 100, "Furious Child of Vidar", id);
+                element.add(1); element.add(2); element.add(1); element.add(2); element.add(3);
+                vidar.setElementStats(element);
+                vidar.setSprite("resources/images/Characters/viggo.png");
+                return vidar;
+            }
+            case "mortal" -> {
+                AutonomousHero mortal = new AutonomousHero("Magni", 100, 100, "Mortal Child", id);
+                element.add(1); element.add(2); element.add(2); element.add(3); element.add(1);
+                mortal.setElementStats(element);
+                mortal.setSprite("resources/images/Characters/magni.png");
+                return mortal;
+            }
+            default -> {
+                AutonomousHero hero = new AutonomousHero("Váli", 100, 100, "Forgotten Child of Loki", id);
+                element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
+                hero.setElementStats(element);
+                return hero;
+            }
+        }
+    }
     
     public static void setUserHero(Hero e, String s){
         List<Integer> element = new ArrayList<>();

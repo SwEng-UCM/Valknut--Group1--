@@ -127,7 +127,7 @@ public class Game {
      */
     private void executeEnemyTurn() {
         if (cb.turn() == cb.getHeroes().size() + 1) {	
-            // cv.print(cb.enemyTurnToString());
+            cv.print(cb.enemyTurnToString());
 
             for (Enemy e : cb.getEnemies()) {
                 cv.print(cb.attack(0));
@@ -170,6 +170,8 @@ public class Game {
                 cb.setTurn(cb.turn() + 1);
             }
         }
+
+        cb.checkAutonomousTurn();
 
         executeEnemyTurn();
         
@@ -216,6 +218,16 @@ public class Game {
                 default -> HeroBuilder.setUserHero(new_hero, "freya");
             }
         }
+        else if(mode == GameMode.SOLO){
+            switch (h) {
+                case HeroEnum.GERSEMI -> new_hero = HeroBuilder.buildAutonomousHero("freya", player);
+                case HeroEnum.VALI -> new_hero = HeroBuilder.buildAutonomousHero("loki", player);
+                case HeroEnum.JORUNN -> new_hero = HeroBuilder.buildAutonomousHero("skadi", player);
+                case HeroEnum.VIGGO -> new_hero = HeroBuilder.buildAutonomousHero("vidar", player);
+                case HeroEnum.MAGNI -> new_hero = HeroBuilder.buildAutonomousHero("mortal", player);
+                default -> {new_hero = HeroBuilder.buildAutonomousHero("Freya", player);}
+            }
+        }
         else{
             switch (h) {
                 case HeroEnum.GERSEMI -> new_hero = HeroBuilder.buildHero("freya", player);
@@ -225,23 +237,23 @@ public class Game {
                 case HeroEnum.MAGNI -> new_hero = HeroBuilder.buildHero("mortal", player);
                 default -> {new_hero = HeroBuilder.buildHero("Freya", player);}
             }
-
-            new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
-            new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
-            new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-            new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-            new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-            new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
-            new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
-
-            if(mode == GameMode.SOLO && player == 2)
-                new_hero.setAutonomous(true);
-
-            addHero(new_hero);
-            
-            cb.addHero(new_hero);
-            new_hero.setCombat(cb);
         }
+
+        new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
+        new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
+        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
+        new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
+        new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
+
+        if(mode == GameMode.SOLO && player == 2)
+            new_hero.setAutonomous(true);
+
+        addHero(new_hero);
+        
+        cb.addHero(new_hero);
+        new_hero.setCombat(cb);
     }
 
     // public void next() {

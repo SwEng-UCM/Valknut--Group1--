@@ -12,15 +12,16 @@ public class AutonomousHero extends Hero {
     public AutonomousHero(String name, int life, int max_life, String surname, int id){
         super(name, life, max_life, surname, id);
         setAutonomous(true);
-        combatState = State.LEADER;
+        combatState = State.FOLLOWER;
     }
 
     @Override
     public void does(Request rq){ //Don't use the request but needed for overriding
+        System.err.println(combatState);
         switch (combatState) {
             case HARMED -> doHarmed();
-            case LEADER -> cmbt.attack(doLeader());
-            case FOLLOWER -> cmbt.attack(doFollower());
+            case LEADER -> System.out.println(cmbt.attack(doLeader()));
+            case FOLLOWER -> System.out.println(cmbt.attack(doFollower()));
             case DEFENSIVE -> {doDefensive(); cmbt.defend();}
             case SCARED -> {doScared(); cmbt.run();}
             default -> cmbt.attack(doLeader());
@@ -53,7 +54,6 @@ public class AutonomousHero extends Hero {
         int idx = 0;
         int tarjet = 0;
         boolean first = true;
-
         List<Enemy> enemies = cmbt.getEnemies();
         Enemy eTarjet = enemies.get(0);
         for(Enemy e : enemies){
@@ -85,6 +85,9 @@ public class AutonomousHero extends Hero {
         else if(i > 0.4)
             combatState = State.FOLLOWER;
 
+        if(tarjet < 0) tarjet = 0;
+        if(tarjet >= cmbt.getEnemies().size()) tarjet = cmbt.getEnemies().size() - 1;
+        System.err.println(tarjet);
         return tarjet;
     }
 
@@ -105,7 +108,7 @@ public class AutonomousHero extends Hero {
             combatState = State.DEFENSIVE;
         }
 
-        return idx;
+        return idx + 1;
     }
 
     public int selectTarjet(){

@@ -113,6 +113,10 @@ public class CombatScreen extends JPanel{
 
                 case DEFEND -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
+                        this.removeAll();
+                        this.revalidate();
+                    	initGUI();
+                    	setComponents();
                     });
 
                 case USE_ITEM -> actionButton.addActionListener(ev -> {

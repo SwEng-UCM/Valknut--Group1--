@@ -123,6 +123,7 @@ public class Combat implements Serializable {
             Hero h = heroes.get(turn - 1);
             sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20));
             lastTarjet = i - 1;
+            System.err.println(lastTarjet);
         }
         else{
             Enemy e = enemies.get(turn - (heroes.size() + 1));
@@ -140,6 +141,16 @@ public class Combat implements Serializable {
         }
 
         return sb.toString();
+    }
+
+    public void checkAutonomousTurn(){
+        if(turn == 2){
+            Hero h = heroes.get(1);
+            if(h.isAutonomous()){
+                h.does(null);
+                turn++;
+            }
+        }
     }
 
     public String showStats(Character c){
