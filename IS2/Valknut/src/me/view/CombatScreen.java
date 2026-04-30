@@ -123,8 +123,6 @@ public class CombatScreen extends JPanel{
 
                 case RUN -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
-                        this.remove(heroPanel);
-                        setComponents();
                         this.revalidate();
                     	this.repaint();
                     });
@@ -135,11 +133,8 @@ public class CombatScreen extends JPanel{
                     
                 case UNDO -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
-                        this.removeAll();
                         this.revalidate();
                         this.repaint();
-                        initGUI();
-                        setComponents();
                     });
         	}
         	command_buttons.add(actionButton);
