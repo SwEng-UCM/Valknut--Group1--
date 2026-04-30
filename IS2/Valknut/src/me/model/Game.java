@@ -130,13 +130,13 @@ public class Game {
             // cv.print(cb.enemyTurnToString());
 
             for (Enemy e : cb.getEnemies()) {
-                // cv.print(cb.attack(0));
+                cv.print(cb.attack(0));
                 cb.setTurn(cb.turn() + 1);
             }
 
             cb.setTurn(1);
             String s = cb.update();
-            // cv.printLine(s);
+            cv.printLine(s);
         }
     }
 
