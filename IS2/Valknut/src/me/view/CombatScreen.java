@@ -109,8 +109,6 @@ public class CombatScreen extends JPanel{
         	switch(c) {
                 case ATTACK -> actionButton.addActionListener(ev -> {
                         attack();
-                    	this.revalidate();
-                    	this.repaint();
                     });
 
                 case DEFEND -> actionButton.addActionListener(ev -> {
@@ -123,8 +121,10 @@ public class CombatScreen extends JPanel{
 
                 case RUN -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
+                        this.removeAll();
                         this.revalidate();
-                    	this.repaint();
+                    	initGUI();
+                    	setComponents();
                     });
 
                 case STATS -> actionButton.addActionListener(ev -> {
@@ -166,6 +166,11 @@ public class CombatScreen extends JPanel{
     	for (int i = 0; i < command_buttons.size(); i++) {
     		command_buttons.get(i).setEnabled(true);
     	}
+    	
+    	this.removeAll();
+    	this.revalidate();
+    	initGUI();
+    	setComponents();
     }
     
     private void useItem() {
