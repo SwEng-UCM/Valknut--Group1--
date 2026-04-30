@@ -111,6 +111,14 @@ public class Game {
             return cb.getHeroes().get(1);
         }
 
+        if (cb.turn() == 3 && cb.getHeroes().size() >= 3) {
+            return cb.getHeroes().get(2);
+        }
+        
+        if (cb.turn() == 4 && cb.getHeroes().size() >= 4) {
+            return cb.getHeroes().get(3);
+        }
+        
         return null;
     }
 
@@ -118,7 +126,7 @@ public class Game {
      * Executes the enemy phase when both heroes have finished their turns.
      */
     private void executeEnemyTurn() {
-        if (cb.turn() == 3) {
+        if (cb.turn() == cb.getHeroes().size() + 1) {	
             // cv.print(cb.enemyTurnToString());
 
             for (Enemy e : cb.getEnemies()) {

@@ -119,13 +119,13 @@ public class Combat implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append(Messages.NEW_LINE);
 
-        if(turn < 3){
+        if (turn < heroes.size() + 1) {
             Hero h = heroes.get(turn - 1);
             sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20));
             lastTarjet = i - 1;
         }
         else{
-            Enemy e = enemies.get(turn - 3);
+            Enemy e = enemies.get(turn - (heroes.size() + 1));
             Hero h = e.selectTarjet(heroes);
             if(h != null){
                 sb.append(e.name().toUpperCase()).append(" attacks ").append(h.name().toUpperCase()).append(Messages.NEW_LINE);
