@@ -297,9 +297,7 @@ public class CharacterSelection extends JPanel {
 
         player++;
 
-        if (player == 2) {
-            infoLabel.setText("Player 2: choose a character");
-        } else if (player > 1) {
+        if (player > 1) {
             infoLabel.setText("Press Start Game.");
             startBtn.setEnabled(true);
         }
