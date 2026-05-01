@@ -1,6 +1,9 @@
 package me.view;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import javax.lang.model.type.NullType;
 import javax.swing.*;
 import me.control.Controller;
 import me.model.Game;
@@ -18,6 +21,7 @@ public class CharacterSelection extends JPanel {
     private final Controller ctrl;
     private final Game game;
     private MultiplayerManager mpm = null;
+    private Map<HeroEnum, NullType> selectedC;
 
     private Image backGround;
 
@@ -36,6 +40,7 @@ public class CharacterSelection extends JPanel {
     private CharacterSelection(Controller ctrl, Game game) {
         this.ctrl = ctrl;
         this.game = game;
+        selectedC = new HashMap<>();
         if(game.isMultiplayer())
             this.mpm = MultiplayerManager.getInstacne(ctrl,game);
         initGUI();
@@ -201,8 +206,10 @@ public class CharacterSelection extends JPanel {
                     mpm.send(rq);
                 }
             }
-            else
+            else{
+                selectedC.put(HeroEnum.GERSEMI, null);
                 selectCharacter(HeroEnum.GERSEMI, "Gersemi");
+            }
         });
         lokiBtn.addActionListener(e ->{ 
             if(mpm != null){
@@ -213,8 +220,10 @@ public class CharacterSelection extends JPanel {
                     mpm.send(rq);
                 }
             }
-            else
+            else{
+                selectedC.put(HeroEnum.VALI, null);
                 selectCharacter(HeroEnum.VALI, "Vali");
+            }
 
         });
         skadiBtn.addActionListener(e -> {
@@ -226,8 +235,10 @@ public class CharacterSelection extends JPanel {
                     mpm.send(rq);
                 }
             }
-            else
+            else{
+                selectedC.put(HeroEnum.JORUNN, null);
                 selectCharacter(HeroEnum.JORUNN, "Jorunn");
+            }
         });
         vidarBtn.addActionListener(e -> {
             if(mpm != null){
@@ -238,8 +249,10 @@ public class CharacterSelection extends JPanel {
                     mpm.send(rq);
                 }
             }
-            else
+            else{
+                selectedC.put(HeroEnum.VIGGO, null);
                 selectCharacter(HeroEnum.VIGGO, "Viggo");
+            }
 
         });
         mortalBtn.addActionListener(e -> {
@@ -257,11 +270,6 @@ public class CharacterSelection extends JPanel {
         startBtn.addActionListener(e -> startGame());
     }
 
-    /**
-     * Handles character selection.
-     *
-     * @param name character name for GUI feedback
-     */
     private void selectCharacter(HeroEnum h, String name) {
         if (player > 4) {
             return;
@@ -303,13 +311,13 @@ public class CharacterSelection extends JPanel {
         }
     }
 
-    /**
-     * Starts the game flow after both players are selected.
-     */
     private void startGame() {
         if(player == 2){
             game.setMode(Game.GameMode.SOLO);
             HeroEnum h = HeroEnum.randomEnum();
+            while(selectedC.containsKey(h)){
+                h = HeroEnum.randomEnum();
+            }
             selectCharacter(h, h.toString());
         }
         if(mpm != null && player == 2){
