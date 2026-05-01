@@ -134,6 +134,8 @@ public class Combat implements Serializable {
                 int damage;
                 if(h.isDefending()){damage = 10;}else{damage = 20;}
                 sb.append(e.attack(h, e.getMainElement(), damage)).append(Messages.NEW_LINE);
+                if(!h.isAlive())
+                    heroes.remove(h);
             }
             else{
                 sb.append(e.name().toUpperCase()).append(Messages.ENEMY_MISS).append(Messages.NEW_LINE);

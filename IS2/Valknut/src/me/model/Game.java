@@ -82,7 +82,6 @@ public class Game {
     
     public void startNewCmb(List<Enemy> newEnemies) {
     	cb.SetEnemies(newEnemies);
-    	//controlPanel.onCombat();
     }
 
     public Enemy firstEnemies(Integer i) {
@@ -93,11 +92,6 @@ public class Game {
         }
     }
 
-    /**
-     * Returns the hero whose turn is currently active.
-     *
-     * @return the current hero or null if the turn is not valid
-     */
     private Hero getCurrentHero() {
         if (cb == null || cb.getHeroes().isEmpty()) {
             return null;
@@ -122,9 +116,6 @@ public class Game {
         return null;
     }
 
-    /**
-     * Executes the enemy phase when both heroes have finished their turns.
-     */
     private void executeEnemyTurn() {
         if (cb.turn() == cb.getHeroes().size() + 1) {	
             cv.print(cb.enemyTurnToString());
@@ -144,17 +135,15 @@ public class Game {
         boolean finishedAction = false;
 
         if (combatOption == CombatOption.UNDO) {
-            if (lastUndoableCommand != null && lastUndoableCommand.undo()) {
+            if (lastUndoableCommand != null && lastUndoableCommand.undo())
                 lastUndoableCommand = null;
-            }
-            // controlPanel.onCombat();
+
             return false;
         }
 
         cb.updateItems();
         Hero currentHero = getCurrentHero();
 
-        // Build the command that corresponds to the selected action.
         Command command = CommandFactory.createCommand(cb, cv, currentHero, combatOption, target, item);
 
         if (command != null) {
@@ -164,8 +153,6 @@ public class Game {
                 lastUndoableCommand = command;
             }
 
-            // Preserve the original behavior:
-            // only commands that advance the turn should move combat forward.
             if (command.advancesTurn()) {
                 cb.setTurn(cb.turn() + 1);
             }
@@ -175,13 +162,6 @@ public class Game {
 
         executeEnemyTurn();
         
-        //if (combatOption == CombatOption.ATTACK) {
-        	// controlPanel.onCombat();
-        //}
-        
-//        else {
-//        	controlPanel.onSelection();
-//        }
         return finishedAction;
     }
 
@@ -207,51 +187,19 @@ public class Game {
 
         Hero new_hero;
 
-        if(mode == GameMode.MULTIPLAYER){
-            new_hero = players.get(player);
-            switch (h) {
-                case HeroEnum.GERSEMI -> HeroBuilder.setUserHero(new_hero, "freya");
-                case HeroEnum.VALI -> HeroBuilder.setUserHero(new_hero, "loki");
-                case HeroEnum.JORUNN -> HeroBuilder.setUserHero(new_hero, "vkadi");
-                case HeroEnum.VIGGO -> HeroBuilder.setUserHero(new_hero, "vidar");
-                case HeroEnum.MAGNI -> HeroBuilder.setUserHero(new_hero, "mortal");
-                default -> HeroBuilder.setUserHero(new_hero, "freya");
+        switch (mode) {
+            case MULTIPLAYER -> {
+                new_hero = players.get(player);
+                HeroBuilder.setUserHero(h, new_hero);
             }
+            case SOLO -> new_hero = AutonomousHeroBuilder.buildAutonomousHero(h, player);
+            default -> new_hero = HeroBuilder.buildHero(h, player);
         }
-        else if(mode == GameMode.SOLO){
-            switch (h) {
-                case HeroEnum.GERSEMI -> new_hero = HeroBuilder.buildAutonomousHero("freya", player);
-                case HeroEnum.VALI -> new_hero = HeroBuilder.buildAutonomousHero("loki", player);
-                case HeroEnum.JORUNN -> new_hero = HeroBuilder.buildAutonomousHero("skadi", player);
-                case HeroEnum.VIGGO -> new_hero = HeroBuilder.buildAutonomousHero("vidar", player);
-                case HeroEnum.MAGNI -> new_hero = HeroBuilder.buildAutonomousHero("mortal", player);
-                default -> {new_hero = HeroBuilder.buildAutonomousHero("Freya", player);}
-            }
-        }
-        else{
-            switch (h) {
-                case HeroEnum.GERSEMI -> new_hero = HeroBuilder.buildHero("freya", player);
-                case HeroEnum.VALI -> new_hero = HeroBuilder.buildHero("loki", player);
-                case HeroEnum.JORUNN -> new_hero = HeroBuilder.buildHero("skadi", player);
-                case HeroEnum.VIGGO -> new_hero = HeroBuilder.buildHero("vidar", player);
-                case HeroEnum.MAGNI -> new_hero = HeroBuilder.buildHero("mortal", player);
-                default -> {new_hero = HeroBuilder.buildHero("Freya", player);}
-            }
-        }
-
-        new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
-        new_hero.addItem(new ResistanceItem("Iron Armor Piece", 5, 1, 3, ItemType.RESITANCE));
-        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-        new_hero.addItem(new HealingItem("Seidr's Herb Sprouts", 10, 20, 1, ItemType.HEAL));
-        new_hero.addItem(new HealingItem("Curing Crystal Stone", 200, 80, 1, ItemType.HEAL));
-        new_hero.addItem(new DamageItem("Uru Gantlet", 1000, 5, 8, ItemType.DAMAGE));
 
         if(mode == GameMode.SOLO && player == 2)
             new_hero.setAutonomous(true);
 
         addHero(new_hero);
-        
         cb.addHero(new_hero);
         new_hero.setCombat(cb);
     }
@@ -259,7 +207,6 @@ public class Game {
     // public void next() {
 	// 	st.next(cb);
 	// }
-
 
 	public void displayStory(String string) {
 		
