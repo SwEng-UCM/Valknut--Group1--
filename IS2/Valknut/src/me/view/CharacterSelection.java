@@ -41,18 +41,13 @@ public class CharacterSelection extends JPanel {
         this.ctrl = ctrl;
         this.game = game;
         selectedC = new HashMap<>();
-        if(game.isMultiplayer())
+        if(game.isMultiplayer()){
             this.mpm = MultiplayerManager.getInstacne(ctrl,game);
+        }
         initGUI();
         setComponents();
     }
 
-    /**
-     * Returns the singleton instance of the character selection screen.
-     *
-     * @param ctrl controller reference
-     * @return character selection instance
-     */
     public static CharacterSelection getInstance(Controller ctrl, Game game) {
         if (instance == null) {
             instance = new CharacterSelection(ctrl, game);
@@ -60,20 +55,12 @@ public class CharacterSelection extends JPanel {
         return instance;
     }
 
-    /**
-     * Initializes the panel layout and background image.
-     */
     private void initGUI() {
         setLayout(new BorderLayout());
         backGround = new ImageIcon(Messages.SELECTIONSCREEN).getImage();
         setOpaque(false);
     }
 
-    /**
-     * Paints the background image.
-     *
-     * @param g the graphics context
-     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -202,81 +189,81 @@ public class CharacterSelection extends JPanel {
                 if(mpm.getUser().getId() == player){
                     Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
                     rq.addParameter(HeroEnum.GERSEMI);
-                    rq.addParameter("Gersemi");
                     mpm.send(rq);
+                    if(player == 1)
+                        selectCharacter(HeroEnum.GERSEMI);
                 }
             }
-            else{
-                selectedC.put(HeroEnum.GERSEMI, null);
-                selectCharacter(HeroEnum.GERSEMI, "Gersemi");
-            }
+            else
+                selectCharacter(HeroEnum.GERSEMI);
+            selectedC.put(HeroEnum.GERSEMI, null);
         });
         lokiBtn.addActionListener(e ->{ 
             if(mpm != null){
                 if(mpm.getUser().getId() == player){
                     Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
                     rq.addParameter(HeroEnum.VALI);
-                    rq.addParameter("Vali");
                     mpm.send(rq);
+                    if(player == 1)
+                        selectCharacter(HeroEnum.VALI);
                 }
             }
-            else{
-                selectedC.put(HeroEnum.VALI, null);
-                selectCharacter(HeroEnum.VALI, "Vali");
-            }
-
+            else
+                selectCharacter(HeroEnum.VALI);
+            selectedC.put(HeroEnum.VALI, null);
         });
         skadiBtn.addActionListener(e -> {
             if(mpm != null){
                 if(mpm.getUser().getId() == player){
                     Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
                     rq.addParameter(HeroEnum.JORUNN);
-                    rq.addParameter("Jorunn");
                     mpm.send(rq);
+                    if(player == 1)
+                        selectCharacter(HeroEnum.JORUNN);
                 }
             }
-            else{
-                selectedC.put(HeroEnum.JORUNN, null);
-                selectCharacter(HeroEnum.JORUNN, "Jorunn");
-            }
+            else
+                selectCharacter(HeroEnum.JORUNN);
+            selectedC.put(HeroEnum.JORUNN, null);
         });
         vidarBtn.addActionListener(e -> {
             if(mpm != null){
+                System.err.println("I SELECTED VIGGO");
                 if(mpm.getUser().getId() == player){
                     Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
                     rq.addParameter(HeroEnum.VIGGO);
-                    rq.addParameter("Viggo");
                     mpm.send(rq);
+                    if(player == 1)
+                        selectCharacter(HeroEnum.VIGGO);
                 }
             }
-            else{
-                selectedC.put(HeroEnum.VIGGO, null);
-                selectCharacter(HeroEnum.VIGGO, "Viggo");
-            }
-
+            else
+                selectCharacter(HeroEnum.VIGGO);
+            selectedC.put(HeroEnum.VIGGO, null);
         });
         mortalBtn.addActionListener(e -> {
             if(mpm != null){
                 if(mpm.getUser().getId() == player){
                     Request rq = new Request(Request.RequestType.CHARACTERSELECT, mpm.getUser().getId());
                     rq.addParameter(HeroEnum.MAGNI);
-                    rq.addParameter("Magni");
                     mpm.send(rq);
+                    if(player == 1)
+                        selectCharacter(HeroEnum.MAGNI);
                 }
             }
             else
-                selectCharacter(HeroEnum.MAGNI, "Magni");
+                selectCharacter(HeroEnum.MAGNI);
+            selectedC.put(HeroEnum.MAGNI, null);
         });
         startBtn.addActionListener(e -> startGame());
     }
 
-    private void selectCharacter(HeroEnum h, String name) {
-        if (player > 4) {
+    public void selectCharacter(HeroEnum h) {
+        if(player > 4 || (mpm != null && player > 2))
             return;
-        }
 
         game.selectCharacter(h, player);
-        selectionLabel.setText("Player " + player + " selected " + name.toUpperCase() + ".");
+        selectionLabel.setText("Player " + player + " selected " + h.toString().toUpperCase() + ".");
 
         switch (h) {
         case HeroEnum.GERSEMI -> {
@@ -311,18 +298,26 @@ public class CharacterSelection extends JPanel {
         }
     }
 
-    private void startGame() {
+    public void startGame() {
+        if(mpm != null){
+            if(mpm.getUser().getId() == 2){
+                ViewUtils.showErrorMsg("Player 2 Selects!!");
+                return;
+            }
+            if(player == 2){
+                ViewUtils.showErrorMsg("Player 2 Selects!!");
+                return;
+            }
+            Request rq = new Request(Request.RequestType.CHARACTERSELECT, 1);
+            mpm.send(rq);
+        }
+
         if(player == 2){
             game.setMode(Game.GameMode.SOLO);
             HeroEnum h = HeroEnum.randomEnum();
-            while(selectedC.containsKey(h)){
+            while(selectedC.containsKey(h))
                 h = HeroEnum.randomEnum();
-            }
-            selectCharacter(h, h.toString());
-        }
-        if(mpm != null && player == 2){
-            ViewUtils.showErrorMsg("Player 2 Selects!!");
-            return;
+            selectCharacter(h); 
         }
 
         selectionLabel.setText("Loading battle...");

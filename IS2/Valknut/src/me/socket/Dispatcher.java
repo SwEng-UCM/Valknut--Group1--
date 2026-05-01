@@ -3,6 +3,7 @@ package me.socket;
 import me.control.*;
 import me.model.CombatOption;
 import me.model.Game;
+import me.model.HeroEnum;
 import me.model.items.Item;
 
 public class Dispatcher {
@@ -44,7 +45,10 @@ public class Dispatcher {
     }
 
     public void dispatchCS(Request rq, MultiplayerManager test){
-        
+        if(rq.getParameters()[0] == null) // If it's an action from character selection with no params, it's start
+            test.startGame();
+        else //If has params, it's a choosing action
+            test.chooseCharacter((HeroEnum) rq.getParameters()[0]);
     }
 
     public void dispatchCO(Request rq){

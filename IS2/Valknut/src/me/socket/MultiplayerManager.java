@@ -3,10 +3,13 @@ import javax.swing.*;
 import me.control.*;
 import me.model.Game;
 import me.model.Hero;
+import me.model.HeroEnum;
+import me.view.CharacterSelection;
 
 public class MultiplayerManager extends JFrame{
 
     private static MultiplayerManager instance;
+    private CharacterSelection characterSelection;
     private ChatScreen cs;
     private final Controller ctrl;
     private final Game game;
@@ -89,5 +92,15 @@ public class MultiplayerManager extends JFrame{
         if(id == 1)
             ctrl.addHero(new Hero(" ", 0, 0, " ", 2));
         ctrl.charactersScreen();
+    }
+
+    public void chooseCharacter(HeroEnum he){
+        characterSelection = CharacterSelection.getInstance(null, null);
+        System.err.println(he.toString());
+        characterSelection.selectCharacter(he);
+    }
+
+    public void startGame(){
+        characterSelection.startGame();
     }
 }
