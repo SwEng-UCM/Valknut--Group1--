@@ -189,7 +189,7 @@ public class Game {
 
         switch (mode) {
             case MULTIPLAYER -> {
-                new_hero = players.get(player);
+                new_hero = players.get(player - 1);
                 HeroBuilder.setUserHero(h, new_hero);
             }
             case SOLO -> new_hero = AutonomousHeroBuilder.buildAutonomousHero(h, player);
@@ -199,7 +199,6 @@ public class Game {
         if(mode == GameMode.SOLO && player == 2)
             new_hero.setAutonomous(true);
 
-        addHero(new_hero);
         cb.addHero(new_hero);
         new_hero.setCombat(cb);
     }

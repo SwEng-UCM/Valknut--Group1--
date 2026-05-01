@@ -301,10 +301,10 @@ public class CharacterSelection extends JPanel {
     public void startGame() {
         if(mpm != null){
             if(mpm.getUser().getId() == 2){
-                ViewUtils.showErrorMsg("Player 2 Selects!!");
+                ViewUtils.showErrorMsg("Wait for Player 1 to Start");
                 return;
             }
-            if(player == 2){
+            if(player < 3){
                 ViewUtils.showErrorMsg("Player 2 Selects!!");
                 return;
             }

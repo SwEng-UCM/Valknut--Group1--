@@ -25,7 +25,6 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
         mainPanel = new JPanel(cardLayout);
 		mainMenu = MainMenu.getInstance(ctrl);
 		settingsPanel = SettingsPanel.getInstance(ctrl);
-		
 		multiPlayerScreen = MultiPlayerScreen.getInstance(ctrl);
 
 		mainPanel.add(mainMenu, "MENU");

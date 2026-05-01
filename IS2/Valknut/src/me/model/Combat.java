@@ -121,6 +121,7 @@ public class Combat implements Serializable {
 
         if (turn < heroes.size() + 1) {
             Hero h = heroes.get(turn - 1);
+            sb.append(h.name().toUpperCase()).append(" ATTACKS");
             sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20));
             lastTarjet = i - 1;
             System.err.println(lastTarjet);

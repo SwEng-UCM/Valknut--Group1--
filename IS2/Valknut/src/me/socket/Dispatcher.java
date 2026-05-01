@@ -46,7 +46,7 @@ public class Dispatcher {
 
     public void dispatchCS(Request rq, MultiplayerManager test){
         if(rq.getParameters()[0] == null) // If it's an action from character selection with no params, it's start
-            test.startGame();
+            ctrl.startSelectedGame();
         else //If has params, it's a choosing action
             test.chooseCharacter((HeroEnum) rq.getParameters()[0]);
     }
