@@ -214,8 +214,9 @@ public class Game {
     }
 
      public void next() {
+    		System.out.println("caling next in Game");
 	 	st.next(cb);
-	 	System.out.println("caling next in Game");
+	 
 	 }
 
 	public void displayStory(String string) {
