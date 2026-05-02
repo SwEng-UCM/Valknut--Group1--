@@ -2,6 +2,8 @@ package me.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -19,6 +21,7 @@ public class StoryScreen extends JPanel {
  	private final Game game;
  	private static StoryScreen instance;
  	private JLabel story;
+ 	private Image backGround;
  	
  	
  	StoryScreen(Controller ctrl, Game game) {
@@ -33,9 +36,20 @@ public class StoryScreen extends JPanel {
          return instance;
      }
  	
+ 	 @Override
+     protected void paintComponent(Graphics g) {
+         super.paintComponent(g);
+         if (backGround != null) {
+        	 System.out.println("I'm the story screen getting the background");
+             g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
+         }
+     }
 
  	private void initGui() {
- 		
+ 		this.backGround = new ImageIcon(Messages.STORYSCREEN).getImage();
+        this.setVisible(true);
+        this.setOpaque(false);
+
  		System.out.println("I am StoryScreen  initiating GUI ");
  		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
  		JPanel mainPanel = new JPanel();
@@ -51,7 +65,7 @@ public class StoryScreen extends JPanel {
  		 //this.nextButton.setIcon(new ImageIcon("resources/images/buttons/menuButton.png"));
  		 this.nextButton.addActionListener((e) -> handleNext());
  		 mainPanel.add(nextButton, BorderLayout.PAGE_END);
-		
+//		
  	}
  	
  	public void setText(String t) {
@@ -61,9 +75,12 @@ public class StoryScreen extends JPanel {
  		story.repaint();
  		story.setPreferredSize(new Dimension(650, 50));
  		this.add(story);
+// 		JPanel aux = new JPanel();
+// 		aux.setPreferredSize(new Dimension(2, 2));
+// 		this.add(aux);
  		nextButton.setPreferredSize(new Dimension(10, 10));
  		this.add(nextButton);
- 		
+
  		//repaint();
  		
  	}
