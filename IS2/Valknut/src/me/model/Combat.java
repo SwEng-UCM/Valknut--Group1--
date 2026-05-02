@@ -12,7 +12,7 @@ import me.view.Messages;
 public class Combat implements Serializable {
     private static final long serialVersionUID = 1L;
     private final List<Hero> heroes;
-    private final List<Enemy> enemies;
+    volatile private List<Enemy> enemies;
     private List<Item> items;
     private int turn;
     private boolean exit;
@@ -45,8 +45,16 @@ public class Combat implements Serializable {
     }
     
     public void SetEnemies(List<Enemy> newEnemies) {
-    	this.enemies.clear();
+    	this.enemies = new ArrayList<>();
         this.enemies.addAll(newEnemies);
+        
+        String s = "New enemies (combat): " + enemies.size();
+        for(Enemy e: enemies) {
+        	s = s +" "+e.name();
+        }
+        System.out.println(s);
+        exit = false;
+        turn = 1;
     }
 
     public int getLastTarjet(){

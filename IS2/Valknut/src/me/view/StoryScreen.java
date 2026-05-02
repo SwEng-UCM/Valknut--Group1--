@@ -36,14 +36,14 @@ public class StoryScreen extends JPanel {
          return instance;
      }
  	
- 	 @Override
-     protected void paintComponent(Graphics g) {
-         super.paintComponent(g);
-         if (backGround != null) {
-        	 System.out.println("I'm the story screen getting the background");
-             g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
-         }
-     }
+// 	 @Override
+//     protected void paintComponent(Graphics g) {
+//         super.paintComponent(g);
+//         if (backGround != null) {
+//        	 System.out.println("I'm the story screen getting the background");
+//             g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
+//         }
+//     }
 
  	private void initGui() {
  		this.backGround = new ImageIcon(Messages.STORYSCREEN).getImage();

@@ -58,6 +58,15 @@ package me.model;
  	public Storyteller(Game game) {
  		this.game = game;
  		s = new Story();
+		
+  	}
+ 	
+ 	public void writeStory(List<Hero> heroes) {
+ 		this.heroes = heroes;
+ 		s.addHeroes(heroes);
+ 		story = new ArrayList<>();
+ 		combats = new ArrayList<>();
+ 		
  		//1st Combat enemies
  		combat1.add(EnemyBuilder.buildEnemy("ice"));
  		combat1.add(EnemyBuilder.buildEnemy("fire"));
@@ -77,19 +86,10 @@ package me.model;
  		//3rd Combat enemies
  		combat3.add(EnemyBuilder.buildEnemy("fafnir"));
 		
-// 		//4rth Combat enemies
-// 		combat4.add(EnemyBuilder.buildEnemy("skoll"));
-// 		combat4.add(EnemyBuilder.buildEnemy("hati"));
+ 		//4rth Combat enemies
+ 		combat4.add(EnemyBuilder.buildEnemy("skoll"));
+ 		combat4.add(EnemyBuilder.buildEnemy("hati"));
 		
- 		
-		
-  	}
- 	
- 	public void writeStory(List<Hero> heroes) {
- 		this.heroes = heroes;
- 		s.addHeroes(heroes);
- 		story = new ArrayList<>();
- 		combats = new ArrayList<>();
  		
 
 		story.add(s.IntroLines);
@@ -105,7 +105,7 @@ package me.model;
 		
  		story.add( s.middleSecondChapter());
 
- 		combats.add( combat2);
+ 		combats.add(combat2);
  		
  		story.add(s.endSecondChapter());
 	

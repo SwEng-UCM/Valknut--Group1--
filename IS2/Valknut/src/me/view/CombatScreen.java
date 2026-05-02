@@ -49,9 +49,10 @@ public class CombatScreen extends JPanel{
         this.backGround = new ImageIcon(Messages.COMBATSCREEN).getImage();
         this.setVisible(true);
         this.setOpaque(false);
+
     }
 
-    private void setComponents(){
+    public void setComponents(){
         this.setLayout(new BorderLayout());
         
         enemyPanel = new JPanel();
@@ -60,6 +61,10 @@ public class CombatScreen extends JPanel{
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
 
         List<Enemy> enemies = game.getEnemies();
+        String s = "New enemies (combat screen): " + enemies.size();
+        for(Enemy e: enemies) {
+        	s = s +" "+e.name();
+        }
         if(enemies != null){
             enemy_buttons = new ArrayList<>(enemies.size());
         int enemy_num = 1;
@@ -148,6 +153,11 @@ public class CombatScreen extends JPanel{
         this.add(heroPanel, BorderLayout.WEST);
         this.add(enemyPanel, BorderLayout.EAST);
         this.add(commandsPanel, BorderLayout.PAGE_END);
+        JButton next = new JButton("next");
+		next.addActionListener(ev -> {
+		game.next();
+		});
+		this.add(next, BorderLayout.PAGE_START );
     }
     
     private void attack() {

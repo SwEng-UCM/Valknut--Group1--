@@ -69,6 +69,9 @@ public class Game {
     }
 
     public List<Enemy> getEnemies(){
+    	if(cb == null) {
+    		System.out.println("cb null");
+    	}
         return (cb == null ? null : cb.getEnemies());
     }
     
@@ -80,6 +83,7 @@ public class Game {
     	System.out.println("I'm game setting enemies");
     	System.out.println();
     	if(cb != null) {
+    		System.out.println("I'm game setting enemies in cb" + newEnemies.getFirst().name());
     		cb.SetEnemies(newEnemies);
     	}
     }
