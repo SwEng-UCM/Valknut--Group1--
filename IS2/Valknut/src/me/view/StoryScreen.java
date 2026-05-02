@@ -18,7 +18,7 @@ public class StoryScreen extends JPanel {
 	private final Controller ctrl;
  	private final Game game;
  	private static StoryScreen instance;
- 	private JLabel s;
+ 	private JLabel story;
  	
  	
  	StoryScreen(Controller ctrl, Game game) {
@@ -37,18 +37,18 @@ public class StoryScreen extends JPanel {
  	private void initGui() {
  		
  		System.out.println("I am StoryScreen  initiating GUI ");
- 		 setLayout(new BorderLayout());
+ 		 setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
  		JPanel mainPanel = new JPanel();
 	    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 	    this.add(mainPanel);
 	    
  		 
- 		JLabel story = new JLabel(text);
+ 		story = new JLabel(text);
 	    mainPanel.add(story);
  		
- 		 this.nextButton = new JButton();
+ 		 this.nextButton = new JButton("Next");
  		 this.nextButton.setToolTipText("Next");
- 		 this.nextButton.setIcon(new ImageIcon("resources/images/buttons/menuButton.png"));
+ 		 //this.nextButton.setIcon(new ImageIcon("resources/images/buttons/menuButton.png"));
  		 this.nextButton.addActionListener((e) -> handleNext());
  		 mainPanel.add(nextButton, BorderLayout.PAGE_END);
 		
@@ -56,6 +56,12 @@ public class StoryScreen extends JPanel {
  	
  	public void setText(String t) {
  		text = t;
+ 		story = new JLabel(text);
+ 		story.repaint();
+ 		this.add(story);
+ 		nextButton.setPreferredSize(new Dimension(10, 10));
+ 		this.add(nextButton);
+ 		
  		//repaint();
  		
  	}

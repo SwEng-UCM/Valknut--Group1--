@@ -131,8 +131,9 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 	
 	private void storyGUI(Game game, String story) {
+		System.out.println("I'm control panel calling storyGui");
 		storyScreen = StoryScreen.getInstance(_ctrl, game);
-		//storyScreen.setText(story);
+		storyScreen.setText(story);
 //		mainPanel.remove(combatScreen);
 		mainPanel.add(storyScreen, "STORY SCREEN");
 		cardLayout.show(mainPanel, "STORY SCREEN");
