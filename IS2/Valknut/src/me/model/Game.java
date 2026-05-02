@@ -213,6 +213,6 @@ public class Game {
 	 }
 
 	public void displayStory(String string) {
-		
+		ctrl.onStory(string);
 	}
 }

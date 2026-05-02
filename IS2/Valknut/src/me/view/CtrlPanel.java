@@ -14,6 +14,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private CharacterSelection characterSelection;
 	private CombatScreen combatScreen;
 	private final MultiPlayerScreen multiPlayerScreen;
+	private StoryScreen storyScreen;
 	private final Controller _ctrl;
 	private final Game game;
 		
@@ -26,6 +27,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		mainMenu = MainMenu.getInstance(ctrl);
 		settingsPanel = SettingsPanel.getInstance(ctrl);
 		multiPlayerScreen = MultiPlayerScreen.getInstance(ctrl);
+		storyScreen = new StoryScreen(ctrl, game);
 
 		mainPanel.add(mainMenu, "MENU");
 		mainPanel.add(settingsPanel, "SETTINGS");
@@ -89,6 +91,12 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	public void onCombat(Game game){
 		combatGUI(game);
 	}
+    
+    public void onStory(Game game, String story) {
+    	storyGUI(game, story);
+    }
+
+
 
 	public void multiplayerScreen(){
 		cardLayout.show(mainPanel, "MULTIPLAYER");
@@ -119,6 +127,13 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		combatScreen = CombatScreen.getInstance(_ctrl, game);
 		mainPanel.add(combatScreen, "COMBAT SCREEN");
 		cardLayout.show(mainPanel, "COMBAT SCREEN");
+	}
+	
+	private void storyGUI(Game game, String story) {
+		storyScreen = StoryScreen.getInstance(_ctrl, game);
+		storyScreen.setText(story);
+		mainPanel.add(storyScreen, "STORY SCREEN");
+		cardLayout.show(mainPanel, "STORY SCREEN");
 	}
 	
 }

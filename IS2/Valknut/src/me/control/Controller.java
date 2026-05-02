@@ -68,8 +68,13 @@ public class Controller {
         controlPanel.multiplayerScreen();
     }
 
-    public void startSelectedGame() {
+    public void startSelectedGame() { //TODO
+    	
         controlPanel.onCombat(game);
+    }
+    
+    public void onStory(String story) {
+    	controlPanel.onStory(game, story);
     }
 
     public void exit() {
