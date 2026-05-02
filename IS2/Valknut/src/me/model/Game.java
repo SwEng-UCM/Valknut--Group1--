@@ -53,8 +53,12 @@ public class Game {
 
     public void addHero(Hero e){
         players.add(e);
+        st.addHero(e);
     }
-
+    
+    public void setStoryHeroes() {
+    	st.writeStory(getHeroes());
+    }
     public int getNumEnemies() {
         return cb.getEnemies().size();
     }

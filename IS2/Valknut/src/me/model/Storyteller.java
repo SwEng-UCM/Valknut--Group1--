@@ -49,11 +49,15 @@ package me.model;
  	private List<Hero> infected = new ArrayList<>();
  	private List<Hero> healthy = new ArrayList<>();
  	private List<Hero> heroes = new ArrayList<>();
- 	private Queue<Object[]> toDo;
+ 	private List<String> story;
+ 	private List<List<Enemy>> combats;
+ 	private final String[] index = {"s", "s", "c", "s", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s"};
+ 	private Story s;
+ 	private int bookmark = 0;
 	
  	public Storyteller(Game game) {
  		this.game = game;
- 		this.toDo = new ArrayDeque<>(90);
+ 		s = new Story();
  		//1st Combat enemies
  		combat1.add(EnemyBuilder.buildEnemy("ice"));
  		combat1.add(EnemyBuilder.buildEnemy("fire"));
@@ -77,61 +81,69 @@ package me.model;
 // 		combat4.add(EnemyBuilder.buildEnemy("skoll"));
 // 		combat4.add(EnemyBuilder.buildEnemy("hati"));
 		
- 		List<String> story = new ArrayList<>();
- 		List<List<Enemy>> combats = new ArrayList<>();
- 		String[] index = {"s", "s", "c", "s", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s"};
+ 		
+		
+  	}
+ 	
+ 	public void writeStory(List<Hero> heroes) {
+ 		this.heroes = heroes;
+ 		s.addHeroes(heroes);
+ 		story = new ArrayList<>();
+ 		combats = new ArrayList<>();
  		
 
-		story.add(Story.IntroLines);
+		story.add(s.IntroLines);
 		
-		story.add(Story.startFirstChapter());
+		story.add(s.startFirstChapter());
 		
 		combats.add(combat1);
 
- 		story.add(Story.middleFirstChapter());
+ 		story.add(s.middleFirstChapter());
 
- 		story.add(Story.startSecondChapter());
+ 		story.add(s.startSecondChapter());
 
 		
- 		story.add( Story.middleSecondChapter());
+ 		story.add( s.middleSecondChapter());
 
  		combats.add( combat2);
  		
- 		story.add(Story.endSecondChapter());
+ 		story.add(s.endSecondChapter());
 	
- 		story.add(Story.startThirdChapter());
+ 		story.add(s.startThirdChapter());
 
  		combats.add(combat3);
 
- 		story.add(Story.endThirdChapter());
+ 		story.add(s.endThirdChapter());
 
- 		story.add(Story.startFourthChapter());
+ 		story.add(s.startFourthChapter());
 
  		combats.add(combat4);
 
- 		story.add(Story.endFourthChapter());
+ 		story.add(s.endFourthChapter());
 	
- 		story.add(Story.chapterFith());
+ 		story.add(s.chapterFith());
 	
  		combats.add(null);
- 		story.add(Story.chapterFinal(null));
-		
-  	}
+ 		story.add(s.chapterFinal(new ArrayList<>()));
+ 	}
 	
 	
  	public void narrate() {
  		game.startNewCmb(combat1);
  	}
-
+ 	
+ 	public void addHero(Hero h) {
+ 		heroes.add(h);
+ 	}
 
  	public void next(Combat cb) {
- 		Object[] n = toDo.remove();
- 		if(n[0] == "story") {
- 			game.displayStory((String) n[1]);
+ 		String s = index[bookmark];
+ 		if(s == "s") {
+ 			game.displayStory(story.removeFirst());
  		}
 		
- 		else if(n[0] == "combat") {
- 			game.setEnemies((List<Enemy>) n[1]);
+ 		else if(s == "c") {
+ 			game.setEnemies(combats.removeFirst());
  		}
  		// else if (n == null) {
 			

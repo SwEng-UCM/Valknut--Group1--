@@ -14,7 +14,9 @@ public class Story {
 	public static List<Hero> healthy;
 			
 	public Story(){
-
+		heroes = new ArrayList<>();
+		infected = new ArrayList<>();
+		healthy = new ArrayList<>();
 	}
 
 	public String getIntro(){
@@ -23,6 +25,10 @@ public class Story {
 
 	public void addHeroes(List<Hero> hs){
 		heroes = new ArrayList<>(hs);
+	}
+	
+	public void addHero(Hero h) {
+		heroes.add(h);
 	}
 	
 	public static String[] getHeroNames(List<Hero> hl) {
