@@ -8,11 +8,12 @@ import me.model.items.*;
 import me.model.save.*;
 import me.socket.MultiplayerManager;
 import me.view.CombatView;
+import me.model.Storyteller; 
 
 public class Game {
     
     private static CombatView cv;
-    // private final Storyteller st;
+    private final Storyteller st;
     private final MultiplayerManager mpm;
     private me.control.Controller ctrl;
     private List<Hero> players;
@@ -30,7 +31,7 @@ public class Game {
         this.ctrl = ctrl;
         players = new ArrayList<>(4);
         mode = GameMode.LOCAL;
-        // st = new Storyteller(this);
+        st = new Storyteller(this);
         mpm = MultiplayerManager.getInstacne(ctrl, this);
         cb = new Combat();
     }
@@ -203,9 +204,9 @@ public class Game {
         new_hero.setCombat(cb);
     }
 
-    // public void next() {
-	// 	st.next(cb);
-	// }
+     public void next() {
+	 	st.next(cb);
+	 }
 
 	public void displayStory(String string) {
 		
