@@ -8,6 +8,7 @@ import me.model.items.*;
 import me.model.save.*;
 import me.socket.MultiplayerManager;
 import me.view.CombatView;
+import me.view.Messages;
 import me.model.Storyteller; 
 
 public class Game {
@@ -33,7 +34,7 @@ public class Game {
         mode = GameMode.LOCAL;
         st = new Storyteller(this);
         mpm = MultiplayerManager.getInstacne(ctrl, this);
-        cb = new Combat();
+        cb = new Combat(this);
     }
 
      public void initCmb() {
@@ -76,6 +77,8 @@ public class Game {
     }
     
     public void setEnemies(List<Enemy> newEnemies){
+    	System.out.println("I'm game setting enemies");
+    	System.out.println();
     	if(cb != null) {
     		cb.SetEnemies(newEnemies);
     	}
@@ -85,9 +88,7 @@ public class Game {
         return (cb == null ? null : cb.getHeroes());
     }
     
-    public void startNewCmb(List<Enemy> newEnemies) {
-    	cb.SetEnemies(newEnemies);
-    }
+  
 
     public Enemy firstEnemies(Integer i) {
         if (i == 1) {
@@ -133,6 +134,10 @@ public class Game {
             cb.setTurn(1);
             String s = cb.update();
             cv.printLine(s);
+        }
+        
+        if(cb.getExit()) {
+            next();
         }
     }
 
@@ -210,9 +215,15 @@ public class Game {
 
      public void next() {
 	 	st.next(cb);
+	 	System.out.println("caling next in Game");
 	 }
 
 	public void displayStory(String string) {
 		ctrl.onStory(string);
+		System.out.println("Displaying story: " + string);
+	}
+	public void startNewCmb() {
+		System.out.println("calling on combat ");
+	   	ctrl.onCombat();
 	}
 }

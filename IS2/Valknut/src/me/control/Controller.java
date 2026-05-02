@@ -69,12 +69,16 @@ public class Controller {
     }
 
     public void startSelectedGame() { //TODO
-    	
-        controlPanel.onCombat(game);
+    	game.next();
+        //controlPanel.onCombat(game);
     }
     
     public void onStory(String story) {
     	controlPanel.onStory(game, story);
+    }
+    
+    public void onCombat() {
+    	controlPanel.onCombat(game);
     }
 
     public void exit() {

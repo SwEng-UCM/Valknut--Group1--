@@ -128,9 +128,9 @@ package me.model;
  	}
 	
 	
- 	public void narrate() {
- 		game.startNewCmb(combat1);
- 	}
+// 	public void narrate() {
+// 		game.startNewCmb(combat1);
+// 	}
  	
  	public void addHero(Hero h) {
  		heroes.add(h);
@@ -138,12 +138,14 @@ package me.model;
 
  	public void next(Combat cb) {
  		String s = index[bookmark];
+ 		bookmark++;
  		if(s == "s") {
  			game.displayStory(story.removeFirst());
  		}
 		
  		else if(s == "c") {
  			game.setEnemies(combats.removeFirst());
+ 			game.startNewCmb();
  		}
  		// else if (n == null) {
 			

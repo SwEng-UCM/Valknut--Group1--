@@ -17,13 +17,15 @@ public class Combat implements Serializable {
     private int turn;
     private boolean exit;
     private int lastTarjet;
+    private Game game;
 
-    public Combat(){
+    public Combat(Game game){
         heroes = new ArrayList<>(); //initial values are almost random
         enemies = new ArrayList<>();
         items = new ArrayList<>(5);
         turn = 1; 
         exit = false;
+        this.game = game;
     }
 
     public List<Hero> getHeroes(){
@@ -36,6 +38,10 @@ public class Combat implements Serializable {
     
     public List<Item> getItems(){
         return items;
+    }
+    
+    public boolean getExit() {
+    	return exit;
     }
     
     public void SetEnemies(List<Enemy> newEnemies) {
@@ -219,7 +225,7 @@ public class Combat implements Serializable {
         if(enemies.isEmpty()){
             sb.append(Messages.BATTLE_WIN);
             exit = true;
-            SaveGameManager.saveGame(save(), "autosave.dat");
+            //SaveGameManager.saveGame(save(), "autosave.dat"); TODO
         }
         else if(allEscaped()){
             sb.append(Messages.BATTLE_ESCAPE);
