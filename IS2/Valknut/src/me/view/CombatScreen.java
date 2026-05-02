@@ -17,8 +17,10 @@ public class CombatScreen extends JPanel{
     private Controller _ctrl;
     private Game game;
     private Image backGround;
+    private CardLayout actionLayout;
     private List<JButton> enemy_buttons, command_buttons;
-    private JPanel commandsPanel, heroPanel, enemyPanel;
+    private JPanel commandsPanel, heroPanel, enemyPanel, actionContainer;
+    private JTextArea combatText;
 
     private CombatScreen(Controller ctrl, Game game){
          _ctrl = ctrl;
@@ -78,6 +80,7 @@ public class CombatScreen extends JPanel{
                     enemy_buttons.add(enemyButton);
                     enemyButton.addActionListener(ev -> {
                     	attackEnemy(e);
+                    	showText("You attack!");
                     });
                     enemyPanel.add(enemyButton);
                     enemy_num++;
@@ -101,6 +104,9 @@ public class CombatScreen extends JPanel{
                 }
             }
         }
+		
+		actionLayout = new CardLayout();
+		actionContainer = new JPanel(actionLayout);
         
         commandsPanel = new JPanel();
         commandsPanel.setSize(new Dimension(500, 500));
@@ -149,10 +155,22 @@ public class CombatScreen extends JPanel{
         	command_buttons.add(actionButton);
         	commandsPanel.add(actionButton);
         }
+		
+		JPanel textPanel = new JPanel(new BorderLayout());
+		combatText = new JTextArea(4, 20);
+		combatText.setEditable(false);
+		textPanel.add(new JScrollPane(combatText), BorderLayout.CENTER);
+
+		JButton continueBtn = new JButton("Continue");
+		continueBtn.addActionListener(e -> actionLayout.show(actionContainer, "COMMANDS"));
+		textPanel.add(continueBtn, BorderLayout.SOUTH);
+		
+		actionContainer.add(commandsPanel, "COMMANDS");
+		actionContainer.add(textPanel, "TEXT");
 
         this.add(heroPanel, BorderLayout.WEST);
         this.add(enemyPanel, BorderLayout.EAST);
-        this.add(commandsPanel, BorderLayout.PAGE_END);
+        this.add(actionContainer, BorderLayout.PAGE_END);
         JButton next = new JButton("next");
 		next.addActionListener(ev -> {
 		game.next();
@@ -220,6 +238,11 @@ public class CombatScreen extends JPanel{
 		});
 		itemsPanel.add(returnButton);
     	this.add(itemsPanel, BorderLayout.PAGE_END);
+    }
+    
+    private void showText(String text) {
+        combatText.setText(text);
+        actionLayout.show(actionContainer, "TEXT");
     }
     
 }
