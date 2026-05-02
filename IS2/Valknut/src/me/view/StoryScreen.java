@@ -56,8 +56,10 @@ public class StoryScreen extends JPanel {
  	
  	public void setText(String t) {
  		text = t;
+ 		text = Messages.startFormat + text + Messages.endFormat;
  		story = new JLabel(text);
  		story.repaint();
+ 		story.setPreferredSize(new Dimension(650, 50));
  		this.add(story);
  		nextButton.setPreferredSize(new Dimension(10, 10));
  		this.add(nextButton);

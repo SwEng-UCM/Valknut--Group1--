@@ -66,11 +66,15 @@ public class Messages {
 	public static final String PRESS_EN = "Press enter to continue...";
 	public static final String WRONG_REQUEST = "The Request from Client was not Correct: ";
 
+	//aux formating text into parragraph for the story
+	public static final String startFormat= "<html> <body style='width: 500px'>" ;
+	public static final String endFormat = "</body> </html>";
 	//Story
-	public static final String INTRO_LINES = """
-                                                 For The Viking Warriors the greatest honor upon death was to enter VALHALLA, the Hall of Heroes. 
-                                                 This is a majestic hall located in ASGARD and presided over by the god ODIN where our heroes will live untill RAGNAROK, 
-                                                 when they will march out of its many doors to fight in aid of ODIN against the JOTNARE, the ice giants.""" ;
+	public static final String INTRO_LINES = "<html> <body style='width: 500px'>" 
+                                                +  "For The Viking Warriors the greatest honor upon death was to enter VALHALLA, the Hall of Heroes. "
+                                                + "This is a majestic hall located in ASGARD and presided over by the god ODIN where our heroes will live untill RAGNAROK," 
+                                                + " when they will march out of its many doors to fight in aid of ODIN against the JOTNARE, the ice giants."
+                                                + "</body> </html>";
 	
 	public static final String CHOOSE = "CHOOSE YOUR HEROES";
 	public static final String CHAPTER_ONE_BEGINING = """
