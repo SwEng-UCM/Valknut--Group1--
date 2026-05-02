@@ -37,7 +37,7 @@ public class StoryScreen extends JPanel {
  	private void initGui() {
  		
  		System.out.println("I am StoryScreen  initiating GUI ");
- 		 setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+ 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
  		JPanel mainPanel = new JPanel();
 	    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 	    this.add(mainPanel);
