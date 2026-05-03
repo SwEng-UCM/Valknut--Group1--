@@ -196,10 +196,10 @@ public class CombatScreen extends JPanel{
 
                 case DEFEND -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
-                        this.removeAll();
-                        this.revalidate();
                     	initGUI();
                     	setComponents();
+                    	this.revalidate();
+                    	this.repaint();
                     });
 
                 case USE_ITEM -> actionButton.addActionListener(ev -> {
@@ -208,10 +208,10 @@ public class CombatScreen extends JPanel{
 
                 case RUN -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
-                        this.removeAll();
-                        this.revalidate();
                     	initGUI();
                     	setComponents();
+                    	this.revalidate();
+                    	this.repaint();
                     });
 
                 case STATS -> actionButton.addActionListener(ev -> {
@@ -224,8 +224,18 @@ public class CombatScreen extends JPanel{
                         this.repaint();
                     });
         	}
-        	command_buttons.add(actionButton);
-        	commandsPanel.add(actionButton);
+        	
+        	if (!game.getFinalBattle() || game.getTurn() - 1 < heroes.size()) {
+	        	command_buttons.add(actionButton);
+	        	commandsPanel.add(actionButton);
+        	}
+        	
+        	else {
+        		if (c == CombatOption.ATTACK) {
+        			command_buttons.add(actionButton);
+    	        	commandsPanel.add(actionButton);
+        		}
+        	}
         }
 		
 		JPanel textPanel = new JPanel(new BorderLayout());
@@ -251,7 +261,7 @@ public class CombatScreen extends JPanel{
 		});
 		this.add(next, BorderLayout.PAGE_START );
 		
-		if (enemies.size() == 0 || heroes.size() == 0 && game.getFinalBattle() || infected.size() == 0) {
+		if (enemies.size() == 0 || heroes.size() == 0 && game.getFinalBattle() || infected.size() == 0 && game.getFinalBattle()) {
 			game.next();
 		}
     }
@@ -293,7 +303,7 @@ public class CombatScreen extends JPanel{
     }
     
     private void useItem() {
-    	this.remove(commandsPanel);
+    	this.remove(actionContainer);
     	this.revalidate();
     	this.repaint();
     	
@@ -313,6 +323,8 @@ public class CombatScreen extends JPanel{
     			this.remove(itemsPanel);
     			initGUI();
     			setComponents();
+    			this.revalidate();
+    			this.repaint();
     		});
         	itemsPanel.add(itemChoiceButton);
     	}
@@ -323,6 +335,8 @@ public class CombatScreen extends JPanel{
 			this.remove(itemsPanel);
 			initGUI();
 			setComponents();
+			this.revalidate();
+			this.repaint();
 		});
 		itemsPanel.add(returnButton);
     	this.add(itemsPanel, BorderLayout.PAGE_END);
