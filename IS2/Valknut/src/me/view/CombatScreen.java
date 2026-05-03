@@ -26,7 +26,7 @@ public class CombatScreen extends JPanel{
          _ctrl = ctrl;
          this.game = game;
         initGUI();
-        setComponents();
+        //setComponents();
     }
 
     @Override
