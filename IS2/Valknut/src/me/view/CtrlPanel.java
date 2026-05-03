@@ -89,7 +89,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 
     @Override
 	public void onCombat(Game game){
-		combatGUI(game);
+    	combatGUI(game);
 	}
     
     public void onStory(Game game, String story) {

@@ -51,7 +51,7 @@ package me.model;
  	private List<Hero> heroes = new ArrayList<>();
  	private List<String> story;
  	private List<List<Enemy>> combats;
- 	private final String[] index = {"s", "s", "c", "s", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s"};
+ 	private final String[] index = {"s", "s", "c", "s", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s"};
  	private Story s;
  	private int bookmark = 0;
 	
@@ -137,15 +137,19 @@ package me.model;
  	}
 
  	public void next(Combat cb) {
- 		String s = index[bookmark];
+ 		String story_or_combat = index[bookmark];
  		bookmark++;
- 		if(s == "s") {
+ 		if(story_or_combat == "s") {
  			game.displayStory(story.removeFirst());
  		}
 		
- 		else if(s == "c") {
+ 		else if(story_or_combat == "c") {
  			game.setEnemies(combats.removeFirst());
  			game.startNewCmb();
+ 		}
+ 		
+ 		else if(story_or_combat == "fc") {
+ 			game.finalCombat(s.getInfected());
  		}
  		// else if (n == null) {
 			

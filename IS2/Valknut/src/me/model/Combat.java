@@ -12,6 +12,7 @@ import me.view.Messages;
 public class Combat implements Serializable {
     private static final long serialVersionUID = 1L;
     private final List<Hero> heroes;
+    private final List<Hero> infected;
     volatile private List<Enemy> enemies;
     private List<Item> items;
     private int turn;
@@ -21,6 +22,7 @@ public class Combat implements Serializable {
 
     public Combat(Game game){
         heroes = new ArrayList<>(); //initial values are almost random
+        infected = new ArrayList<>();
         enemies = new ArrayList<>();
         items = new ArrayList<>(5);
         turn = 1; 
@@ -30,6 +32,10 @@ public class Combat implements Serializable {
 
     public List<Hero> getHeroes(){
         return heroes;
+    }
+    
+    public List<Hero> getInfected(){
+        return infected;
     }
 
     public List<Enemy> getEnemies(){
@@ -55,6 +61,21 @@ public class Combat implements Serializable {
         System.out.println(s);
         exit = false;
         turn = 1;
+    }
+    
+    public void setFinalCombat(List<Hero> infected) {
+    	for(Hero h: infected) {
+    		this.infected.add(h);
+    		
+    		int i = 0;
+    		for (Hero h2: heroes) {
+    			if (h2 == h) {
+    				this.heroes.remove(i);
+    			}
+    			i++;
+    		}
+    	}
+    	
     }
 
     public int getLastTarjet(){

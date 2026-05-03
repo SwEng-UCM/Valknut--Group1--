@@ -21,6 +21,7 @@ public class Game {
     private Command lastUndoableCommand;
     private Combat cb;
     private Command lastCommand;
+    private boolean finalBattle = false;
 
     public enum GameMode{
         SOLO, LOCAL, MULTIPLAYER;
@@ -93,7 +94,13 @@ public class Game {
         return (cb == null ? null : cb.getHeroes());
     }
     
-  
+    public List<Hero> getInfected(){
+        return (cb == null ? null : cb.getInfected());
+    }
+    
+    public boolean getFinalBattle() {
+    	return finalBattle;
+    }
 
     public Enemy firstEnemies(Integer i) {
         if (i == 1) {
@@ -144,6 +151,11 @@ public class Game {
         if(cb.getExit()) {
             next();
         }
+    }
+    
+    public void finalCombat(List<Hero> infected) {
+    	cb.setFinalCombat(infected);
+    	this.finalBattle = true;
     }
 
     public boolean action(CombatOption combatOption, int target,Item item) {

@@ -22,6 +22,10 @@ public class Story {
 	public String getIntro(){
 		return IntroLines;
 	}
+	
+	public List<Hero> getInfected(){
+		return infected;
+	}
 
 	public void addHeroes(List<Hero> hs){
 		heroes = new ArrayList<>(hs);
