@@ -31,7 +31,8 @@ public class CommandFactory {
             Hero currentHero,
             CombatOption option,
             int target,
-            Item item
+            Item item,
+            Command lastCommand
     ) {
         if (option == null) {
             return null;
@@ -43,6 +44,7 @@ public class CommandFactory {
             case USE_ITEM -> new UseItemCommand(combat, combatView, currentHero, item);
             case RUN -> new RunCommand(combat, combatView, currentHero);
             case STATS -> new StatsCommand(combat, combatView, currentHero);
+            case UNDO -> new UndoCommand(combat, combatView, lastCommand);
             default -> null;
         };
     }

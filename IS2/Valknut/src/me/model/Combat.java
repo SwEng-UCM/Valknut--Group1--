@@ -72,6 +72,10 @@ public class Combat implements Serializable {
     public void addItem(Item e) {
     	items.add(e);
     }
+    
+    public void rstEnemies() {
+    	rmvEnemies();
+    }
 
     private String rmvEnemies(){
         StringBuilder sb = new StringBuilder();

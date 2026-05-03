@@ -20,6 +20,7 @@ public class Game {
     private List<Hero> players;
     private Command lastUndoableCommand;
     private Combat cb;
+    private Command lastCommand;
 
     public enum GameMode{
         SOLO, LOCAL, MULTIPLAYER;
@@ -158,7 +159,9 @@ public class Game {
         cb.updateItems();
         Hero currentHero = getCurrentHero();
 
-        Command command = CommandFactory.createCommand(cb, cv, currentHero, combatOption, target, item);
+        Command command = CommandFactory.createCommand(cb, cv, currentHero, combatOption, target, item, lastCommand);
+        
+        lastCommand = command;
 
         if (command != null) {
             finishedAction = command.execute();
@@ -219,7 +222,8 @@ public class Game {
 
      public void next() {
     		System.out.println("caling next in Game");
-	 	st.next(cb);
+    		cb.rstEnemies();
+    		st.next(cb);
 	 
 	 }
 

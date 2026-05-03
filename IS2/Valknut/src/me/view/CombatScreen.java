@@ -62,6 +62,7 @@ public class CombatScreen extends JPanel{
     }
 
     public void setComponents(){
+    	this.removeAll();
         this.setLayout(new BorderLayout());
         
         enemyPanel = new JPanel();
@@ -179,10 +180,14 @@ public class CombatScreen extends JPanel{
         this.add(enemyPanel, BorderLayout.EAST);
         this.add(actionContainer, BorderLayout.PAGE_END);
         JButton next = new JButton("next");
-		next.addActionListener(ev -> {
-		game.next();
+			next.addActionListener(ev -> {
+				game.next();
 		});
 		this.add(next, BorderLayout.PAGE_START );
+		
+		if (enemies.size() == 0) {
+			game.next();
+		}
     }
     
     public void toogleAtAttack() {
