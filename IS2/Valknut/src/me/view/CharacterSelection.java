@@ -286,8 +286,7 @@ public class CharacterSelection extends JPanel {
             mortalBtn.setEnabled(false);
             mortalBtn.setBackground(Color.GREEN);
             }
-        default -> {
-            }
+        default -> {}
         }
 
         player++;

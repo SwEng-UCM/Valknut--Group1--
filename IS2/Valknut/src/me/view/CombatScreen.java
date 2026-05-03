@@ -11,20 +11,27 @@ import me.model.Game;
 import me.model.Hero;
 import me.model.items.Inventory;
 import me.model.items.Item;
+import me.socket.MultiplayerManager;
+import me.socket.Request;
 
 public class CombatScreen extends JPanel{
     private static CombatScreen instance;
-    private Controller _ctrl;
-    private Game game;
+    private final Controller ctrl;
+    private final Game game;
+    private MultiplayerManager mpm;
     private Image backGround;
     private CardLayout actionLayout;
     private List<JButton> enemy_buttons, command_buttons;
     private JPanel commandsPanel, heroPanel, enemyPanel, actionContainer;
     private JTextArea combatText;
+    private boolean toogleVariable = false;
 
     private CombatScreen(Controller ctrl, Game game){
-         _ctrl = ctrl;
-         this.game = game;
+        this.ctrl = ctrl;
+        this.game = game;
+        if(game.isMultiplayer()){
+            this.mpm = MultiplayerManager.getInstacne(ctrl,game);
+        }
         initGUI();
         //setComponents();
     }
@@ -74,9 +81,9 @@ public class CombatScreen extends JPanel{
                 if (e.isAlive()) {
                 	e.setEnemyNum(enemy_num);
                     JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
-                    enemyButton.setBorderPainted(false);
-                    enemyButton.setContentAreaFilled(false);
-                    enemyButton.setEnabled(false);
+                    enemyButton.setBorderPainted(toogleVariable);
+                    enemyButton.setContentAreaFilled(toogleVariable);
+                    enemyButton.setEnabled(toogleVariable);
                     enemy_buttons.add(enemyButton);
                     enemyButton.addActionListener(ev -> {
                     	attackEnemy(e);
@@ -119,7 +126,7 @@ public class CombatScreen extends JPanel{
         	actionButton.setPreferredSize(new Dimension(500, 100));
         	switch(c) {
                 case ATTACK -> actionButton.addActionListener(ev -> {
-                        attack();
+                        toogleAtAttack();
                     });
 
                 case DEFEND -> actionButton.addActionListener(ev -> {
@@ -178,31 +185,40 @@ public class CombatScreen extends JPanel{
 		this.add(next, BorderLayout.PAGE_START );
     }
     
-    private void attack() {
+    public void toogleAtAttack() {
+        toogleVariable = !toogleVariable;
     	for (int i = 0; i < enemy_buttons.size(); i++) {
-    		enemy_buttons.get(i).setEnabled(true);
+    		enemy_buttons.get(i).setEnabled(toogleVariable);
     	}
     	
     	for (int i = 0; i < command_buttons.size(); i++) {
-    		command_buttons.get(i).setEnabled(false);
+    		command_buttons.get(i).setEnabled(!toogleVariable);
     	}
     }
     
     private void attackEnemy(Enemy enemy) {
+        if(mpm != null){
+            int turn = game.getTurn();
+            int id = mpm.getUser().getId();
+            if(turn == id){
+                Request rq = new Request(Request.RequestType.COMBATOPTION, id);
+                rq.addParameter(CombatOption.ATTACK);
+                System.err.println("ADDED COMBAT OPTION --> " + CombatOption.ATTACK);
+                rq.addParameter(enemy.getEnemyNum());
+                System.err.println("ADDED ENEMY NUM --> " + enemy.getEnemyNum());
+                System.err.println("OBJECTS TO PASS TO DISPATCHER");
+                System.err.println(rq.getParameters()[0].toString());
+                System.err.println(rq.getParameters()[1].toString());
+                mpm.send(rq);
+            }
+            else 
+                return;
+        }
     	game.action(CombatOption.ATTACK, enemy.getEnemyNum(), null);
     	
-    	for (int i = 0; i < enemy_buttons.size(); i++) {
-    		enemy_buttons.get(i).setEnabled(false);
-    	}
+    	toogleAtAttack();
     	
-    	for (int i = 0; i < command_buttons.size(); i++) {
-    		command_buttons.get(i).setEnabled(true);
-    	}
-    	
-    	this.removeAll();
-    	this.revalidate();
-    	initGUI();
-    	setComponents();
+    	refresh();
     }
     
     private void useItem() {
@@ -214,7 +230,7 @@ public class CombatScreen extends JPanel{
     	itemsPanel.setOpaque(false);
     	itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.X_AXIS));
     	Inventory in = game.getHeroItems(); 
-    	if (in.getItems().size() == 0) {
+    	if (in.getItems().isEmpty()) {
     		System.out.println("No items to use");
     	}
     	for(Item i : in.getItems()){
@@ -238,6 +254,13 @@ public class CombatScreen extends JPanel{
 		});
 		itemsPanel.add(returnButton);
     	this.add(itemsPanel, BorderLayout.PAGE_END);
+    }
+
+    public void refresh(){
+        this.removeAll();
+    	this.revalidate();
+    	initGUI();
+    	setComponents();
     }
     
     private void showText(String text) {

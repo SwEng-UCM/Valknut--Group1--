@@ -10,7 +10,8 @@ public class Request implements Serializable{
 
     private RequestType rt;
     private int id;
-    Object[] parameter;
+    private Object[] parameter;
+    private int size = 0;
 
     public Request(RequestType rt, int id){
         this.id = id;
@@ -23,7 +24,10 @@ public class Request implements Serializable{
     }
 
     public void addParameter(Object obj){
-        parameter[0] = obj;
+        if(size < 10)
+            parameter[size++] = obj;
+        else
+            System.err.println("FULL CAPACITY OF THE PARAMETERS LIST");
     }
 
     public RequestType getRT(){

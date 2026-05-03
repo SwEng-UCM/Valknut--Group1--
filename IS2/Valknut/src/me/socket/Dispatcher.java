@@ -22,7 +22,7 @@ public class Dispatcher {
             case MESSAGE ->{dispatchMessage(rq, test);}
             case CLOSING ->{dispatchClose(rq, test);}
             case CHARACTERSELECT ->{dispatchCS(rq, test);}
-            case COMBATOPTION -> {dispatchCO(rq);}
+            case COMBATOPTION -> {dispatchCO(rq, test);}
             default ->{}
         }
     }
@@ -51,15 +51,17 @@ public class Dispatcher {
             test.chooseCharacter((HeroEnum) rq.getParameters()[0]);
     }
 
-    public void dispatchCO(Request rq){
-        CombatOption co = (CombatOption) rq.getParameters()[0];
+    public void dispatchCO(Request rq, MultiplayerManager test){
+        Object[] par = rq.getParameters();
+        CombatOption co = (CombatOption) par[0];
         switch (co) {
-            case ATTACK -> {game.action(co, (int) rq.getParameters()[1], null);}
+            case ATTACK -> {game.action(co, (int) par[1], null);}
             case DEFEND -> {game.action(co, 0, null);}
             case RUN -> {game.action(co, 0, null);}
-            case USE_ITEM -> {game.action(co, 0, (Item) rq.getParameters()[1]);}
+            case USE_ITEM -> {game.action(co, 0, (Item) par[1]);}
             case STATS -> {game.action(co, (int) 0, null);}
             default -> {}
         }
+        test.refreshCombatScreen();
     }
 }

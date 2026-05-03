@@ -87,7 +87,7 @@ public class AutonomousHero extends Hero {
 
         if(tarjet < 0) tarjet = 0;
         if(tarjet >= cmbt.getEnemies().size()) tarjet = cmbt.getEnemies().size() - 1;
-        System.err.println(tarjet);
+
         return tarjet;
     }
 

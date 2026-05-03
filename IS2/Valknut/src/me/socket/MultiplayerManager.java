@@ -5,11 +5,13 @@ import me.model.Game;
 import me.model.Hero;
 import me.model.HeroEnum;
 import me.view.CharacterSelection;
+import me.view.CombatScreen;
 
 public class MultiplayerManager extends JFrame{
 
     private static MultiplayerManager instance;
     private CharacterSelection characterSelection;
+    private CombatScreen combatScreen;
     private ChatScreen cs;
     private final Controller ctrl;
     private final Game game;
@@ -102,5 +104,10 @@ public class MultiplayerManager extends JFrame{
 
     public void startGame(){
         characterSelection.startGame();
+    }
+
+    public void refreshCombatScreen(){
+        combatScreen = CombatScreen.getInstance(null, null);
+        combatScreen.refresh();
     }
 }
