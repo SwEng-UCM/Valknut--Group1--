@@ -70,11 +70,13 @@ public class Combat implements Serializable {
     public void setFinalCombat() {
     	for(Hero h: infected) {
     		int i = 0;
-    		for (Hero h2: heroes) {
+    		Hero h2 = heroes.get(i);
+    		while(i < heroes.size()) {
     			if (h2 == h) {
     				this.heroes.remove(i);
     			}
     			i++;
+    			if (i < heroes.size()) h2 = heroes.get(i);
     		}
     	}
     	

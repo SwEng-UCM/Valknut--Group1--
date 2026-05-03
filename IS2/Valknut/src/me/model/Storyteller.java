@@ -114,14 +114,13 @@ import me.view.Story;
 
  		combats.add(combat3);
 
- 		// Obtain a number between [0 - 49].
  		int n = rand.nextInt(heroes.size());
  		game.setInfected(n);
  		
  		if (heroes.size() == 4) {
  			int y = rand.nextInt(4);
  			while (y == n) y = rand.nextInt(4);
- 			game.setInfected(n);
+ 			game.setInfected(y);
  		}
 
  		story.add(s.endThirdChapter());
