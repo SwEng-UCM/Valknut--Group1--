@@ -153,9 +153,13 @@ public class Game {
         }
     }
     
-    public void finalCombat(List<Hero> infected) {
-    	cb.setFinalCombat(infected);
+    public void finalCombat() {
+    	cb.setFinalCombat();
     	this.finalBattle = true;
+    }
+    
+    public void setInfected(int infected) {
+    	cb.setInfected(infected);
     }
 
     public boolean action(CombatOption combatOption, int target,Item item) {

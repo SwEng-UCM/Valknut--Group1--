@@ -63,10 +63,12 @@ public class Combat implements Serializable {
         turn = 1;
     }
     
-    public void setFinalCombat(List<Hero> infected) {
+    public void setInfected(int infectedHero) {
+    	infected.add(heroes.get(infectedHero));
+    }
+    
+    public void setFinalCombat() {
     	for(Hero h: infected) {
-    		this.infected.add(h);
-    		
     		int i = 0;
     		for (Hero h2: heroes) {
     			if (h2 == h) {

@@ -4,7 +4,9 @@ package me.model;
  import java.util.ArrayList;
  import java.util.List;
  import java.util.Queue;
- import me.view.Story;
+import java.util.Random;
+
+import me.view.Story;
 
  public class Storyteller {
 
@@ -54,6 +56,7 @@ package me.model;
  	private final String[] index = {"s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s"};
  	private Story s;
  	private int bookmark = 0;
+ 	private Random rand = new Random();
 	
  	public Storyteller(Game game) {
  		this.game = game;
@@ -111,6 +114,16 @@ package me.model;
 
  		combats.add(combat3);
 
+ 		// Obtain a number between [0 - 49].
+ 		int n = rand.nextInt(heroes.size());
+ 		game.setInfected(n);
+ 		
+ 		if (heroes.size() == 4) {
+ 			int y = rand.nextInt(4);
+ 			while (y == n) y = rand.nextInt(4);
+ 			game.setInfected(n);
+ 		}
+
  		story.add(s.endThirdChapter());
 
  		story.add(s.startFourthChapter());
@@ -147,7 +160,8 @@ package me.model;
  		}
  		
  		else if(story_or_combat == "fc") {
- 			game.finalCombat(s.getInfected());
+ 			game.finalCombat();
+ 			game.startNewCmb();
  		}
  		// else if (n == null) {
 			
