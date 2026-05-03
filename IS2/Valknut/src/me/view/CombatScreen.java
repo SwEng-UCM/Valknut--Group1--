@@ -72,6 +72,52 @@ public class CombatScreen extends JPanel{
         enemyPanel.setOpaque(false); // keep background visible
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
         
+        java.util.List<Hero> heroes = game.getHeroes();
+        
+        heroPanel = new JPanel();
+        heroPanel.setSize(new Dimension(500, 500));
+        heroPanel.setOpaque(false);
+        heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
+        
+        if (!game.getFinalBattle()) {
+	        if(heroes != null){
+	            for (Hero h : heroes) {
+	                if (h.isAlive() && !h.escaped()) {
+	                    JLabel heroLabel = new JLabel();
+	                    heroLabel.setIcon(h.getSprite(150, 150));
+	                    heroPanel.add(heroLabel);
+	                }
+	            }
+	        }
+        }
+        
+        else {
+        	if(heroes != null){
+        		if (game.getTurn() < heroes.size()) {
+        			for (Hero h : heroes) {
+    	                if (h.isAlive() && !h.escaped()) {
+    	                    JLabel heroLabel = new JLabel();
+    	                    heroLabel.setIcon(h.getSprite(150, 150));
+    	                    heroPanel.add(heroLabel);
+    	                }
+    	            }
+        		}
+        		
+        		else {
+		            for (Hero h : heroes) {
+		                if (h.isAlive() && !h.escaped()) {
+		                    JButton heroButton= new JButton();
+		                    heroButton.setIcon(h.getSprite(150, 150));
+		                    heroButton.addActionListener(ev -> {
+		                    	attackHero(h);
+		                    });
+		                    heroPanel.add(heroButton);
+		                }
+		            }
+        		}
+	        }
+        }
+        
         if (!game.getFinalBattle()) {
 	        enemies = game.getEnemies();
 	        String s = "New enemies (combat screen): " + enemies.size();
@@ -102,50 +148,28 @@ public class CombatScreen extends JPanel{
         
         else {
         	infected = game.getInfected();
-        	for (Hero h : infected) {
-                if (h.isAlive() && !h.escaped()) {
-                    JButton heroButton = new JButton();
-                    heroButton.setIcon(h.getSprite(150, 150));
-                    heroButton.addActionListener(ev -> {
-                    	attackHero(h);
-                    });
-                    enemyPanel.add(heroButton);
-                }
-            }
-        }
-        
-        heroPanel = new JPanel();
-        heroPanel.setSize(new Dimension(500, 500));
-        heroPanel.setOpaque(false);
-        heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
-        
-        java.util.List<Hero> heroes = game.getHeroes();
-        
-        if (!game.getFinalBattle()) {
-	        if(heroes != null){
-	            for (Hero h : heroes) {
+        	if (game.getTurn() >= heroes.size()) {
+    			for (Hero h : infected) {
 	                if (h.isAlive() && !h.escaped()) {
 	                    JLabel heroLabel = new JLabel();
 	                    heroLabel.setIcon(h.getSprite(150, 150));
-	                    heroPanel.add(heroLabel);
+	                    enemyPanel.add(heroLabel);
 	                }
 	            }
-	        }
-        }
-        
-        else {
-        	if(heroes != null){
-	            for (Hero h : heroes) {
+    		}
+    		
+    		else {
+	            for (Hero h : infected) {
 	                if (h.isAlive() && !h.escaped()) {
 	                    JButton heroButton= new JButton();
 	                    heroButton.setIcon(h.getSprite(150, 150));
 	                    heroButton.addActionListener(ev -> {
 	                    	attackHero(h);
 	                    });
-	                    heroPanel.add(heroButton);
+	                    enemyPanel.add(heroButton);
 	                }
 	            }
-	        }
+    		}
         }
 		
 		actionLayout = new CardLayout();
@@ -310,10 +334,11 @@ public class CombatScreen extends JPanel{
     
     private void attackHero(Hero h) {
     	if (toggleVariable) {
-    		
+    		game.attackHero(h);
+    		toggleAttack();
+    		refresh();
     	}
     }
-    
     
     
 }

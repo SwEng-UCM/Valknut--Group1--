@@ -134,9 +134,9 @@ public class Game {
         }
         
         else {
-        	if (cb.turn() < cb.getHeroes().size()) return cb.getHeroes().get(cb.turn());
+        	if (cb.turn() - 1 < cb.getHeroes().size()) return cb.getHeroes().get(cb.turn() - 1);
         	
-        	else if (cb.turn() - cb.getHeroes().size() < cb.getInfected().size()) return cb.getInfected().get(cb.turn());
+        	else if (cb.turn() - cb.getHeroes().size() - 1< cb.getInfected().size()) return cb.getInfected().get(cb.turn() - 1);
         }
         
         return null;
@@ -161,11 +161,11 @@ public class Game {
         }
     }
     
-    public void attackHero(Hero attacker, Hero defender) {
-    	cb.attackHero(attacker, defender);
+    public void attackHero(Hero defender) {
+    	cv.print(cb.attackHero(getCurrentHero(), defender));
     	cb.setTurn(cb.turn() + 1);
     	
-    	if (cb.turn() >= cb.getHeroes().size() + cb.getInfected().size()) cb.setTurn(0);
+    	if (cb.turn() >= cb.getHeroes().size() + cb.getInfected().size() + 1) cb.setTurn(0);
     }
     
     public void finalCombat() {

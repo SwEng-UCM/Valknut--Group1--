@@ -193,7 +193,7 @@ public class Combat implements Serializable {
         return sb.toString();
     }
     
-    public void attackHero(Hero attacker, Hero defender) {
+    public String attackHero(Hero attacker, Hero defender) {
     	StringBuilder sb = new StringBuilder();
         sb.append(Messages.NEW_LINE);
         
@@ -208,6 +208,8 @@ public class Combat implements Serializable {
         else{
             sb.append(attacker.name().toUpperCase()).append(Messages.ENEMY_MISS).append(Messages.NEW_LINE);
         }
+    	
+    	return sb.toString();
     }
 
     public void checkAutonomousTurn(){
