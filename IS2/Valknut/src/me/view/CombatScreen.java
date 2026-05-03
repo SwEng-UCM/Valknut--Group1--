@@ -93,7 +93,7 @@ public class CombatScreen extends JPanel{
         
         else {
         	if(heroes != null){
-        		if (game.getTurn() < heroes.size()) {
+        		if (game.getTurn() - 1 < heroes.size()) {
         			for (Hero h : heroes) {
     	                if (h.isAlive() && !h.escaped()) {
     	                    JLabel heroLabel = new JLabel();
@@ -108,6 +108,8 @@ public class CombatScreen extends JPanel{
 		                if (h.isAlive() && !h.escaped()) {
 		                    JButton heroButton= new JButton();
 		                    heroButton.setIcon(h.getSprite(150, 150));
+		                    heroButton.setBorderPainted(false);
+		                    heroButton.setContentAreaFilled(false);
 		                    heroButton.addActionListener(ev -> {
 		                    	attackHero(h);
 		                    });
@@ -148,7 +150,7 @@ public class CombatScreen extends JPanel{
         
         else {
         	infected = game.getInfected();
-        	if (game.getTurn() >= heroes.size()) {
+        	if (game.getTurn() - 1 >= heroes.size()) {
     			for (Hero h : infected) {
 	                if (h.isAlive() && !h.escaped()) {
 	                    JLabel heroLabel = new JLabel();
@@ -163,6 +165,8 @@ public class CombatScreen extends JPanel{
 	                if (h.isAlive() && !h.escaped()) {
 	                    JButton heroButton= new JButton();
 	                    heroButton.setIcon(h.getSprite(150, 150));
+	                    heroButton.setBorderPainted(false);
+	                    heroButton.setContentAreaFilled(false);
 	                    heroButton.addActionListener(ev -> {
 	                    	attackHero(h);
 	                    });
@@ -244,7 +248,7 @@ public class CombatScreen extends JPanel{
 		});
 		this.add(next, BorderLayout.PAGE_START );
 		
-		if (enemies.size() == 0) {
+		if (enemies.size() == 0 || heroes.size() == 0 && game.getFinalBattle() || infected.size() == 0) {
 			game.next();
 		}
     }
