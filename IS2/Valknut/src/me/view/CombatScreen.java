@@ -133,9 +133,9 @@ public class CombatScreen extends JPanel{
 	                if (e.isAlive()) {
 	                	e.setEnemyNum(enemy_num);
 	                    JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
-	                    enemyButton.setBorderPainted(toggleVariable);
-	                    enemyButton.setContentAreaFilled(toggleVariable);
-	                    enemyButton.setEnabled(toggleVariable);
+	                    enemyButton.setBorderPainted(false);
+	                    enemyButton.setContentAreaFilled(false);
+	                    enemyButton.setEnabled(false);
 	                    enemy_buttons.add(enemyButton);
 	                    enemyButton.addActionListener(ev -> {
 	                    	attackEnemy(e);
@@ -178,6 +178,7 @@ public class CombatScreen extends JPanel{
 		
 		actionLayout = new CardLayout();
 		actionContainer = new JPanel(actionLayout);
+		actionContainer.setOpaque(false);
         
         commandsPanel = new JPanel();
         commandsPanel.setSize(new Dimension(500, 500));
@@ -242,8 +243,10 @@ public class CombatScreen extends JPanel{
         this.add(heroPanel, BorderLayout.WEST);
         this.add(enemyPanel, BorderLayout.EAST);
         this.add(actionContainer, BorderLayout.PAGE_END);
+        
         JButton next = new JButton("next");
 			next.addActionListener(ev -> {
+				this.toggleVariable = false;
 				game.next();
 		});
 		this.add(next, BorderLayout.PAGE_START );
@@ -293,6 +296,7 @@ public class CombatScreen extends JPanel{
     	this.remove(commandsPanel);
     	this.revalidate();
     	this.repaint();
+    	
     	JPanel itemsPanel = new JPanel();
     	itemsPanel.setSize(new Dimension(500, 500));
     	itemsPanel.setOpaque(false);

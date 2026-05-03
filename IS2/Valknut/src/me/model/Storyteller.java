@@ -147,20 +147,25 @@ import me.view.Story;
  	}
 
  	public void next(Combat cb) {
- 		String story_or_combat = index[bookmark];
- 		bookmark++;
- 		if(story_or_combat == "s") {
- 			game.displayStory(story.removeFirst());
- 		}
-		
- 		else if(story_or_combat == "c") {
- 			game.setEnemies(combats.removeFirst());
- 			game.startNewCmb();
- 		}
  		
- 		else if(story_or_combat == "fc") {
- 			game.finalCombat();
- 			game.startNewCmb();
+ 		if (bookmark == index.length) game.end();
+	 		else {
+	 		String story_or_combat = index[bookmark];
+	 		bookmark++;
+	 		
+	 		if(story_or_combat == "s") {
+	 			game.displayStory(story.removeFirst());
+	 		}
+			
+	 		else if(story_or_combat == "c") {
+	 			game.setEnemies(combats.removeFirst());
+	 			game.startNewCmb();
+	 		}
+	 		
+	 		else if(story_or_combat == "fc") {
+	 			game.finalCombat();
+	 			game.startNewCmb();
+	 		}
  		}
  		// else if (n == null) {
 			

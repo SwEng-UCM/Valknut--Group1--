@@ -268,4 +268,8 @@ public class Game {
 		System.out.println("calling on combat ");
 	   	ctrl.onCombat();
 	}
+	
+	public void end() {
+		ctrl.exit();
+	}
 }
