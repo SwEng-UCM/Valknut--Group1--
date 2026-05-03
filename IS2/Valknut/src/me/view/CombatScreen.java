@@ -181,14 +181,14 @@ public class CombatScreen extends JPanel{
 		actionContainer.setOpaque(false);
         
         commandsPanel = new JPanel();
-        commandsPanel.setSize(new Dimension(500, 500));
+        commandsPanel.setSize(new Dimension(5000, 500));
         commandsPanel.setOpaque(false);
         commandsPanel.setLayout(new BoxLayout(commandsPanel, BoxLayout.X_AXIS));
         command_buttons = new ArrayList<>(CombatOption.values().length);
         
         for (CombatOption c: CombatOption.values()) {
         	JButton actionButton = new JButton(c.toString());
-        	actionButton.setPreferredSize(new Dimension(500, 100));
+        	actionButton.setPreferredSize(new Dimension(5000, 100));
         	switch(c) {
                 case ATTACK -> actionButton.addActionListener(ev -> {
                         toggleAttack();
@@ -225,7 +225,7 @@ public class CombatScreen extends JPanel{
                     });
         	}
         	
-        	if (!game.getFinalBattle() || game.getTurn() - 1 < heroes.size()) {
+        	if (!game.getFinalBattle() || (game.getTurn() - 1 < heroes.size() && c != CombatOption.RUN)) {
 	        	command_buttons.add(actionButton);
 	        	commandsPanel.add(actionButton);
         	}
