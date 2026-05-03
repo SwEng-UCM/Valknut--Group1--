@@ -25,6 +25,8 @@ public class CombatScreen extends JPanel{
     private JPanel commandsPanel, heroPanel, enemyPanel, actionContainer;
     private JTextArea combatText;
     private boolean toogleVariable = false;
+    private List<Enemy> enemies = new ArrayList<>();
+    private List<Hero> infected = new ArrayList<>();
 
     private CombatScreen(Controller ctrl, Game game){
         this.ctrl = ctrl;
@@ -69,33 +71,45 @@ public class CombatScreen extends JPanel{
         enemyPanel.setSize(new Dimension(500, 500));
         enemyPanel.setOpaque(false); // keep background visible
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
-
-        List<Enemy> enemies = game.getEnemies();
-        String s = "New enemies (combat screen): " + enemies.size();
-        for(Enemy e: enemies) {
-        	s = s +" "+e.name();
+        
+        if (!game.getFinalBattle()) {
+	        enemies = game.getEnemies();
+	        String s = "New enemies (combat screen): " + enemies.size();
+	        for(Enemy e: enemies) {
+	        	s = s +" "+e.name();
+	        }
+	        if(enemies != null){
+	            enemy_buttons = new ArrayList<>(enemies.size());
+	        int enemy_num = 1;
+	            for (Enemy e : enemies) {
+	                if (e.isAlive()) {
+	                	e.setEnemyNum(enemy_num);
+	                    JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
+	                    enemyButton.setBorderPainted(toogleVariable);
+	                    enemyButton.setContentAreaFilled(toogleVariable);
+	                    enemyButton.setEnabled(toogleVariable);
+	                    enemy_buttons.add(enemyButton);
+	                    enemyButton.addActionListener(ev -> {
+	                    	attackEnemy(e);
+	                    	showText("You attack!");
+	                    });
+	                    enemyPanel.add(enemyButton);
+	                    enemy_num++;
+	                }
+	            }
+	        }
         }
-        if(enemies != null){
-            enemy_buttons = new ArrayList<>(enemies.size());
-        int enemy_num = 1;
-            for (Enemy e : enemies) {
-                if (e.isAlive()) {
-                	e.setEnemyNum(enemy_num);
-                    JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
-                    enemyButton.setBorderPainted(toogleVariable);
-                    enemyButton.setContentAreaFilled(toogleVariable);
-                    enemyButton.setEnabled(toogleVariable);
-                    enemy_buttons.add(enemyButton);
-                    enemyButton.addActionListener(ev -> {
-                    	attackEnemy(e);
-                    	showText("You attack!");
-                    });
-                    enemyPanel.add(enemyButton);
-                    enemy_num++;
+        
+        else {
+        	infected = game.getInfected();
+        	for (Hero h : infected) {
+                if (h.isAlive() && !h.escaped()) {
+                    JLabel heroLabel = new JLabel();
+                    heroLabel.setIcon(h.getSprite(150, 150));
+                    enemyPanel.add(heroLabel);
                 }
             }
         }
-
         
         heroPanel = new JPanel();
         heroPanel.setSize(new Dimension(500, 500));
@@ -272,5 +286,7 @@ public class CombatScreen extends JPanel{
         combatText.setText(text);
         actionLayout.show(actionContainer, "TEXT");
     }
+    
+    
     
 }
