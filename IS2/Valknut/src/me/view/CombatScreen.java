@@ -24,7 +24,7 @@ public class CombatScreen extends JPanel{
     private List<JButton> enemy_buttons, command_buttons;
     private JPanel commandsPanel, heroPanel, enemyPanel, actionContainer;
     private JTextArea combatText;
-    private boolean toogleVariable = false;
+    private boolean toggleVariable = false;
     private List<Enemy> enemies = new ArrayList<>();
     private List<Hero> infected = new ArrayList<>();
 
@@ -85,9 +85,9 @@ public class CombatScreen extends JPanel{
 	                if (e.isAlive()) {
 	                	e.setEnemyNum(enemy_num);
 	                    JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
-	                    enemyButton.setBorderPainted(toogleVariable);
-	                    enemyButton.setContentAreaFilled(toogleVariable);
-	                    enemyButton.setEnabled(toogleVariable);
+	                    enemyButton.setBorderPainted(toggleVariable);
+	                    enemyButton.setContentAreaFilled(toggleVariable);
+	                    enemyButton.setEnabled(toggleVariable);
 	                    enemy_buttons.add(enemyButton);
 	                    enemyButton.addActionListener(ev -> {
 	                    	attackEnemy(e);
@@ -104,9 +104,12 @@ public class CombatScreen extends JPanel{
         	infected = game.getInfected();
         	for (Hero h : infected) {
                 if (h.isAlive() && !h.escaped()) {
-                    JLabel heroLabel = new JLabel();
-                    heroLabel.setIcon(h.getSprite(150, 150));
-                    enemyPanel.add(heroLabel);
+                    JButton heroButton = new JButton();
+                    heroButton.setIcon(h.getSprite(150, 150));
+                    heroButton.addActionListener(ev -> {
+                    	attackHero(h);
+                    });
+                    enemyPanel.add(heroButton);
                 }
             }
         }
@@ -115,16 +118,34 @@ public class CombatScreen extends JPanel{
         heroPanel.setSize(new Dimension(500, 500));
         heroPanel.setOpaque(false);
         heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
-
+        
         java.util.List<Hero> heroes = game.getHeroes();
-        if(heroes != null){
-            for (Hero h : heroes) {
-                if (h.isAlive() && !h.escaped()) {
-                    JLabel heroLabel = new JLabel();
-                    heroLabel.setIcon(h.getSprite(150, 150));
-                    heroPanel.add(heroLabel);
-                }
-            }
+        
+        if (!game.getFinalBattle()) {
+	        if(heroes != null){
+	            for (Hero h : heroes) {
+	                if (h.isAlive() && !h.escaped()) {
+	                    JLabel heroLabel = new JLabel();
+	                    heroLabel.setIcon(h.getSprite(150, 150));
+	                    heroPanel.add(heroLabel);
+	                }
+	            }
+	        }
+        }
+        
+        else {
+        	if(heroes != null){
+	            for (Hero h : heroes) {
+	                if (h.isAlive() && !h.escaped()) {
+	                    JButton heroButton= new JButton();
+	                    heroButton.setIcon(h.getSprite(150, 150));
+	                    heroButton.addActionListener(ev -> {
+	                    	attackHero(h);
+	                    });
+	                    heroPanel.add(heroButton);
+	                }
+	            }
+	        }
         }
 		
 		actionLayout = new CardLayout();
@@ -141,7 +162,7 @@ public class CombatScreen extends JPanel{
         	actionButton.setPreferredSize(new Dimension(500, 100));
         	switch(c) {
                 case ATTACK -> actionButton.addActionListener(ev -> {
-                        toogleAtAttack();
+                        toggleAttack();
                     });
 
                 case DEFEND -> actionButton.addActionListener(ev -> {
@@ -204,14 +225,14 @@ public class CombatScreen extends JPanel{
 		}
     }
     
-    public void toogleAtAttack() {
-        toogleVariable = !toogleVariable;
+    public void toggleAttack() {
+        toggleVariable = !toggleVariable;
     	for (int i = 0; i < enemy_buttons.size(); i++) {
-    		enemy_buttons.get(i).setEnabled(toogleVariable);
+    		enemy_buttons.get(i).setEnabled(toggleVariable);
     	}
     	
     	for (int i = 0; i < command_buttons.size(); i++) {
-    		command_buttons.get(i).setEnabled(!toogleVariable);
+    		command_buttons.get(i).setEnabled(!toggleVariable);
     	}
     }
     
@@ -235,7 +256,7 @@ public class CombatScreen extends JPanel{
         }
     	game.action(CombatOption.ATTACK, enemy.getEnemyNum(), null);
     	
-    	toogleAtAttack();
+    	toggleAttack();
     	
     	refresh();
     }
@@ -285,6 +306,12 @@ public class CombatScreen extends JPanel{
     private void showText(String text) {
         combatText.setText(text);
         actionLayout.show(actionContainer, "TEXT");
+    }
+    
+    private void attackHero(Hero h) {
+    	if (toggleVariable) {
+    		
+    	}
     }
     
     

@@ -114,21 +114,29 @@ public class Game {
         if (cb == null || cb.getHeroes().isEmpty()) {
             return null;
         }
-
-        if (cb.turn() == 1 && cb.getHeroes().size() >= 1) {
-            return cb.getHeroes().get(0);
-        }
-
-        if (cb.turn() == 2 && cb.getHeroes().size() >= 2) {
-            return cb.getHeroes().get(1);
-        }
-
-        if (cb.turn() == 3 && cb.getHeroes().size() >= 3) {
-            return cb.getHeroes().get(2);
+        
+        if (!finalBattle) {
+	        if (cb.turn() == 1 && cb.getHeroes().size() >= 1) {
+	            return cb.getHeroes().get(0);
+	        }
+	
+	        if (cb.turn() == 2 && cb.getHeroes().size() >= 2) {
+	            return cb.getHeroes().get(1);
+	        }
+	
+	        if (cb.turn() == 3 && cb.getHeroes().size() >= 3) {
+	            return cb.getHeroes().get(2);
+	        }
+	        
+	        if (cb.turn() == 4 && cb.getHeroes().size() >= 4) {
+	            return cb.getHeroes().get(3);
+	        }
         }
         
-        if (cb.turn() == 4 && cb.getHeroes().size() >= 4) {
-            return cb.getHeroes().get(3);
+        else {
+        	if (cb.turn() < cb.getHeroes().size()) return cb.getHeroes().get(cb.turn());
+        	
+        	else if (cb.turn() - cb.getHeroes().size() < cb.getInfected().size()) return cb.getInfected().get(cb.turn());
         }
         
         return null;
@@ -151,6 +159,13 @@ public class Game {
         if(cb.getExit()) {
             next();
         }
+    }
+    
+    public void attackHero(Hero attacker, Hero defender) {
+    	cb.attackHero(attacker, defender);
+    	cb.setTurn(cb.turn() + 1);
+    	
+    	if (cb.turn() >= cb.getHeroes().size() + cb.getInfected().size()) cb.setTurn(0);
     }
     
     public void finalCombat() {
@@ -192,8 +207,10 @@ public class Game {
         }
 
         cb.checkAutonomousTurn();
-
-        executeEnemyTurn();
+        
+        if (!finalBattle) executeEnemyTurn();
+        
+        else if (cb.turn() >= cb.getHeroes().size() + cb.getInfected().size()) cb.setTurn(0);
         
         return finishedAction;
     }

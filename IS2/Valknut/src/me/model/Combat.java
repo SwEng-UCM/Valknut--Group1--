@@ -192,6 +192,23 @@ public class Combat implements Serializable {
 
         return sb.toString();
     }
+    
+    public void attackHero(Hero attacker, Hero defender) {
+    	StringBuilder sb = new StringBuilder();
+        sb.append(Messages.NEW_LINE);
+        
+    	if(attacker != null && defender != null){
+            sb.append(attacker.name().toUpperCase()).append(" attacks ").append(defender.name().toUpperCase()).append(Messages.NEW_LINE);
+            int damage;
+            if(defender.isDefending()){damage = 10;}else{damage = 20;}
+            sb.append(attacker.attack(defender, attacker.getMainElement(), damage)).append(Messages.NEW_LINE);
+            if(!defender.isAlive())
+                heroes.remove(defender);
+        }
+        else{
+            sb.append(attacker.name().toUpperCase()).append(Messages.ENEMY_MISS).append(Messages.NEW_LINE);
+        }
+    }
 
     public void checkAutonomousTurn(){
         if(turn == 2){
