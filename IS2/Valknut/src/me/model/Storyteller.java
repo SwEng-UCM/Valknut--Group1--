@@ -51,7 +51,7 @@ package me.model;
  	private List<Hero> heroes = new ArrayList<>();
  	private List<String> story;
  	private List<List<Enemy>> combats;
- 	private final String[] index = {"s", "s", "c", "s", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s"};
+ 	private final String[] index = {"s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s"};
  	private Story s;
  	private int bookmark = 0;
 	
@@ -97,8 +97,6 @@ package me.model;
 		story.add(s.startFirstChapter());
 		
 		combats.add(combat1);
-
- 		story.add(s.middleFirstChapter());
 
  		story.add(s.startSecondChapter());
 

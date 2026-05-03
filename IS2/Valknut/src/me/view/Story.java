@@ -87,10 +87,6 @@ public class Story {
 		return sb.toString();
 	}
 	
-	public static String middleFirstChapter() {		
-		return Messages.CHAPTER_ONE_MIDDLE;
-	}
-	
 	public static String endFirstChapter() {
 		return Messages.CHAPTER_ONE_END;
 	}
