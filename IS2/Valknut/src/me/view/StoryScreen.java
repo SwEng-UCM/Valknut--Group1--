@@ -16,7 +16,7 @@ import me.model.Game;
 public class StoryScreen extends JPanel {
 	
 	private JButton nextButton;
-	private String text = "I am the starting text";
+	private String text = "";
 	private final Controller ctrl;
  	private final Game game;
  	private static StoryScreen instance;
