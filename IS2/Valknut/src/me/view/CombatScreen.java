@@ -24,6 +24,7 @@ public class CombatScreen extends JPanel{
     private List<JButton> enemy_buttons, command_buttons;
     private JPanel commandsPanel, heroPanel, enemyPanel, actionContainer;
     private JTextArea combatText;
+    private String textLog;
     private boolean toggleVariable = false;
     private List<Enemy> enemies = new ArrayList<>();
     private List<Hero> infected = new ArrayList<>();
@@ -195,30 +196,32 @@ public class CombatScreen extends JPanel{
 
                 case DEFEND -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
-                    	initGUI();
-                    	setComponents();
-                    	this.revalidate();
-                    	this.repaint();
-                    	showText(game.consumeCombatLog());
+                        textLog = game.consumeCombatLog();
+                        refresh();
+//                    	initGUI();
+//                    	setComponents();
+//                    	this.revalidate();
+//                    	this.repaint();
                     });
 
                 case USE_ITEM -> actionButton.addActionListener(ev -> {
                         useItem();
-                        showText(game.consumeCombatLog());
                     });
 
                 case RUN -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
-                    	initGUI();
-                    	setComponents();
-                    	this.revalidate();
-                    	this.repaint();
-                    	showText(game.consumeCombatLog());
+                        textLog = game.consumeCombatLog();
+                        refresh();
+//                    	initGUI();
+//                    	setComponents();
+//                    	this.revalidate();
+//                    	this.repaint();
                     });
 
                 case STATS -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
-                        showText(game.consumeCombatLog());
+                        textLog = game.consumeCombatLog();
+                        refresh();
                     });
                     
                 case UNDO -> actionButton.addActionListener(ev -> {
@@ -267,6 +270,11 @@ public class CombatScreen extends JPanel{
 		if (enemies.size() == 0 || heroes.size() == 0 && game.getFinalBattle() || infected.size() == 0 && game.getFinalBattle()) {
 			game.next();
 		}
+		
+		if (textLog != null && !textLog.isEmpty()) {
+		    showText(textLog);
+		    textLog = "";
+		}
     }
     
     public void toggleAttack() {
@@ -302,9 +310,9 @@ public class CombatScreen extends JPanel{
     	
     	toggleAttack();
     	
-    	showText(game.consumeCombatLog());
+    	textLog = game.consumeCombatLog();
     	
-    	//refresh();
+    	refresh();
     }
     
     private void useItem() {
@@ -325,6 +333,7 @@ public class CombatScreen extends JPanel{
     		itemChoiceButton.setPreferredSize(new Dimension(1000, 100));
     		itemChoiceButton.addActionListener(ev -> {
     			game.action(CombatOption.USE_ITEM, 1, i);
+    			textLog = game.consumeCombatLog();
     			this.remove(itemsPanel);
     			initGUI();
     			setComponents();
