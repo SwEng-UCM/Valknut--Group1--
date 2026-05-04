@@ -1,8 +1,10 @@
 package me.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -57,7 +59,6 @@ public class StoryScreen extends JPanel {
  		
  		 this.nextButton = new JButton("Next");
  		 this.nextButton.setToolTipText("Next");
- 		 //this.nextButton.setIcon(new ImageIcon("resources/images/buttons/menuButton.png"));
  		 this.nextButton.addActionListener((e) -> handleNext());
  		 JPanel controls = new JPanel();
  		 controls.setOpaque(false);
@@ -87,14 +88,19 @@ public class StoryScreen extends JPanel {
  	}
  	
  	public void setText(String t) {
+ 		Font f = new Font(null, Font.PLAIN, 15);
  		storyPanel.removeAll();
  		text = t;
  		text = Messages.startFormat + text + Messages.endFormat;
  		story = new JLabel(text);
+ 		story.setFont(f);
  		story.repaint();
  		storyPanel.setPreferredSize(new Dimension(650, 10000));
  		storyPanel.add(story);
+ 		storyPanel.setBackground(new Color(222,111, 111));
+ 		
  		this.add(storyPanel, BorderLayout.CENTER);
+ 		
  		
  	}
  	private void handleNext() {
