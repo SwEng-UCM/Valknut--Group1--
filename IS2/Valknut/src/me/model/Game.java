@@ -227,8 +227,6 @@ public class Game {
         cb.updateItems();
         Hero currentHero = getCurrentHero();
 
-        System.err.println("It's attacking hero " + currentHero.name().toUpperCase());
-
         Command command = CommandFactory.createCommand(cb, cv, currentHero, combatOption, target, item, lastCommand);
         
         lastCommand = command;
@@ -244,13 +242,11 @@ public class Game {
             }
         }
 
-        cb.checkAutonomousTurn();
+        combatLog.append(cb.checkAutonomousTurn());
         
         if (!finalBattle) executeEnemyTurn();
         
         else if (cb.turn() >= cb.getHeroes().size() + cb.getInfected().size()) cb.setTurn(1);
-        
-        System.err.println("TURN UPDATED TO -> " + cb.turn());
         
         return finishedAction;
     }

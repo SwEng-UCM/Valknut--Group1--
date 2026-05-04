@@ -69,7 +69,6 @@ public abstract class Character implements Serializable {
     }
     
     public ImageIcon getSprite(int width, int height) {
-    	System.err.println(sprite);
     	if (sprite == null && spritePath != null) {
     		setSprite(spritePath);
     	}

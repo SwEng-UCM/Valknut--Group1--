@@ -130,7 +130,7 @@ public class CombatScreen extends JPanel{
 	            for (Enemy e : enemies) {
 	                if (e.isAlive()) {
 	                	e.setEnemyNum(enemy_num);
-	                    JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
+	                    JButton enemyButton = new JButton(e.getSprite(150, 150));
 	                    enemyButton.setBorderPainted(false);
 	                    enemyButton.setContentAreaFilled(false);
 	                    enemyButton.setEnabled(false);
@@ -199,6 +199,7 @@ public class CombatScreen extends JPanel{
 						return;
 					ctrl.action(c, 1, null);
 					textLog = ctrl.consumeCombatLog();
+					showText(textLog);
 					refresh();
 				});
 
@@ -206,6 +207,8 @@ public class CombatScreen extends JPanel{
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
 					useItem();
+					textLog = ctrl.consumeCombatLog();
+					showText(textLog);
 				});
 
                 case RUN -> actionButton.addActionListener(ev -> {
@@ -213,14 +216,15 @@ public class CombatScreen extends JPanel{
 						return;
 					ctrl.action(c, 1, null);
 					textLog = ctrl.consumeCombatLog();
+					showText(textLog);
 					refresh();
 				});
 
                 case STATS -> actionButton.addActionListener(ev -> {
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
-					showText(ctrl.showStats());
 					textLog = ctrl.consumeCombatLog();
+					showText(textLog);
 					refresh();
                 });
                     
@@ -402,30 +406,28 @@ public class CombatScreen extends JPanel{
     public void refresh() {
 		SwingUtilities.invokeLater(() -> {
 
-			List<Enemy> temporal = ctrl.getEnemies();
-			if(temporal != null && !temporal.isEmpty() && temporal.size() != enemies.size()){
-				enemyPanel.removeAll();
-				enemies = temporal;
-				enemy_buttons = new ArrayList<>(enemies.size());
-				int enemy_num = 1;
-				for (Enemy e : enemies) {
-					if (e.isAlive()) {
-						e.setEnemyNum(enemy_num);
-						JButton enemyButton = new JButton(e.getSprite(enemyPanel.getWidth()/enemies.size(), enemyPanel.getHeight()/enemies.size()));
-						enemyButton.setBorderPainted(false);
-						enemyButton.setContentAreaFilled(false);
-						enemyButton.setEnabled(false);
-						enemy_buttons.add(enemyButton);
-						enemyButton.addActionListener(ev -> {
-							attackEnemy(e);
-						});
-						enemyPanel.add(enemyButton);
-						enemy_num++;
-					}
-					enemyPanel.revalidate();
-					enemyPanel.repaint();
+			enemyPanel.removeAll();
+			enemy_buttons = new ArrayList<>(enemies.size());
+			int enemy_num = 1;
+			for (Enemy e : enemies) {
+				if (e.isAlive()) {
+					e.setEnemyNum(enemy_num);
+					JButton enemyButton = new JButton(e.getSprite(150, 150));
+					enemyButton.setBorderPainted(false);
+					enemyButton.setContentAreaFilled(false);
+					enemyButton.setEnabled(false);
+					enemy_buttons.add(enemyButton);
+					enemyButton.addActionListener(ev -> {
+						attackEnemy(e);
+					});
+					enemyPanel.add(enemyButton);
+					enemy_num++;
 				}
+				
 			}
+			enemyPanel.revalidate();
+			enemyPanel.repaint();
+		
 
 			heroPanel.removeAll();
 			for (Hero h : heroes) {
@@ -443,6 +445,7 @@ public class CombatScreen extends JPanel{
 			heroPanel.revalidate();
 			heroPanel.repaint();
 
+			// setComponents();
     	});
 	}
     
