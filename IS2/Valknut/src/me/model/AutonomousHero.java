@@ -16,16 +16,19 @@ public class AutonomousHero extends Hero {
     }
 
     @Override
-    public void does(Request rq){ //Don't use the request but needed for overriding
+    public String does(Request rq){ //Don't use the request but needed for overriding
+        StringBuilder sb = new StringBuilder();
         System.err.println(combatState);
         switch (combatState) {
-            case HARMED -> doHarmed();
-            case LEADER -> System.out.println(cmbt.attack(doLeader()));
-            case FOLLOWER -> System.out.println(cmbt.attack(doFollower()));
-            case DEFENSIVE -> {doDefensive(); cmbt.defend();}
-            case SCARED -> {doScared(); cmbt.run();}
-            default -> cmbt.attack(doLeader());
+            case HARMED ->{doHarmed(); sb.append(name().toUpperCase()).append(" heals theirself");}
+            case LEADER -> sb.append(cmbt.attack(doLeader()));
+            case FOLLOWER -> sb.append(cmbt.attack(doFollower()));
+            case DEFENSIVE -> {doDefensive(); sb.append(cmbt.defend());}
+            case SCARED -> {doScared(); sb.append(cmbt.run());}
+            default -> sb.append(cmbt.attack(doLeader()));
         }
+
+        return sb.toString();
     }
 
     public void doHarmed(){

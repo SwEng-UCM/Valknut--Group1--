@@ -96,8 +96,8 @@ public class Hero extends Character implements Player {
     }
 
     @Override
-    public void does(Request rq){
-        
+    public String does(Request rq){
+        return null;
     }
 
     public boolean addItem(Item i){

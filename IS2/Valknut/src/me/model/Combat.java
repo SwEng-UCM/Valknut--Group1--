@@ -171,7 +171,8 @@ public class Combat implements Serializable {
             sb.append(h.name().toUpperCase()).append(" ATTACKS").append(Messages.NEW_LINE);
             sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20));
             lastTarjet = i - 1;
-            System.err.println(lastTarjet);
+            if(!enemies.get(lastTarjet).isAlive())
+                enemies.remove(lastTarjet);
         }
         else{
             Enemy e = enemies.get(turn - (heroes.size() + 1));
@@ -214,14 +215,16 @@ public class Combat implements Serializable {
     	return sb.toString();
     }
 
-    public void checkAutonomousTurn(){
+    public String checkAutonomousTurn(){
+        StringBuilder sb = new StringBuilder();
         if(turn == 2){
             Hero h = heroes.get(1);
             if(h.isAutonomous()) {
-                h.does(null);
+                sb.append(h.does(null)).append(Messages.NEW_LINE);
                 turn++;
             }
         }
+        return sb.toString();
     }
 
     public String showStats(Character c){

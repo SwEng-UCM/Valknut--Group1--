@@ -350,32 +350,17 @@ public class CombatScreen extends JPanel{
             if(turn == id){
                 Request rq = new Request(Request.RequestType.COMBATOPTION, id);
                 rq.addParameter(CombatOption.ATTACK);
-                System.err.println("ADDED COMBAT OPTION --> " + CombatOption.ATTACK);
                 rq.addParameter(enemy.getEnemyNum());
-                System.err.println("ADDED ENEMY NUM --> " + enemy.getEnemyNum());
-                System.err.println("OBJECTS TO PASS TO DISPATCHER");
-                System.err.println(rq.getParameters()[0].toString());
-                System.err.println(rq.getParameters()[1].toString());
                 mpm.send(rq);
-            }
-            else{
-				ViewUtils.showErrorMsg("You can not perform actions right now.");
-				return;
 			}
-                
         }
-
 		toggleAttack();
-		
 		attackAction(enemy.getEnemyNum());    	
     }
 
 	public void attackAction(int tarjet){
 		ctrl.action(CombatOption.ATTACK, tarjet, null);
-    	System.err.println("Time for textLog display");
     	textLog = ctrl.consumeCombatLog();
-    	System.err.println("So textLog is: " + textLog);
-		System.err.println("Should display TextLog");
 		showText(textLog);
 	}
     
@@ -471,8 +456,6 @@ public class CombatScreen extends JPanel{
     		ctrl.attackHero(h);
     		toggleAttack();
     		refresh();
-    		this.repaint();
-    		this.revalidate();
     	}
     }
     
