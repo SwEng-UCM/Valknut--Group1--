@@ -1,14 +1,18 @@
 package me.model;
 
+ import java.io.Serializable;
  import java.util.ArrayDeque;
  import java.util.ArrayList;
  import java.util.List;
  import java.util.Queue;
 import java.util.Random;
 
+import me.model.save.SaveGameData;
 import me.view.Story;
 
- public class Storyteller {
+ public class Storyteller implements Serializable {
+
+ 	private static final long serialVersionUID = 1L;
 
  	//*Players select characters
 
@@ -43,7 +47,7 @@ import me.view.Story;
 	
 // 	//Story.chapterFinal()
 	
- 	private Game game;
+ 	private transient Game game;
  	private final List<Enemy> combat1 = new ArrayList<>();
  	private final List<Enemy> combat2= new ArrayList<>();
  	private final List<Enemy> combat3= new ArrayList<>();
@@ -54,7 +58,7 @@ import me.view.Story;
  	private List<String> story;
  	private List<List<Enemy>> combats;
  	private final String[] index = {"s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s"};
- 	private Story s;
+ 	private transient Story s;
  	private int bookmark = 0;
  	private Random rand = new Random();
 	
@@ -63,6 +67,46 @@ import me.view.Story;
  		s = new Story();
 		
   	}
+
+ 	public void restore(SaveGameData data, Game game) {
+ 		Storyteller restored = data.getStoryteller();
+ 		if (restored == null) {
+ 			return;
+ 		}
+
+ 		this.game = game;
+ 		this.s = new Story();
+
+ 		copyEnemies(combat1, restored.combat1);
+ 		copyEnemies(combat2, restored.combat2);
+ 		copyEnemies(combat3, restored.combat3);
+ 		copyEnemies(combat4, restored.combat4);
+
+ 		infected = new ArrayList<>(restored.infected);
+ 		healthy = new ArrayList<>(restored.healthy);
+ 		heroes = new ArrayList<>(restored.heroes);
+ 		story = restored.story == null ? null : new ArrayList<>(restored.story);
+ 		combats = copyCombatList(restored.combats);
+ 		bookmark = restored.bookmark;
+ 		rand = restored.rand == null ? new Random() : restored.rand;
+ 	}
+
+ 	private void copyEnemies(List<Enemy> target, List<Enemy> source) {
+ 		target.clear();
+ 		target.addAll(source);
+ 	}
+
+ 	private List<List<Enemy>> copyCombatList(List<List<Enemy>> source) {
+ 		if (source == null) {
+ 			return null;
+ 		}
+
+ 		List<List<Enemy>> copy = new ArrayList<>();
+ 		for (List<Enemy> combat : source) {
+ 			copy.add(combat == null ? null : new ArrayList<>(combat));
+ 		}
+ 		return copy;
+ 	}
  	
  	public void writeStory(List<Hero> heroes) {
  		this.heroes = heroes;

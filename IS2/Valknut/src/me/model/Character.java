@@ -23,7 +23,8 @@ public abstract class Character implements Serializable {
     protected int max_life;
     private boolean escaped;
     private boolean defend;
-    private BufferedImage sprite;
+    private transient BufferedImage sprite;
+    private String spritePath;
 
     public Character(String name, int life, int max_life) {
         this.name = name;
@@ -52,6 +53,9 @@ public abstract class Character implements Serializable {
     }
     
     public ImageIcon getSprite(int width, int height) {
+    	if (sprite == null && spritePath != null) {
+    		setSprite(spritePath);
+    	}
     	Image dimg = this.sprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     	
     	ImageIcon imageIcon = new ImageIcon(dimg);
@@ -60,6 +64,7 @@ public abstract class Character implements Serializable {
     }
     
     public void setSprite(String img) {
+    	this.spritePath = img;
     	try {
     		this.sprite = ImageIO.read(new File(img));
     	} catch (IOException e) {

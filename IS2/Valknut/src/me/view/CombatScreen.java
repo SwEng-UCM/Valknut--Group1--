@@ -260,12 +260,35 @@ public class CombatScreen extends JPanel{
         this.add(enemyPanel, BorderLayout.EAST);
         this.add(actionContainer, BorderLayout.PAGE_END);
         
-        JButton next = new JButton("next");
-			next.addActionListener(ev -> {
-				this.toggleVariable = false;
-				game.next();
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        topPanel.setOpaque(false);
+
+        JButton next = new JButton("Next");
+		next.addActionListener(ev -> {
+			this.toggleVariable = false;
+			game.next();
 		});
-		this.add(next, BorderLayout.PAGE_START );
+        topPanel.add(next);
+
+        JButton save = new JButton("Save");
+        save.addActionListener(ev -> {
+            game.saveGame();
+            JOptionPane.showMessageDialog(this, "Game saved.");
+        });
+        topPanel.add(save);
+
+        JButton load = new JButton("Load");
+        load.addActionListener(ev -> {
+            game.loadGame();
+            JOptionPane.showMessageDialog(this, "Game loaded.");
+        });
+        topPanel.add(load);
+
+        JButton exit = new JButton("Exit");
+        exit.addActionListener(ev -> ctrl.exit());
+        topPanel.add(exit);
+
+		this.add(topPanel, BorderLayout.PAGE_START);
 		
 		if (enemies.size() == 0 || heroes.size() == 0 && game.getFinalBattle() || infected.size() == 0 && game.getFinalBattle()) {
 			game.next();

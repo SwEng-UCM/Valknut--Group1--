@@ -72,6 +72,14 @@ public class Controller {
     	game.next();
         //controlPanel.onCombat(game);
     }
+
+    public void saveGame() {
+        game.saveGame();
+    }
+
+    public void loadGame() {
+        game.loadGame();
+    }
     
     public void onStory(String story) {
     	controlPanel.onStory(game, story);

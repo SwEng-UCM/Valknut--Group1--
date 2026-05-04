@@ -2,6 +2,7 @@ package me.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -64,7 +65,29 @@ public class StoryScreen extends JPanel {
  		 this.nextButton.setToolTipText("Next");
  		 //this.nextButton.setIcon(new ImageIcon("resources/images/buttons/menuButton.png"));
  		 this.nextButton.addActionListener((e) -> handleNext());
- 		 mainPanel.add(nextButton, BorderLayout.PAGE_END);
+ 		 JPanel controls = new JPanel(new FlowLayout(FlowLayout.CENTER));
+ 		 controls.setOpaque(false);
+ 		 controls.add(nextButton);
+
+ 		 JButton saveButton = new JButton("Save");
+ 		 saveButton.addActionListener(e -> {
+ 			 game.saveGame();
+ 			 javax.swing.JOptionPane.showMessageDialog(this, "Game saved.");
+ 		 });
+ 		 controls.add(saveButton);
+
+ 		 JButton loadButton = new JButton("Load");
+ 		 loadButton.addActionListener(e -> {
+ 			 game.loadGame();
+ 			 javax.swing.JOptionPane.showMessageDialog(this, "Game loaded.");
+ 		 });
+ 		 controls.add(loadButton);
+
+ 		 JButton exitButton = new JButton("Exit");
+ 		 exitButton.addActionListener(e -> ctrl.exit());
+ 		 controls.add(exitButton);
+
+ 		 mainPanel.add(controls, BorderLayout.PAGE_END);
 //		
  	}
  	
@@ -78,9 +101,6 @@ public class StoryScreen extends JPanel {
 // 		JPanel aux = new JPanel();
 // 		aux.setPreferredSize(new Dimension(2, 2));
 // 		this.add(aux);
- 		nextButton.setPreferredSize(new Dimension(10, 10));
- 		this.add(nextButton);
-
  		//repaint();
  		
  	}
