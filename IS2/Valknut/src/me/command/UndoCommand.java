@@ -16,7 +16,7 @@ public class UndoCommand implements Command{
 	}
 
 	@Override
-	public boolean execute() {
+	public boolean execute(StringBuilder sb) {
 		// TODO Auto-generated method stub
 		return false;
 	}

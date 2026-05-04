@@ -25,7 +25,7 @@ public class RunCommand implements Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(StringBuilder sb) {
         previousState = combat.save();
 
         if (currentHero == null || !currentHero.isAlive() || currentHero.escaped() || combat.getEnemies().isEmpty()) {
@@ -33,7 +33,7 @@ public class RunCommand implements Command {
             return false;
         }
 
-        combatView.printLine(combat.run());
+        sb.append(combat.run());
         actionExecuted = true;
         return true;
     }

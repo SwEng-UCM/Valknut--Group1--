@@ -26,7 +26,7 @@ public class DefendCommand implements Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(StringBuilder sb) {
 
         // SAVE STATE for undo
         previousState = combat.save();
@@ -41,7 +41,7 @@ public class DefendCommand implements Command {
             ((AutonomousHero) currentHero).doDefensive();
         }
 
-        combatView.printLine(combat.defend());
+        sb.append(combat.defend());
         actionExecuted = true;
         return true;
     }

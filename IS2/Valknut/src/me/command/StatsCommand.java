@@ -20,12 +20,12 @@ public class StatsCommand implements Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(StringBuilder sb) {
         if (currentHero == null) {
             return false;
         }
 
-        combatView.print(combat.showStats(currentHero));
+        sb.append(combat.showStats(currentHero));
         return false;
     }
 

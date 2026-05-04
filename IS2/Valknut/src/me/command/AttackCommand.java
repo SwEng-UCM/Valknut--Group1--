@@ -29,7 +29,7 @@ public class AttackCommand implements Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(StringBuilder sb) {
         //previousState = combat.save();
 
         if (currentHero instanceof AutonomousHero) {
@@ -44,7 +44,7 @@ public class AttackCommand implements Command {
         attackedEnemy = combat.getEnemies().get(target - 1);
         previousEnemyLife = attackedEnemy.getLife();
 
-        combatView.printLine(combat.attack(target));
+        sb.append(combat.attack(target));
         actionExecuted = true;
         return true;
     }

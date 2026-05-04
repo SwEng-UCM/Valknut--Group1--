@@ -199,10 +199,12 @@ public class CombatScreen extends JPanel{
                     	setComponents();
                     	this.revalidate();
                     	this.repaint();
+                    	showText(game.consumeCombatLog());
                     });
 
                 case USE_ITEM -> actionButton.addActionListener(ev -> {
                         useItem();
+                        showText(game.consumeCombatLog());
                     });
 
                 case RUN -> actionButton.addActionListener(ev -> {
@@ -211,10 +213,12 @@ public class CombatScreen extends JPanel{
                     	setComponents();
                     	this.revalidate();
                     	this.repaint();
+                    	showText(game.consumeCombatLog());
                     });
 
                 case STATS -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
+                        showText(game.consumeCombatLog());
                     });
                     
                 case UNDO -> actionButton.addActionListener(ev -> {

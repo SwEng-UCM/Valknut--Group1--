@@ -212,7 +212,7 @@ public class Game {
         lastCommand = command;
 
         if (command != null) {
-            finishedAction = command.execute();
+            finishedAction = command.execute(combatLog);
 
             if (finishedAction && command.canUndo()) {
                 lastUndoableCommand = command;

@@ -10,7 +10,7 @@ public interface Command {
      *
      * @return true if the action was completed successfully, false otherwise
      */
-    boolean execute();
+    boolean execute(StringBuilder sb);
 
     /**
      * Tells the controller whether this command should advance the turn.

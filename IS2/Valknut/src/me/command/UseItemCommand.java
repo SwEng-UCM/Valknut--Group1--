@@ -26,7 +26,7 @@ public class UseItemCommand implements Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(StringBuilder sb) {
         previousState = combat.save();
 
         if (currentHero == null || !currentHero.isAlive() || currentHero.escaped() || combat.getEnemies().isEmpty() || item == null) {
@@ -34,7 +34,7 @@ public class UseItemCommand implements Command {
             return false;
         }
 
-        combat.useItem(currentHero, item);
+        sb.append(combat.useItem(currentHero, item));
 
         // Original behavior: item usage does not advance the turn.
         return false;
