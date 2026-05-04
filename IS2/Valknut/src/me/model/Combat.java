@@ -59,11 +59,6 @@ public class Combat implements Serializable {
     	this.enemies = new ArrayList<>();
         this.enemies.addAll(newEnemies);
         
-        String s = "New enemies (combat): " + enemies.size();
-        for(Enemy e: enemies) {
-        	s = s +" "+e.name();
-        }
-        System.out.println(s);
         exit = false;
         turn = 1;
     }
