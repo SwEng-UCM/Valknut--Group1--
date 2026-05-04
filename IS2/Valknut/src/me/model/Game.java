@@ -208,6 +208,10 @@ public class Game {
     public boolean action(CombatOption combatOption, int target,Item item) {
         boolean finishedAction = false;
         
+        String debug = (item == null ? "None" : item.toString());
+        System.err.println("I'm doing " + combatOption.toString() + " with tarjet: " + target + " and item: " + debug);
+        
+        
         if (combatOption == CombatOption.UNDO) {
             Command undoCommand = CommandFactory.createCommand(cb, cv, getCurrentHero(), combatOption, target, item, lastUndoableCommand);
 
@@ -240,11 +244,13 @@ public class Game {
             }
         }
 
-        combatLog.append(cb.checkAutonomousTurn());
+        cb.checkAutonomousTurn();
         
         if (!finalBattle) executeEnemyTurn();
         
         else if (cb.turn() >= cb.getHeroes().size() + cb.getInfected().size()) cb.setTurn(1);
+        
+        System.err.println("TURN UPDATED TO -> " + cb.turn());
         
         return finishedAction;
     }
