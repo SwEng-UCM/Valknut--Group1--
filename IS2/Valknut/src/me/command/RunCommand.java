@@ -51,7 +51,7 @@ public class RunCommand implements Command {
 
     @Override
     public boolean canUndo() {
-        return false;
+        return previousState != null;
     }
 
     @Override
