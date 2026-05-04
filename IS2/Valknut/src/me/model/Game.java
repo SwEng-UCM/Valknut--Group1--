@@ -77,7 +77,6 @@ public class Game {
 
     public List<Enemy> getEnemies(){
     	if(cb == null) {
-    		System.out.println("cb null");
     	}
         return (cb == null ? null : cb.getEnemies());
     }
@@ -87,10 +86,7 @@ public class Game {
     }
     
     public void setEnemies(List<Enemy> newEnemies){
-    	System.out.println("I'm game setting enemies");
-    	System.out.println();
     	if(cb != null) {
-    		System.out.println("I'm game setting enemies in cb" + newEnemies.getFirst().name());
     		cb.SetEnemies(newEnemies);
     	}
     }
@@ -269,7 +265,6 @@ public class Game {
             if (ctrl != null) {
                 ctrl.onCombat();
             }
-            System.out.println("Game loaded successfully.");
         }
     }
 
@@ -304,7 +299,6 @@ public class Game {
     }
 
      public void next() {
-        System.out.println("caling next in Game");
         lastUndoableCommand = null;
         lastCommand = null;
         cb.rstEnemies();
@@ -313,14 +307,12 @@ public class Game {
 
 	public void displayStory(String string) {
 		ctrl.onStory(string);
-		System.out.println("Displaying story: " + string);
 	}
 	public void startNewCmb() {
         lastUndoableCommand = null;
         lastCommand = null;
         combatLog.setLength(0);
 
-        System.out.println("calling on combat ");
         ctrl.onCombat();
     }
 	

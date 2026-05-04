@@ -54,7 +54,6 @@ public class StoryScreen extends JPanel {
         this.setVisible(true);
         this.setOpaque(false);
 
- 		System.out.println("I am StoryScreen  initiating GUI ");
  		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
  		
  		 this.nextButton = new JButton("Next");
