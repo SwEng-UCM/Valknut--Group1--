@@ -115,9 +115,9 @@ public class Messages {
             than you can handle”. The dragon laughs “I very much doubt everything about what you just said, but give it your best shot”. """ ;
 	
 	public static final String CHAPTER_THREE_END = """
-            With one last roar that shakes the skies, the dragon’s body collapses, producing a great cloud of dust. “Are you okay?”   
-            “Yeah, I got scared for a moment because of the gas, but I feel just fine”. After the dust settles, you spot a claw and a 
-            scale that seem to have fallen from the dragon during the battle. These will make good weapons until you achieve your goal. """ ;
+            With one last roar that shakes the skies, the dragon’s body collapses, producing a great cloud of dust. “Are you okay?”  %s %s
+            “Yeah, I got scared for a moment because of the gas, but I feel just fine” %s %s. After the dust settles, you spot a claw and a 
+            scale that seem to have fallen from the dragon during the battle. These will make good weapons until you achieve your goal. """ ; //healthy ask, infected reply
 	
 	//Story chapter 4
 	

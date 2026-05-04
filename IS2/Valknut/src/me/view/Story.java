@@ -29,6 +29,7 @@ public class Story {
 
 	public void addHeroes(List<Hero> hs){
 		heroes = new ArrayList<>(hs);
+		healthy = new ArrayList<>(hs);
 	}
 	
 	public void setInfected(int infectedHero) {
@@ -122,8 +123,18 @@ public class Story {
 		return "";
 	}
 	
-	public static String endThirdChapter() {
-		return Messages.CHAPTER_THREE_END;
+	public static String endThirdChapter() { //healthy ask, infected reply
+		String asks = "asks";
+		if(infected.size() > 1) {
+			asks = "ask";
+		}
+		
+		String reply = "replies";
+		if(infected.size() > 1) {
+			reply = "reply";
+		}
+		return String.format(Messages.CHAPTER_THREE_END, formatNames(getHeroNames(healthy)), asks,formatNames(getHeroNames(infected)), reply);
+
 	}
 	
 	//Chapter 4 
