@@ -70,7 +70,7 @@ public class Hero extends Character implements Player {
         
         // rewards: more max HP + heal a bit
         increaseMaxLife(20);
-        changeLife(max_life);
+        changeLife(getMaxLife());
 
         // small stat bumps
         changeAgility(1);
@@ -111,7 +111,7 @@ public class Hero extends Character implements Player {
 
     @Override
     public String toString(){
-        return name.toUpperCase() + ", " + surname.toUpperCase();
+        return getName().toUpperCase() + ", " + surname.toUpperCase();
     }
 
     private String displayInv(){

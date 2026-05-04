@@ -253,6 +253,10 @@ public class Game {
         
         return finishedAction;
     }
+    
+    public String showStats() {
+    	return "Hero" + getCurrentHero().getName() + cb.showStats(getCurrentHero());
+    }
 
     public void saveGame() {
 

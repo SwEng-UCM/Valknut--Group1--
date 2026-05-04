@@ -158,4 +158,8 @@ public class Controller {
     public void attackHero(Hero h) {
     	game.attackHero(h);
     }
+    
+    public String showStats() {
+    	return game.showStats();
+    }
 }

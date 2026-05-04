@@ -182,8 +182,11 @@ public class CombatScreen extends JPanel{
         command_buttons = new ArrayList<>(CombatOption.values().length);
         
         for (CombatOption c: CombatOption.values()) {
-        	JButton actionButton = new JButton(c.toString());
-        	actionButton.setPreferredSize(new Dimension(5000, 100));
+        	JButton actionButton = ViewUtils.createButton(
+                    "resources/images/Buttons/" + c.toString() + "Button_NS.png",
+                    "resources/images/Buttons/" + c.toString() + "Button_S.png"
+            );
+        	actionButton.setPreferredSize(new Dimension(233, 100));
         	switch(c) {
                 case ATTACK -> actionButton.addActionListener(ev -> {
                         toggleAttack();
@@ -211,6 +214,7 @@ public class CombatScreen extends JPanel{
 
                 case STATS -> actionButton.addActionListener(ev -> {
                 		ctrl.action(c, 1, null);
+                		showText("Hero: " + ctrl.showStats());
                         //textLog = game.consumeCombatLog();
                         //refresh();
                     });
@@ -286,18 +290,23 @@ public class CombatScreen extends JPanel{
 			ctrl.next();
 		});
         topPanel.add(next);
-
-        JButton save = new JButton("Save");
-        save.addActionListener(ev -> {
-        	ctrl.saveGame();
-            JOptionPane.showMessageDialog(this, "Game saved.");
-        });
-        topPanel.add(save);
+        
+        if (!ctrl.getFinalBattle()) {
+	        JButton save = new JButton("Save");
+	        save.addActionListener(ev -> {
+	        	ctrl.saveGame();
+	            JOptionPane.showMessageDialog(this, "Game saved.");
+	        });
+	        topPanel.add(save);
+        }
 
         JButton load = new JButton("Load");
         load.addActionListener(ev -> {
         	ctrl.loadGame();
             JOptionPane.showMessageDialog(this, "Game loaded.");
+            refresh();
+            this.revalidate();
+            this.repaint();
         });
         topPanel.add(load);
 

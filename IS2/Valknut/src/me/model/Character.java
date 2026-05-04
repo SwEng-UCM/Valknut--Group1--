@@ -15,12 +15,12 @@ import me.view.Messages;
 
 public abstract class Character implements Serializable {
     private static final long serialVersionUID = 1L;
-    protected String name;
+    private String name;
     private boolean alive;
     private Map<Element, Integer> elements; // Representing the five elements stats with a Map
 	private Map<Attribute, Integer> attributes; // Representing the five attributes stats with a Map
-    protected int life;
-    protected int max_life;
+    private int life;
+    private int max_life;
     private boolean escaped;
     private boolean defend;
     private transient BufferedImage sprite, infectedSprite;
@@ -39,6 +39,22 @@ public abstract class Character implements Serializable {
         this.max_life = max_life;
         this.escaped = false;
         this.defend = false;
+    }
+    
+    public String getName() {
+    	return name;
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
+    
+    public int getMaxLife() {
+    	return max_life;
+    }
+    
+    public void setMaxLife(int max_life) {
+    	this.max_life = max_life;
     }
 
     public void setLife(int life) {
