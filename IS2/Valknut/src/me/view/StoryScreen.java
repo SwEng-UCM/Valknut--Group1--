@@ -3,11 +3,9 @@ package me.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import me.control.Controller;
 import me.model.Game;
+import me.socket.MultiplayerManager;
+import me.socket.Request;
 
 public class StoryScreen extends JPanel {
 	
@@ -23,6 +23,7 @@ public class StoryScreen extends JPanel {
 	private final Controller ctrl;
  	private final Game game;
  	private static StoryScreen instance;
+	private MultiplayerManager mpm;
  	private JLabel story;
  	private JPanel storyPanel = new JPanel();
  	private Image backGround;
@@ -32,6 +33,9 @@ public class StoryScreen extends JPanel {
  	StoryScreen(Controller ctrl, Game game) {
  		this.ctrl = ctrl;
  		this.game = game;
+		if(game.isMultiplayer()){
+            this.mpm = MultiplayerManager.getInstacne(ctrl,game);
+        }
  		initGui();
  	}
  	
@@ -56,33 +60,33 @@ public class StoryScreen extends JPanel {
 
  		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
  		
- 		 this.nextButton = new JButton("Next");
- 		 this.nextButton.setToolTipText("Next");
- 		 this.nextButton.addActionListener((e) -> handleNext());
- 		 JPanel controls = new JPanel();
- 		 controls.setOpaque(false);
+ 		this.nextButton = new JButton("Next");
+ 		this.nextButton.setToolTipText("Next");
+ 		this.nextButton.addActionListener((e) -> handleNext());
+ 		JPanel controls = new JPanel();
+ 		controls.setOpaque(false);
  		controls.setPreferredSize(new Dimension(5000, 100));
- 		 controls.add(nextButton);
+ 		controls.add(nextButton);
 
- 		 JButton saveButton = new JButton("Save");
- 		 saveButton.addActionListener(e -> {
- 			 game.saveGame();
- 			 javax.swing.JOptionPane.showMessageDialog(this, "Game saved.");
- 		 });
- 		 controls.add(saveButton);
+ 		JButton saveButton = new JButton("Save");
+ 		saveButton.addActionListener(e -> {
+ 			game.saveGame();
+ 			javax.swing.JOptionPane.showMessageDialog(this, "Game saved.");
+ 		});
+ 		controls.add(saveButton);
 
- 		 JButton loadButton = new JButton("Load");
- 		 loadButton.addActionListener(e -> {
- 			 game.loadGame();
- 			 javax.swing.JOptionPane.showMessageDialog(this, "Game loaded.");
- 		 });
- 		 controls.add(loadButton);
+ 		JButton loadButton = new JButton("Load");
+ 		loadButton.addActionListener(e -> {
+ 			game.loadGame();
+ 			javax.swing.JOptionPane.showMessageDialog(this, "Game loaded.");
+ 		});
+		controls.add(loadButton);
 
- 		 JButton exitButton = new JButton("Exit");
- 		 exitButton.addActionListener(e -> ctrl.exit());
- 		 controls.add(exitButton);
+		JButton exitButton = new JButton("Exit");
+		exitButton.addActionListener(e -> ctrl.exit());
+		controls.add(exitButton);
 
- 		 this.add(controls, BorderLayout.PAGE_START);
+		this.add(controls, BorderLayout.PAGE_START);
 //		
  	}
  	
@@ -104,6 +108,17 @@ public class StoryScreen extends JPanel {
  		
  	}
  	private void handleNext() {
- 		game.next();
+		if(mpm != null){
+			int id = mpm.getUser().getId();
+			if(id == 2){
+				ViewUtils.showErrorMsg("Wait for Player 1");
+				return;
+			}
+			else{
+				Request rq = new Request(Request.RequestType.STORYADVANCED, id);
+				mpm.send(rq);
+			}
+		}
+ 		ctrl.next();
  	}
 }

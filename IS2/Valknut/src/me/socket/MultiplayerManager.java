@@ -106,8 +106,21 @@ public class MultiplayerManager extends JFrame{
         characterSelection.startGame();
     }
 
+    public void initCS(){
+        if(combatScreen == null)
+            combatScreen = CombatScreen.getInstance(null, null);
+    }
+
+    public void continueCombat(){
+        combatScreen.changeActionPanel("COMMANDS");
+        combatScreen.refresh();
+    }
+
+    public void attackAction(int tarjet){
+        combatScreen.attackAction(tarjet);
+    }
+
     public void refreshCombatScreen(){
-        combatScreen = CombatScreen.getInstance(null, null);
         combatScreen.refresh();
     }
 }

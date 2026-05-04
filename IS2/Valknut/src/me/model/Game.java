@@ -208,6 +208,9 @@ public class Game {
     public boolean action(CombatOption combatOption, int target,Item item) {
         boolean finishedAction = false;
 
+        String debug = (item == null ? "None" : item.toString());
+        System.err.println("I'm doing " + combatOption.toString() + " with tarjet: " + target + " and item: " + debug);
+        
         if (combatOption == CombatOption.UNDO) {
             Command undoCommand = CommandFactory.createCommand(cb, cv, getCurrentHero(), combatOption, target, item, lastUndoableCommand);
 
@@ -223,15 +226,16 @@ public class Game {
         cb.updateItems();
         Hero currentHero = getCurrentHero();
 
+        System.err.println("It's attacking hero " + currentHero.name().toUpperCase());
+
         Command command = CommandFactory.createCommand(cb, cv, currentHero, combatOption, target, item, lastCommand);
         
         lastCommand = command;
 
         if (command != null) {
             finishedAction = command.execute(combatLog);
-
+            System.err.println("CombatLog charged: " + combatLog);
             if (command.canUndo()) {
-            	cb.setTurn(cb.turn() - 1);
                 lastUndoableCommand = command;
             }
 

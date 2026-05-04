@@ -1,6 +1,7 @@
 package me.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -91,7 +92,6 @@ public class CombatScreen extends JPanel{
 	            }
 	        }
         }
-        
         else {
         	if(heroes != null){
         		if (game.getTurn() - 1 < heroes.size()) {
@@ -103,7 +103,6 @@ public class CombatScreen extends JPanel{
     	                }
     	            }
         		}
-        		
         		else {
 		            for (Hero h : heroes) {
 		                if (h.isAlive() && !h.escaped()) {
@@ -147,7 +146,6 @@ public class CombatScreen extends JPanel{
 	            }
 	        }
         }
-        
         else {
         	infected = game.getInfected();
         	if (game.getTurn() - 1 >= heroes.size()) {
@@ -159,7 +157,6 @@ public class CombatScreen extends JPanel{
 	                }
 	            }
     		}
-    		
     		else {
 	            for (Hero h : infected) {
 	                if (h.isAlive() && !h.escaped()) {
@@ -250,7 +247,21 @@ public class CombatScreen extends JPanel{
 		textPanel.add(new JScrollPane(combatText), BorderLayout.CENTER);
 
 		JButton continueBtn = new JButton("Continue");
-		continueBtn.addActionListener(e -> {actionLayout.show(actionContainer, "COMMANDS"); refresh();});
+		continueBtn.addActionListener(e -> {
+			if(mpm != null){
+			int id = mpm.getUser().getId();
+			if(id == 2){
+				ViewUtils.showErrorMsg("Wait for Player 1");
+				return;
+			}
+			else{
+				Request rq = new Request(Request.RequestType.COMBATOPTION, id);
+				mpm.send(rq);
+			}
+		}
+			changeActionPanel("COMMANDS");
+			refresh();
+		});
 		textPanel.add(continueBtn, BorderLayout.SOUTH);
 		
 		actionContainer.add(commandsPanel, "COMMANDS");
@@ -264,8 +275,19 @@ public class CombatScreen extends JPanel{
         topPanel.setOpaque(false);
 
         JButton next = new JButton("Next");
-		next.addActionListener(ev -> {
+		next.addActionListener((ActionEvent ev) -> {
 			this.toggleVariable = false;
+			if(mpm != null){
+				int id = mpm.getUser().getId();
+				if(id == 2){
+					ViewUtils.showErrorMsg("Wait for Player 1");
+					return;
+				}
+				else{
+					Request rq = new Request(Request.RequestType.STORYADVANCED, id);
+					mpm.send(rq);
+				}
+			}
 			game.next();
 		});
         topPanel.add(next);
@@ -290,14 +312,15 @@ public class CombatScreen extends JPanel{
 
 		this.add(topPanel, BorderLayout.PAGE_START);
 		
-		if (enemies.size() == 0 || heroes.size() == 0 && game.getFinalBattle() || infected.size() == 0 && game.getFinalBattle()) {
+		if (enemies.isEmpty() || heroes.isEmpty() && game.getFinalBattle() || infected.isEmpty() && game.getFinalBattle()) {
 			game.next();
 		}
 		
-		if (textLog != null && !textLog.isEmpty()) {
-		    showText(textLog);
-		    textLog = "";
-		}
+		// if (textLog != null && !textLog.isEmpty()) {
+		// 	System.err.println("I arrived at really showing dialog");
+		//     showText(textLog);
+		//     textLog = "";
+		// }
     }
     
     public void toggleAttack() {
@@ -326,17 +349,26 @@ public class CombatScreen extends JPanel{
                 System.err.println(rq.getParameters()[1].toString());
                 mpm.send(rq);
             }
-            else 
-                return;
+            else{
+				ViewUtils.showErrorMsg("You can not perform actions right now.");
+				return;
+			}
+                
         }
-    	game.action(CombatOption.ATTACK, enemy.getEnemyNum(), null);
-    	
-    	toggleAttack();
-    	
-    	textLog = game.consumeCombatLog();
-    	
-    	refresh();
+
+		toggleAttack();
+		
+		attackAction(enemy.getEnemyNum());    	
     }
+
+	public void attackAction(int tarjet){
+		game.action(CombatOption.ATTACK, tarjet, null);
+    	System.err.println("Time for textLog display");
+    	textLog = game.consumeCombatLog();
+    	System.err.println("So textLog is: " + textLog);
+		System.err.println("Should display TextLog");
+		showText(textLog);
+	}
     
     private void useItem() {
     	this.remove(actionContainer);
@@ -380,15 +412,12 @@ public class CombatScreen extends JPanel{
     }
 
     public void refresh(){
-        this.removeAll();
-    	this.revalidate();
-    	initGUI();
     	setComponents();
     }
     
     private void showText(String text) {
         combatText.setText(text);
-        actionLayout.show(actionContainer, "TEXT");
+        changeActionPanel("TEXT");
     }
     
     private void attackHero(Hero h) {
@@ -399,5 +428,7 @@ public class CombatScreen extends JPanel{
     	}
     }
     
-    
+    public void changeActionPanel(String s){
+		actionLayout.show(actionContainer, s);
+	}
 }

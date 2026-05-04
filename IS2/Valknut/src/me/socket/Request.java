@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Request implements Serializable{
 
     public enum RequestType{
-        MESSAGE, CLOSING, CHARACTERSELECT, COMBATOPTION;
+        MESSAGE, CLOSING, CHARACTERSELECT, STORYADVANCED, COMBATOPTION,;
     }
 
     private RequestType rt;

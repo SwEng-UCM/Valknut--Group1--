@@ -69,6 +69,7 @@ public class Controller {
     }
 
     public void startSelectedGame() { //TODO
+        game.setStoryHeroes();
     	game.next();
         //controlPanel.onCombat(game);
     }
@@ -95,5 +96,9 @@ public class Controller {
 
     public void exit() {
         controlPanel.onQuit();
+    }
+
+    public void next(){
+        game.next();
     }
 }

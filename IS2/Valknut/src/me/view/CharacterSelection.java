@@ -318,7 +318,6 @@ public class CharacterSelection extends JPanel {
                 h = HeroEnum.randomEnum();
             selectCharacter(h); 
         }
-        game.setStoryHeroes();
         selectionLabel.setText("Loading battle...");
         ctrl.startSelectedGame();
     }
