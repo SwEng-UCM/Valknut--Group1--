@@ -4,6 +4,8 @@ import java.util.List;
 
 import me.model.*;
 import me.model.Game.GameMode;
+import me.model.items.Inventory;
+import me.model.items.Item;
 import me.view.CtrlPanel;
 
 public class Controller {
@@ -119,5 +121,41 @@ public class Controller {
     
     public void setMode(GameMode m) {
     	game.setMode(m);
+    }
+    
+    public List<Hero> getHeroes(){
+    	return game.getHeroes();
+    }
+    
+    public List<Hero> getInfected(){
+    	return game.getInfected();
+    }
+    
+    public List<Enemy> getEnemies(){
+    	return game.getEnemies();
+    }
+    
+    public Inventory getHeroItems(){
+    	return game.getHeroItems();
+    }
+    
+    public int getTurn() {
+    	return game.getTurn();
+    }
+    
+    public boolean getFinalBattle() {
+    	return game.getFinalBattle();
+    }
+    
+    public boolean action(CombatOption c, int target, Item item) {
+    	return game.action(c, target, item);
+    }
+    
+    public String consumeCombatLog() {
+    	return game.consumeCombatLog();
+    }
+    
+    public void attackHero(Hero h) {
+    	game.attackHero(h);
     }
 }

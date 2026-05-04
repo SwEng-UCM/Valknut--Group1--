@@ -18,7 +18,6 @@ import me.socket.Request;
 public class CombatScreen extends JPanel{
     private static CombatScreen instance;
     private final Controller ctrl;
-    private final Game game;
     private MultiplayerManager mpm;
     private Image backGround;
     private CardLayout actionLayout;
@@ -30,11 +29,10 @@ public class CombatScreen extends JPanel{
     private List<Enemy> enemies = new ArrayList<>();
     private List<Hero> infected = new ArrayList<>();
 
-    private CombatScreen(Controller ctrl, Game game){
+    private CombatScreen(Controller ctrl){
         this.ctrl = ctrl;
-        this.game = game;
-        if(game.isMultiplayer()){
-            this.mpm = MultiplayerManager.getInstacne(ctrl,game);
+        if(ctrl.isMultiplayer()){
+            this.mpm = MultiplayerManager.getInstacne(ctrl,ctrl.getGame());
         }
         initGUI();
         //setComponents();
@@ -48,9 +46,9 @@ public class CombatScreen extends JPanel{
         }
     }
 
-    public static CombatScreen getInstance(Controller ctrl, Game game){
+    public static CombatScreen getInstance(Controller ctrl){
         if(instance == null)
-            instance = new CombatScreen(ctrl, game);
+            instance = new CombatScreen(ctrl);
         return instance;
     }
     
@@ -74,14 +72,14 @@ public class CombatScreen extends JPanel{
         enemyPanel.setOpaque(false); // keep background visible
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
         
-        java.util.List<Hero> heroes = game.getHeroes();
+        java.util.List<Hero> heroes = ctrl.getHeroes();
         
         heroPanel = new JPanel();
         heroPanel.setSize(new Dimension(500, 500));
         heroPanel.setOpaque(false);
         heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
         
-        if (!game.getFinalBattle()) {
+        if (!ctrl.getFinalBattle()) {
 	        if(heroes != null){
 	            for (Hero h : heroes) {
 	                if (h.isAlive() && !h.escaped()) {
@@ -94,7 +92,7 @@ public class CombatScreen extends JPanel{
         }
         else {
         	if(heroes != null){
-        		if (game.getTurn() - 1 < heroes.size()) {
+        		if (ctrl.getTurn() - 1 < heroes.size()) {
         			for (Hero h : heroes) {
     	                if (h.isAlive() && !h.escaped()) {
     	                    JLabel heroLabel = new JLabel();
@@ -120,8 +118,8 @@ public class CombatScreen extends JPanel{
 	        }
         }
         
-        if (!game.getFinalBattle()) {
-	        enemies = game.getEnemies();
+        if (!ctrl.getFinalBattle()) {
+	        enemies = ctrl.getEnemies();
 	        String s = "New enemies (combat screen): " + enemies.size();
 	        for(Enemy e: enemies) {
 	        	s = s +" "+e.name();
@@ -147,8 +145,8 @@ public class CombatScreen extends JPanel{
 	        }
         }
         else {
-        	infected = game.getInfected();
-        	if (game.getTurn() - 1 >= heroes.size()) {
+        	infected = ctrl.getInfected();
+        	if (ctrl.getTurn() - 1 >= heroes.size()) {
     			for (Hero h : infected) {
 	                if (h.isAlive() && !h.escaped()) {
 	                    JLabel heroLabel = new JLabel();
@@ -192,8 +190,8 @@ public class CombatScreen extends JPanel{
                     });
 
                 case DEFEND -> actionButton.addActionListener(ev -> {
-                        game.action(c, 1, null);
-                        textLog = game.consumeCombatLog();
+                		ctrl.action(c, 1, null);
+                        textLog = ctrl.consumeCombatLog();
                         refresh();
                     	this.revalidate();
                     	this.repaint();
@@ -204,28 +202,28 @@ public class CombatScreen extends JPanel{
                     });
 
                 case RUN -> actionButton.addActionListener(ev -> {
-                        game.action(c, 1, null);
-                        textLog = game.consumeCombatLog();
+                		ctrl.action(c, 1, null);
+                        textLog = ctrl.consumeCombatLog();
                         refresh();
                     	this.revalidate();
                     	this.repaint();
                     });
 
                 case STATS -> actionButton.addActionListener(ev -> {
-                        game.action(c, 1, null);
+                		ctrl.action(c, 1, null);
                         //textLog = game.consumeCombatLog();
                         //refresh();
                     });
                     
                 case UNDO -> actionButton.addActionListener(ev -> {
-                        game.action(c, 1, null);
+                		ctrl.action(c, 1, null);
                         refresh();
                         this.revalidate();
                         this.repaint();
                     });
         	}
         	
-        	if (!game.getFinalBattle() || (game.getTurn() - 1 < heroes.size() && c != CombatOption.RUN)) {
+        	if (!ctrl.getFinalBattle() || (ctrl.getTurn() - 1 < heroes.size() && c != CombatOption.RUN)) {
 	        	command_buttons.add(actionButton);
 	        	commandsPanel.add(actionButton);
         	}
@@ -285,20 +283,20 @@ public class CombatScreen extends JPanel{
 					mpm.send(rq);
 				}
 			}
-			game.next();
+			ctrl.next();
 		});
         topPanel.add(next);
 
         JButton save = new JButton("Save");
         save.addActionListener(ev -> {
-            game.saveGame();
+        	ctrl.saveGame();
             JOptionPane.showMessageDialog(this, "Game saved.");
         });
         topPanel.add(save);
 
         JButton load = new JButton("Load");
         load.addActionListener(ev -> {
-            game.loadGame();
+        	ctrl.loadGame();
             JOptionPane.showMessageDialog(this, "Game loaded.");
         });
         topPanel.add(load);
@@ -309,8 +307,8 @@ public class CombatScreen extends JPanel{
 
 		this.add(topPanel, BorderLayout.PAGE_START);
 		
-		if (enemies.isEmpty() || heroes.isEmpty() && game.getFinalBattle() || infected.isEmpty() && game.getFinalBattle()) {
-			game.next();
+		if (enemies.isEmpty() || heroes.isEmpty() && ctrl.getFinalBattle() || infected.isEmpty() && ctrl.getFinalBattle()) {
+			ctrl.next();
 		}
 		
 		// if (textLog != null && !textLog.isEmpty()) {
@@ -333,7 +331,7 @@ public class CombatScreen extends JPanel{
     
     private void attackEnemy(Enemy enemy) {
         if(mpm != null){
-            int turn = game.getTurn();
+            int turn = ctrl.getTurn();
             int id = mpm.getUser().getId();
             if(turn == id){
                 Request rq = new Request(Request.RequestType.COMBATOPTION, id);
@@ -359,9 +357,9 @@ public class CombatScreen extends JPanel{
     }
 
 	public void attackAction(int tarjet){
-		game.action(CombatOption.ATTACK, tarjet, null);
+		ctrl.action(CombatOption.ATTACK, tarjet, null);
     	System.err.println("Time for textLog display");
-    	textLog = game.consumeCombatLog();
+    	textLog = ctrl.consumeCombatLog();
     	System.err.println("So textLog is: " + textLog);
 		System.err.println("Should display TextLog");
 		showText(textLog);
@@ -376,7 +374,7 @@ public class CombatScreen extends JPanel{
     	itemsPanel.setSize(new Dimension(500, 500));
     	itemsPanel.setOpaque(false);
     	itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.X_AXIS));
-    	Inventory in = game.getHeroItems(); 
+    	Inventory in = ctrl.getHeroItems(); 
     	if (in.getItems().isEmpty()) {
     		System.out.println("No items to use");
     	}
@@ -384,8 +382,8 @@ public class CombatScreen extends JPanel{
     		JButton itemChoiceButton = new JButton(i.getName());
     		itemChoiceButton.setPreferredSize(new Dimension(1000, 100));
     		itemChoiceButton.addActionListener(ev -> {
-    			game.action(CombatOption.USE_ITEM, 1, i);
-    			textLog = game.consumeCombatLog();
+    			ctrl.action(CombatOption.USE_ITEM, 1, i);
+    			textLog = ctrl.consumeCombatLog();
     			this.remove(itemsPanel);
     			initGUI();
     			setComponents();
@@ -397,7 +395,7 @@ public class CombatScreen extends JPanel{
     	JButton returnButton = new JButton("RETURN");
 		returnButton.setPreferredSize(new Dimension(1000, 100));
 		returnButton.addActionListener(ev -> {
-			game.action(CombatOption.USE_ITEM, 1, null);
+			ctrl.action(CombatOption.USE_ITEM, 1, null);
 			this.remove(itemsPanel);
 			initGUI();
 			setComponents();
@@ -419,7 +417,7 @@ public class CombatScreen extends JPanel{
     
     private void attackHero(Hero h) {
     	if (toggleVariable) {
-    		game.attackHero(h);
+    		ctrl.attackHero(h);
     		toggleAttack();
     		refresh();
     		this.repaint();
