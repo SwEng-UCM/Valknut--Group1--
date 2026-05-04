@@ -16,19 +16,17 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private final MultiPlayerScreen multiPlayerScreen;
 	private StoryScreen storyScreen;
 	private final Controller _ctrl;
-	private final Game game;
 	private EndScreen endscreen;
 		
-	public CtrlPanel(Controller ctrl, Game game) {
+	public CtrlPanel(Controller ctrl) {
 		_ctrl = ctrl;
-		this.game = game;
 
 		cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 		mainMenu = MainMenu.getInstance(ctrl);
 		settingsPanel = SettingsPanel.getInstance(ctrl);
 		multiPlayerScreen = MultiPlayerScreen.getInstance(ctrl);
-		storyScreen = new StoryScreen(ctrl, game);
+		storyScreen = new StoryScreen(ctrl);
 
 		mainPanel.add(mainMenu, "MENU");
 		mainPanel.add(settingsPanel, "SETTINGS");
@@ -46,7 +44,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		mainPanel.getActionMap().put("saveGame", new AbstractAction() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				game.saveGame();
+				ctrl.saveGame();
 				JOptionPane.showMessageDialog(null, "Game saved!");
 			}
 		});
@@ -58,7 +56,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		mainPanel.getActionMap().put("loadGame", new AbstractAction() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				game.loadGame();
+				ctrl.loadGame();
 				JOptionPane.showMessageDialog(null, "Game loaded!");
 			}
 		});
@@ -119,13 +117,13 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 	
 	private void createCharacterSelector() {
-		characterSelection = CharacterSelection.getInstance(_ctrl, game);
+		characterSelection = CharacterSelection.getInstance(_ctrl);
 		mainPanel.add(characterSelection, "CHARACTER SELECTION");
 		cardLayout.show(mainPanel, "CHARACTER SELECTION");
 	}
 	
 	private void combatGUI(Game game) {
-		combatScreen = CombatScreen.getInstance(_ctrl, game);
+		combatScreen = CombatScreen.getInstance(_ctrl);
 		combatScreen.setComponents();
 		mainPanel.add(combatScreen, "COMBAT SCREEN");
 		cardLayout.show(mainPanel, "COMBAT SCREEN");

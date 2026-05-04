@@ -21,20 +21,17 @@ public class StoryScreen extends JPanel {
 	private JButton nextButton;
 	private String text = "";
 	private final Controller ctrl;
- 	private final Game game;
  	private static StoryScreen instance;
 	private MultiplayerManager mpm;
  	private JLabel story;
  	private JPanel storyPanel = new JPanel();
  	private Image backGround;
- 	private JPanel mainPanel;
  	
  	
- 	StoryScreen(Controller ctrl, Game game) {
+ 	StoryScreen(Controller ctrl) {
  		this.ctrl = ctrl;
- 		this.game = game;
-		if(game.isMultiplayer()){
-            this.mpm = MultiplayerManager.getInstacne(ctrl,game);
+		if(ctrl.isMultiplayer()){
+            this.mpm = MultiplayerManager.getInstacne(ctrl, ctrl.getGame());
         }
  		initGui();
  	}
@@ -49,7 +46,7 @@ public class StoryScreen extends JPanel {
  	
  	 public static StoryScreen getInstance(Controller ctrl, Game game){
          if(instance == null)
-             instance = new StoryScreen(ctrl, game);
+             instance = new StoryScreen(ctrl);
          return instance;
      }
 
@@ -70,14 +67,14 @@ public class StoryScreen extends JPanel {
 
  		JButton saveButton = new JButton("Save");
  		saveButton.addActionListener(e -> {
- 			game.saveGame();
+ 			ctrl.saveGame();
  			javax.swing.JOptionPane.showMessageDialog(this, "Game saved.");
  		});
  		controls.add(saveButton);
 
  		JButton loadButton = new JButton("Load");
  		loadButton.addActionListener(e -> {
- 			game.loadGame();
+ 			ctrl.loadGame();
  			javax.swing.JOptionPane.showMessageDialog(this, "Game loaded.");
  		});
 		controls.add(loadButton);

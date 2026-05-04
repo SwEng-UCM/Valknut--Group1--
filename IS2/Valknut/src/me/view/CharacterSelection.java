@@ -46,7 +46,7 @@ public class CharacterSelection extends JPanel {
         setComponents();
     }
 
-    public static CharacterSelection getInstance(Controller ctrl, Game game) {
+    public static CharacterSelection getInstance(Controller ctrl) {
         if (instance == null) {
             instance = new CharacterSelection(ctrl);
         }
