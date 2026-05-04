@@ -213,8 +213,7 @@ public class CombatScreen extends JPanel{
                     });
 
                 case STATS -> actionButton.addActionListener(ev -> {
-                		ctrl.action(c, 1, null);
-                		showText("Hero: " + ctrl.showStats());
+                		showText(ctrl.showStats());
                         //textLog = game.consumeCombatLog();
                         //refresh();
                     });

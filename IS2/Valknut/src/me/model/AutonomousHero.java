@@ -73,7 +73,7 @@ public class AutonomousHero extends Hero {
         }
 
         double i = Math.random();
-        if(getLife() < max_life / 2){
+        if(getLife() < getMaxLife() / 2){
             if(i > 0.95)
                 combatState = State.LEADER;
             else if(i > 0.3)
@@ -98,7 +98,7 @@ public class AutonomousHero extends Hero {
             idx = size - 1;
 
         double i = Math.random();
-        if(getLife() < max_life / 2){
+        if(getLife() < getMaxLife() / 2){
             if(i > 0.95)
                 combatState = State.LEADER;
             else if(i > 0.3)
@@ -130,7 +130,7 @@ public class AutonomousHero extends Hero {
     public void doScared(){
         //it runs on combat logic. This method is to change combatState
         double i = Math.random();
-        if(getLife() < max_life / 2){
+        if(getLife() < getMaxLife() / 2){
             if(i > 0.95)
                 combatState = State.LEADER;
             else if(i > 0.3)

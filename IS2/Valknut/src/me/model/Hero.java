@@ -31,9 +31,9 @@ public class Hero extends Character implements Player {
     }
 
     public void setHero(String name, int life, int max_life, String surname){
-        this.name = name;
-        this.life = life;
-        this.max_life = max_life;
+        setName(name);
+        setLife(life);
+        setMaxLife(max_life);
         this.surname = surname;
     }
 

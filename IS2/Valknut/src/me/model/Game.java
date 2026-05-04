@@ -255,7 +255,7 @@ public class Game {
     }
     
     public String showStats() {
-    	return "Hero" + getCurrentHero().getName() + cb.showStats(getCurrentHero());
+    	return "Hero: " + getCurrentHero().getName() + "\n" + cb.showStats(getCurrentHero());
     }
 
     public void saveGame() {
