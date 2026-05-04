@@ -118,7 +118,8 @@ public class MultiPlayerScreen extends JPanel{
         exit.addActionListener(e -> {
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             this.removeAll();
-            mpm.killUser();
+            if(mpm.getUser() != null)
+                mpm.killUser();
             setComponents();
             this.revalidate();
             this.repaint();

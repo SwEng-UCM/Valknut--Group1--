@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
-import me.control.Controller;
 import me.model.items.*;
 import me.model.save.*;
 import me.socket.MultiplayerManager;
@@ -235,7 +234,6 @@ public class Game {
 
         if (command != null) {
             finishedAction = command.execute(combatLog);
-            System.err.println("CombatLog charged: " + combatLog);
             if (command.canUndo()) {
                 lastUndoableCommand = command;
             }
@@ -250,6 +248,7 @@ public class Game {
         if (!finalBattle) executeEnemyTurn();
         
         else if (cb.turn() >= cb.getHeroes().size() + cb.getInfected().size()) cb.setTurn(1);
+        System.err.println("TURN UPDATED TO -> " + cb.turn());
         
         return finishedAction;
     }
@@ -317,6 +316,7 @@ public class Game {
 	public void displayStory(String string) {
 		ctrl.onStory(string);
 	}
+    
 	public void startNewCmb() {
         lastUndoableCommand = null;
         lastCommand = null;
