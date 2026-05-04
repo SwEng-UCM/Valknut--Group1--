@@ -94,10 +94,11 @@ public class StoryScreen extends JPanel {
  		text = Messages.startFormat + text + Messages.endFormat;
  		story = new JLabel(text);
  		story.setFont(f);
+ 		story.setForeground(new Color(255,255, 255)); //letters color
  		story.repaint();
  		storyPanel.setPreferredSize(new Dimension(650, 10000));
  		storyPanel.add(story);
- 		storyPanel.setBackground(new Color(222,111, 111));
+ 		storyPanel.setBackground(new Color(105,0, 0));
  		
  		this.add(storyPanel, BorderLayout.CENTER);
  		
