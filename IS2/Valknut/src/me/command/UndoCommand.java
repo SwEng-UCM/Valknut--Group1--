@@ -16,6 +16,7 @@ public class UndoCommand implements Command {
     }
 
     @Override
+    
     public boolean execute(StringBuilder sb) {
         if (previousCommand == null || !previousCommand.canUndo()) {
             sb.append("There is no action to undo.\n");
@@ -27,6 +28,7 @@ public class UndoCommand implements Command {
 
     @Override
     public boolean undo() {
+        // Undo command itself cannot be undone
         return false;
     }
 
@@ -37,6 +39,7 @@ public class UndoCommand implements Command {
 
     @Override
     public boolean advancesTurn() {
+        // Undo should NOT advance turn
         return false;
     }
 }
