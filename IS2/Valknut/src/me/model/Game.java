@@ -215,8 +215,10 @@ public class Game {
         if (combatOption == CombatOption.UNDO) {
             Command undoCommand = CommandFactory.createCommand(cb, cv, getCurrentHero(), combatOption, target, item, lastUndoableCommand);
 
-            if (undoCommand != null && undoCommand.execute()) {
+            if (undoCommand != null) {
+                undoCommand.execute(combatLog);
                 lastUndoableCommand = null;
+                lastCommand = null;
             }
 
             return false;
@@ -232,7 +234,7 @@ public class Game {
         if (command != null) {
             finishedAction = command.execute(combatLog);
 
-            if (finishedAction && command.canUndo()) {
+            if (command.canUndo()) {
                 lastUndoableCommand = command;
             }
 
@@ -301,20 +303,25 @@ public class Game {
     }
 
      public void next() {
-    		System.out.println("caling next in Game");
-    		cb.rstEnemies();
-    		st.next(cb);
-	 
-	 }
+        System.out.println("caling next in Game");
+        lastUndoableCommand = null;
+        lastCommand = null;
+        cb.rstEnemies();
+        st.next(cb);
+    }
 
 	public void displayStory(String string) {
 		ctrl.onStory(string);
 		System.out.println("Displaying story: " + string);
 	}
 	public void startNewCmb() {
-		System.out.println("calling on combat ");
-	   	ctrl.onCombat();
-	}
+        lastUndoableCommand = null;
+        lastCommand = null;
+        combatLog.setLength(0);
+
+        System.out.println("calling on combat ");
+        ctrl.onCombat();
+    }
 	
 	public void end() {
 		ctrl.exit();
