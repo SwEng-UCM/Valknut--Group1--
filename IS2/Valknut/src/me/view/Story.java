@@ -31,8 +31,14 @@ public class Story {
 		heroes = new ArrayList<>(hs);
 	}
 	
+	public void setInfected(int infectedHero) {
+    	infected.add(heroes.get(infectedHero));
+    	healthy.remove(heroes.get(infectedHero));
+    }
+	
 	public void addHero(Hero h) {
 		heroes.add(h);
+		healthy.add(h);
 	}
 	
 	public static String[] getHeroNames(List<Hero> hl) {
