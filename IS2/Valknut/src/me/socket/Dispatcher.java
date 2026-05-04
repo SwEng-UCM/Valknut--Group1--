@@ -57,20 +57,22 @@ public class Dispatcher {
     }
 
     public void dispatchCO(Request rq, MultiplayerManager test){
-        Object[] par = rq.getParameters();
-        CombatOption co = (CombatOption) par[0];
-        test.initCS();
-        if(co == null){
-            test.continueCombat();
-        }
-        else{
-            switch (co) {
-                case ATTACK -> {test.attackAction((int) par[1]);}
-                case DEFEND -> {game.action(co, 0, null);}
-                case RUN -> {game.action(co, 0, null);}
-                case USE_ITEM -> {game.action(co, 0, (Item) par[1]);}
-                case STATS -> {game.action(co, (int) 0, null);}
-                default -> {}
+        if(!(test.getUser().getId() == 2 && rq.getId() == 2)){
+            Object[] par = rq.getParameters();
+            CombatOption co = (CombatOption) par[0];
+            test.initCS();
+            if(co == null){
+                test.continueCombat();
+            }
+            else{
+                switch (co) {
+                    case ATTACK -> {test.attackAction((int) par[1]);}
+                    case DEFEND -> {game.action(co, 0, null);}
+                    case RUN -> {game.action(co, 0, null);}
+                    case USE_ITEM -> {game.action(co, 0, (Item) par[1]);}
+                    case STATS -> {game.action(co, (int) 0, null);}
+                    default -> {}
+                }
             }
         }
     }

@@ -8,7 +8,6 @@ import javax.swing.*;
 import me.control.Controller;
 import me.model.CombatOption;
 import me.model.Enemy;
-import me.model.Game;
 import me.model.Hero;
 import me.model.items.Inventory;
 import me.model.items.Item;
@@ -247,16 +246,16 @@ public class CombatScreen extends JPanel{
 		JButton continueBtn = new JButton("Continue");
 		continueBtn.addActionListener(e -> {
 			if(mpm != null){
-			int id = mpm.getUser().getId();
-			if(id == 2){
-				ViewUtils.showErrorMsg("Wait for Player 1");
-				return;
+				int id = mpm.getUser().getId();
+				if(id == ctrl.getTurn()){
+					ViewUtils.showErrorMsg("Wait for the other Player");
+					return;
+				}
+				else{
+					Request rq = new Request(Request.RequestType.COMBATOPTION, id);
+					mpm.send(rq);
+				}
 			}
-			else{
-				Request rq = new Request(Request.RequestType.COMBATOPTION, id);
-				mpm.send(rq);
-			}
-		}
 			changeActionPanel("COMMANDS");
 			refresh();
 		});
