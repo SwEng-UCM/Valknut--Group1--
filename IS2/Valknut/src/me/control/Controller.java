@@ -1,7 +1,6 @@
 package me.control;
 
 import java.util.List;
-
 import me.model.*;
 import me.model.Game.GameMode;
 import me.model.items.Inventory;
@@ -16,7 +15,7 @@ public class Controller {
 
     private Controller() {
         this.game = new Game(this);
-        controlPanel = new CtrlPanel(this, game);
+        controlPanel = new CtrlPanel(this);
     }
     
 

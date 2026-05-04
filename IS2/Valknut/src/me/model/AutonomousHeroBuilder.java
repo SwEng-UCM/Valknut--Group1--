@@ -17,13 +17,13 @@ public class AutonomousHeroBuilder {
                 new_hero = new AutonomousHero("Gersemi", 100, 100, "Beloved Child of Freya", id);
                 element.add(1); element.add(2); element.add(3); element.add(1); element.add(2);
                 new_hero.setElementStats(element);
-                new_hero.setSprite("resources/images/Characters/newgersemi.png");
+                new_hero.setSprite("resources/images/Characters/gersemi.png");
             }
             case VALI -> {
                 new_hero = new AutonomousHero("Váli", 100, 100, "Forgotten Child of Loki", id);
                 element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
                 new_hero.setElementStats(element);
-                new_hero.setSprite("resources/images/Characters/newvali.png");
+                new_hero.setSprite("resources/images/Characters/vali.png");
             }
             case JORUNN -> {
                 new_hero = new AutonomousHero("Jorunn", 100, 100, "Silent Child of Skadi", id);
@@ -47,7 +47,8 @@ public class AutonomousHeroBuilder {
                 new_hero = new AutonomousHero("Váli", 100, 100, "Forgotten Child of Loki", id);
                 element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
                 new_hero.setElementStats(element);
-                new_hero.setSprite("resources/images/Characters/newvali.png");
+                new_hero.setSprite("resources/images/Characters/vali.png");
+                new_hero.setInfectedSprite("resources/images/Characters/cursed_vali.png");
             }
         }
 
