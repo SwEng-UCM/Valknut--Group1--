@@ -57,7 +57,7 @@ import me.view.Story;
  	private List<Hero> heroes = new ArrayList<>();
  	private List<String> story;
  	private List<List<Enemy>> combats;
- 	private final String[] index = {"s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s"};
+ 	private final String[] index = {"s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s", "end"};
  	private transient Story s;
  	private int bookmark = 0;
  	private Random rand = new Random();
@@ -209,6 +209,9 @@ import me.view.Story;
 	 		else if(story_or_combat == "fc") {
 	 			game.finalCombat();
 	 			game.startNewCmb();
+	 		}
+	 		else if(story_or_combat == "end") {
+	 			game.end();
 	 		}
  		}
  		// else if (n == null) {

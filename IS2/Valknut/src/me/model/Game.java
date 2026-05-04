@@ -325,6 +325,6 @@ public class Game {
     }
 	
 	public void end() {
-		ctrl.exit();
+		ctrl.onEnd();
 	}
 }

@@ -85,6 +85,10 @@ public class Controller {
     	controlPanel.onStory(game, story);
     }
     
+    public void onEnd() {
+    	controlPanel.onEnd();
+    }
+    
     public void onCombat() {
     	controlPanel.onCombat(game);
     }

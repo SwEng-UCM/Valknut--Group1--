@@ -17,6 +17,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private StoryScreen storyScreen;
 	private final Controller _ctrl;
 	private final Game game;
+	private EndScreen endscreen;
 		
 	public CtrlPanel(Controller ctrl, Game game) {
 		_ctrl = ctrl;
@@ -125,20 +126,22 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	
 	private void combatGUI(Game game) {
 		combatScreen = CombatScreen.getInstance(_ctrl, game);
-		//mainPanel.remove(storyScreen);
 		combatScreen.setComponents();
 		mainPanel.add(combatScreen, "COMBAT SCREEN");
 		cardLayout.show(mainPanel, "COMBAT SCREEN");
 	}
 	
 	private void storyGUI(Game game, String story) {
-		// storyScreen.removeAll();
-		System.out.println("I'm control panel calling storyGui");
 		storyScreen = StoryScreen.getInstance(_ctrl, game);
 		storyScreen.setText(story);
-//		mainPanel.remove(combatScreen);
 		mainPanel.add(storyScreen, "STORY SCREEN");
 		cardLayout.show(mainPanel, "STORY SCREEN");
+	}
+
+	public void onEnd() {
+		endscreen = EndScreen.getInstance();
+		mainPanel.add(endscreen, "END SCREEN");
+		cardLayout.show(mainPanel, "END SCREEN");
 	}
 	
 }
