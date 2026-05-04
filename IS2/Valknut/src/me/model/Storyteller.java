@@ -180,11 +180,6 @@ import me.view.Story;
  		combats.add(null);
  		story.add(s.chapterFinal(new ArrayList<>()));
  	}
-	
-	
-// 	public void narrate() {
-// 		game.startNewCmb(combat1);
-// 	}
  	
  	public void addHero(Hero h) {
  		heroes.add(h);

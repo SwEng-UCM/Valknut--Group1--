@@ -33,6 +33,14 @@ public class StoryScreen extends JPanel {
  		initGui();
  	}
  	
+ 	  @Override
+ 	    protected void paintComponent(Graphics g) {
+ 	        super.paintComponent(g);
+ 	        if (backGround != null) {
+ 	            g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
+ 	        }
+ 	    }
+ 	
  	 public static StoryScreen getInstance(Controller ctrl, Game game){
          if(instance == null)
              instance = new StoryScreen(ctrl, game);
