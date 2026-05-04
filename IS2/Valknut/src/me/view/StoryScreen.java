@@ -22,7 +22,9 @@ public class StoryScreen extends JPanel {
  	private final Game game;
  	private static StoryScreen instance;
  	private JLabel story;
+ 	private JPanel storyPanel = new JPanel();
  	private Image backGround;
+ 	private JPanel mainPanel;
  	
  	
  	StoryScreen(Controller ctrl, Game game) {
@@ -36,15 +38,6 @@ public class StoryScreen extends JPanel {
              instance = new StoryScreen(ctrl, game);
          return instance;
      }
- 	
-// 	 @Override
-//     protected void paintComponent(Graphics g) {
-//         super.paintComponent(g);
-//         if (backGround != null) {
-//        	 System.out.println("I'm the story screen getting the background");
-//             g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
-//         }
-//     }
 
  	private void initGui() {
  		this.backGround = new ImageIcon(Messages.STORYSCREEN).getImage();
@@ -53,20 +46,14 @@ public class StoryScreen extends JPanel {
 
  		System.out.println("I am StoryScreen  initiating GUI ");
  		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
- 		JPanel mainPanel = new JPanel();
-	    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-	    this.add(mainPanel);
-	    
- 		 
- 		story = new JLabel(text);
-	    mainPanel.add(story);
  		
  		 this.nextButton = new JButton("Next");
  		 this.nextButton.setToolTipText("Next");
  		 //this.nextButton.setIcon(new ImageIcon("resources/images/buttons/menuButton.png"));
  		 this.nextButton.addActionListener((e) -> handleNext());
- 		 JPanel controls = new JPanel(new FlowLayout(FlowLayout.CENTER));
+ 		 JPanel controls = new JPanel();
  		 controls.setOpaque(false);
+ 		controls.setPreferredSize(new Dimension(5000, 100));
  		 controls.add(nextButton);
 
  		 JButton saveButton = new JButton("Save");
@@ -87,21 +74,19 @@ public class StoryScreen extends JPanel {
  		 exitButton.addActionListener(e -> ctrl.exit());
  		 controls.add(exitButton);
 
- 		 mainPanel.add(controls, BorderLayout.PAGE_END);
+ 		 this.add(controls, BorderLayout.PAGE_START);
 //		
  	}
  	
  	public void setText(String t) {
+ 		storyPanel.removeAll();
  		text = t;
  		text = Messages.startFormat + text + Messages.endFormat;
  		story = new JLabel(text);
  		story.repaint();
- 		story.setPreferredSize(new Dimension(650, 50));
- 		this.add(story);
-// 		JPanel aux = new JPanel();
-// 		aux.setPreferredSize(new Dimension(2, 2));
-// 		this.add(aux);
- 		//repaint();
+ 		storyPanel.setPreferredSize(new Dimension(650, 10000));
+ 		storyPanel.add(story);
+ 		this.add(storyPanel, BorderLayout.CENTER);
  		
  	}
  	private void handleNext() {
