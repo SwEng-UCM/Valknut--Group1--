@@ -109,6 +109,22 @@ public class Game {
     	return finalBattle;
     }
 
+    public GameMode getMode() {
+        return mode;
+    }
+
+    public Combat getCombat() {
+        return cb;
+    }
+
+    public Storyteller getStoryteller() {
+        return st;
+    }
+
+    public String getCombatLogSnapshot() {
+        return combatLog.toString();
+    }
+
     public Enemy firstEnemies(Integer i) {
         if (i == 1) {
             return EnemyBuilder.buildEnemy("Ice");
@@ -235,7 +251,7 @@ public class Game {
     public void saveGame() {
 
         if (cb != null) {
-            SaveGameData data = cb.save();
+            SaveGameData data = new SaveGameData(this);
             SaveGameManager.saveGame(data);
         }
     }
@@ -244,10 +260,22 @@ public class Game {
         SaveGameData data = SaveGameManager.loadGame();
 
         if (data != null && cb != null) {
-            cb.restore(data);
-            // controlPanel.onCombat();
+            restore(data);
+            if (ctrl != null) {
+                ctrl.onCombat();
+            }
             System.out.println("Game loaded successfully.");
         }
+    }
+
+    private void restore(SaveGameData data) {
+        cb.restore(data);
+        cb.setGame(this);
+        st.restore(data, this);
+        finalBattle = data.isFinalBattle();
+        mode = data.getMode();
+        combatLog = new StringBuilder(data.getCombatLog());
+        players = new ArrayList<>(cb.getHeroes());
     }
 
     public void selectCharacter(HeroEnum h, int player) {

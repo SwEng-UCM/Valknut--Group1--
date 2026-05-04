@@ -18,7 +18,7 @@ public class Combat implements Serializable {
     private int turn;
     private boolean exit;
     private int lastTarjet;
-    private Game game;
+    private transient Game game;
 
     public Combat(Game game){
         heroes = new ArrayList<>(); //initial values are almost random
@@ -28,6 +28,11 @@ public class Combat implements Serializable {
         turn = 1; 
         exit = false;
         this.game = game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+        reconnectHeroes();
     }
 
     public List<Hero> getHeroes(){
@@ -319,6 +324,9 @@ public class Combat implements Serializable {
         this.heroes.clear();
         this.heroes.addAll(restored.getHeroes());
 
+        this.infected.clear();
+        this.infected.addAll(restored.getInfected());
+
         this.enemies.clear();
         this.enemies.addAll(restored.getEnemies());
 
@@ -328,6 +336,17 @@ public class Combat implements Serializable {
         this.turn = restored.turn();
         this.lastTarjet = restored.getLastTarjet();
         this.exit = restored.exit();
+        reconnectHeroes();
+    }
+
+    private void reconnectHeroes() {
+        for (Hero hero : heroes) {
+            hero.setCombat(this);
+        }
+
+        for (Hero hero : infected) {
+            hero.setCombat(this);
+        }
     }
 
     public String run(){

@@ -83,9 +83,12 @@ public class MainMenu extends JPanel {
         );
         btnPlay.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.charactersScreen();});
 
-        // btnLoad = new JButton("LOAD GAME");
-        // btnLoad.setPreferredSize(new Dimension(200, 80));
-        // btnLoad.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.loadGame();});
+        btnLoad = new JButton("LOAD GAME");
+        btnLoad.setPreferredSize(new Dimension(180, 60));
+        btnLoad.addActionListener(e -> {
+            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            _ctrl.loadGame();
+        });
 
         btnMP = ViewUtils.createButton(
                 "resources/images/Buttons/multiButton_NS.png",
@@ -118,8 +121,8 @@ public class MainMenu extends JPanel {
         gbc.gridx = 1;
         buttonPanel.add(btnPlay, gbc);
 
-        // gbc.gridx = 2;
-        // buttonPanel.add(btnLoad, gbc);
+        gbc.gridx = 2;
+        buttonPanel.add(btnLoad, gbc);
 
         gbc.gridx = 3;
         buttonPanel.add(btnSettings, gbc);
