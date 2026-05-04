@@ -53,7 +53,7 @@ public class UseItemCommand implements Command {
 
     @Override
     public boolean canUndo() {
-        return false;
+        return previousState != null;
     }
 
     @Override

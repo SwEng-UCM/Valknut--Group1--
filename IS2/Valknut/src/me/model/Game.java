@@ -8,8 +8,6 @@ import me.model.items.*;
 import me.model.save.*;
 import me.socket.MultiplayerManager;
 import me.view.CombatView;
-import me.view.Messages;
-import me.model.Storyteller; 
 
 public class Game {
     
@@ -214,8 +212,11 @@ public class Game {
         boolean finishedAction = false;
 
         if (combatOption == CombatOption.UNDO) {
-            if (lastUndoableCommand != null && lastUndoableCommand.undo())
+            Command undoCommand = CommandFactory.createCommand(cb, cv, getCurrentHero(), combatOption, target, item, lastUndoableCommand);
+
+            if (undoCommand != null && undoCommand.execute()) {
                 lastUndoableCommand = null;
+            }
 
             return false;
         }

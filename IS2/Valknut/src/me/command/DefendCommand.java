@@ -59,7 +59,7 @@ public class DefendCommand implements Command {
 
     @Override
     public boolean canUndo() {
-        return false;
+        return previousState != null;
     }
 
     @Override
