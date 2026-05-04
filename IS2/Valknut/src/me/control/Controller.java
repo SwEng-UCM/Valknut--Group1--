@@ -16,7 +16,7 @@ public class Controller {
 
     private Controller() {
         this.game = new Game(this);
-        controlPanel = new CtrlPanel(this, game);
+        controlPanel = new CtrlPanel(this);
     }
     
 

@@ -97,7 +97,7 @@ public class MultiplayerManager extends JFrame{
     }
 
     public void chooseCharacter(HeroEnum he){
-        characterSelection = CharacterSelection.getInstance(null, null);
+        characterSelection = CharacterSelection.getInstance(null);
         System.err.println(he.toString());
         characterSelection.selectCharacter(he);
     }
@@ -108,7 +108,7 @@ public class MultiplayerManager extends JFrame{
 
     public void initCS(){
         if(combatScreen == null)
-            combatScreen = CombatScreen.getInstance(null, null);
+            combatScreen = CombatScreen.getInstance(null);
     }
 
     public void continueCombat(){
