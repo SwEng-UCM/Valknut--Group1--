@@ -217,7 +217,7 @@ public class Combat implements Serializable {
     public void checkAutonomousTurn(){
         if(turn == 2){
             Hero h = heroes.get(1);
-            if(h.isAutonomous()){
+            if(h.isAutonomous()) {
                 h.does(null);
                 turn++;
             }
