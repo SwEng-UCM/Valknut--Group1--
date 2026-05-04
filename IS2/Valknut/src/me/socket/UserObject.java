@@ -25,8 +25,9 @@ public abstract class UserObject extends Hero implements User {
     }
 
     @Override
-    public void does(Request rq){
+    public String does(Request rq){
         send(rq);
+        return null;
     }
 
     @Override
