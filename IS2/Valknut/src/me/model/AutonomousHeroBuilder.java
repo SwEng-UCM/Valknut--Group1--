@@ -18,30 +18,35 @@ public class AutonomousHeroBuilder {
                 element.add(1); element.add(2); element.add(3); element.add(1); element.add(2);
                 new_hero.setElementStats(element);
                 new_hero.setSprite("resources/images/Characters/gersemi.png");
+                new_hero.setInfectedSprite("resources/images/Characters/cursed_gersemi.png");
             }
             case VALI -> {
                 new_hero = new AutonomousHero("Váli", 100, 100, "Forgotten Child of Loki", id);
                 element.add(2); element.add(3); element.add(2); element.add(1); element.add(1);
                 new_hero.setElementStats(element);
                 new_hero.setSprite("resources/images/Characters/vali.png");
+                new_hero.setInfectedSprite("resources/images/Characters/cursed_vali.png");
             }
             case JORUNN -> {
                 new_hero = new AutonomousHero("Jorunn", 100, 100, "Silent Child of Skadi", id);
                 element.add(3); element.add(1); element.add(2); element.add(2); element.add(1);
                 new_hero.setElementStats(element);
                 new_hero.setSprite("resources/images/Characters/jorunn.png");
+                new_hero.setInfectedSprite("resources/images/Characters/cursed_jorunn.png");
             }
             case VIGGO -> {
                 new_hero = new AutonomousHero("Viggo", 100, 100, "Furious Child of Vidar", id);
                 element.add(1); element.add(2); element.add(1); element.add(2); element.add(3);
                 new_hero.setElementStats(element);
                 new_hero.setSprite("resources/images/Characters/viggo.png");
+                new_hero.setInfectedSprite("resources/images/Characters/cursed_viggo.png");
             }
             case MAGNI -> {
                 new_hero = new AutonomousHero("Magni", 100, 100, "Mortal Child", id);
                 element.add(1); element.add(2); element.add(2); element.add(3); element.add(1);
                 new_hero.setElementStats(element);
                 new_hero.setSprite("resources/images/Characters/magni.png");
+                new_hero.setInfectedSprite("resources/images/Characters/cursed_magni.png");
             }
             default -> {
                 new_hero = new AutonomousHero("Váli", 100, 100, "Forgotten Child of Loki", id);

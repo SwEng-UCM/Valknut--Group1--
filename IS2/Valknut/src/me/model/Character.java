@@ -91,7 +91,7 @@ public abstract class Character implements Serializable {
     
     public ImageIcon getInfectedSprite(int width, int height) {
     	if (infectedSprite == null && infectedSpritePath != null) {
-    		setSprite(infectedSpritePath);
+    		setInfectedSprite(infectedSpritePath);
     	}
     	Image dimg = this.infectedSprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     	
