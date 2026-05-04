@@ -206,6 +206,7 @@ public class Game {
     
     public void setInfected(int infected) {
     	cb.setInfected(infected);
+    	st.setInfected(infected);
     }
 
     public boolean action(CombatOption combatOption, int target,Item item) {

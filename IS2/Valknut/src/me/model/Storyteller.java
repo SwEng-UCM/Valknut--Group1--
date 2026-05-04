@@ -189,7 +189,12 @@ import me.view.Story;
  	public void addHero(Hero h) {
  		heroes.add(h);
  	}
-
+ 	
+ 	public void setInfected(int infectedHero) {
+    	infected.add(heroes.get(infectedHero));
+    	s.setInfected(infectedHero);
+    }
+ 	
  	public void next(Combat cb) {
  		
  		if (bookmark == index.length) game.end();
