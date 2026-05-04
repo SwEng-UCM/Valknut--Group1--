@@ -23,8 +23,8 @@ public abstract class Character implements Serializable {
     protected int max_life;
     private boolean escaped;
     private boolean defend;
-    private transient BufferedImage sprite;
-    private String spritePath;
+    private transient BufferedImage sprite, infectedSprite;
+    private String spritePath, infectedSpritePath;
 
     public Character(String name, int life, int max_life) {
         this.name = name;
@@ -67,6 +67,26 @@ public abstract class Character implements Serializable {
     	this.spritePath = img;
     	try {
     		this.sprite = ImageIO.read(new File(img));
+    	} catch (IOException e) {
+    		
+    	}
+    }
+    
+    public ImageIcon getInfectedSprite(int width, int height) {
+    	if (infectedSprite == null && infectedSpritePath != null) {
+    		setSprite(infectedSpritePath);
+    	}
+    	Image dimg = this.infectedSprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    	
+    	ImageIcon imageIcon = new ImageIcon(dimg);
+    	
+    	return imageIcon;
+    }
+    
+    public void setInfectedSprite(String img) {
+    	this.infectedSpritePath = img;
+    	try {
+    		this.infectedSprite = ImageIO.read(new File(img));
     	} catch (IOException e) {
     		
     	}

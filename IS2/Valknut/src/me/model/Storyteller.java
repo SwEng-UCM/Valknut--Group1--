@@ -7,6 +7,7 @@ package me.model;
  import java.util.Queue;
 import java.util.Random;
 
+import me.control.Controller;
 import me.model.save.SaveGameData;
 import me.view.Story;
 
@@ -68,7 +69,7 @@ import me.view.Story;
 		
   	}
 
- 	public void restore(SaveGameData data, Game game) {
+ 	public void restore(SaveGameData data, Controller ctrl_) {
  		Storyteller restored = data.getStoryteller();
  		if (restored == null) {
  			return;

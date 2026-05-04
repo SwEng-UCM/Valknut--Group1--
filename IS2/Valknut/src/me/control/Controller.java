@@ -1,6 +1,9 @@
 package me.control;
 
+import java.util.List;
+
 import me.model.*;
+import me.model.Game.GameMode;
 import me.view.CtrlPanel;
 
 public class Controller {
@@ -100,5 +103,21 @@ public class Controller {
 
     public void next(){
         game.next();
+    }
+    
+    public boolean isMultiplayer() {
+    	return game.isMultiplayer();
+    }
+    
+    public Game getGame() {
+    	return game;
+    }
+    
+    public void selectCharacter(HeroEnum h, int player) {
+    	game.selectCharacter(h, player);
+    }
+    
+    public void setMode(GameMode m) {
+    	game.setMode(m);
     }
 }

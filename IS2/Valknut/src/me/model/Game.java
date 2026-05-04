@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
+import me.control.Controller;
 import me.model.items.*;
 import me.model.save.*;
 import me.socket.MultiplayerManager;
@@ -275,7 +276,7 @@ public class Game {
     private void restore(SaveGameData data) {
         cb.restore(data);
         cb.setGame(this);
-        st.restore(data, this);
+        st.restore(data, ctrl);
         finalBattle = data.isFinalBattle();
         mode = data.getMode();
         combatLog = new StringBuilder(data.getCombatLog());

@@ -152,7 +152,7 @@ public class CombatScreen extends JPanel{
     			for (Hero h : infected) {
 	                if (h.isAlive() && !h.escaped()) {
 	                    JLabel heroLabel = new JLabel();
-	                    heroLabel.setIcon(h.getSprite(150, 150));
+	                    heroLabel.setIcon(h.getInfectedSprite(150, 150));
 	                    enemyPanel.add(heroLabel);
 	                }
 	            }
@@ -161,7 +161,7 @@ public class CombatScreen extends JPanel{
 	            for (Hero h : infected) {
 	                if (h.isAlive() && !h.escaped()) {
 	                    JButton heroButton= new JButton();
-	                    heroButton.setIcon(h.getSprite(150, 150));
+	                    heroButton.setIcon(h.getInfectedSprite(150, 150));
 	                    heroButton.setBorderPainted(false);
 	                    heroButton.setContentAreaFilled(false);
 	                    heroButton.addActionListener(ev -> {
@@ -195,10 +195,8 @@ public class CombatScreen extends JPanel{
                         game.action(c, 1, null);
                         textLog = game.consumeCombatLog();
                         refresh();
-//                    	initGUI();
-//                    	setComponents();
-//                    	this.revalidate();
-//                    	this.repaint();
+                    	this.revalidate();
+                    	this.repaint();
                     });
 
                 case USE_ITEM -> actionButton.addActionListener(ev -> {
@@ -209,20 +207,19 @@ public class CombatScreen extends JPanel{
                         game.action(c, 1, null);
                         textLog = game.consumeCombatLog();
                         refresh();
-//                    	initGUI();
-//                    	setComponents();
-//                    	this.revalidate();
-//                    	this.repaint();
+                    	this.revalidate();
+                    	this.repaint();
                     });
 
                 case STATS -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
-                        textLog = game.consumeCombatLog();
-                        refresh();
+                        //textLog = game.consumeCombatLog();
+                        //refresh();
                     });
                     
                 case UNDO -> actionButton.addActionListener(ev -> {
                         game.action(c, 1, null);
+                        refresh();
                         this.revalidate();
                         this.repaint();
                     });
@@ -425,6 +422,8 @@ public class CombatScreen extends JPanel{
     		game.attackHero(h);
     		toggleAttack();
     		refresh();
+    		this.repaint();
+    		this.revalidate();
     	}
     }
     

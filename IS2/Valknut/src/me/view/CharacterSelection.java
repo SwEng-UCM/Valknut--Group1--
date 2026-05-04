@@ -19,7 +19,6 @@ public class CharacterSelection extends JPanel {
     private static CharacterSelection instance;
 
     private final Controller ctrl;
-    private final Game game;
     private MultiplayerManager mpm = null;
     private Map<HeroEnum, NullType> selectedC;
 
@@ -37,12 +36,11 @@ public class CharacterSelection extends JPanel {
 
     private int player = 1;
 
-    private CharacterSelection(Controller ctrl, Game game) {
+    private CharacterSelection(Controller ctrl) {
         this.ctrl = ctrl;
-        this.game = game;
         selectedC = new HashMap<>();
-        if(game.isMultiplayer()){
-            this.mpm = MultiplayerManager.getInstacne(ctrl,game);
+        if(ctrl.isMultiplayer()){
+            this.mpm = MultiplayerManager.getInstacne(ctrl, ctrl.getGame());
         }
         initGUI();
         setComponents();
@@ -50,7 +48,7 @@ public class CharacterSelection extends JPanel {
 
     public static CharacterSelection getInstance(Controller ctrl, Game game) {
         if (instance == null) {
-            instance = new CharacterSelection(ctrl, game);
+            instance = new CharacterSelection(ctrl);
         }
         return instance;
     }
@@ -112,14 +110,14 @@ public class CharacterSelection extends JPanel {
         mortalPanel.setOpaque(false);
 
         JLabel freyaImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/newgersemi.png")
+                new ImageIcon("resources/images/Characters/gersemi.png")
                         .getImage()
                         .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));
         freyaImage.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lokiImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/newvali.png")
+                new ImageIcon("resources/images/Characters/vali.png")
                         .getImage()
                         .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));
@@ -262,7 +260,7 @@ public class CharacterSelection extends JPanel {
         if(player > 4 || (mpm != null && player > 2))
             return;
 
-        game.selectCharacter(h, player);
+        ctrl.selectCharacter(h, player);
         selectionLabel.setText("Player " + player + " selected " + h.toString().toUpperCase() + ".");
 
         switch (h) {
@@ -312,7 +310,7 @@ public class CharacterSelection extends JPanel {
         }
 
         if(player == 2){
-            game.setMode(Game.GameMode.SOLO);
+            ctrl.setMode(Game.GameMode.SOLO);
             HeroEnum h = HeroEnum.randomEnum();
             while(selectedC.containsKey(h))
                 h = HeroEnum.randomEnum();
