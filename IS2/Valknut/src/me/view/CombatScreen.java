@@ -139,7 +139,6 @@ public class CombatScreen extends JPanel{
 	                    enemy_buttons.add(enemyButton);
 	                    enemyButton.addActionListener(ev -> {
 	                    	attackEnemy(e);
-	                    	showText("You attack!");
 	                    });
 	                    enemyPanel.add(enemyButton);
 	                    enemy_num++;
@@ -239,12 +238,12 @@ public class CombatScreen extends JPanel{
         }
 		
 		JPanel textPanel = new JPanel(new BorderLayout());
-		combatText = new JTextArea(4, 20);
+		combatText = new JTextArea(5, 20);
 		combatText.setEditable(false);
 		textPanel.add(new JScrollPane(combatText), BorderLayout.CENTER);
 
 		JButton continueBtn = new JButton("Continue");
-		continueBtn.addActionListener(e -> actionLayout.show(actionContainer, "COMMANDS"));
+		continueBtn.addActionListener(e -> {actionLayout.show(actionContainer, "COMMANDS"); refresh();});
 		textPanel.add(continueBtn, BorderLayout.SOUTH);
 		
 		actionContainer.add(commandsPanel, "COMMANDS");
@@ -299,7 +298,9 @@ public class CombatScreen extends JPanel{
     	
     	toggleAttack();
     	
-    	refresh();
+    	showText(game.consumeCombatLog());
+    	
+    	//refresh();
     }
     
     private void useItem() {

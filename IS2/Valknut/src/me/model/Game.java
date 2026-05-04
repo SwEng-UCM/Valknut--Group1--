@@ -22,6 +22,7 @@ public class Game {
     private Combat cb;
     private Command lastCommand;
     private boolean finalBattle = false;
+    private StringBuilder combatLog = new StringBuilder();
 
     public enum GameMode{
         SOLO, LOCAL, MULTIPLAYER;
@@ -52,6 +53,12 @@ public class Game {
 
     public boolean isMultiplayer(){
         return mode == GameMode.MULTIPLAYER;
+    }
+    
+    public String consumeCombatLog() {
+        String text = combatLog.toString();
+        combatLog.setLength(0);
+        return text;
     }
 
     public void addHero(Hero e){
@@ -143,17 +150,27 @@ public class Game {
     }
 
     private void executeEnemyTurn() {
+    	String s = cb.update();
+        combatLog.append(s);
+        
         if (cb.turn() == cb.getHeroes().size() + 1) {	
-            cv.print(cb.enemyTurnToString());
-
-            for (Enemy e : cb.getEnemies()) {
-                cv.print(cb.attack(0));
-                cb.setTurn(cb.turn() + 1);
+            combatLog.append(cb.enemyTurnToString());
+            
+            int numEnemies = cb.getEnemies().size();
+            for (int i = 0; i < numEnemies; i++) {
+                // Set turn so cb.attack() knows which enemy is acting
+                cb.setTurn(cb.getHeroes().size() + 1 + i);
+                combatLog.append(cb.attack(0)); // 0 = enemy turn, target selected internally
             }
 
+//            for (Enemy e : cb.getEnemies()) {
+//                combatLog.append(cb.attack(0));
+//                cb.setTurn(cb.turn() + 1);
+//            }
+            
+            //System.out.println("FULL LOG:\n" + combatLog.toString());
+
             cb.setTurn(1);
-            String s = cb.update();
-            cv.printLine(s);
         }
         
         if(cb.getExit()) {
@@ -162,7 +179,7 @@ public class Game {
     }
     
     public void attackHero(Hero defender) {
-    	cv.print(cb.attackHero(getCurrentHero(), defender));
+    	combatLog.append(cb.attackHero(getCurrentHero(), defender));
     	cb.setTurn(cb.turn() + 1);
     	
     	if (cb.turn() >= cb.getHeroes().size() + cb.getInfected().size() + 1) cb.setTurn(1);

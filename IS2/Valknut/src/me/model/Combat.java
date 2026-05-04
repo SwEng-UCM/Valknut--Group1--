@@ -164,7 +164,7 @@ public class Combat implements Serializable {
 
         if (turn < heroes.size() + 1) {
             if(i == 0){
-                sb.append("NO TARJET").append(Messages.NEW_LINE);
+                sb.append("NO TARGET").append(Messages.NEW_LINE);
                 return sb.toString();
             }
             Hero h = heroes.get(turn - 1);
