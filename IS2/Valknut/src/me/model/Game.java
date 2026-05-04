@@ -235,6 +235,7 @@ public class Game {
             finishedAction = command.execute(combatLog);
 
             if (command.canUndo()) {
+            	cb.setTurn(cb.turn() - 1);
                 lastUndoableCommand = command;
             }
 
