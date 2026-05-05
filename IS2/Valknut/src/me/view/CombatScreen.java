@@ -20,8 +20,8 @@ public class CombatScreen extends JPanel{
     private MultiplayerManager mpm;
     private Image backGround;
     private CardLayout actionLayout;
-    private List<JButton> enemy_buttons, command_buttons;
-    private JPanel commandsPanel, heroPanel, enemyPanel, actionContainer;
+    private List<JButton> enemy_buttons, command_buttons, final_battle_buttons;
+    private JPanel commandsPanel, heroPanel, enemyPanel, actionContainer, finalBattleCommandPanel;
     private JTextArea combatText;
     private String textLog;
     private boolean toggleVariable = false;
@@ -179,7 +179,12 @@ public class CombatScreen extends JPanel{
         commandsPanel.setSize(new Dimension(5000, 500));
         commandsPanel.setOpaque(false);
         commandsPanel.setLayout(new BoxLayout(commandsPanel, BoxLayout.X_AXIS));
+        finalBattleCommandPanel = new JPanel();
+        finalBattleCommandPanel.setSize(new Dimension(5000, 500));
+        finalBattleCommandPanel.setOpaque(false);
+        finalBattleCommandPanel.setLayout(new BoxLayout(finalBattleCommandPanel, BoxLayout.X_AXIS));
         command_buttons = new ArrayList<>(CombatOption.values().length);
+        final_battle_buttons = new ArrayList<>(CombatOption.values().length);
         
         for (CombatOption c: CombatOption.values()) {
         	JButton actionButton = ViewUtils.createButton(
@@ -230,18 +235,24 @@ public class CombatScreen extends JPanel{
                 });
         	}
         	
-        	if (!ctrl.getFinalBattle() || (ctrl.getTurn() - 1 < heroes.size() && c != CombatOption.RUN) || (mpm != null && c != CombatOption.UNDO)) {
+        	if (!ctrl.getFinalBattle() || c != CombatOption.RUN || (mpm != null && c != CombatOption.UNDO)) {
 	        	command_buttons.add(actionButton);
 	        	commandsPanel.add(actionButton);
         	}
-        	
-        	else {
-        		if (c == CombatOption.ATTACK) {
-        			command_buttons.add(actionButton);
-    	        	commandsPanel.add(actionButton);
-        		}
-        	}
         }
+        
+        JButton attackButton = ViewUtils.createButton(
+                "resources/images/Buttons/attackButton_NS.png",
+                "resources/images/Buttons/attackButton_S.png"
+        );
+    	attackButton.setPreferredSize(new Dimension(1000, 100));
+    	attackButton.addActionListener(ev -> {
+			if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
+				return;
+			toggleAttack();
+		});
+    	final_battle_buttons.add(attackButton);
+        finalBattleCommandPanel.add(attackButton);
 		
 		JPanel textPanel = new JPanel(new BorderLayout());
 		combatText = new JTextArea(5, 20);
@@ -262,6 +273,7 @@ public class CombatScreen extends JPanel{
 		
 		actionContainer.add(commandsPanel, "COMMANDS");
 		actionContainer.add(textPanel, "TEXT");
+		actionContainer.add(finalBattleCommandPanel, "INFECTED COMMANDS");
 
         this.add(heroPanel, BorderLayout.WEST);
         this.add(enemyPanel, BorderLayout.EAST);
@@ -395,6 +407,10 @@ public class CombatScreen extends JPanel{
 
     public void refresh() {
 		SwingUtilities.invokeLater(() -> {
+			
+			if (ctrl.getFinalBattle() && ctrl.getTurn() - 1 < ctrl.getHeroes().size()) changeActionPanel("COMMANDS");
+			
+			else if (ctrl.getFinalBattle() && ctrl.getTurn() - 1 >= ctrl.getHeroes().size()) changeActionPanel("INFECTED COMMANDS");
 
 			enemyPanel.removeAll();
 			heroPanel.removeAll();
