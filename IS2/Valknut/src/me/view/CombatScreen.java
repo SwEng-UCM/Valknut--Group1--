@@ -198,8 +198,6 @@ public class CombatScreen extends JPanel{
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
 					ctrl.action(c, 1, null);
-					textLog = ctrl.consumeCombatLog();
-					showText(textLog);
 					refresh();
 				});
 
@@ -207,16 +205,12 @@ public class CombatScreen extends JPanel{
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
 					useItem();
-					textLog = ctrl.consumeCombatLog();
-					showText(textLog);
 				});
 
                 case RUN -> actionButton.addActionListener(ev -> {
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
 					ctrl.action(c, 1, null);
-					textLog = ctrl.consumeCombatLog();
-					showText(textLog);
 					refresh();
 				});
 
@@ -258,14 +252,8 @@ public class CombatScreen extends JPanel{
 		continueBtn.addActionListener(e -> {
 			if(mpm != null){
 				int id = mpm.getUser().getId();
-				if(id == ctrl.getTurn()){
-					ViewUtils.showErrorMsg("Wait for the other Player");
-					return;
-				}
-				else{
-					Request rq = new Request(Request.RequestType.COMBATOPTION, id);
-					mpm.send(rq);
-				}
+				Request rq = new Request(Request.RequestType.COMBATOPTION, id);
+				mpm.send(rq);
 			}
 			changeActionPanel("COMMANDS");
 			refresh();
@@ -384,8 +372,10 @@ public class CombatScreen extends JPanel{
     			ctrl.action(CombatOption.USE_ITEM, 1, i);
     			textLog = ctrl.consumeCombatLog();
     			this.remove(itemsPanel);
-    			this.add(actionContainer);
+    			this.add(actionContainer, BorderLayout.PAGE_END);
     			refresh();
+    			this.revalidate();
+    			this.repaint();
     		});
         	itemsPanel.add(itemChoiceButton);
     	}
@@ -394,8 +384,10 @@ public class CombatScreen extends JPanel{
 		returnButton.addActionListener(ev -> {
 			ctrl.action(CombatOption.USE_ITEM, 1, null);
 			this.remove(itemsPanel);
-			this.add(actionContainer);
+			this.add(actionContainer, BorderLayout.PAGE_END);
 			refresh();
+			this.revalidate();
+			this.repaint();
 		});
 		itemsPanel.add(returnButton);
     	this.add(itemsPanel, BorderLayout.PAGE_END);
