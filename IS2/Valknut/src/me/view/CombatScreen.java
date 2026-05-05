@@ -440,6 +440,10 @@ public class CombatScreen extends JPanel{
 			}
 			heroPanel.revalidate();
 			heroPanel.repaint();
+			
+			if (heroes.size() == 0) {
+				ctrl.onGameOver();
+			}
 
 			// setComponents();
     	});

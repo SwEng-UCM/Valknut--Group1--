@@ -50,9 +50,10 @@ public class GameOverScreen extends JPanel{
 		 endPanel.setPreferredSize(new Dimension(650, 10000));
 		 endPanel.setBackground(new Color(105,0, 0));
 		 
-		 Font f = new Font(null, Font.PLAIN, 45);
-		 end = new JLabel("YOUR PARTY DIED BUT WILL NOT REACH VALHALLA, GAME OVER");
+		 Font f = new Font(null, Font.PLAIN, 30);
+		 end = new JLabel("YOUR PARTY DIED BUT WILL NOT REACH VALHALLA, GAME OVER!");
 		 end.setFont(f);
+		 end.setPreferredSize(new Dimension(1000, 500));
 		 end.setForeground(new Color(255,255, 255)); //letters color
 		 endPanel.add(end);
 		 this.add(endPanel, BorderLayout.CENTER);

@@ -51,7 +51,7 @@ public class EndScreen extends JPanel{
 		 endPanel.setBackground(new Color(105,0, 0));
 		 
 		 Font f = new Font(null, Font.PLAIN, 45);
-		 end = new JLabel("The End");
+		 end = new JLabel("The End...");
 		 end.setFont(f);
 		 end.setForeground(new Color(255,255, 255)); //letters color
 		 endPanel.add(end);

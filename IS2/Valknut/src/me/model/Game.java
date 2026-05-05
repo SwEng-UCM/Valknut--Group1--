@@ -183,8 +183,12 @@ public class Game {
             cb.setTurn(1);
         }
         
-        if(cb.getExit()) {
+        if(cb.getExit() && !cb.heroesLose()) {
             next();
+        }
+        
+        else if (cb.getExit() && cb.heroesLoose()) {
+        	ctrl.onGameOver();
         }
     }
     

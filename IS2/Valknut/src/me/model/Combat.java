@@ -16,7 +16,7 @@ public class Combat implements Serializable {
     volatile private List<Enemy> enemies;
     private List<Item> items;
     private int turn;
-    private boolean exit;
+    private boolean exit, heroes_lose = false;
     private int lastTarjet;
     private transient Game game;
 
@@ -297,9 +297,10 @@ public class Combat implements Serializable {
             exit = true;
             SaveGameManager.saveGame(save(), "autosave.dat");
         }
-        else if(heroesLoose()){
+        else if(heroesLoose() || heroes.isEmpty()){
             sb.append(Messages.BATTLE_LOSS);
             exit = true;
+            heroes_lose = true;
             SaveGameManager.saveGame(save(), "autosave.dat");
         }
 
@@ -356,5 +357,9 @@ public class Combat implements Serializable {
         else{
             return Messages.PLAYER_RUNFAIL + Messages.NEW_LINE;
         }
+    }
+    
+    public boolean heroesLose() {
+    	return heroes_lose;
     }
 }
