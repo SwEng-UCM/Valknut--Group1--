@@ -1,9 +1,8 @@
 package me.model.items;
 
+import java.io.Serializable;
 import me.model.Character;
 import me.view.Messages;
-
-import java.io.Serializable;
 
 public abstract class Item implements Serializable {
     private static final long serialVersionUID = 1L;

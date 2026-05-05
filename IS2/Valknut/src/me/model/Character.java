@@ -23,7 +23,6 @@ public abstract class Character implements Serializable {
     private int max_life;
     private boolean escaped;
     private boolean defend;
-    private transient BufferedImage sprite, infectedSprite;
     private String spritePath, infectedSpritePath;
 
     public Character(String name, int life, int max_life) {
@@ -67,44 +66,38 @@ public abstract class Character implements Serializable {
             this.alive = true;
         }
     }
-    
-    public ImageIcon getSprite(int width, int height) {
-    	if (sprite == null && spritePath != null) {
-    		setSprite(spritePath);
-    	}
-    	Image dimg = this.sprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-    	
-    	ImageIcon imageIcon = new ImageIcon(dimg);
-    	
-    	return imageIcon;
+
+    public void setSprite(String spritePath){
+        this.spritePath = spritePath;
+    }
+
+    public void setInfectedSprite(String infectedSpritePath){
+        this.infectedSpritePath = infectedSpritePath;
     }
     
-    public void setSprite(String img) {
-    	this.spritePath = img;
-    	try {
-    		this.sprite = ImageIO.read(new File(img));
+    public ImageIcon getSprite(int width, int height) {
+        BufferedImage sprite;
+        try {
+    		sprite = ImageIO.read(new File(spritePath));
+            Image dimg = sprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            return imageIcon;
     	} catch (IOException e) {
-    		
+    		System.err.println("Error at Sprites");
+            return null;
     	}
     }
     
     public ImageIcon getInfectedSprite(int width, int height) {
-    	if (infectedSprite == null && infectedSpritePath != null) {
-    		setInfectedSprite(infectedSpritePath);
-    	}
-    	Image dimg = this.infectedSprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-    	
-    	ImageIcon imageIcon = new ImageIcon(dimg);
-    	
-    	return imageIcon;
-    }
-    
-    public void setInfectedSprite(String img) {
-    	this.infectedSpritePath = img;
-    	try {
-    		this.infectedSprite = ImageIO.read(new File(img));
+    	BufferedImage sprite;
+        try {
+    		sprite = ImageIO.read(new File(infectedSpritePath));
+            Image dimg = sprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            return imageIcon;
     	} catch (IOException e) {
-    		
+    		System.err.println("Error at Sprites");
+            return null;
     	}
     }
 
