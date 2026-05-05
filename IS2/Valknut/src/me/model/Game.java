@@ -230,6 +230,8 @@ public class Game {
 
         cb.updateItems();
         Hero currentHero = getCurrentHero();
+        
+        if (currentHero == null) ctrl.onGameOver();
 
         Command command = CommandFactory.createCommand(cb, cv, currentHero, combatOption, target, item, lastCommand);
         

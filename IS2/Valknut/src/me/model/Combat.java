@@ -218,7 +218,11 @@ public class Combat implements Serializable {
     public String checkAutonomousTurn(){
         StringBuilder sb = new StringBuilder();
         if(turn == 2){
-            Hero h = heroes.get(1);
+        	Hero h;
+        	if (heroes.size() > 1) h = heroes.get(1);
+        	
+        	else h = heroes.get(0);
+        	
             if(h.isAutonomous()) {
                 sb.append(h.does(null)).append(Messages.NEW_LINE);
                 turn++;

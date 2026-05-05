@@ -64,6 +64,6 @@ public class DefendCommand implements Command {
 
     @Override
     public boolean advancesTurn() {
-        return actionExecuted;
+        return true;
     }
 }

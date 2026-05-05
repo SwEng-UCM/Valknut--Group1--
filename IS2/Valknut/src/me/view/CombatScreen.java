@@ -397,45 +397,105 @@ public class CombatScreen extends JPanel{
 		SwingUtilities.invokeLater(() -> {
 
 			enemyPanel.removeAll();
-			enemy_buttons = new ArrayList<>(enemies.size());
-			int enemy_num = 1;
-			for (Enemy e : enemies) {
-				if (e.isAlive()) {
-					e.setEnemyNum(enemy_num);
-					JButton enemyButton = new JButton(e.getSprite(150, 150));
-					enemyButton.setBorderPainted(false);
-					enemyButton.setContentAreaFilled(false);
-					enemyButton.setEnabled(false);
-					enemy_buttons.add(enemyButton);
-					enemyButton.addActionListener(ev -> {
-						attackEnemy(e);
-					});
-					enemyPanel.add(enemyButton);
-					enemy_num++;
+			heroPanel.removeAll();
+			
+			if (!ctrl.getFinalBattle()) {
+				enemy_buttons = new ArrayList<>(enemies.size());
+				int enemy_num = 1;
+				for (Enemy e : enemies) {
+					if (e.isAlive()) {
+						e.setEnemyNum(enemy_num);
+						JButton enemyButton = new JButton(e.getSprite(150, 150));
+						enemyButton.setBorderPainted(false);
+						enemyButton.setContentAreaFilled(false);
+						enemyButton.setEnabled(false);
+						enemy_buttons.add(enemyButton);
+						enemyButton.addActionListener(ev -> {
+							attackEnemy(e);
+						});
+						enemyPanel.add(enemyButton);
+						enemy_num++;
+					}
+					
 				}
 				
-			}
-			enemyPanel.revalidate();
-			enemyPanel.repaint();
-		
-
-			heroPanel.removeAll();
-			for (Hero h : heroes) {
-				if (h.isAlive() && !h.escaped()) {
-					JButton heroButton= new JButton();
-					heroButton.setIcon(h.getSprite(150, 150));
-					heroButton.setBorderPainted(false);
-					heroButton.setContentAreaFilled(false);
-					heroButton.addActionListener(ev -> {
-						attackHero(h);
-					});
-					heroPanel.add(heroButton);
+				for (Hero h : heroes) {
+					if (h.isAlive() && !h.escaped()) {
+						JButton heroButton= new JButton();
+						heroButton.setIcon(h.getSprite(150, 150));
+						heroButton.setBorderPainted(false);
+						heroButton.setContentAreaFilled(false);
+						heroButton.addActionListener(ev -> {
+							attackHero(h);
+						});
+						heroPanel.add(heroButton);
+					}
 				}
 			}
+			
+			else {
+				infected = ctrl.getInfected();
+	        	if (ctrl.getTurn() - 1 >= heroes.size()) {
+	    			for (Hero h : infected) {
+		                if (h.isAlive() && !h.escaped()) {
+		                    JLabel heroLabel = new JLabel();
+		                    heroLabel.setIcon(h.getInfectedSprite(150, 150));
+		                    enemyPanel.add(heroLabel);
+		                }
+		            }
+	    		}
+	    		else {
+		            for (Hero h : infected) {
+		                if (h.isAlive() && !h.escaped()) {
+		                    JButton heroButton= new JButton();
+		                    heroButton.setIcon(h.getInfectedSprite(150, 150));
+		                    heroButton.setBorderPainted(false);
+		                    heroButton.setContentAreaFilled(false);
+		                    heroButton.addActionListener(ev -> {
+		                    	attackHero(h);
+		                    });
+		                    enemyPanel.add(heroButton);
+		                }
+		            }
+	    		}
+	        	
+	        	if(heroes != null){
+	        		if (ctrl.getTurn() - 1 < heroes.size()) {
+	        			for (Hero h : heroes) {
+	    	                if (h.isAlive() && !h.escaped()) {
+	    	                    JLabel heroLabel = new JLabel();
+	    	                    heroLabel.setIcon(h.getSprite(150, 150));
+	    	                    heroPanel.add(heroLabel);
+	    	                }
+	    	            }
+	        		}
+	        		else {
+			            for (Hero h : heroes) {
+			                if (h.isAlive() && !h.escaped()) {
+			                    JButton heroButton= new JButton();
+			                    heroButton.setIcon(h.getSprite(150, 150));
+			                    heroButton.setBorderPainted(false);
+			                    heroButton.setContentAreaFilled(false);
+			                    heroButton.addActionListener(ev -> {
+			                    	attackHero(h);
+			                    });
+			                    heroPanel.add(heroButton);
+			                }
+			            }
+	        		}
+		        }
+			}
+			
+			enemyPanel.revalidate();
+        	enemyPanel.repaint();
 			heroPanel.revalidate();
 			heroPanel.repaint();
 			
-			if (heroes.size() == 0) {
+			if (ctrl.getFinalBattle() && (ctrl.getInfected().size() == 0 || heroes.size() == 0)) {
+				ctrl.next();
+			}
+			
+			else if (heroes.size() == 0) {
 				ctrl.onGameOver();
 			}
 
