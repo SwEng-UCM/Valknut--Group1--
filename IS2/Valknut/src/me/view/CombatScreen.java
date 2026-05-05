@@ -203,6 +203,8 @@ public class CombatScreen extends JPanel{
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
 					ctrl.action(c, 1, null);
+					textLog = ctrl.consumeCombatLog();
+					showText(textLog);
 					refresh();
 				});
 
@@ -263,8 +265,14 @@ public class CombatScreen extends JPanel{
 		continueBtn.addActionListener(e -> {
 			if(mpm != null){
 				int id = mpm.getUser().getId();
-				Request rq = new Request(Request.RequestType.COMBATOPTION, id);
-				mpm.send(rq);
+				if(id == ctrl.getTurn()){
+					ViewUtils.showErrorMsg("Wait for the other Player");
+					return;
+				}
+				else{
+					Request rq = new Request(Request.RequestType.COMBATOPTION, id);
+					mpm.send(rq);
+				}
 			}
 			changeActionPanel("COMMANDS");
 			refresh();
@@ -365,17 +373,15 @@ public class CombatScreen extends JPanel{
 	}
     
     private void useItem() {
-    	this.remove(actionContainer);
-    	this.revalidate();
-    	this.repaint();
     	
     	JPanel itemsPanel = new JPanel();
     	itemsPanel.setSize(new Dimension(500, 500));
     	itemsPanel.setOpaque(false);
     	itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.X_AXIS));
+		
     	Inventory in = ctrl.getHeroItems(); 
     	if (in.getItems().isEmpty()) {
-    		System.out.println("No items to use");
+    		showText("No items to use");
     	}
     	for(Item i : in.getItems()){
     		JButton itemChoiceButton = new JButton(i.getName());
@@ -383,26 +389,20 @@ public class CombatScreen extends JPanel{
     		itemChoiceButton.addActionListener(ev -> {
     			ctrl.action(CombatOption.USE_ITEM, 1, i);
     			textLog = ctrl.consumeCombatLog();
-    			this.remove(itemsPanel);
-    			this.add(actionContainer, BorderLayout.PAGE_END);
-    			refresh();
-    			this.revalidate();
-    			this.repaint();
+				showText(textLog);
     		});
         	itemsPanel.add(itemChoiceButton);
     	}
+		
     	JButton returnButton = new JButton("RETURN");
 		returnButton.setPreferredSize(new Dimension(1000, 100));
 		returnButton.addActionListener(ev -> {
-			ctrl.action(CombatOption.USE_ITEM, 1, null);
-			this.remove(itemsPanel);
-			this.add(actionContainer, BorderLayout.PAGE_END);
-			refresh();
-			this.revalidate();
-			this.repaint();
+			actionLayout.show(actionContainer, "COMMANDS");
 		});
 		itemsPanel.add(returnButton);
-    	this.add(itemsPanel, BorderLayout.PAGE_END);
+
+		actionContainer.add(itemsPanel, "ITEMS");
+		actionLayout.show(actionContainer, "ITEMS");
     }
 
     public void refresh() {

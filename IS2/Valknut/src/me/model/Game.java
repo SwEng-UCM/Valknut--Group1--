@@ -247,6 +247,7 @@ public class Game {
                 cb.setTurn(cb.turn() + 1);
             }
         }
+        System.err.println("GAME -->" + combatLog);
 
         combatLog.append(cb.checkAutonomousTurn());
         

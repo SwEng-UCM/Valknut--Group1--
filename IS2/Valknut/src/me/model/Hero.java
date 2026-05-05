@@ -137,11 +137,11 @@ public class Hero extends Character implements Player {
         i.assignCharacter(this);
             i.use();
         //    using.addItem(i);
-            sb.append(Messages.USED_ITEM).append(i.getName().toUpperCase());
+            sb.append(Messages.USED_ITEM).append(i.toString().toUpperCase());
         //}
         //else
         //    sb.append(Messages.USING_ITEM).append(i.getName().toUpperCase());
-        
+        System.err.println("HERO -->" + sb.toString());
         return sb.toString();
     }
 

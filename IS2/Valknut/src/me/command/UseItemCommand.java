@@ -36,7 +36,6 @@ public class UseItemCommand implements Command {
 
         sb.append(combat.useItem(currentHero, item));
 
-        // Original behavior: item usage does not advance the turn.
         return false;
     }
 
@@ -47,7 +46,6 @@ public class UseItemCommand implements Command {
         }
 
         combat.restore(previousState);
-        combatView.printLine("Last combat action was undone.");
         return true;
     }
 
