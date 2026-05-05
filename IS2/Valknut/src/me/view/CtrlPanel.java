@@ -142,4 +142,10 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 		cardLayout.show(mainPanel, "END SCREEN");
 	}
 	
+	public void onGameOver() {
+		game_over_screen = GameOver.getInstance();
+		mainPanel.add(game_over_screen, "GAME OVER SCREEN");
+		cardLayout.show(mainPanel, "GAME OVER SCREEN");
+	}
+	
 }

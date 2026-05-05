@@ -94,6 +94,10 @@ public class Controller {
     	controlPanel.onEnd();
     }
     
+    public void onGameOver() {
+    	controlPanel.onGameOver();
+    }
+    
     public void onCombat() {
     	controlPanel.onCombat(game);
     }

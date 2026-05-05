@@ -223,7 +223,7 @@ public class CombatScreen extends JPanel{
                 case STATS -> actionButton.addActionListener(ev -> {
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
-					textLog = ctrl.consumeCombatLog();
+					textLog = ctrl.showStats();
 					showText(textLog);
 					refresh();
                 });
@@ -324,10 +324,6 @@ public class CombatScreen extends JPanel{
         topPanel.add(exit);
 
 		this.add(topPanel, BorderLayout.PAGE_START);
-		
-		if (enemies.isEmpty() || heroes.isEmpty() && ctrl.getFinalBattle() || infected.isEmpty() && ctrl.getFinalBattle()) {
-			ctrl.next();
-		}
 		
 		// if (textLog != null && !textLog.isEmpty()) {
 		// 	System.err.println("I arrived at really showing dialog");
