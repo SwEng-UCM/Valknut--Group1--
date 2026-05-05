@@ -17,6 +17,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private StoryScreen storyScreen;
 	private final Controller _ctrl;
 	private EndScreen endscreen;
+	private GameOverScreen game_over_screen;
 		
 	public CtrlPanel(Controller ctrl) {
 		_ctrl = ctrl;
@@ -143,7 +144,7 @@ public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	}
 	
 	public void onGameOver() {
-		game_over_screen = GameOver.getInstance();
+		game_over_screen = GameOverScreen.getInstance();
 		mainPanel.add(game_over_screen, "GAME OVER SCREEN");
 		cardLayout.show(mainPanel, "GAME OVER SCREEN");
 	}
