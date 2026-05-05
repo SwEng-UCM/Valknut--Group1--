@@ -27,7 +27,7 @@ public class UseItemCommand implements Command {
 
     @Override
     public boolean execute(StringBuilder sb) {
-        previousState = combat.save();
+    	if (!combat.multiPlayer()) previousState = combat.save();
 
         if (currentHero == null || !currentHero.isAlive() || currentHero.escaped() || combat.getEnemies().isEmpty() || item == null) {
             previousState = null;

@@ -29,7 +29,7 @@ public class DefendCommand implements Command {
     public boolean execute(StringBuilder sb) {
 
         // SAVE STATE for undo
-        previousState = combat.save();
+    	if (!combat.multiPlayer()) previousState = combat.save();
 
         if (currentHero == null || !currentHero.isAlive() || currentHero.escaped() || combat.getEnemies().isEmpty()) {
             previousState = null;

@@ -236,7 +236,7 @@ public class CombatScreen extends JPanel{
                 });
         	}
         	
-        	if (!ctrl.getFinalBattle() || (ctrl.getTurn() - 1 < heroes.size() && c != CombatOption.RUN)) {
+        	if (!ctrl.getFinalBattle() || (ctrl.getTurn() - 1 < heroes.size() && c != CombatOption.RUN) || (mpm != null && c != CombatOption.UNDO)) {
 	        	command_buttons.add(actionButton);
 	        	commandsPanel.add(actionButton);
         	}
@@ -384,6 +384,7 @@ public class CombatScreen extends JPanel{
     			ctrl.action(CombatOption.USE_ITEM, 1, i);
     			textLog = ctrl.consumeCombatLog();
     			this.remove(itemsPanel);
+    			this.add(actionContainer);
     			refresh();
     		});
         	itemsPanel.add(itemChoiceButton);
@@ -393,6 +394,7 @@ public class CombatScreen extends JPanel{
 		returnButton.addActionListener(ev -> {
 			ctrl.action(CombatOption.USE_ITEM, 1, null);
 			this.remove(itemsPanel);
+			this.add(actionContainer);
 			refresh();
 		});
 		itemsPanel.add(returnButton);

@@ -362,4 +362,8 @@ public class Combat implements Serializable {
     public boolean heroesLose() {
     	return heroes_lose;
     }
+    
+    public boolean multiPlayer() {
+    	return game.isMultiplayer();
+    }
 }
