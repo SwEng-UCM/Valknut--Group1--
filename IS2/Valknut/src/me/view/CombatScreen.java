@@ -243,13 +243,8 @@ public class CombatScreen extends JPanel{
                 });
                     
                 case UNDO -> actionButton.addActionListener(ev -> {
-					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
+					if(mpm != null )
 						return;
-					if(mpm != null){
-						Request rq = new Request(Request.RequestType.COMBATOPTION, mpm.getUser().getId());
-						rq.addParameter(CombatOption.UNDO);
-						mpm.send(rq);
-					}
 					ctrl.action(c, 1, null);
 					refresh();
                 });
