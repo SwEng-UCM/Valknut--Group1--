@@ -1,0 +1,77 @@
+[33mb97fd40[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m #82 now enemies turn is displayed in the textbox (its scrollable)
+[33m40b8156[m Changed the final button so that the infected player can only attack for both lore and coding reasons
+[33mf20e7b3[m Fixed UseItems button
+[33mf36f8e4[m Added a condition to end the game once the final piece of story is read
+[33md250fb6[m Finished final battle
+[33m1f2178d[m Resolved issues during final combat and now both infected and healthy heroes are able to attack eachother
+[33mbf19d5a[m Added changes to make the infected and non-infected heroes take turns being buttons
+[33mb70d4c9[m Added attacks during the final battle
+[33m1ba6402[m Fixed infected issue during 4-player playthrough
+[33mb82414f[m Corrected the combat screen to show the infected player(s) in the final battle
+[33m5bc1238[m Removed unnecessary part of the story
+[33m1c52a0b[m Added the sprites of the infected to the right side of the screen
+[33mea67078[m Started creating the final combat
+[33m6f0830d[m Fixed issue were enemies weren't removed after changing battle
+[33m8884ae3[m #79 debugging multiplayer
+[33mb3f43d6[m #81 starting text aux massage removed
+[33m4f9b8c4[m Now only one set of components #81
+[33m62894ca[m #82 first prototype of the combat textpanel that alternates with combat buttons
+[33mc96555b[m #81 New enemies now load
+[33m2f7202b[m StoryScreen background ()it won't print for some rason
+[33m5887df2[m Text fixed again #81
+[33m28752cb[m Story now prints int parragrpsh format (width tbd)
+[33m6289f45[m Now text print on screen #81
+[33m3d484b9[m #81 calling on next now prints first
+[33mf958726[m Game now starts in story and goes till first combat
+[33m2f18f72[m On story method created
+[33m869508c[m Setting heroes for the story
+[33m62ca64a[m New story index
+[33m7099e6a[m #79 Multiplayer implemented until combat screen
+[33m6bf4983[m #79 advanced on multiplayer selection
+[33m0b9e3d3[m Now two Heroes can not be the same even the autonomous
+[33m57baf91[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33me071834[m Enhanced the Hero creation
+[33mf43b2b8[m Lisence file
+[33m2a56603[m #53 Autonomoues Player Implemented
+[33md5b21a8[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m677a230[m Fixed removal of enemies
+[33mbe22a62[m mini push
+[33m4d1555f[m eliminated some lines from combatscreen
+[33m8dd3e9b[m Now enemies attack
+[33m421d2fe[m #92 mini changes
+[33m2286a0f[m #91 Game Class done and integrated
+[33m84cdddf[m #92 you can select up to 4 characters (only the first 2 have turns as of now)
+[33mc044c80[m aux function for display #81
+[33mf76e265[m #81 fixed queue
+[33mab11b6b[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33mc5a6c36[m #81 better queue for storyteller
+[33mf2ce174[m #79 & #91 Advanced on integrating game
+[33m8a86744[m #66 changed size of the characters in the combat screen
+[33m06b4431[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m1a2f04d[m #79 and #91
+[33ma42685f[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m43f7625[m #66 all characters are now selectable
+[33m64e6182[m #81 storyteller next() started
+[33m9f67d92[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m0bb17bc[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m3be53ef[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m0a3089e[m Added hero and enemy update in GUI
+[33m3857d07[m #66 all characters are selectable
+[33m40a6b57[m Fixed items issue
+[33m689d711[m Storyteller Queue done + story spelling corrections
+[33m7e2f398[m #66 all characters appear in the selection screen
+[33m5495adc[m next declared in Controller and StoryTeller
+[33m14be2c4[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m71b1346[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m1b4dfa1[m Fixed items
+[33m2f9a1ce[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33ma1e7afb[m StoryScreen next button
+[33mc965baa[m #79 Advanced on Integration combat logic
+[33mbd4d88f[m #66 new character sprites added
+[33me6d647b[m #81 StoryScreen start
+[33m9f45c92[m #79 Starting integrating everything
+[33m8b6b275[m Use Item supposedly working
+[33mf73cc50[m Add autosave after combat outcomes (#89)
+[33m83f80b7[m Merge branch 'main' of https://github.com/SwEng-UCM/Valknut
+[33m2e5285f[m Reverted changes in combat so other people can test + decreased the life of gigants
+[33m1f4e130[m Changes in controller to adapt Storytelling #81

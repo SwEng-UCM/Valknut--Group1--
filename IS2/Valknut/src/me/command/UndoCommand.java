@@ -1,3 +1,12 @@
+/**
+ * 
+ * @author Hana Perocevic
+ * 
+ * ai-assisted: yes
+ * 
+ */
+
+
 package me.command;
 
 import me.model.Combat;
@@ -41,5 +50,6 @@ public class UndoCommand implements Command {
     public boolean advancesTurn() {
         // Undo should NOT advance turn
         return false;
+        
     }
 }

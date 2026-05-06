@@ -1,3 +1,13 @@
+/**
+ * 
+ * @author Hana Perocevic
+ * 
+ * ai-assisted: yes
+ * 
+ */
+
+
+
 package me.command;
 
 import me.model.AutonomousHero;

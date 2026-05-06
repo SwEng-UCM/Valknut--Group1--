@@ -1,3 +1,12 @@
+/**
+ * 
+ * @author Hana Perocevic
+ * 
+ * ai-assisted: no
+ * 
+ */
+
+
 package me.command;
 
 import me.model.Combat;

@@ -1,6 +1,15 @@
 package me.command;
 
 /**
+ * 
+ * @author Hana Perocevic
+ * 
+ * ai-assisted: yes
+ * 
+ */
+
+
+/**
  * Command interface used to encapsulate a combat action.
  */
 public interface Command {
