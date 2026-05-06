@@ -128,7 +128,9 @@ import me.view.Story;
  		combat2.add(EnemyBuilder.buildEnemy("draug"));
  		combat2.add(EnemyBuilder.buildEnemy("draug"));
  		combat2.add(EnemyBuilder.buildEnemy("draug"));
+ 		combat2.add(EnemyBuilder.buildEnemy("draug"));
  		if(heroes.size() > 2) {
+ 			combat2.add(EnemyBuilder.buildEnemy("draug"));
  			combat2.add(EnemyBuilder.buildEnemy("draug"));
  			combat2.add(EnemyBuilder.buildEnemy("draug"));
  		}

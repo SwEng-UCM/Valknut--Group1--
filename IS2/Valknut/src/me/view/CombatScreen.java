@@ -238,7 +238,7 @@ public class CombatScreen extends JPanel{
 						rq.addParameter(CombatOption.STATS);
 						mpm.send(rq);
 					}
-					consumeTextLog();
+					showText(ctrl.showStats());
 					refresh();
                 });
                     

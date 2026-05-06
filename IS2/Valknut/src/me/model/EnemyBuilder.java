@@ -50,28 +50,28 @@ public class EnemyBuilder {
                 return elf;
             }
             case "draug" -> {
-            	Enemy draugr = new Enemy(Messages.DRAUGR, 100, 120, 60, Messages.DRAUGR_ATTACK);
+            	Enemy draugr = new Enemy(Messages.DRAUGR, 30, 120, 60, Messages.DRAUGR_ATTACK);
                 element.add(1); element.add(3); element.add(1); element.add(1); element.add(1);
                 draugr.setElementStats(element);
                 draugr.setSprite("resources/images/Creatures/dragur.png");
                 return draugr;
             }
             case "fafnir" -> {
-            	Enemy fafnir = new Enemy(Messages.FAFNIR, 450, 550, 300, Messages.FAFNIR_ATTACK);
+            	Enemy fafnir = new Enemy(Messages.FAFNIR, 200, 550, 300, Messages.FAFNIR_ATTACK);
                 element.add(1); element.add(1); element.add(1); element.add(1); element.add(5);
                 fafnir.setElementStats(element);
                 fafnir.setSprite("resources/images/Creatures/fafnir.png");
                 return fafnir;
             }
             case "skoll" -> {
-            	Enemy skoll = new Enemy(Messages.SKOLL, 350, 450, 250, Messages.SKOLL_ATTACK);
+            	Enemy skoll = new Enemy(Messages.SKOLL, 150, 450, 250, Messages.SKOLL_ATTACK);
                 element.add(1); element.add(4); element.add(1); element.add(1); element.add(1);
                 skoll.setElementStats(element);
                 skoll.setSprite("resources/images/Creatures/skoll.png");
                 return skoll;
             }
             case "hati" -> {
-            	Enemy hati = new Enemy(Messages.HATI, 350, 450, 250, Messages.HATI_ATTACK);
+            	Enemy hati = new Enemy(Messages.HATI, 150, 450, 250, Messages.HATI_ATTACK);
                 element.add(1); element.add(4); element.add(1); element.add(1); element.add(1);
                 hati.setElementStats(element);
                 hati.setSprite("resources/images/Creatures/hati.png");
