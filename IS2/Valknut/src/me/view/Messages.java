@@ -66,6 +66,8 @@ public class Messages {
 	public static final String PRESS_EN = "Press enter to continue...";
 	public static final String WRONG_REQUEST = "The Request from Client was not Correct: ";
 
+	
+	//@author Gadea Domínguez (for the story part). AI-assisted: no
 	//aux formating text into parragraph for the story
 	public static final String startFormat= "<html> <body style='width: 500px'>" ;
 	public static final String endFormat = "</body> </html>";

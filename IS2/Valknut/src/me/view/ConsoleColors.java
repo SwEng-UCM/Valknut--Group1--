@@ -4,6 +4,7 @@ package me.view;
 //Posted by shakram02
 //Retrieved 2026-03-03, License - CC BY-SA 3.0
 
+//@author Gadea Domínguez (woudn't say exactly author for this one tbh). AI-assisted: no
 public class ConsoleColors {
  // Reset
  public static final String RESET = "\033[0m";  // Text Reset

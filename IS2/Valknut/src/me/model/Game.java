@@ -1,6 +1,7 @@
 package me.model;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
@@ -8,6 +9,7 @@ import me.model.items.*;
 import me.model.save.*;
 import me.socket.MultiplayerManager;
 import me.view.CombatView;
+//@author Gadea Domínguez (for the story-related functions). AI-assisted: no
 
 public class Game {
     

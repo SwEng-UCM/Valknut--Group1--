@@ -1,5 +1,7 @@
 package me.view;
 
+//@author Gadea Domínguez. AI-assisted: no
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

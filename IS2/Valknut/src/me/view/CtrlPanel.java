@@ -6,6 +6,8 @@ import me.control.Controller;
 import me.model.CharacterSelectionObserver;
 import me.model.Game;
 
+//@author Gadea Domínguez (for the story-related functions). AI-assisted: no
+
 public class CtrlPanel extends JFrame implements CharacterSelectionObserver{
 	private final CardLayout cardLayout;
 	private final JPanel mainPanel;

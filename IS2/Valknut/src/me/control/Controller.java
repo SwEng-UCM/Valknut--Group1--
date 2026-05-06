@@ -7,6 +7,7 @@ import me.model.items.Inventory;
 import me.model.items.Item;
 import me.view.CtrlPanel;
 
+//@author Gadea Domínguez (for the story-related functions). AI-assisted: no
 public class Controller {
 
     private static Controller instance;

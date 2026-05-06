@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import me.control.Controller;
 import me.model.Game;
+//@author Gadea Domínguez. AI-assisted: no
 
 public class EndScreen extends JPanel{
 	

@@ -11,6 +11,8 @@ import me.control.Controller;
 import me.model.save.SaveGameData;
 import me.view.Story;
 
+//@author Gadea Domínguez. AI-assisted: no
+
  public class Storyteller implements Serializable {
 
  	private static final long serialVersionUID = 1L;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.model.Hero;
+//@author Gadea Domínguez. AI-assisted: yes, chatGPT for the formatNames() function exclusively
 
 public class Story {
 
