@@ -202,9 +202,13 @@ public class CombatScreen extends JPanel{
                 case DEFEND -> actionButton.addActionListener(ev -> {
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
+					if(mpm != null){
+						Request rq = new Request(Request.RequestType.COMBATOPTION, mpm.getUser().getId());
+						rq.addParameter(CombatOption.DEFEND);
+						mpm.send(rq);
+					}
 					ctrl.action(c, 1, null);
-					textLog = ctrl.consumeCombatLog();
-					showText(textLog);
+					consumeTextLog();
 					refresh();
 				});
 
@@ -217,6 +221,11 @@ public class CombatScreen extends JPanel{
                 case RUN -> actionButton.addActionListener(ev -> {
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
+					if(mpm != null){
+						Request rq = new Request(Request.RequestType.COMBATOPTION, mpm.getUser().getId());
+						rq.addParameter(CombatOption.RUN);
+						mpm.send(rq);
+					}
 					ctrl.action(c, 1, null);
 					refresh();
 				});
@@ -224,13 +233,17 @@ public class CombatScreen extends JPanel{
                 case STATS -> actionButton.addActionListener(ev -> {
 					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
 						return;
-					textLog = ctrl.showStats();
-					showText(textLog);
+					if(mpm != null){
+						Request rq = new Request(Request.RequestType.COMBATOPTION, mpm.getUser().getId());
+						rq.addParameter(CombatOption.STATS);
+						mpm.send(rq);
+					}
+					consumeTextLog();
 					refresh();
                 });
                     
                 case UNDO -> actionButton.addActionListener(ev -> {
-					if(mpm != null && mpm.getUser().getId() != ctrl.getTurn())
+					if(mpm != null )
 						return;
 					ctrl.action(c, 1, null);
 					refresh();
@@ -368,11 +381,10 @@ public class CombatScreen extends JPanel{
 
 	public void attackAction(int tarjet){
 		ctrl.action(CombatOption.ATTACK, tarjet, null);
-    	textLog = ctrl.consumeCombatLog();
-		showText(textLog);
+    	consumeTextLog();
 	}
     
-    private void useItem() {
+    public void useItem() {
     	
     	JPanel itemsPanel = new JPanel();
     	itemsPanel.setSize(new Dimension(500, 500));
@@ -387,9 +399,14 @@ public class CombatScreen extends JPanel{
     		JButton itemChoiceButton = new JButton(i.getName());
     		itemChoiceButton.setPreferredSize(new Dimension(1000, 100));
     		itemChoiceButton.addActionListener(ev -> {
+				if(mpm != null){
+					Request rq = new Request(Request.RequestType.COMBATOPTION, mpm.getUser().getId());
+					rq.addParameter(CombatOption.USE_ITEM);
+					rq.addParameter(i);
+					mpm.send(rq);
+				}
     			ctrl.action(CombatOption.USE_ITEM, 1, i);
-    			textLog = ctrl.consumeCombatLog();
-				showText(textLog);
+    			consumeTextLog();
     		});
         	itemsPanel.add(itemChoiceButton);
     	}
@@ -517,6 +534,11 @@ public class CombatScreen extends JPanel{
 
 			// setComponents();
     	});
+	}
+
+	public void consumeTextLog(){
+		textLog = ctrl.consumeCombatLog();
+		showText(textLog);
 	}
     
     private void showText(String text) {

@@ -82,11 +82,18 @@ public class StoryScreen extends JPanel {
 		controls.add(loadButton);
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.addActionListener(e -> ctrl.exit());
+		exitButton.addActionListener(e ->{ 
+			if(mpm != null){
+				int id = mpm.getUser().getId();
+				Request rq = new Request(Request.RequestType.STORYADVANCED, id);
+				rq.addParameter(1);
+				mpm.send(rq);
+			}
+			ctrl.exit();
+		});
 		controls.add(exitButton);
 
-		this.add(controls, BorderLayout.PAGE_START);
-//		
+		this.add(controls, BorderLayout.PAGE_START);		
  	}
  	
  	public void setText(String t) {
@@ -115,6 +122,7 @@ public class StoryScreen extends JPanel {
 			}
 			else{
 				Request rq = new Request(Request.RequestType.STORYADVANCED, id);
+				rq.addParameter(0);
 				mpm.send(rq);
 			}
 		}

@@ -22,7 +22,7 @@ public class MultiplayerManager extends JFrame{
     private MultiplayerManager(Controller ctrl, Game game){
         this.ctrl = ctrl;
         this.game = game;
-        this.dispatcher = new Dispatcher(ctrl, game);
+        this.dispatcher = new Dispatcher(ctrl);
     }
 
     public static MultiplayerManager getInstacne(Controller ctrl, Game game){
@@ -98,7 +98,6 @@ public class MultiplayerManager extends JFrame{
 
     public void chooseCharacter(HeroEnum he){
         characterSelection = CharacterSelection.getInstance(null);
-        System.err.println(he.toString());
         characterSelection.selectCharacter(he);
     }
 
@@ -118,6 +117,10 @@ public class MultiplayerManager extends JFrame{
 
     public void attackAction(int tarjet){
         combatScreen.attackAction(tarjet);
+    }
+
+    public void consumTextLog(){
+        combatScreen.consumeTextLog();
     }
 
     public void refreshCombatScreen(){
