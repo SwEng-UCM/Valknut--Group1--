@@ -2,7 +2,7 @@ package me.view;
 
 /**
  * 
- * @author Gadea Domínguez. 
+ * @author Gadea Domínguez. AI assisted: No
  * 
  */
 

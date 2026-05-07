@@ -8,8 +8,8 @@ import me.model.Game;
 
 /**
  * 
- * @author Helio Vega Fernández
- * @author Gadea Domínguez (for the story-related functions)
+ * @author Helio Vega Fernández AI assisted: No
+ * @author Gadea Domínguez (for the story-related functions) AI assisted: No
  * 
  */
 

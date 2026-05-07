@@ -5,7 +5,7 @@ import java.util.List;
 import me.model.Hero;
 /**
  * 
- * @author Helio Vega Fernández
+ * @author Helio Vega Fernández AI assisted: No
  * @author Gadea Domínguez. AI-assisted: yes, chatGPT for the formatNames() function exclusively
  * 
  */

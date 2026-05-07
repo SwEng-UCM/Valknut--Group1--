@@ -1,7 +1,7 @@
 /**
  * 
- * @author Helio Vega Fernández
- * @author Pablo Cabello Canales  
+ * @author Helio Vega Fernández AI assisted: No
+ * @author Pablo Cabello Canales  AI assisted: No
  * 
  */
 package me.model;

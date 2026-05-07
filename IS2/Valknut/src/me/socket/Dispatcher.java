@@ -1,6 +1,6 @@
 /**
  * 
- * @author Helio Vega Fernández
+ * @author Helio Vega Fernández AI assisted: No
  * 
  */
 package me.socket;

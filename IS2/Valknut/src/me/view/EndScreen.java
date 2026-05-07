@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
  * 
- * @author Gadea Domínguez (for the story-related functions)
+ * @author Gadea Domínguez (for the story-related functions) AI assisted: No
  * 
  */
 

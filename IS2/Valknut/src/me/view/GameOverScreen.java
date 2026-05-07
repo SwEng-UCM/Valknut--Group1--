@@ -8,6 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Miguel Ángel Trejo AI assisted: No
+ * 
+ */
+
 public class GameOverScreen extends JPanel{
 	
 	private static GameOverScreen instance;
