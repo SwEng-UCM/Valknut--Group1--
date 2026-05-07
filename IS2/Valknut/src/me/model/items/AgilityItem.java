@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Helio Vega Fernández
+ * 
+ */
+
 package me.model.items;
 
 import me.view.Messages;

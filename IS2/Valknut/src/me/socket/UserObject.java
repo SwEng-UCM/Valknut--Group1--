@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author Helio Vega Fernández
+ * 
+ */
 package me.socket;
 
 import java.io.IOException;

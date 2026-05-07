@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Helio Vega Fernández
+ * AI assisted
+ * 
+ */
 package me.socket;
 
 import java.net.*;

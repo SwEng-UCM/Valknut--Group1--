@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author Helio Vega Fernández
+ * 
+ */
 package me.socket;
 import javax.swing.*;
 import me.control.*;
@@ -12,7 +17,6 @@ public class MultiplayerManager extends JFrame{
     private static MultiplayerManager instance;
     private CharacterSelection characterSelection;
     private CombatScreen combatScreen;
-    private ChatScreen cs;
     private final Controller ctrl;
     private final Game game;
     private JPanel mainPanel;
@@ -62,23 +66,6 @@ public class MultiplayerManager extends JFrame{
 
     public void treatRequest(Request rq){
         dispatcher.dispatch(rq, this);
-    }
-
-    public void write(String message){
-        cs.writeInScreen(message);
-    }
-
-    public void openChat(){
-        mainPanel.removeAll();
-
-        this.setSize(600, 500); 
-        this.setLocationRelativeTo(this);
-
-        cs = new ChatScreen(this, user);
-        mainPanel.add(cs);
-
-        mainPanel.revalidate();
-        mainPanel.repaint();
     }
 
     public void killUser(){

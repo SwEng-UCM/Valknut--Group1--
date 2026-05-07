@@ -1,6 +1,9 @@
-//@author Gadea Domínguez (for the story-related functions). AI-assisted: no
+/**
+ * @author Gadea Domínguez (for the story-related functions). AI-assisted: no
 // @author Pablo Cabello Canales (combat log stuff) AI-assisted: no
-
+ * @author Helio Vega Fernández
+ * 
+ */
 package me.model;
 
 import java.util.ArrayList;

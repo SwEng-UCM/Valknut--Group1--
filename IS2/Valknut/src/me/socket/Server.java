@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Helio Vega Fernández
+ * AI assisted
+ * 
+ */
 package me.socket;
 import java.io.IOException;
 import java.io.ObjectInputStream;

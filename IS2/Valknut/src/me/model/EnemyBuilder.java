@@ -1,5 +1,9 @@
-// @author Pablo Cabello Canales  AI-assisted: no
-
+/**
+ * 
+ * @author Helio Vega Fernández
+ * @author Pablo Cabello Canales
+ * 
+ */
 package me.model;
 
 import java.util.ArrayList;

@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author Helio Vega Fernández
+ * 
+ */
 package me.model;
 
 import me.model.items.HealingItem;

@@ -1,5 +1,9 @@
-// @author Pablo Cabello Canales (sprite related stuff) AI-assisted: no
-
+/**
+ * 
+ * @author Helio Vega Fernández
+ * @author Pablo Cabello Canales (sprite related stuff)
+ * 
+ */
 package me.model;
 
 import java.awt.Image;

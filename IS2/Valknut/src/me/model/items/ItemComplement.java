@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author Helio Vega Fernández
+ * 
+ */
 package me.model.items;
 
 public class ItemComplement extends Item implements Complement{

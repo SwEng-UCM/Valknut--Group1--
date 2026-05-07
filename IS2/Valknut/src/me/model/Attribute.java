@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author Helio Vega Fernández
+ * 
+ */
 package me.model;
 
 public enum Attribute {
@@ -7,20 +12,14 @@ public enum Attribute {
         if (command == null) {
             return SPEED; 
         }
-        switch (command.toLowerCase()) {
-            case "speed":
-                return SPEED;
-            case "strength":
-                return STRENGTH;
-            case "resistance":
-                return RESISTANCE;
-            case "cleverness":
-                return CLEVERNESS;
-            case "agility":
-                return AGILITY;
-            default:
-                return SPEED;
-        }
+        return switch (command.toLowerCase()) {
+            case "speed" -> SPEED;
+            case "strength" -> STRENGTH;
+            case "resistance" -> RESISTANCE;
+            case "cleverness" -> CLEVERNESS;
+            case "agility" -> AGILITY;
+            default -> SPEED;
+        };
     }
 }
 
