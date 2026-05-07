@@ -1,3 +1,6 @@
+//@author Gadea Domínguez (for the story-related functions). AI-assisted: no
+// @author Pablo Cabello Canales (character display stuff) AI-assisted: no
+
 package me.control;
 
 import java.util.List;
@@ -7,7 +10,6 @@ import me.model.items.Inventory;
 import me.model.items.Item;
 import me.view.CtrlPanel;
 
-//@author Gadea Domínguez (for the story-related functions). AI-assisted: no
 public class Controller {
 
     private static Controller instance;

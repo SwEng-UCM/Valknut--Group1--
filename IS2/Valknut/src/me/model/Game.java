@@ -1,3 +1,6 @@
+//@author Gadea Domínguez (for the story-related functions). AI-assisted: no
+// @author Pablo Cabello Canales (combat log stuff) AI-assisted: no
+
 package me.model;
 
 import java.util.ArrayList;
@@ -8,7 +11,6 @@ import me.model.items.*;
 import me.model.save.*;
 import me.socket.MultiplayerManager;
 import me.view.CombatView;
-//@author Gadea Domínguez (for the story-related functions). AI-assisted: no
 
 public class Game {
     

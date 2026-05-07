@@ -1,3 +1,5 @@
+// @author Pablo Cabello Canales  AI-assisted: no
+
 package me.model;
 
 import java.util.ArrayList;

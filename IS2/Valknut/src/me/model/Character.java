@@ -1,3 +1,5 @@
+// @author Pablo Cabello Canales (sprite related stuff) AI-assisted: no
+
 package me.model;
 
 import java.awt.Image;
