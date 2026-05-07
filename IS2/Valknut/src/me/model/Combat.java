@@ -271,7 +271,6 @@ public class Combat implements Serializable {
             sb.append(h.useItem(i));
             items.add(i);
         }
-        System.err.println("COMBAT -->" + sb.toString());
 
         return sb.toString();
     }

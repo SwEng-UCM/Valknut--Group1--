@@ -1,5 +1,5 @@
 package me.model;
 
 public enum State {
-    HARMED, LEADER, FOLLOWER, DEFENSIVE, SCARED;
+    HARMED, ATTACK, DEFENSIVE, SCARED;
 }

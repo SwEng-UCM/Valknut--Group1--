@@ -9,7 +9,6 @@
 
 package me.command;
 
-import me.model.AutonomousHero;
 import me.model.Combat;
 import me.model.Hero;
 import me.model.save.SaveGameData;
@@ -43,11 +42,6 @@ public class DefendCommand implements Command {
         if (currentHero == null || !currentHero.isAlive() || currentHero.escaped() || combat.getEnemies().isEmpty()) {
             previousState = null;
             return false;
-        }
-
-        // Autonomous hero behavior
-        if (currentHero instanceof AutonomousHero) {
-            ((AutonomousHero) currentHero).doDefensive();
         }
 
         sb.append(combat.defend());

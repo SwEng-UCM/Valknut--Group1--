@@ -10,7 +10,6 @@
 
 package me.command;
 
-import me.model.AutonomousHero;
 import me.model.Combat;
 import me.model.Enemy;
 import me.model.Hero;
@@ -41,10 +40,6 @@ public class AttackCommand implements Command {
     @Override
     public boolean execute(StringBuilder sb) {
         //previousState = combat.save();
-
-        if (currentHero instanceof AutonomousHero) {
-            target = ((AutonomousHero) currentHero).selectTarjet() + 1;
-        }
 
         if (target <= 0) {
             //previousState = null;

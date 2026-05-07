@@ -22,7 +22,6 @@ public class Server extends UserObject{
             me = new ServerSocket(PORT); // Creates the class that will host the server features
             System.out.println("New ServerSocket created");
 
-            // startBroadcasting(); // Starts saying to the network, "Hey, I'm here!"
             System.out.println("Server Arranged"); // Status control line
 
             client = me.accept(); // Waiting for a Socket connection. This methods return a new Socket() indeed 

@@ -100,9 +100,8 @@ public class Hero extends Character implements Player {
         return null;
     }
 
-    public boolean addItem(Item i){
-        i.assignCharacter(this);
-        return inventory.addItem(i);
+    public void addItem(Item i){
+        inventory.addItem(i);
     }
 
     public Inventory getInventory(){
@@ -133,15 +132,14 @@ public class Hero extends Character implements Player {
     public String useItem(Item i){
         StringBuilder sb = new StringBuilder();
         //if(!isUsing(i)){
-        inventory.dropItem(i);
         i.assignCharacter(this);
-            i.use();
+        inventory.dropItem(i);
+        i.use();
         //    using.addItem(i);
             sb.append(Messages.USED_ITEM).append(i.toString().toUpperCase());
         //}
         //else
         //    sb.append(Messages.USING_ITEM).append(i.getName().toUpperCase());
-        System.err.println("HERO -->" + sb.toString());
         return sb.toString();
     }
 

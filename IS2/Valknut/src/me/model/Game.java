@@ -1,7 +1,6 @@
 package me.model;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import me.command.Command;
 import me.command.CommandFactory;
@@ -135,27 +134,13 @@ public class Game {
         }
         
         if (!finalBattle) {
-	        if (cb.turn() == 1 && cb.getHeroes().size() >= 1) {
-	            return cb.getHeroes().get(0);
-	        }
-	
-	        if (cb.turn() == 2 && cb.getHeroes().size() >= 2) {
-	            return cb.getHeroes().get(1);
-	        }
-	
-	        if (cb.turn() == 3 && cb.getHeroes().size() >= 3) {
-	            return cb.getHeroes().get(2);
-	        }
-	        
-	        if (cb.turn() == 4 && cb.getHeroes().size() >= 4) {
-	            return cb.getHeroes().get(3);
-	        }
+	        return cb.getHeroes().get(cb.turn() - 1);
         }
         
         else {
         	if (cb.turn() - 1 < cb.getHeroes().size()) return cb.getHeroes().get(cb.turn() - 1);
         	
-        	else if (cb.turn() - cb.getHeroes().size() - 1< cb.getInfected().size()) return cb.getInfected().get(cb.turn() - 1 - cb.getHeroes().size());
+        	else if (cb.turn() - cb.getHeroes().size() - 1 < cb.getInfected().size()) return cb.getInfected().get(cb.turn() - 1 - cb.getHeroes().size());
         }
         
         return null;
@@ -174,13 +159,6 @@ public class Game {
                 cb.setTurn(cb.getHeroes().size() + 1 + i);
                 combatLog.append(cb.attack(0)); // 0 = enemy turn, target selected internally
             }
-
-//            for (Enemy e : cb.getEnemies()) {
-//                combatLog.append(cb.attack(0));
-//                cb.setTurn(cb.turn() + 1);
-//            }
-            
-            //System.out.println("FULL LOG:\n" + combatLog.toString());
 
             cb.setTurn(1);
         }
@@ -308,6 +286,9 @@ public class Game {
 
         if(mode == GameMode.SOLO && player == 2)
             new_hero.setAutonomous(true);
+
+        System.err.println("New HERO --> " + new_hero.toString());
+        System.err.println(new_hero.getInventory().getInfo());
 
         cb.addHero(new_hero);
         new_hero.setCombat(cb);

@@ -1,6 +1,5 @@
 package me.model;
 
-import java.util.List;
 import me.model.items.HealingItem;
 import me.model.items.Item;
 import me.socket.Request;
@@ -8,24 +7,24 @@ import me.socket.Request;
 public class AutonomousHero extends Hero {
     
     private State combatState;
+    private CombatStrategy combatStrategy;
 
     public AutonomousHero(String name, int life, int max_life, String surname, int id){
         super(name, life, max_life, surname, id);
         setAutonomous(true);
-        combatState = State.FOLLOWER;
+        combatState = State.ATTACK;
+        combatStrategy = new FollowerCombatStrategy();
     }
 
     @Override
     public String does(Request rq){ //Don't use the request but needed for overriding
         StringBuilder sb = new StringBuilder();
-        System.err.println(combatState);
         switch (combatState) {
             case HARMED ->{doHarmed(); sb.append(name().toUpperCase()).append(" heals theirself");}
-            case LEADER -> sb.append(cmbt.attack(doLeader()));
-            case FOLLOWER -> sb.append(cmbt.attack(doFollower()));
+            case ATTACK -> sb.append(cmbt.attack(doAttack()));
             case DEFENSIVE -> {doDefensive(); sb.append(cmbt.defend());}
             case SCARED -> {doScared(); sb.append(cmbt.run());}
-            default -> sb.append(cmbt.attack(doLeader()));
+            default -> sb.append(cmbt.attack(doAttack()));
         }
 
         return sb.toString();
@@ -40,93 +39,56 @@ public class AutonomousHero extends Hero {
         boolean used = inventory.useFirstOfType(item);
 
         if(used && getLife() > 50)
-            combatState = State.FOLLOWER;
+            combatState = State.ATTACK;
         if(!used){
             double i = Math.random();
-            if(i > 0.95)
-                combatState = State.LEADER;
+            if(i > 0.95){
+                combatStrategy = new LeaderCombatStrategy();
+                combatState = State.ATTACK;
+            }
             else if(i > 0.85)
                 combatState = State.DEFENSIVE;
-            else
-                combatState = State.FOLLOWER;
+            else{
+                combatStrategy = new FollowerCombatStrategy();
+                combatState = State.ATTACK;
+            }
         }
        
     }
 
-    public int doLeader(){
-        int idx = 0;
-        int tarjet = 0;
-        boolean first = true;
-        List<Enemy> enemies = cmbt.getEnemies();
-        Enemy eTarjet = enemies.get(0);
-        for(Enemy e : enemies){
-            if(e.isWeak(getMainElement())){
-                if(first){
-                    eTarjet = e;
-                    tarjet = idx;
-                    first = false;
-                }
-                else{
-                    if(eTarjet.getLife() < e.getLife())
-                        tarjet = idx;
-                }
-                
-            }
-            idx++;
-        }
+    public int doAttack(){
+        
+        int tarjet = combatStrategy.execute(getMainElement(), cmbt.getEnemies(), cmbt.getLastTarjet());
 
         double i = Math.random();
         if(getLife() < getMaxLife() / 2){
-            if(i > 0.95)
-                combatState = State.LEADER;
-            else if(i > 0.3)
+            if(i > 0.3)
                 combatState = State.HARMED;
         }
-        else if(i > 0.9){
+        else if(i > 0.85){
             combatState = State.DEFENSIVE;
+            i = Math.random();
+            if(i > 0.95){
+                setCombatStrategy(0);
+            }
+            else{
+                setCombatStrategy(1);
+            }
         }
-        else if(i > 0.4)
-            combatState = State.FOLLOWER;
-
-        if(tarjet < 0) tarjet = 0;
-        if(tarjet >= cmbt.getEnemies().size()) tarjet = cmbt.getEnemies().size() - 1;
 
         return tarjet;
-    }
-
-    public int doFollower(){
-        int idx = cmbt.getLastTarjet();
-        int size = cmbt.getEnemies().size();
-        if(idx >= size)
-            idx = size - 1;
-
-        double i = Math.random();
-        if(getLife() < getMaxLife() / 2){
-            if(i > 0.95)
-                combatState = State.LEADER;
-            else if(i > 0.3)
-                combatState = State.HARMED;
-        }
-        else if(i > 0.8){
-            combatState = State.DEFENSIVE;
-        }
-
-        return idx + 1;
-    }
-
-    public int selectTarjet(){
-        return switch (combatState) {
-            case LEADER -> doLeader();
-            case FOLLOWER -> doFollower();
-            default -> doFollower();
-        };
     }
 
     public void doDefensive(){
         //it defends on combat logic. This method is to change combatState
         double i = Math.random();
         if(i > 0.3){
-            combatState = State.FOLLOWER;
+            combatState = State.ATTACK;
+            i = Math.random();
+            if(i > 0.95)
+                setCombatStrategy(0);
+            else
+                setCombatStrategy(1);
         }
     }
 
@@ -134,21 +96,39 @@ public class AutonomousHero extends Hero {
         //it runs on combat logic. This method is to change combatState
         double i = Math.random();
         if(getLife() < getMaxLife() / 2){
-            if(i > 0.95)
-                combatState = State.LEADER;
-            else if(i > 0.3)
+            if(i > 0.35)
                 combatState = State.HARMED;
-            else
-                combatState = State.FOLLOWER;
+            else{
+                combatState = State.ATTACK;
+                i = Math.random();
+                if(i > 0.95)
+                    setCombatStrategy(0);
+                else
+                    setCombatStrategy(1);
+            }
 
         }
         else{
-            if(i > 0.95)
-                combatState = State.LEADER;
-            else if(i > 0.2)
-                combatState = State.FOLLOWER;
+            if(i > 0.2){
+                combatState = State.ATTACK;
+                i = Math.random();
+                if(i > 0.95)
+                    setCombatStrategy(0);
+                else
+                    setCombatStrategy(1);
+            }
             else
                 combatState = State.DEFENSIVE;
+        }
+    }
+
+    private void setCombatStrategy(int i){
+        switch (i) {
+            case 0 -> combatStrategy = new LeaderCombatStrategy();
+            case 1 -> combatStrategy = new FollowerCombatStrategy();
+            default -> {
+                combatStrategy = new FollowerCombatStrategy();
+            }
         }
     }
     

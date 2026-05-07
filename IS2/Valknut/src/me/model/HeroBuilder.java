@@ -2,10 +2,8 @@ package me.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.model.items.DamageItem;
 import me.model.items.HealingItem;
 import me.model.items.ItemType;
-import me.model.items.ResistanceItem;
 
 public class HeroBuilder {
 

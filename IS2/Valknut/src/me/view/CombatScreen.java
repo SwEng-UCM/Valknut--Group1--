@@ -278,14 +278,8 @@ public class CombatScreen extends JPanel{
 		continueBtn.addActionListener(e -> {
 			if(mpm != null){
 				int id = mpm.getUser().getId();
-				if(id == ctrl.getTurn()){
-					ViewUtils.showErrorMsg("Wait for the other Player");
-					return;
-				}
-				else{
-					Request rq = new Request(Request.RequestType.COMBATOPTION, id);
-					mpm.send(rq);
-				}
+				Request rq = new Request(Request.RequestType.COMBATOPTION, id);
+				mpm.send(rq);
 			}
 			changeActionPanel("COMMANDS");
 			refresh();
