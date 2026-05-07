@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author Helio Vega Fernández. Taken from TP 2 subject
+ * 
+ */
 package me.view;
 
 import java.awt.*;

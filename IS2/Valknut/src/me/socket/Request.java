@@ -2,7 +2,7 @@
  * 
  * @author Helio Vega Fernández
  * 
- */s
+ */
 package me.socket;
 
 import java.io.Serializable;

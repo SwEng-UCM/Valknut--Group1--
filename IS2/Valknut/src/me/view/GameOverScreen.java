@@ -1,18 +1,12 @@
 package me.view;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import me.control.Controller;
-import me.model.Game;
 
 public class GameOverScreen extends JPanel{
 	

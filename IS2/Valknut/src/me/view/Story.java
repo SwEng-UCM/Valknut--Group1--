@@ -2,10 +2,13 @@ package me.view;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import me.model.Hero;
-//@author Gadea Domínguez. AI-assisted: yes, chatGPT for the formatNames() function exclusively
-
+/**
+ * 
+ * @author Helio Vega Fernández
+ * @author Gadea Domínguez. AI-assisted: yes, chatGPT for the formatNames() function exclusively
+ * 
+ */
 public class Story {
 
 	public static final String IntroLines = Messages.INTRO_LINES;
