@@ -10,6 +10,7 @@ import me.view.CtrlPanel;
 /**
  * @author Gadea Domínguez (for the story-related functions). AI-assisted: no
  * @author Pablo Cabello Canales (character display stuff) AI-assisted: no 
+ * @author Miguel Ángel Trejo AI-assisted: no
  * 
  */
 public class Controller {

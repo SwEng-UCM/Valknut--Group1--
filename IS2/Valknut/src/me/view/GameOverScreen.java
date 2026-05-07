@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Miguel Ángel Trejo AI assisted: No
+ * @author Miguel Ángel Trejo AI assisted: No
  * 
  */
 

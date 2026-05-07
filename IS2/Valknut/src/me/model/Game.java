@@ -2,6 +2,7 @@
  * @author Gadea Domínguez (for the story-related functions). AI-assisted: no
 // @author Pablo Cabello Canales (combat log stuff) AI-assisted: no
  * @author Helio Vega Fernández AI assisted: No
+ * @author Miguel Ángel Trejo AI-assisted: no
  * 
  */
 package me.model;
