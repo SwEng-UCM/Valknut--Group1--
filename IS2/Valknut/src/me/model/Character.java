@@ -21,6 +21,10 @@ import me.view.Messages;
 
 public abstract class Character implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    //Character has a name, a alive state, a set of elemental stats, a set of phisical stats
+    // a life, a max lifem, a run indicator, a defend indicator and sprites
+
     private String name;
     private boolean alive;
     private Map<Element, Integer> elements; // Representing the five elements stats with a Map
@@ -65,12 +69,7 @@ public abstract class Character implements Serializable {
     public void setLife(int life) {
         this.life = life;
 
-        // optional ali pametno:
-        if (this.life <= 0) {
-            this.alive = false;
-        } else {
-            this.alive = true;
-        }
+        this.alive = this.life > 0;
     }
 
     public void setSprite(String spritePath){
@@ -212,6 +211,9 @@ public abstract class Character implements Serializable {
         return yes;
     }
 
+    // Until here method names are quite descriptive and methods quite simple
+
+    // Weakness is translated in a mod of 1.5 while when resistant it's substracted 10 points of damage
     public String receiveDamage(int damage, Element element) {
         StringBuilder sb = new StringBuilder();
         if (isWeak(element)) {
@@ -226,6 +228,7 @@ public abstract class Character implements Serializable {
         if(damage < 0)
             damage = 0;
 
+        //The way of taking off life
     	changeLife(-damage);
         
         sb.append(name.toUpperCase()).append(" has received ").append(damage).append( " point of damage.").append(Messages.NEW_LINE);
@@ -233,6 +236,8 @@ public abstract class Character implements Serializable {
 
         return sb.toString();
     }
+
+    //Physical attributes playing
     public int computeDamage(Character e, int damage){
 
         int result = (int) (damage + damage * 0.5 * getStrength());
@@ -244,6 +249,7 @@ public abstract class Character implements Serializable {
         return result;
     }
 
+    // Character attacks another character
     public String attack(Character e, Element element, int damage) {
         StringBuilder sb = new StringBuilder();
         int var = computeDamage(e, damage);
@@ -252,6 +258,7 @@ public abstract class Character implements Serializable {
         return sb.toString();
     }
 
+    //To modify life when curing or receiving damage
     public void changeLife(int value){
         life += value;
         if(life > max_life){
@@ -263,6 +270,8 @@ public abstract class Character implements Serializable {
         }
     }
 
+
+    //Methods for modifying stats
     public void changeShield(int value){
         int shield = attributes.get(Attribute.RESISTANCE);
         shield += value;

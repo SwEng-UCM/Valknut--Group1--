@@ -8,6 +8,7 @@
 package me.model;
 
 public enum HeroEnum {
+	//five possible heroes
 	GERSEMI, VALI, JORUNN, VIGGO, MAGNI;
 
 	public static HeroEnum randomEnum(){

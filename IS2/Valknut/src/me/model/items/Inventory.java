@@ -16,6 +16,10 @@ import me.view.Messages;
 public class Inventory implements Serializable {
        private static final long serialVersionUID = 1L;
 
+       //The inventory consist of a Map of a Map
+       //Given one item instance, it is mapped with the name and the quantity, 
+       //so you can mapped athe five types of items with their different possible names
+
        private final static String EMPTY_INV = "Your inventory is empty.";
        private final static int INIT_INV_CAP = 10;
        private final Map <Item, Map<String, Integer>> inventory;
@@ -29,6 +33,7 @@ public class Inventory implements Serializable {
        public boolean isEmpty(){
               return inventory.isEmpty();
        }
+
        public int size(){
               int acc = 0;
               for(Map.Entry <Item, Map<String, Integer>> entry : inventory.entrySet()){
@@ -37,6 +42,8 @@ public class Inventory implements Serializable {
               return acc;
        }
 
+       //checks if its a new type of item before adding
+       //if it's already just sum 1 to the quantity
        public boolean addItem(Item i){
               if(!isFull()){
                      String name = i.getName();
@@ -54,6 +61,7 @@ public class Inventory implements Serializable {
               return false;
        }
 
+       //This is used by the Autonomous Hero to cure itself
        public boolean useFirstOfType(Item it){
               String name = it.getName();
               boolean used = inventory.get(it).containsKey(name);
@@ -113,6 +121,7 @@ public class Inventory implements Serializable {
               return inventory.get(i).containsKey(s);
        }
 
+       //To display the content of the inventory on text
        public String getInfo() {
               if (inventory.isEmpty()) {
                      return EMPTY_INV;

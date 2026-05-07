@@ -12,7 +12,6 @@ package me.command;
 
 import me.model.Combat;
 import me.model.Hero;
-import me.view.CombatView;
 
 /**
  * Command responsible for showing the current hero stats.
@@ -20,12 +19,10 @@ import me.view.CombatView;
 public class StatsCommand implements Command {
 
     private final Combat combat;
-    private final CombatView combatView;
     private final Hero currentHero;
 
-    public StatsCommand(Combat combat, CombatView combatView, Hero currentHero) {
+    public StatsCommand(Combat combat, Hero currentHero) {
         this.combat = combat;
-        this.combatView = combatView;
         this.currentHero = currentHero;
     }
 

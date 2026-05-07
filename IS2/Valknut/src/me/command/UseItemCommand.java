@@ -13,7 +13,6 @@ import me.model.Combat;
 import me.model.Hero;
 import me.model.items.Item;
 import me.model.save.SaveGameData;
-import me.view.CombatView;
 
 /**
  * Command responsible for handling the item usage action.
@@ -21,15 +20,13 @@ import me.view.CombatView;
 public class UseItemCommand implements Command {
 
     private final Combat combat;
-    private final CombatView combatView;
     private final Hero currentHero;
     private final Item item;
 
     private SaveGameData previousState;
 
-    public UseItemCommand(Combat combat, CombatView combatView, Hero currentHero, Item item) {
+    public UseItemCommand(Combat combat, Hero currentHero, Item item) {
         this.combat = combat;
-        this.combatView = combatView;
         this.currentHero = currentHero;
         this.item = item;
     }

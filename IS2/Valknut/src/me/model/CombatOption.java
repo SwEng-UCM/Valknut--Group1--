@@ -3,6 +3,7 @@ package me.model;
 import me.view.Messages;
 
 public enum CombatOption {
+    //These are the possible options of the combat
     ATTACK, DEFEND, USE_ITEM, RUN, STATS, UNDO;
 
     private CombatOption co;

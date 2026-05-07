@@ -27,7 +27,6 @@ public class CommandFactory {
      */
     public static Command createCommand(
             Combat combat,
-            CombatView combatView,
             Hero currentHero,
             CombatOption option,
             int target,
@@ -39,12 +38,12 @@ public class CommandFactory {
         }
 
         return switch (option) {
-            case ATTACK -> new AttackCommand(combat, combatView, currentHero, target);
-            case DEFEND -> new DefendCommand(combat, combatView, currentHero);
-            case USE_ITEM -> new UseItemCommand(combat, combatView, currentHero, item);
-            case RUN -> new RunCommand(combat, combatView, currentHero);
-            case STATS -> new StatsCommand(combat, combatView, currentHero);
-            case UNDO -> new UndoCommand(combat, combatView, lastCommand);
+            case ATTACK -> new AttackCommand(combat, currentHero, target);
+            case DEFEND -> new DefendCommand(combat, currentHero);
+            case USE_ITEM -> new UseItemCommand(combat, currentHero, item);
+            case RUN -> new RunCommand(combat, currentHero);
+            case STATS -> new StatsCommand(combat, currentHero);
+            case UNDO -> new UndoCommand(combat, lastCommand);
             default -> null;
         };
     }

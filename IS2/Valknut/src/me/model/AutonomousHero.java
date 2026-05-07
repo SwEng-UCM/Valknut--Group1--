@@ -10,6 +10,9 @@ import me.model.items.Item;
 import me.socket.Request;
 
 public class AutonomousHero extends Hero {
+
+    //Autonomous hero has a state on the combat and a strategy to attack
+    //As well as all the standar hero attributes
     
     private State combatState;
     private CombatStrategy combatStrategy;
@@ -35,6 +38,8 @@ public class AutonomousHero extends Hero {
         return sb.toString();
     }
 
+    //Every state has a probability of changing to any of the other states
+    //Combat strategy is chosen by the player
     public void doHarmed(){
         Item item = new HealingItem(null, 0, 0, 0, null);
         if(inventory.containsType(item)){
@@ -53,12 +58,13 @@ public class AutonomousHero extends Hero {
             }
             else if(i > 0.85)
                 combatState = State.DEFENSIVE;
+            else if(i > 0.65)
+                combatState = State.SCARED;
             else{
                 combatStrategy = new FollowerCombatStrategy();
                 combatState = State.ATTACK;
             }
         }
-       
     }
 
     public int doAttack(){
@@ -74,6 +80,9 @@ public class AutonomousHero extends Hero {
             combatState = State.DEFENSIVE;
             i = Math.random();
             if(i > 0.95){
+                combatState = State.SCARED;
+            }
+            else if (i > 0.90){
                 setCombatStrategy(0);
             }
             else{
@@ -87,13 +96,22 @@ public class AutonomousHero extends Hero {
     public void doDefensive(){
         //it defends on combat logic. This method is to change combatState
         double i = Math.random();
-        if(i > 0.3){
+        if(getLife() < getMaxLife() / 2){
+            if(i > 0.3)
+                combatState = State.HARMED;
+        }
+        else if(i > 0.3){
             combatState = State.ATTACK;
             i = Math.random();
-            if(i > 0.95)
+            if(i > 0.95){
+                combatState = State.SCARED;
+            }
+            else if (i > 0.90){
                 setCombatStrategy(0);
-            else
+            }
+            else{
                 setCombatStrategy(1);
+            }
         }
     }
 
@@ -127,7 +145,7 @@ public class AutonomousHero extends Hero {
         }
     }
 
-    private void setCombatStrategy(int i){
+    public void setCombatStrategy(int i){
         switch (i) {
             case 0 -> combatStrategy = new LeaderCombatStrategy();
             case 1 -> combatStrategy = new FollowerCombatStrategy();

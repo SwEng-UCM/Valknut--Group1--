@@ -10,6 +10,7 @@ import java.util.List;
 public class LeaderCombatStrategy implements CombatStrategy {
 
     @Override
+    //Selects the enemy that is weak to the AH main element or the one that Player hit
     public int execute(Element element, List<Enemy> enemies, int tarjet) {
         boolean first = true;
         int idx = 0;

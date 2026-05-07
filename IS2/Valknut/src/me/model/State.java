@@ -6,5 +6,6 @@
 package me.model;
 
 public enum State {
+    //Possible states of AH
     HARMED, ATTACK, DEFENSIVE, SCARED;
 }

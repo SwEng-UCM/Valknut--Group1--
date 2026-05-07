@@ -6,6 +6,7 @@
 package me.model;
 
 public enum Element {
+    //Possible elementes of the game
 	ICE, CHAOS, NATURE, BLOOD, FIRE;
 	
 	public static Element parseElement(String command) {

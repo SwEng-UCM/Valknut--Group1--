@@ -2,13 +2,10 @@
 
 package me.model;
 
- import java.io.Serializable;
- import java.util.ArrayDeque;
- import java.util.ArrayList;
- import java.util.List;
- import java.util.Queue;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-
 import me.control.Controller;
 import me.model.save.SaveGameData;
 import me.view.Story;
@@ -81,7 +78,6 @@ public class Storyteller implements Serializable {
  			return;
  		}
 
- 		this.game = game;
  		this.s = new Story();
 
  		copyEnemies(combat1, restored.combat1);

@@ -12,7 +12,6 @@ package me.command;
 import me.model.Combat;
 import me.model.Hero;
 import me.model.save.SaveGameData;
-import me.view.CombatView;
 
 /**
  * Command responsible for handling the defend action.
@@ -20,15 +19,13 @@ import me.view.CombatView;
 public class DefendCommand implements Command {
 
     private final Combat combat;
-    private final CombatView combatView;
     private final Hero currentHero;
 
     private boolean actionExecuted;
     private SaveGameData previousState;
 
-    public DefendCommand(Combat combat, CombatView combatView, Hero currentHero) {
+    public DefendCommand(Combat combat, Hero currentHero) {
         this.combat = combat;
-        this.combatView = combatView;
         this.currentHero = currentHero;
         this.actionExecuted = false;
     }
@@ -56,7 +53,6 @@ public class DefendCommand implements Command {
         }
 
         combat.restore(previousState);
-        combatView.printLine("Last combat action was undone.");
         return true;
     }
 

@@ -9,6 +9,10 @@ import java.util.List;
 
 public class Enemy extends Character {
     private static final long serialVersionUID = 1L;
+
+    //It's enemy has the exp it gives, the description of the attack (how it attacks)
+    // and the enemy num for the combat
+
     private final int xpReward;
     private String attkDesc;
     private int enemy_num;

@@ -12,6 +12,10 @@ import me.view.Messages;
 public abstract class Item implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    //Items has a name, a modificator, a cunatity for the stack in inventory
+    // a cost, a number of turns its effect lasts, a type, the hero it belongs
+    // and a possible complement that modifies mod
+
     private final String name;
     protected int mod;
     protected boolean used;
@@ -31,15 +35,11 @@ public abstract class Item implements Serializable {
         this.type = type;
     }
 
-    public ItemType getType(){
+    public ItemType getType(){ // HEAL, RESITANCE, DAMAGE, ELEMENTAL, AGILITY, SPEED
         return type;
     }
 
-    public Item parseItem(){
-        return null;
-    }
-
-    public int getTurn(){
+    public int getTurn(){ // how much time has been used
         return turn;
     }
 
@@ -47,11 +47,11 @@ public abstract class Item implements Serializable {
         return cost;
     }
 
-    public void addMod(int mod){
+    public void addMod(int mod){ //when complements are used
         this.mod += mod;
     }
 
-    public void addCuantity(){
+    public void addCuantity(){ // to accumulate in the inventory
         cuantity++;
     }
 
@@ -61,7 +61,7 @@ public abstract class Item implements Serializable {
             cuantity = 0;
     }
 
-    public void decreaseTime(){
+    public void decreaseTime(){ 
         turn--;
         if(turn < 0){
             delete();
@@ -76,11 +76,13 @@ public abstract class Item implements Serializable {
         return name;
     }
 
-    public void assignCharacter(Character c){
+    public void assignCharacter(Character c){ // to later modify hero stats, items know the hero
         this.c = c;
     }
 
-    public abstract void use();
+    
+    // To implement in different item type classes
+    public abstract void use(); 
     public abstract void revert();
     public abstract Item createInstanceOf(String s);
 
@@ -95,6 +97,7 @@ public abstract class Item implements Serializable {
         revert();
     }
 
+    //Matches a complement, uses addMod() from before to modify
     public String addComplement(Complement c){
 
         StringBuilder sb = new StringBuilder();
@@ -111,7 +114,7 @@ public abstract class Item implements Serializable {
         return sb.toString();
     }
 
-    public Complement removeComplement(){
+    public Complement removeComplement(){ // erase complement and return the erased complement
         if(complement != null){
             Complement c = complement;
             complement = null;
@@ -121,6 +124,7 @@ public abstract class Item implements Serializable {
         return null;
     }
     
+    // Acts like a down counter
     public void update(){
         decreaseTime();
     }

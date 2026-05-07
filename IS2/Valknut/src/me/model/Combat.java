@@ -16,6 +16,11 @@ import me.view.Messages;
 
 public class Combat implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    //Combats has a list of heroes playing, for the final combat a list of infected,
+    // a list of enemies to be defeated, a list of items that are causing effects
+    // the turn that belongs to the state of the combat, a value to say if heroes scaped
+    // the last tarjet one hero hit and the game it belongs
     private final List<Hero> heroes;
     private final List<Hero> infected;
     volatile private List<Enemy> enemies;
@@ -149,6 +154,8 @@ public class Combat implements Serializable {
         return exit;
     }
 
+    
+    //For printing into text
     public String heroTargetsToString(){
         StringBuilder sb = new StringBuilder();
 
@@ -163,23 +170,29 @@ public class Combat implements Serializable {
             return sb.toString();
     }
 
+    //The main method where cjaracter attack
     public String attack(int i){
         StringBuilder sb = new StringBuilder();
         sb.append(Messages.NEW_LINE);
 
+        //The turn system is that counts one for every hero and when 
+        //it reaches the number of players, it's turn for all enemies.
+        //After that, the turn is reset to 1. Being 1 the first number is an important detail
         if (turn < heroes.size() + 1) {
-            if(i == 0){
+            if(i == 0){ // it's not a possible value, so NO TARGET
                 sb.append("NO TARGET").append(Messages.NEW_LINE);
                 return sb.toString();
             }
             Hero h = heroes.get(turn - 1);
             sb.append(h.name().toUpperCase()).append(" ATTACKS").append(Messages.NEW_LINE);
-            sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20));
+            //h attacks the enemy selected by integer
+            sb.append(h.attack(enemies.get(i - 1), h.getMainElement(), 20)); 
             lastTarjet = i - 1;
-            if(!enemies.get(lastTarjet).isAlive())
+            if(!enemies.get(lastTarjet).isAlive()) //If the enemy runs out of life
                 enemies.remove(lastTarjet);
         }
         else{
+            //Similar logic for the point of view of the enemy
             Enemy e = enemies.get(turn - (heroes.size() + 1));
             Hero h = e.selectTarjet(heroes);
             if(h != null){
@@ -199,6 +212,7 @@ public class Combat implements Serializable {
         return sb.toString();
     }
     
+    //For final combat
     public String attackHero(Hero attacker, Hero defender) {
     	StringBuilder sb = new StringBuilder();
         sb.append(Messages.NEW_LINE);
@@ -220,6 +234,7 @@ public class Combat implements Serializable {
     	return sb.toString();
     }
 
+    //Every turn it's checked that is the turn or not of an AH
     public String checkAutonomousTurn(){
         StringBuilder sb = new StringBuilder();
         if(turn == 2){
@@ -236,6 +251,7 @@ public class Combat implements Serializable {
         return sb.toString();
     }
 
+    //Show stats of the character that has the turn
     public String showStats(Character c){
         StringBuilder sb = new StringBuilder();
 
@@ -246,6 +262,7 @@ public class Combat implements Serializable {
         return  sb.toString();
     }
 
+    //set defend action
     public String defend(){
         StringBuilder sb = new StringBuilder();
         Hero e = heroes.get(turn - 1);
@@ -254,6 +271,7 @@ public class Combat implements Serializable {
         return sb.toString();
     }
 
+    //check if heroes escaped
     public boolean allEscaped(){
         boolean yes = true;
 
@@ -280,7 +298,7 @@ public class Combat implements Serializable {
         return sb.toString();
     }
 
-    public boolean heroesLoose(){
+    public boolean heroesLoose(){ // If all hero escaped or died
         boolean yes = true;
 
         for(int i = 0; i < heroes.size(); i++){
@@ -292,6 +310,7 @@ public class Combat implements Serializable {
         return yes;
     }
 
+    // Check possible states of the combat 
     public String update() {
         //Implement a fucntion set escaped with one turn of delay so if The Boss with the Odin's Spear (Gungnir) uses the special attacks, ,it hits the heroes that just escpaed
         StringBuilder sb = new StringBuilder();
@@ -316,6 +335,7 @@ public class Combat implements Serializable {
         return sb.toString();
     }
 
+    //For deleting expired items
     public void updateItems(){
         for(Item i : items){
             i.update();
@@ -357,9 +377,10 @@ public class Combat implements Serializable {
         }
     }
 
+    //Probability of escaping the battle
     public String run(){
         double i = Math.random();
-        if(i > 0.5){
+        if(i > 0.35){
             heroes.get(turn - 1).setEscaped(true);
             return Messages.PLAYER_RUNS + Messages.NEW_LINE;
         }
@@ -372,6 +393,7 @@ public class Combat implements Serializable {
     	return heroes_lose;
     }
     
+    //To know if the combat is being played on multiplayer mode
     public boolean multiPlayer() {
     	return game.isMultiplayer();
     }

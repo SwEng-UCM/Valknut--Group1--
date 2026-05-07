@@ -13,7 +13,6 @@ package me.command;
 import me.model.Combat;
 import me.model.Enemy;
 import me.model.Hero;
-import me.view.CombatView;
 
 /**
  * Command responsible for handling the attack action.
@@ -21,7 +20,6 @@ import me.view.CombatView;
 public class AttackCommand implements Command {
 
     private final Combat combat;
-    private final CombatView combatView;
     private final Hero currentHero;
     private int target;
     private boolean actionExecuted;
@@ -29,9 +27,8 @@ public class AttackCommand implements Command {
     private Enemy attackedEnemy;
     private int previousEnemyLife;
 
-    public AttackCommand(Combat combat, CombatView combatView, Hero currentHero, int target) {
+    public AttackCommand(Combat combat,  Hero currentHero, int target) {
         this.combat = combat;
-        this.combatView = combatView;
         this.currentHero = currentHero;
         this.target = target;
         this.actionExecuted = false;
@@ -61,7 +58,6 @@ public class AttackCommand implements Command {
         }
 
         attackedEnemy.setLife(previousEnemyLife);
-        combatView.printLine("Last combat action was undone.");
         return true;
     }
 

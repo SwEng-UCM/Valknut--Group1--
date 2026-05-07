@@ -13,6 +13,8 @@ import me.model.items.ItemType;
 import me.model.items.ResistanceItem;
 
 public class AutonomousHeroBuilder {
+
+    // A brute-force way of doing it
     
     static public AutonomousHero buildAutonomousHero(HeroEnum he, int id){
         List<Integer> element = new ArrayList<>();

@@ -10,17 +10,14 @@
 package me.command;
 
 import me.model.Combat;
-import me.view.CombatView;
 
 public class UndoCommand implements Command {
 
     private final Combat combat;
-    private final CombatView combatView;
     private final Command previousCommand;
 
-    public UndoCommand(Combat combat, CombatView combatView, Command lastCommand) {
+    public UndoCommand(Combat combat,Command lastCommand) {
         this.combat = combat;
-        this.combatView = combatView;
         this.previousCommand = lastCommand;
     }
 

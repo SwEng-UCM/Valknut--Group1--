@@ -14,6 +14,10 @@ import me.view.Messages;
 public class Hero extends Character implements Player {
     private static final long serialVersionUID = 1L;
 
+    //Every hero has the id (1, 2, 3 or 4), surname complementing the name, if it's AH,
+    //an inventory, inventory of items that are causing effect used by him
+    //the combat he is taking part, the level and the accumulated xp
+
     protected int id;
     protected String surname;
     private boolean autonomous; 
@@ -35,6 +39,7 @@ public class Hero extends Character implements Player {
         using = new Inventory();
     }
 
+    //fast way of modifying some attributes
     public void setHero(String name, int life, int max_life, String surname){
         setName(name);
         setLife(life);
@@ -47,7 +52,7 @@ public class Hero extends Character implements Player {
     public int getLevel() { return level; }
     public int getXp() { return xp; }
 
-    //XP curve (we can tweak this)
+    //XP curve, logic for leveling up
     private int xpToNextLevel() {
         return 100 + (level - 1) * 50;
     }
@@ -77,11 +82,10 @@ public class Hero extends Character implements Player {
         increaseMaxLife(20);
         changeLife(getMaxLife());
 
-        // small stat bumps
-        changeAgility(1);
+        // small stat bump
         changeShield(1); // uses RESISTANCE as shield stat
         
-        //Increase 2 stats (greatest and random)
+        //Increase 2 stats 
         changeElement(getMainElement(), 1);
         switch(rand.nextInt(5)) {
         case 0 -> changeElement(Element.BLOOD, 1);
@@ -101,6 +105,7 @@ public class Hero extends Character implements Player {
     }
 
     @Override
+    //Already select action on combat screen
     public String does(Request rq){
         return null;
     }
@@ -114,10 +119,12 @@ public class Hero extends Character implements Player {
     }
 
     @Override
+    //the whole name
     public String toString(){
         return getName().toUpperCase() + ", " + surname.toUpperCase();
     }
 
+    //auxiliar function for the below one
     private String displayInv(){
         return inventory.getInfo();
     }
@@ -130,6 +137,7 @@ public class Hero extends Character implements Player {
 
         return sb.toString();
     }
+    
     public boolean isUsing(Item i){
         return using.containsItem(i, i.getName());
     }

@@ -12,14 +12,15 @@ import me.command.Command;
 import me.command.CommandFactory;
 import me.model.items.*;
 import me.model.save.*;
-import me.socket.MultiplayerManager;
-import me.view.CombatView;
 
 public class Game {
+
+    // Game has a storyteller to follow the story flow, a controller reference, list of players,
+    // last commando to undo, a combat, the last command, if it's time for 
+    // the final battle and a combatLog to move text from game to the view
+    // via the controller
     
-    private static CombatView cv;
     private final Storyteller st;
-    private final MultiplayerManager mpm;
     private me.control.Controller ctrl;
     private List<Hero> players;
     private Command lastUndoableCommand;
@@ -29,18 +30,17 @@ public class Game {
     private StringBuilder combatLog = new StringBuilder();
 
     public enum GameMode{
+        //Three posibilities for playing
         SOLO, LOCAL, MULTIPLAYER;
     }
 
     private GameMode mode;
 
     public Game(me.control.Controller ctrl){
-        cv = CombatView.getInstance(); //Temporally
         this.ctrl = ctrl;
         players = new ArrayList<>(4);
         mode = GameMode.LOCAL;
         st = new Storyteller(this);
-        mpm = MultiplayerManager.getInstacne(ctrl, this);
         cb = new Combat(this);
     }
 
@@ -133,6 +133,7 @@ public class Game {
         }
     }
 
+    //Based on the turn and if its final battle or regular
     private Hero getCurrentHero() {
         if (cb == null || cb.getHeroes().isEmpty()) {
             return null;
@@ -151,6 +152,7 @@ public class Game {
         return null;
     }
 
+    //Attacks for enemies
     private void executeEnemyTurn() {
     	String s = cb.update();
         combatLog.append(s);
@@ -177,6 +179,7 @@ public class Game {
         }
     }
     
+    //Attack for heroes
     public void attackHero(Hero defender) {
     	combatLog.append(cb.attackHero(getCurrentHero(), defender));
     	cb.setTurn(cb.turn() + 1);
@@ -194,6 +197,7 @@ public class Game {
     	st.setInfected(infected);
     }
 
+    //This uses the command pattern to execute actions
     public boolean action(CombatOption combatOption, int target,Item item) {
         boolean finishedAction = false;
         
@@ -202,7 +206,7 @@ public class Game {
         
         
         if (combatOption == CombatOption.UNDO) {
-            Command undoCommand = CommandFactory.createCommand(cb, cv, getCurrentHero(), combatOption, target, item, lastUndoableCommand);
+            Command undoCommand = CommandFactory.createCommand(cb, getCurrentHero(), combatOption, target, item, lastUndoableCommand);
 
             if (undoCommand != null) {
                 undoCommand.execute(combatLog);
@@ -213,12 +217,14 @@ public class Game {
             return false;
         }
 
+        //Update items to deleted expired ones
         cb.updateItems();
         Hero currentHero = getCurrentHero();
         
+        //If no heroes, heroes lose
         if (currentHero == null) ctrl.onGameOver();
 
-        Command command = CommandFactory.createCommand(cb, cv, currentHero, combatOption, target, item, lastCommand);
+        Command command = CommandFactory.createCommand(cb, currentHero, combatOption, target, item, lastCommand);
         
         lastCommand = command;
 
@@ -232,8 +238,8 @@ public class Game {
                 cb.setTurn(cb.turn() + 1);
             }
         }
-        System.err.println("GAME -->" + combatLog);
 
+        //Add the autonomous hero action to the log if there is an AH
         combatLog.append(cb.checkAutonomousTurn());
         
         if (!finalBattle) executeEnemyTurn();
@@ -276,10 +282,12 @@ public class Game {
         players = new ArrayList<>(cb.getHeroes());
     }
 
+    //Before entering the game, the logic for select which character the player is
     public void selectCharacter(HeroEnum h, int player) {
 
         Hero new_hero;
 
+        //Depending on the mode
         switch (mode) {
             case MULTIPLAYER -> {
                 new_hero = players.get(player - 1);
@@ -292,13 +300,13 @@ public class Game {
         if(mode == GameMode.SOLO && player == 2)
             new_hero.setAutonomous(true);
 
-        System.err.println("New HERO --> " + new_hero.toString());
-        System.err.println(new_hero.getInventory().getInfo());
-
+        //adds to the combat that will be the first combat
         cb.addHero(new_hero);
+        //also the hero know the combat
         new_hero.setCombat(cb);
     }
 
+    //next on the story
      public void next() {
         lastUndoableCommand = null;
         lastCommand = null;

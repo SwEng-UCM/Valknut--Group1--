@@ -5,6 +5,7 @@
  */
 package me.model;
 
+//These are phisical related stats of characters
 public enum Attribute {
     SPEED, STRENGTH, RESISTANCE, CLEVERNESS, AGILITY;
 
