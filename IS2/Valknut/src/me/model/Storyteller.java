@@ -60,9 +60,9 @@ import me.view.Story;
  	private List<Hero> heroes = new ArrayList<>();
  	private List<String> story;
  	private List<List<Enemy>> combats;
- 	private final String[] index = {"s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s", "end"};
+ 	private final String[] index = {"s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "c", "s", "s", "fc", "s", "end"}; //The index with the order of the different parts
  	private transient Story s;
- 	private int bookmark = 0;
+ 	private int bookmark = 0; //Keeps where in the index we are
  	private Random rand = new Random();
 	
  	public Storyteller(Game game) {
@@ -195,7 +195,7 @@ import me.view.Story;
     	s.setInfected(infectedHero);
     }
  	
- 	public void next(Combat cb) {
+ 	public void next(Combat cb) { //calls the corresponding functions in combat with the next part of the plot
  		
  		if (bookmark == index.length) game.end();
 	 		else {
