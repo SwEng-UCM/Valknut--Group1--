@@ -12,7 +12,10 @@ import me.view.Story;
 
 
  /**
+  * 
  * @author Gadea Domínguez. AI-assisted: no
+ * @author Miguel Ángel Trejo AI-assisted: no
+ * 
  */
 public class Storyteller implements Serializable {
 
@@ -198,7 +201,8 @@ public class Storyteller implements Serializable {
  	public void next(Combat cb) { //calls the corresponding functions in combat with the next part of the plot
  		
  		if (bookmark == index.length) game.end();
-	 		else {
+	 	
+ 		else {
 	 		String story_or_combat = index[bookmark];
 	 		bookmark++;
 	 		
@@ -219,9 +223,6 @@ public class Storyteller implements Serializable {
 	 			game.end();
 	 		}
  		}
- 		// else if (n == null) {
-			
- 		// }
 		
  	}
 	

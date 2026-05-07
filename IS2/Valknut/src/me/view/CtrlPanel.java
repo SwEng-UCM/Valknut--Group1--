@@ -10,6 +10,7 @@ import me.model.Game;
  * 
  * @author Helio Vega Fernández AI assisted: No
  * @author Gadea Domínguez (for the story-related functions) AI assisted: No
+ * @author Miguel Ángel Trejo AI-assisted: no
  * 
  */
 

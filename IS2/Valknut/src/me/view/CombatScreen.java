@@ -2,6 +2,7 @@
  * 
  * @author Helio Vega Fernández AI assisted: No
  * @author Pablo Cabello Canales AI assisted: No
+ * @author Miguel Ángel Trejo AI-assisted: no
  * 
  */
 package me.view;
