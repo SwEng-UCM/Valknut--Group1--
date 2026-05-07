@@ -22,7 +22,7 @@ public class Server extends UserObject{
             me = new ServerSocket(PORT); // Creates the class that will host the server features
             System.out.println("New ServerSocket created");
 
-            startBroadcasting(); // Starts saying to the network, "Hey, I'm here!"
+            // startBroadcasting(); // Starts saying to the network, "Hey, I'm here!"
             System.out.println("Server Arranged"); // Status control line
 
             client = me.accept(); // Waiting for a Socket connection. This methods return a new Socket() indeed 
@@ -48,37 +48,37 @@ public class Server extends UserObject{
         System.out.println("Communication Stablished");
     }
 
-    public void startBroadcasting() {
-        new Thread(() -> { // A Thread since it is done constantly
-            // I'm not sure if this Thread fall asleep at some point, I could do it different so
-            //when a client is connected, this Thread ends
-            try {
-                socket = new DatagramSocket(); // This is the endpoit for sending and receiving 
-                // packages in the network UDP style 
-                socket.setBroadcast(true); // To start broadcasting "Hey, I'm here!"
-                String mensaje = "SERVER_ALIVE"; // This is the "Hey, I'm here!", actually
-                byte[] buffer = mensaje.getBytes(); // UDP communication works via Bytes, so byte[] is needed
-                DatagramPacket packet = new DatagramPacket(
-                    buffer, buffer.length, // The message, the length, the mask (or directly the IP) and
-                    // the port where to send the message
-                    InetAddress.getByName("255.255.255.255"), 8888
-                );
-                // DatagramPacket packet = new DatagramPacket(
-                //     buffer, buffer.length, 
-                //     InetAddress.getByName(getWiFiIP()), 8888
-                // ); This is another option still in progress
+    // public void startBroadcasting() {
+    //     new Thread(() -> { // A Thread since it is done constantly
+    //         // I'm not sure if this Thread fall asleep at some point, I could do it different so
+    //         //when a client is connected, this Thread ends
+    //         try {
+    //             socket = new DatagramSocket(); // This is the endpoit for sending and receiving 
+    //             // packages in the network UDP style 
+    //             socket.setBroadcast(true); // To start broadcasting "Hey, I'm here!"
+    //             String mensaje = "SERVER_ALIVE"; // This is the "Hey, I'm here!", actually
+    //             byte[] buffer = mensaje.getBytes(); // UDP communication works via Bytes, so byte[] is needed
+    //             DatagramPacket packet = new DatagramPacket(
+    //                 buffer, buffer.length, // The message, the length, the mask (or directly the IP) and
+    //                 // the port where to send the message
+    //                 InetAddress.getByName(getWiFiIP()), 8888
+    //             );
+    //             // DatagramPacket packet = new DatagramPacket(
+    //             //     buffer, buffer.length, 
+    //             //     InetAddress.getByName(getWiFiIP()), 8888
+    //             // ); This is another option still in progress
 
-                while (true) { // Constant sending
-                    socket.send(packet);
-                    Thread.sleep(2000); // To not saturate the machine
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }finally{
-                socket.close(); // finally, when the Thread is close, so it's the DatagramSocket
-            }
-        }).start();
-    }
+    //             while (true) { // Constant sending
+    //                 socket.send(packet);
+    //                 Thread.sleep(2000); // To not saturate the machine
+    //             }
+    //         } catch (Exception e) {
+    //             e.printStackTrace();
+    //         }finally{
+    //             socket.close(); // finally, when the Thread is close, so it's the DatagramSocket
+    //         }
+    //     }).start();
+    // }
 
     @Override
     public void disconnect(){ // very important

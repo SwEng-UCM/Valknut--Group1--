@@ -17,7 +17,7 @@ public class ServerListScreen extends JDialog {
         this.test = test;
         this.ctrl = ctrl;
         initGUI();
-        startSearcher();
+        // startSearcher();
     }
 
     private void initGUI(){
@@ -28,21 +28,24 @@ public class ServerListScreen extends JDialog {
 
         model = new DefaultListModel<>();
         list = new JList<>(model);
-        JScrollPane scroll = new JScrollPane(list);
-        scroll.setBounds(20, 20, 345, 180);
-        this.add(scroll);
+        // JScrollPane scroll = new JScrollPane(list);
+        // scroll.setBounds(20, 20, 345, 180);
+        // this.add(scroll);
+
+        JTextField textFile = new JTextField();
+        textFile.setBounds(100, 100, 200, 30);
+        this.add(textFile);
 
         JButton btnConectar = new JButton("Connect");
         btnConectar.setBounds(230, 215, 100, 30);
         btnConectar.addActionListener(e -> {
-            if (list.getSelectedValue() != null) {
-                String selected = list.getSelectedValue();
-                if(selected != null){
-                    System.out.println("[ServerListScreen:35] Conecting to: " + selected);
-                    test.recieveNotification(2, selected);
-                    this.dispose();
-                    ctrl.charactersScreen();
-                }
+            String selected = textFile.getText();
+            System.err.println(selected);
+            if(selected != null){
+                System.out.println("[ServerListScreen:35] Conecting to: " + selected);
+                test.recieveNotification(2, selected);
+                this.dispose();
+                ctrl.charactersScreen();
             }
         });
         this.add(btnConectar);
@@ -54,33 +57,33 @@ public class ServerListScreen extends JDialog {
         this.add(exit);
     }
 
-    private void startSearcher(){
-        new Thread(this::searchServers).start();
-    }
+    // private void startSearcher(){
+    //     new Thread(this::searchServers).start();
+    // }
 
-    private void searchServers() {
-        try {
-            socket = new DatagramSocket(null);
-            socket.setReuseAddress(true);
-            socket.bind(new InetSocketAddress(8888));
-            socket.setSoTimeout(3000); // Wait 3 seconds
-            byte[] buffer = new byte[256];
-            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-            while (true) {
-                try {
-                    socket.receive(packet);
-                    ip = packet.getAddress().getHostAddress();
-                    if (!model.contains(ip))
-                        SwingUtilities.invokeLater(() -> model.addElement(ip));
-                } catch (SocketTimeoutException e) {
-                    e.getStackTrace();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally{
-            model.clear();
-            socket.close();
-        }
-    }
+    // private void searchServers() {
+    //     try {
+    //         socket = new DatagramSocket(null);
+    //         socket.setReuseAddress(true);
+    //         socket.bind(new InetSocketAddress(8888));
+    //         socket.setSoTimeout(3000); // Wait 3 seconds
+    //         byte[] buffer = new byte[256];
+    //         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+    //         while (true) {
+    //             try {
+    //                 socket.receive(packet);
+    //                 ip = packet.getAddress().getHostAddress();
+    //                 if (!model.contains(ip))
+    //                     SwingUtilities.invokeLater(() -> model.addElement(ip));
+    //             } catch (SocketTimeoutException e) {
+    //                 e.getStackTrace();
+    //             }
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }finally{
+    //         model.clear();
+    //         socket.close();
+    //     }
+    // }
 }
