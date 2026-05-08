@@ -286,6 +286,10 @@ public class Combat implements Serializable {
                 e.setEscaped(false);
         }
 
+        if(game.isSolo() && heroes.get(0).escaped()){
+            yes = true;
+        }
+
         return yes;
     }
 
@@ -306,6 +310,9 @@ public class Combat implements Serializable {
             if(!heroes.get(i).escaped() && heroes.get(i).isAlive()){
                 yes = false;
             }
+        }
+        if(game.isSolo() && !heroes.get(0).isAlive()){
+            yes = true;
         }
 
         return yes;
