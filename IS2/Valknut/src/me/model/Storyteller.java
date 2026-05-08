@@ -114,7 +114,7 @@ public class Storyteller implements Serializable {
  		return copy;
  	}
  	
- 	public void writeStory(List<Hero> heroes) {
+ 	public void writeStory(List<Hero> heroes) { //Initializes the combat and story queues depending on the number of players
  		this.heroes = heroes;
  		s.addHeroes(heroes);
  		story = new ArrayList<>();

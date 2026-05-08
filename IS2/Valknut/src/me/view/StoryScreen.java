@@ -63,6 +63,8 @@ public class StoryScreen extends JPanel {
 
  		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
  		
+ 		//The control buttons (next save load exit)
+ 		
  		this.nextButton = new JButton("Next");
  		this.nextButton.setToolTipText("Next");
  		this.nextButton.addActionListener((e) -> handleNext());
@@ -100,7 +102,7 @@ public class StoryScreen extends JPanel {
 		this.add(controls, BorderLayout.PAGE_START);		
  	}
  	
- 	public void setText(String t) {
+ 	public void setText(String t) { //Updates the text displayed with the next part of the story
  		Font f = new Font(null, Font.PLAIN, 15);
  		storyPanel.removeAll();
  		text = t;

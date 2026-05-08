@@ -78,7 +78,7 @@ public class Controller {
         controlPanel.multiplayerScreen();
     }
 
-    public void startSelectedGame() { //TODO
+    public void startSelectedGame() {
         game.setStoryHeroes();
     	game.next();
         //controlPanel.onCombat(game);
