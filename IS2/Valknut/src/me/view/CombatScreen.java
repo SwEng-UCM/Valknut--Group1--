@@ -42,7 +42,6 @@ public class CombatScreen extends JPanel{
             this.mpm = MultiplayerManager.getInstacne(ctrl,ctrl.getGame());
         }
         initGUI();
-        //setComponents();
     }
 
     @Override
@@ -52,31 +51,30 @@ public class CombatScreen extends JPanel{
             g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
         }
     }
-
+    
+    // Returns an instance of the CombatScreen or creates one if none had already been made
     public static CombatScreen getInstance(Controller ctrl){
         if(instance == null)
             instance = new CombatScreen(ctrl);
         return instance;
     }
     
-    public void setHeroes() {
-    	
-    }
-
+    // Initialises the visual aspects of the combat screen
     private void initGUI(){
         this.backGround = new ImageIcon(Messages.COMBATSCREEN).getImage();
         this.setVisible(true);
         this.setOpaque(false);
 
     }
-
+    
+    // Creates and places the buttons, taking into account what components are needed in the current moment
     public void setComponents(){
     	this.removeAll();
         this.setLayout(new BorderLayout());
         
         enemyPanel = new JPanel();
         enemyPanel.setSize(new Dimension(500, 500));
-        enemyPanel.setOpaque(false); // keep background visible
+        enemyPanel.setOpaque(false);
         enemyPanel.setLayout(new BoxLayout(enemyPanel, BoxLayout.Y_AXIS));
         
         heroes = ctrl.getHeroes();
@@ -257,7 +255,7 @@ public class CombatScreen extends JPanel{
                 });
         	}
         	
-        	if (!ctrl.getFinalBattle() || c != CombatOption.RUN || (mpm != null && c != CombatOption.UNDO)) {
+        	if (!ctrl.getFinalBattle() || (c != CombatOption.RUN && c != CombatOption.UNDO)) {
 	        	command_buttons.add(actionButton);
 	        	commandsPanel.add(actionButton);
         	}
@@ -346,14 +344,9 @@ public class CombatScreen extends JPanel{
         topPanel.add(exit);
 
 		this.add(topPanel, BorderLayout.PAGE_START);
-		
-		// if (textLog != null && !textLog.isEmpty()) {
-		// 	System.err.println("I arrived at really showing dialog");
-		//     showText(textLog);
-		//     textLog = "";
-		// }
     }
     
+    // Enables and disables the enemy buttons when attacking
     public void toggleAttack() {
         toggleVariable = !toggleVariable;
     	for (int i = 0; i < enemy_buttons.size(); i++) {
@@ -365,6 +358,7 @@ public class CombatScreen extends JPanel{
     	}
     }
     
+    // Function to check for online multiplayer and inform the player that didn't attack about the board state
     private void attackEnemy(Enemy enemy) {
         if(mpm != null){
             int turn = ctrl.getTurn();
@@ -379,12 +373,14 @@ public class CombatScreen extends JPanel{
 		toggleAttack();
 		attackAction(enemy.getEnemyNum());    	
     }
-
+    
+    // Informs the controller that an enemy was attacked
 	public void attackAction(int tarjet){
 		ctrl.action(CombatOption.ATTACK, tarjet, null);
     	consumeTextLog();
 	}
     
+	// Shows the available items and allows the player to use one of them
     public void useItem() {
     	
     	JPanel itemsPanel = new JPanel();
@@ -422,7 +418,8 @@ public class CombatScreen extends JPanel{
 		actionContainer.add(itemsPanel, "ITEMS");
 		actionLayout.show(actionContainer, "ITEMS");
     }
-
+    
+    // Resets the buttons in case a player / enemy died last turn
     public void refresh() {
 		SwingUtilities.invokeLater(() -> {
 			
@@ -536,17 +533,20 @@ public class CombatScreen extends JPanel{
 			// setComponents();
     	});
 	}
-
+    
+    // Fetches the message corresponding to the last action taken
 	public void consumeTextLog(){
 		textLog = ctrl.consumeCombatLog();
 		showText(textLog);
 	}
     
+	// Shows the most recently retrieved action
     private void showText(String text) {
         combatText.setText(text);
         changeActionPanel("TEXT");
     }
     
+    // Function to attack the other player in the final combat of the game
     private void attackHero(Hero h) {
     	if (toggleVariable) {
     		ctrl.attackHero(h);
@@ -555,6 +555,7 @@ public class CombatScreen extends JPanel{
     	}
     }
     
+    // Switches the lower part of the screen to text / action buttons depending on what is needed
     public void changeActionPanel(String s){
 		actionLayout.show(actionContainer, s);
 	}
