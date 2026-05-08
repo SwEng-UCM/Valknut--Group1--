@@ -117,7 +117,7 @@ public class SettingsPanel extends JPanel{
 
         // AH Button
         gbc.gridy = 2;
-        ah = ViewUtils.createButton("resources/images/Buttons/menuButtons.png", "resources/images/Buttons/menuButtons.png");
+        ah = ViewUtils.createButton("resources/images/Buttons/aHButton_NS.png", "resources/images/Buttons/aHButton_S.png");
         ah.addActionListener(e -> {
             AHSetterScreen ass = new AHSetterScreen(_ctrl);
             ass.setVisible(true);
