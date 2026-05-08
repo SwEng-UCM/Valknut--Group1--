@@ -220,6 +220,7 @@ public class Game {
                 undoCommand.execute(combatLog);
                 lastUndoableCommand = null;
                 lastCommand = null;
+                cb.setTurn(cb.turn() - 1);
             }
 
             return false;
