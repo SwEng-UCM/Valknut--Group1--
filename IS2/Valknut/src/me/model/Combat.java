@@ -382,7 +382,7 @@ public class Combat implements Serializable {
     public String run(){
         double i = Math.random();
         if(i > 0.35){
-            heroes.get(turn - 1).setEscaped(true);
+            heroes.get(turn - 1).setLife(0);
             return Messages.PLAYER_RUNS + Messages.NEW_LINE;
         }
         else{
