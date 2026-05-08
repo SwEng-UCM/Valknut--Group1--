@@ -251,6 +251,7 @@ public class CombatScreen extends JPanel{
 					if(mpm != null )
 						return;
 					ctrl.action(c, 1, null);
+					showText("Last action was undone");
 					refresh();
                 });
         	}
