@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import me.model.items.Item;
 import me.model.save.SaveGameData;
-import me.model.save.SaveGameManager;
 import me.view.Messages;
 
 
@@ -173,6 +172,7 @@ public class Combat implements Serializable {
 
     //The main method where cjaracter attack
     public String attack(int i){
+        if(i == -1) return " No Attacks";
         StringBuilder sb = new StringBuilder();
         sb.append(Messages.NEW_LINE);
 
@@ -324,13 +324,13 @@ public class Combat implements Serializable {
         else if(allEscaped()){
             sb.append(Messages.BATTLE_ESCAPE);
             exit = true;
-            SaveGameManager.saveGame(save(), "autosave.dat");
+            // SaveGameManager.saveGame(save(), "autosave.dat");
         }
         else if(heroesLoose() || heroes.isEmpty()){
             sb.append(Messages.BATTLE_LOSS);
             exit = true;
             heroes_lose = true;
-            SaveGameManager.saveGame(save(), "autosave.dat");
+            // SaveGameManager.saveGame(save(), "autosave.dat");
         }
 
         return sb.toString();

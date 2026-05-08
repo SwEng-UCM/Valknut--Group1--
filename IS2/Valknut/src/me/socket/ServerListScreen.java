@@ -6,16 +6,12 @@
  */
 package me.socket;
 
-import java.net.*;
 import javax.swing.*;
 import me.control.*;
 import me.view.ViewUtils;
 
 public class ServerListScreen extends JDialog {
-    private DefaultListModel<String> model;
     private Controller ctrl;
-    private JList<String> list;
-    private DatagramSocket socket;
     private MultiplayerManager test;
 
     public ServerListScreen(MultiplayerManager test, Controller ctrl) {
@@ -29,9 +25,6 @@ public class ServerListScreen extends JDialog {
         this.setResizable(false);
         this.setLocationRelativeTo(ViewUtils.getWindow(this)); 
         this.setLayout(null);
-
-        model = new DefaultListModel<>();
-        list = new JList<>(model);
 
         JTextField textFile = new JTextField();
         textFile.setBounds(100, 100, 200, 30);

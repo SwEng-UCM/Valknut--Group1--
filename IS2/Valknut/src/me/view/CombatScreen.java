@@ -24,7 +24,7 @@ import me.socket.Request;
 public class CombatScreen extends JPanel{
     private static CombatScreen instance;
     private final Controller ctrl;
-    private MultiplayerManager mpm;
+    private MultiplayerManager mpm = null;
     private Image backGround;
     private CardLayout actionLayout;
     private List<JButton> enemy_buttons, command_buttons, final_battle_buttons;
@@ -42,7 +42,6 @@ public class CombatScreen extends JPanel{
             this.mpm = MultiplayerManager.getInstacne(ctrl,ctrl.getGame());
         }
         initGUI();
-        //setComponents();
     }
 
     @Override
@@ -67,7 +66,6 @@ public class CombatScreen extends JPanel{
         this.backGround = new ImageIcon(Messages.COMBATSCREEN).getImage();
         this.setVisible(true);
         this.setOpaque(false);
-
     }
 
     public void setComponents(){
@@ -234,6 +232,7 @@ public class CombatScreen extends JPanel{
 						mpm.send(rq);
 					}
 					ctrl.action(c, 1, null);
+					consumeTextLog();
 					refresh();
 				});
 
@@ -277,7 +276,7 @@ public class CombatScreen extends JPanel{
         finalBattleCommandPanel.add(attackButton);
 		
 		JPanel textPanel = new JPanel(new BorderLayout());
-		combatText = new JTextArea(5, 20);
+		combatText = new JTextArea(15, 20);
 		combatText.setEditable(false);
 		textPanel.add(new JScrollPane(combatText), BorderLayout.CENTER);
 
@@ -288,6 +287,7 @@ public class CombatScreen extends JPanel{
 				Request rq = new Request(Request.RequestType.COMBATOPTION, id);
 				mpm.send(rq);
 			}
+			checkExit();
 			changeActionPanel("COMMANDS");
 			refresh();
 		});
@@ -304,6 +304,7 @@ public class CombatScreen extends JPanel{
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel.setOpaque(false);
 
+		//Next Button
         JButton next = new JButton("Next");
 		next.addActionListener((ActionEvent ev) -> {
 			this.toggleVariable = false;
@@ -321,8 +322,9 @@ public class CombatScreen extends JPanel{
 			ctrl.next();
 		});
         topPanel.add(next);
-        
-        if (!ctrl.getFinalBattle()) {
+
+		//Save Button
+		if (!ctrl.getFinalBattle()) {
 	        JButton save = new JButton("Save");
 	        save.addActionListener(ev -> {
 	        	ctrl.saveGame();
@@ -331,6 +333,7 @@ public class CombatScreen extends JPanel{
 	        topPanel.add(save);
         }
 
+		//Load Button
         JButton load = new JButton("Load");
         load.addActionListener(ev -> {
         	ctrl.loadGame();
@@ -341,17 +344,20 @@ public class CombatScreen extends JPanel{
         });
         topPanel.add(load);
 
+		//Settings button
+		JButton settings = new JButton("Settings");
+		settings.addActionListener(ev -> {
+			ctrl.setPreviousScreenToSettings("COMBAT", Messages.COMBATSCREEN); 
+            ctrl.settingScreen();
+		});
+		topPanel.add(settings);
+
+		//Exit Button
         JButton exit = new JButton("Exit");
         exit.addActionListener(ev -> ctrl.exit());
         topPanel.add(exit);
 
 		this.add(topPanel, BorderLayout.PAGE_START);
-		
-		// if (textLog != null && !textLog.isEmpty()) {
-		// 	System.err.println("I arrived at really showing dialog");
-		//     showText(textLog);
-		//     textLog = "";
-		// }
     }
     
     public void toggleAttack() {
@@ -557,5 +563,15 @@ public class CombatScreen extends JPanel{
     
     public void changeActionPanel(String s){
 		actionLayout.show(actionContainer, s);
+	}
+
+	public void checkExit(){
+
+		if(ctrl.endCombat()){
+			ctrl.next();
+		}
+		else if(ctrl.loseCombat()){
+			ctrl.onGameOver();
+		}
 	}
 }

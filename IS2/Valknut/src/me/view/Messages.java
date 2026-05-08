@@ -17,7 +17,7 @@ public class Messages {
 	public static final String HERO_TURN = "HEROES' TURN...";
 	public static final String HERO_WEAK = " is WEAK to ";
 	public static final String HERO_RESISTANT = " is RESISTANT to ";
-	public static final String DEFEND = " defends";
+	public static final String DEFEND = " Defends";
 
 	// Item Miscellaneous
 	public static final String NON_MATCHED_ITEM = "The types of the objects don't match. Try different";

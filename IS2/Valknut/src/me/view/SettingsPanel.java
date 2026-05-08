@@ -17,6 +17,7 @@ public class SettingsPanel extends JPanel{
     private JButton stop;
     private JButton increase;
     private JButton decrease;
+    private JButton ah;
     private int volume = 50;
     private JLabel lblVolumen;
     private String previousScreen;
@@ -55,28 +56,32 @@ public class SettingsPanel extends JPanel{
         this.setOpaque(false);
     }
 
-    private void setComponents(){
+    private void setComponents() {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        lblVolumen = new JLabel("Music: " + volume);
-        lblVolumen.setForeground(Color.WHITE); 
-        gbc.gridx = 0;
+        
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER; // Cambiado de NORTHWEST a CENTER
+        gbc.weightx = 1.0; // Permite que la celda se expanda horizontalmente
+        gbc.weighty = 0.0; // Controlaremos el vertical fila por fila
+
         gbc.gridy = 0;
-        gbc.insets = new Insets(100, 10, 200, 10);
-        this.add(lblVolumen, gbc);
+        gbc.weighty = 0.2; 
+        this.add(new Box.Filler(new Dimension(0,0), new Dimension(0,0), new Dimension(0,0)), gbc);
 
-
+        // Button Panel
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setOpaque(false);
-
         GridBagConstraints gbcPanel = new GridBagConstraints();
-
-        gbcPanel.gridx = 0; 
-        gbcPanel.gridy = 0;
-        gbcPanel.fill = GridBagConstraints.HORIZONTAL; 
-        gbcPanel.weightx = 1.0; 
         
-        increase = ViewUtils.createButton("resources\\images\\Buttons\\addButton_NS.png", "resources\\images\\Buttons\\addButton_S.png");
+        gbcPanel.insets = new Insets(5, 5, 5, 5); 
+        gbcPanel.anchor = GridBagConstraints.WEST;
+
+        lblVolumen = new JLabel("Music: " + volume);
+        lblVolumen.setForeground(Color.WHITE);
+        gbcPanel.gridx = 0; buttonPanel.add(lblVolumen, gbcPanel);
+
+        increase = ViewUtils.createButton("resources/images/Buttons/addButton_NS.png", "resources/images/Buttons/addButton_S.png");
         increase.addActionListener(e ->{
             volume += 5;
             volume = Math.min(volume, 100);
@@ -84,7 +89,9 @@ public class SettingsPanel extends JPanel{
             String s = (volume == 100 ? "Music:" : volume > 9 ? "Music: " : "Music:  ");
             lblVolumen.setText(s + volume);
         });
-        decrease = ViewUtils.createButton("resources\\images\\Buttons\\subButton_NS.png", "resources\\images\\Buttons\\subButton_S.png");
+        gbcPanel.gridx = 1; buttonPanel.add(increase, gbcPanel);
+
+        decrease = ViewUtils.createButton("resources/images/Buttons/subButton_NS.png", "resources/images/Buttons/subButton_S.png");
         decrease.addActionListener(e ->{
             volume -= 5;
             volume = Math.max(0, volume);
@@ -92,37 +99,48 @@ public class SettingsPanel extends JPanel{
             String s = (volume == 100 ? "Music:" : volume > 9 ? "Music: " : "Music:  ");
             lblVolumen.setText(s + volume);
         });
-        stop = ViewUtils.createButton("resources\\images\\Buttons\\stopButton_NS.png", "resources\\images\\Buttons\\stopButton_S.png");
+        gbcPanel.gridx = 2; buttonPanel.add(decrease, gbcPanel);
+
+        stop = ViewUtils.createButton("resources/images/Buttons/stopButton_NS.png", "resources/images/Buttons/stopButton_S.png");
         stop.addActionListener(e ->{
             volume = 50;
             AudioManager.getInstance().setVolume(volume);
             AudioManager.getInstance().stopMusic();
             lblVolumen.setText("Music: " + volume);
         });
+        gbcPanel.gridx = 3; buttonPanel.add(stop, gbcPanel);
 
-        gbcPanel.gridx = 0; buttonPanel.add(increase, gbcPanel);
-        gbcPanel.gridx = 1; buttonPanel.add(decrease, gbcPanel);
-        gbcPanel.gridx = 2; buttonPanel.add(stop, gbcPanel);
-
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.NORTH; 
-
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(100, 10, 5, 10); 
         this.add(buttonPanel, gbc);
 
-        exit = ViewUtils.createButton("resources\\images\\Buttons\\exitButton_NS.png", "resources\\images\\Buttons\\exitButton_S.png");
+        // AH Button
+        gbc.gridy = 2;
+        ah = ViewUtils.createButton("resources/images/Buttons/menuButtons.png", "resources/images/Buttons/menuButtons.png");
+        ah.addActionListener(e -> {
+            AHSetterScreen ass = new AHSetterScreen(_ctrl);
+            ass.setVisible(true);
+        });
+        this.add(ah, gbc);
+
+        //Exit Button
+        gbc.gridy = 3;
+        exit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");
         exit.addActionListener(e ->{
             AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
             switch (previousScreen) {
                 case "MENU" -> _ctrl.menuScreen();
                 case "MULTIPLAYER" -> _ctrl.multiplayerScreen();
+                case "COMBAT" -> _ctrl.onCombat();
                 default -> _ctrl.menuScreen();
             }
         });
-        gbc.gridy = 1;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.insets = new Insets(100, 20, 0, 20);
-        gbc.weightx = 0.1; 
         this.add(exit, gbc);
+
+        gbc.gridy = 4;
+        gbc.weighty = 0.2; 
+        this.add(new Box.Filler(new Dimension(0,0), new Dimension(0,0), new Dimension(0,0)), gbc);
     }
     
 }

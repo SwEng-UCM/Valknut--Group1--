@@ -16,6 +16,7 @@ public class AutonomousHero extends Hero {
     
     private State combatState;
     private CombatStrategy combatStrategy;
+    private double mod = 1;
 
     public AutonomousHero(String name, int life, int max_life, String surname, int id){
         super(name, life, max_life, surname, id);
@@ -52,13 +53,13 @@ public class AutonomousHero extends Hero {
             combatState = State.ATTACK;
         if(!used){
             double i = Math.random();
-            if(i > 0.95){
+            if(i > 0.95 * mod){
                 combatStrategy = new LeaderCombatStrategy();
                 combatState = State.ATTACK;
             }
-            else if(i > 0.85)
+            else if(i > 0.85 * mod)
                 combatState = State.DEFENSIVE;
-            else if(i > 0.65)
+            else if(i > 0.65 * mod)
                 combatState = State.SCARED;
             else{
                 combatStrategy = new FollowerCombatStrategy();
@@ -71,22 +72,21 @@ public class AutonomousHero extends Hero {
         
         int tarjet = combatStrategy.execute(getMainElement(), cmbt.getEnemies(), cmbt.getLastTarjet());
 
+        if(tarjet == 99){
+            doDefensive();
+            return -1;
+        }
+
         double i = Math.random();
         if(getLife() < getMaxLife() / 2){
-            if(i > 0.3)
+            if(i > 0.3 * mod)
                 combatState = State.HARMED;
         }
-        else if(i > 0.85){
+        else if(i > 0.85 * mod){
             combatState = State.DEFENSIVE;
             i = Math.random();
-            if(i > 0.95){
+            if(i > 0.95 * mod){
                 combatState = State.SCARED;
-            }
-            else if (i > 0.90){
-                setCombatStrategy(0);
-            }
-            else{
-                setCombatStrategy(1);
             }
         }
 
@@ -97,20 +97,14 @@ public class AutonomousHero extends Hero {
         //it defends on combat logic. This method is to change combatState
         double i = Math.random();
         if(getLife() < getMaxLife() / 2){
-            if(i > 0.3)
+            if(i > 0.3 * mod)
                 combatState = State.HARMED;
         }
-        else if(i > 0.3){
+        else if(i > 0.20 * mod){
             combatState = State.ATTACK;
             i = Math.random();
-            if(i > 0.95){
+            if(i > 0.95 * mod){
                 combatState = State.SCARED;
-            }
-            else if (i > 0.90){
-                setCombatStrategy(0);
-            }
-            else{
-                setCombatStrategy(1);
             }
         }
     }
@@ -119,26 +113,16 @@ public class AutonomousHero extends Hero {
         //it runs on combat logic. This method is to change combatState
         double i = Math.random();
         if(getLife() < getMaxLife() / 2){
-            if(i > 0.35)
+            if(i > 0.25 * mod)
                 combatState = State.HARMED;
             else{
                 combatState = State.ATTACK;
-                i = Math.random();
-                if(i > 0.95)
-                    setCombatStrategy(0);
-                else
-                    setCombatStrategy(1);
             }
 
         }
         else{
-            if(i > 0.2){
+            if(i > 0.2 * mod){
                 combatState = State.ATTACK;
-                i = Math.random();
-                if(i > 0.95)
-                    setCombatStrategy(0);
-                else
-                    setCombatStrategy(1);
             }
             else
                 combatState = State.DEFENSIVE;
@@ -149,10 +133,14 @@ public class AutonomousHero extends Hero {
         switch (i) {
             case 0 -> combatStrategy = new LeaderCombatStrategy();
             case 1 -> combatStrategy = new FollowerCombatStrategy();
+            case 2 -> combatStrategy = new DefensiveCombatStrategy();
             default -> {
                 combatStrategy = new FollowerCombatStrategy();
             }
         }
     }
     
+    public void setMod(double i){
+        mod = i;
+    }
 }

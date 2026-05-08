@@ -59,6 +59,10 @@ public class Game {
     public boolean isMultiplayer(){
         return mode == GameMode.MULTIPLAYER;
     }
+
+    public boolean isSolo(){
+        return mode == GameMode.SOLO;
+    }
     
     public String consumeCombatLog() {
         String text = combatLog.toString();
@@ -159,25 +163,28 @@ public class Game {
         combatLog.append(s);
         
         if (cb.turn() == cb.getHeroes().size() + 1) {	
-            combatLog.append(cb.enemyTurnToString());
+            
             
             int numEnemies = cb.getEnemies().size();
-            for (int i = 0; i < numEnemies; i++) {
-                // Set turn so cb.attack() knows which enemy is acting
-                cb.setTurn(cb.getHeroes().size() + 1 + i);
-                combatLog.append(cb.attack(0)); // 0 = enemy turn, target selected internally
+            if(numEnemies > 0){
+                combatLog.append(cb.enemyTurnToString());
+                for (int i = 0; i < numEnemies; i++) {
+                    // Set turn so cb.attack() knows which enemy is acting
+                    cb.setTurn(cb.getHeroes().size() + 1 + i);
+                    combatLog.append(cb.attack(0)); // 0 = enemy turn, target selected internally
+                }
             }
 
             cb.setTurn(1);
         }
-        
-        if(cb.getExit() && !cb.heroesLose()) {
-            next();
-        }
-        
-        else if (cb.getExit() && cb.heroesLoose()) {
-        	ctrl.onGameOver();
-        }
+    }
+
+    public boolean endCombat(){
+        return cb.getExit() && !cb.heroesLose();
+    }
+
+    public boolean loseCombat(){
+        return cb.getExit() && cb.heroesLoose();
     }
     
     //Attack for heroes
@@ -330,4 +337,30 @@ public class Game {
 	public void end() {
 		ctrl.onEnd();
 	}
+
+    public boolean setDifficulty(double i){
+        if(isSolo()){
+            for(Hero e : cb.getHeroes()){
+                if(e.isAutonomous()){
+                    AutonomousHero ah = (AutonomousHero) e;
+                    ah.setMod(i);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean setCombatStrategy(int i){
+        if(isSolo()){
+            for(Hero e : cb.getHeroes()){
+                if(e.isAutonomous()){
+                    AutonomousHero ah = (AutonomousHero) e;
+                    ah.setCombatStrategy(i);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

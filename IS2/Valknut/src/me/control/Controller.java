@@ -119,6 +119,10 @@ public class Controller {
     public boolean isMultiplayer() {
     	return game.isMultiplayer();
     }
+
+    public boolean isSolo(){
+        return game.isSolo();
+    }
     
     public Game getGame() {
     	return game;
@@ -170,5 +174,21 @@ public class Controller {
     
     public String showStats() {
     	return game.showStats();
+    }
+
+    public boolean setDificulty(double i){
+        return game.setDifficulty(i);
+    }
+
+    public boolean setCombatStrategy(int i){
+        return game.setCombatStrategy(i);
+    }
+
+    public boolean endCombat(){
+        return game.endCombat();
+    }
+
+    public boolean loseCombat(){
+        return game.loseCombat();
     }
 }
