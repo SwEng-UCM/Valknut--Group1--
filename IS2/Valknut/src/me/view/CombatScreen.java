@@ -1,7 +1,7 @@
 /**
  * 
  * @author Helio Vega Fernández AI assisted: No
- * @author Pablo Cabello Canales AI assisted: No
+ * @author Pablo Cabello Canales AI assisted: Yes
  * @author Miguel Ángel Trejo AI-assisted: no
  * 
  */
