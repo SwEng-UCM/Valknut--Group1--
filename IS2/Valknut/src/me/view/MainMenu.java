@@ -39,7 +39,7 @@ public class MainMenu extends JPanel {
     private void initGUI() {
 
         this.backGround = new ImageIcon(
-                Messages.MAINMENU
+                getClass().getResource(Messages.MAINMENU)
         ).getImage();
 
         this.setVisible(true);
@@ -67,7 +67,7 @@ public class MainMenu extends JPanel {
                 ViewUtils.rescalate(
                         1200,
                         600,
-                        new ImageIcon("resources/images/valknut_logo.png")
+                        new ImageIcon(getClass().getResource("/resources/images/valknut_logo.png"))
                 )
         );
 
@@ -83,43 +83,43 @@ public class MainMenu extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
 
         btnPlay = ViewUtils.createButton(
-                "resources/images/Buttons/playButton_NS.png",
-                "resources/images/Buttons/playButton_S.png"
+                getClass().getResource("/resources/images/Buttons/playButton_NS.png"),
+                getClass().getResource("/resources/images/Buttons/playButton_S.png")
         );
         btnPlay.setPreferredSize(new Dimension(280, 100));
-        btnPlay.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.charactersScreen();});
+        btnPlay.addActionListener(e ->{AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection_click.wav")); _ctrl.charactersScreen();});
 
         btnLoad = ViewUtils.createButton(
-        		"resources/images/Buttons/loadButton_NS.png",
-                "resources/images/Buttons/loadButton_S.png"
+        		getClass().getResource("/resources/images/Buttons/loadButton_NS.png"),
+                getClass().getResource("/resources/images/Buttons/loadButton_S.png")
         );
         btnLoad.setPreferredSize(new Dimension(280, 100));
         btnLoad.addActionListener(e -> {
-            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection_click.wav"));
             _ctrl.loadGame();
         });
 
         btnMP = ViewUtils.createButton(
-                "resources/images/Buttons/multiButton_NS.png",
-                "resources/images/Buttons/multiButton_S.png"
+                getClass().getResource("/resources/images/Buttons/multiButton_NS.png"),
+                getClass().getResource("/resources/images/Buttons/multiButton_S.png")
         );
         btnMP.setPreferredSize(new Dimension(280, 100));
-        btnMP.addActionListener(e ->{AudioManager.getInstance().sound("resources/sounds/selection_click.wav"); _ctrl.startMultiplayer();});
+        btnMP.addActionListener(e ->{AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection_click.wav")); _ctrl.startMultiplayer();});
 
         btnSettings = ViewUtils.createButton(
-                "resources/images/Buttons/settingsButton_NS.png",
-                "resources/images/Buttons/settingsButton_S.png"
+                getClass().getResource("/resources/images/Buttons/settingsButton_NS.png"),
+                getClass().getResource("/resources/images/Buttons/settingsButton_S.png")
         );
         btnSettings.setPreferredSize(new Dimension(280, 100));
         btnSettings.addActionListener(e ->{
-            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection_click.wav"));
             _ctrl.setPreviousScreenToSettings("MENU", Messages.MAINMENU); 
             _ctrl.settingScreen();
         });
 
         btnExit = ViewUtils.createButton(
-                "resources/images/Buttons/exitButton_NS.png",
-                "resources/images/Buttons/exitButton_S.png"
+                getClass().getResource("/resources/images/Buttons/exitButton_NS.png"),
+                getClass().getResource("/resources/images/Buttons/exitButton_S.png")
         );
         btnExit.setPreferredSize(new Dimension(280, 100));
         btnExit.addActionListener(e ->_ctrl.exit());

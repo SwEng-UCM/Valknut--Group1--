@@ -61,7 +61,7 @@ public class CharacterSelection extends JPanel {
 
     private void initGUI() {
         setLayout(new BorderLayout());
-        backGround = new ImageIcon(Messages.SELECTIONSCREEN).getImage();
+        backGround = new ImageIcon(getClass().getResource(Messages.SELECTIONSCREEN)).getImage();
         setOpaque(false);
     }
 
@@ -116,35 +116,35 @@ public class CharacterSelection extends JPanel {
         mortalPanel.setOpaque(false);
 
         JLabel freyaImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/gersemi.png")
+                new ImageIcon(getClass().getResource("/resources/images/Characters/gersemi.png"))
                         .getImage()
                         .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));
         freyaImage.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lokiImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/vali.png")
+                new ImageIcon(getClass().getResource("/resources/images/Characters/vali.png"))
                         .getImage()
                         .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));
         lokiImage.setHorizontalAlignment(SwingConstants.CENTER);
         
         JLabel skadiImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/jorunn.png")
+                new ImageIcon(getClass().getResource("/resources/images/Characters/jorunn.png"))
                         .getImage()
                         .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));
         skadiImage.setHorizontalAlignment(SwingConstants.CENTER);
         
         JLabel vidarImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/viggo.png")
+                new ImageIcon(getClass().getResource("/resources/images/Characters/viggo.png"))
                         .getImage()
                         .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));
         vidarImage.setHorizontalAlignment(SwingConstants.CENTER);
         
         JLabel mortalImage = new JLabel(new ImageIcon(
-                new ImageIcon("resources/images/Characters/magni.png")
+                new ImageIcon(getClass().getResource("/resources/images/Characters/magni.png"))
                         .getImage()
                         .getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         ));

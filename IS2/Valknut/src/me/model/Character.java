@@ -9,7 +9,6 @@ package me.model;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collections;
@@ -84,7 +83,7 @@ public abstract class Character implements Serializable {
     public ImageIcon getSprite(int width, int height) {
         BufferedImage sprite;
         try {
-    		sprite = ImageIO.read(new File(spritePath));
+    		sprite = ImageIO.read(getClass().getResource(spritePath));
             Image dimg = sprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
             return imageIcon;
@@ -97,7 +96,7 @@ public abstract class Character implements Serializable {
     public ImageIcon getInfectedSprite(int width, int height) {
     	BufferedImage sprite;
         try {
-    		sprite = ImageIO.read(new File(infectedSpritePath));
+    		sprite = ImageIO.read(getClass().getResource(infectedSpritePath));
             Image dimg = sprite.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
             return imageIcon;

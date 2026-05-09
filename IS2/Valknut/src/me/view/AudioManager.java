@@ -6,8 +6,10 @@
  */
 package me.view;
 
-import java.io.File;
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import javax.sound.sampled.*;
 
 public class AudioManager {
@@ -21,10 +23,12 @@ public class AudioManager {
         return am_instance;
     }
 
-    public void playMusic(String path) {
+    public void playMusic(URL url) {
         stopMusic();
         try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(path));
+            InputStream is = url.openStream();
+            InputStream bufferedIn = new BufferedInputStream(is);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
             music = AudioSystem.getClip();
             music.open(audioStream);
             applyVolume();
@@ -43,9 +47,9 @@ public class AudioManager {
         }
     }
 
-    public void sound(String audio) {
+    public void sound(URL url) {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(audio).getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
             Clip sound = AudioSystem.getClip();
             sound.open(audioInputStream);
             sound.start();

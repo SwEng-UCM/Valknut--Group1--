@@ -5,6 +5,7 @@ import me.model.*;
 import me.model.Game.GameMode;
 import me.model.items.Inventory;
 import me.model.items.Item;
+import me.view.AudioManager;
 import me.view.CtrlPanel;
 
 /**
@@ -38,8 +39,8 @@ public class Controller {
     }
 
     public void startGame() {
-        // AudioManager.getInstance().stopMusic();
-        // AudioManager.getInstance().playMusic("resources/sounds/titleMusic.wav");
+        AudioManager.getInstance().stopMusic();
+        AudioManager.getInstance().playMusic(getClass().getResource("/resources/sounds/titleMusic.wav"));
         game.initCmb();
         controlPanel.onGameStart();
     }
@@ -69,8 +70,8 @@ public class Controller {
     }
 
     public void startMultiplayer() {
-        // AudioManager.getInstance().stopMusic();
-        // AudioManager.getInstance().playMusic("resources/sounds/internetMusic.wav");
+        AudioManager.getInstance().stopMusic();
+        AudioManager.getInstance().playMusic(getClass().getResource("/resources/sounds/internetMusic.wav"));
         multiplayerScreen();
     }
 

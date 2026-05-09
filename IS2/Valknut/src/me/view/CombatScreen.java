@@ -9,6 +9,7 @@ package me.view;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -61,7 +62,7 @@ public class CombatScreen extends JPanel{
     
     // Initialises the visual aspects of the combat screen
     private void initGUI(){
-        this.backGround = new ImageIcon(Messages.COMBATSCREEN).getImage();
+        this.backGround = new ImageIcon(getClass().getResource(Messages.COMBATSCREEN)).getImage();
         this.setVisible(true);
         this.setOpaque(false);
     }
@@ -191,9 +192,11 @@ public class CombatScreen extends JPanel{
         final_battle_buttons = new ArrayList<>(CombatOption.values().length);
         
         for (CombatOption c: CombatOption.values()) {
+			URL urlns = getClass().getResource("/resources/images/Buttons/" + c.toString().toLowerCase() + "Button_NS.png");
+			URL urls = getClass().getResource("/resources/images/Buttons/" + c.toString().toLowerCase() + "Button_S.png");
         	JButton actionButton = ViewUtils.createButton(
-                    "resources/images/Buttons/" + c.toString() + "Button_NS.png",
-                    "resources/images/Buttons/" + c.toString() + "Button_S.png"
+                    urlns ,
+                    urls
             );
         	actionButton.setPreferredSize(new Dimension(233, 100));
         	switch(c) {
@@ -263,8 +266,8 @@ public class CombatScreen extends JPanel{
         }
         
         JButton attackButton = ViewUtils.createButton(
-                "resources/images/Buttons/attackButton_NS.png",
-                "resources/images/Buttons/attackButton_S.png"
+                getClass().getResource("/resources/images/Buttons/attackButton_NS.png"),
+                getClass().getResource("/resources/images/Buttons/attackButton_S.png")
         );
     	attackButton.setPreferredSize(new Dimension(1000, 100));
     	attackButton.addActionListener(ev -> {

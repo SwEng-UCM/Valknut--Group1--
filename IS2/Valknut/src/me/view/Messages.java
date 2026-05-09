@@ -185,9 +185,9 @@ public class Messages {
 	
 
 	//Screens
-	public static final String MAINMENU = "resources/images/Backgrounds/MainMenu.png";
-	public static final String MULTISCREEN = "resources/images/Backgrounds/MultiplayerScreen.png";
-	public static final String SELECTIONSCREEN = "resources/images/Backgrounds/SelectionScreen.png";
-	public static final String COMBATSCREEN = "resources/images/Backgrounds/CombatScreen.png";
-	public static final String STORYSCREEN = "resources/images/Backgrounds/StoryScreen.png";
+	public static final String MAINMENU = "/resources/images/Backgrounds/MainMenu.png";
+	public static final String MULTISCREEN = "/resources/images/Backgrounds/MultiplayerScreen.png";
+	public static final String SELECTIONSCREEN = "/resources/images/Backgrounds/SelectionScreen.png";
+	public static final String COMBATSCREEN = "/resources/images/Backgrounds/CombatScreen.png";
+	public static final String STORYSCREEN = "/resources/images/Backgrounds/StoryScreen.png";
 }

@@ -29,7 +29,7 @@ public class SettingsPanel extends JPanel{
     }
 
     public void setBackground(String s){
-        backGround = new ImageIcon(s).getImage();
+        backGround = new ImageIcon(getClass().getResource(s)).getImage();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class SettingsPanel extends JPanel{
     }
 
     private void initGUI(){
-        this.backGround = new ImageIcon(Messages.MAINMENU).getImage();
+        this.backGround = new ImageIcon(getClass().getResource(Messages.MAINMENU)).getImage();
         this.setVisible(true);
         this.setOpaque(false);
     }
@@ -81,7 +81,7 @@ public class SettingsPanel extends JPanel{
         lblVolumen.setForeground(Color.WHITE);
         gbcPanel.gridx = 0; buttonPanel.add(lblVolumen, gbcPanel);
 
-        increase = ViewUtils.createButton("resources/images/Buttons/addButton_NS.png", "resources/images/Buttons/addButton_S.png");
+        increase = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/addButton_NS.png"), getClass().getResource("/resources/images/Buttons/addButton_S.png"));
         increase.addActionListener(e ->{
             volume += 5;
             volume = Math.min(volume, 100);
@@ -91,7 +91,7 @@ public class SettingsPanel extends JPanel{
         });
         gbcPanel.gridx = 1; buttonPanel.add(increase, gbcPanel);
 
-        decrease = ViewUtils.createButton("resources/images/Buttons/subButton_NS.png", "resources/images/Buttons/subButton_S.png");
+        decrease = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/subButton_NS.png"), getClass().getResource("/resources/images/Buttons/subButton_S.png"));
         decrease.addActionListener(e ->{
             volume -= 5;
             volume = Math.max(0, volume);
@@ -101,7 +101,7 @@ public class SettingsPanel extends JPanel{
         });
         gbcPanel.gridx = 2; buttonPanel.add(decrease, gbcPanel);
 
-        stop = ViewUtils.createButton("resources/images/Buttons/stopButton_NS.png", "resources/images/Buttons/stopButton_S.png");
+        stop = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/stopButton_NS.png"), getClass().getResource("/resources/images/Buttons/stopButton_S.png"));
         stop.addActionListener(e ->{
             volume = 50;
             AudioManager.getInstance().setVolume(volume);
@@ -117,7 +117,7 @@ public class SettingsPanel extends JPanel{
 
         // AH Button
         gbc.gridy = 2;
-        ah = ViewUtils.createButton("resources/images/Buttons/aHButton_NS.png", "resources/images/Buttons/aHButton_S.png");
+        ah = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/aHButton_NS.png"),getClass().getResource( "/resources/images/Buttons/aHButton_S.png"));
         ah.addActionListener(e -> {
             AHSetterScreen ass = new AHSetterScreen(_ctrl);
             ass.setVisible(true);
@@ -126,9 +126,9 @@ public class SettingsPanel extends JPanel{
 
         //Exit Button
         gbc.gridy = 3;
-        exit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");
+        exit = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/exitButton_NS.png"), getClass().getResource("/resources/images/Buttons/exitButton_S.png"));
         exit.addActionListener(e ->{
-            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection_click.wav"));
             switch (previousScreen) {
                 case "MENU" -> _ctrl.menuScreen();
                 case "MULTIPLAYER" -> _ctrl.multiplayerScreen();

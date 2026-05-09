@@ -8,11 +8,12 @@ package me.view;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import javax.swing.*;
 
 public class ViewUtils {
     
-    public static JButton createButton(String path, String over){
+    public static JButton createButton(URL path, URL over){
         JButton jb = new JButton();
         jb.setIcon(rescalate(300, 100, new ImageIcon(path)));
         jb.setContentAreaFilled(false); 
@@ -24,7 +25,7 @@ public class ViewUtils {
         jb.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                AudioManager.getInstance().sound("resources/sounds/selection.wav");
+                AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection.wav"));
             }
 
             @Override

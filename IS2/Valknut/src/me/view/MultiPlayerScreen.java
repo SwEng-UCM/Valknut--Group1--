@@ -42,7 +42,7 @@ public class MultiPlayerScreen extends JPanel{
     }
 
     private void initGUI(){
-        this.backGround = new ImageIcon(Messages.MULTISCREEN).getImage();
+        this.backGround = new ImageIcon(getClass().getResource(Messages.MULTISCREEN)).getImage();
         this.setVisible(true);
         this.setOpaque(false);
     }
@@ -50,25 +50,25 @@ public class MultiPlayerScreen extends JPanel{
     private void setComponents(){
         this.setLayout(new GridBagLayout());
         
-        join = ViewUtils.createButton("resources/images/Buttons/joinButton_NS.png", "resources/images/Buttons/joinButton_S.png");
+        join = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/joinButton_NS.png"), getClass().getResource("/resources/images/Buttons/joinButton_S.png"));
         join.addActionListener(e -> {
             ServerListScreen slv = new ServerListScreen(mpm, _ctrl);
             slv.setVisible(true);
             setWaitingComponents();
         });
-        host = ViewUtils.createButton("resources/images/Buttons/hostButton_NS.png", "resources/images/Buttons/hostButton_S.png");
+        host = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/hostButton_NS.png"), getClass().getResource("/resources/images/Buttons/hostButton_S.png"));
         host.addActionListener(e -> {
             setWaitingComponents();
             new Thread(() -> mpm.recieveNotification(1, null)).start();
         });
-        exit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");
+        exit = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/exitButton_NS.png"), getClass().getResource("/resources/images/Buttons/exitButton_S.png"));
         exit.addActionListener(e -> {
-            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection_click.wav"));
             _ctrl.startGame();
         });
-        settings = ViewUtils.createButton("resources/images/Buttons/settingsButton_NS.png", "resources/images/Buttons/settingsButton_S.png");
+        settings = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/settingsButton_NS.png"), getClass().getResource("/resources/images/Buttons/settingsButton_S.png"));
         settings.addActionListener(e -> {
-            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection_click.wav"));
             _ctrl.setPreviousScreenToSettings("MULTIPLAYER", Messages.MULTISCREEN); 
             _ctrl.settingScreen();
         });
@@ -119,9 +119,9 @@ public class MultiPlayerScreen extends JPanel{
         this.add(titulo, gbc);
 
         gbc.gridy = 2; 
-        exit = ViewUtils.createButton("resources/images/Buttons/exitButton_NS.png", "resources/images/Buttons/exitButton_S.png");;
+        exit = ViewUtils.createButton(getClass().getResource("/resources/images/Buttons/exitButton_NS.png"), getClass().getResource("/resources/images/Buttons/exitButton_S.png"));
         exit.addActionListener(e -> {
-            AudioManager.getInstance().sound("resources/sounds/selection_click.wav");
+            AudioManager.getInstance().sound(getClass().getResource("/resources/sounds/selection_click.wav"));
             this.removeAll();
             if(mpm.getUser() != null)
                 mpm.killUser();
